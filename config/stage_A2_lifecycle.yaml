@@ -1,0 +1,48 @@
+primary:
+  alpha: 1.7e9
+  beta: 7.5e7
+  I_CM0: 0.44
+  T0: 6.0e-09
+  source_id: SRC-0001
+  source_location: PDF p. 5 and p. 7, printed pp. 447 and 449
+figure3_caption_variant:
+  alpha: 1.7e9
+  beta: 7.5e7
+  I_CM0: 0.4
+  T0: 6.0e-09
+  source_id: SRC-0001
+  source_location: PDF p. 6, printed p. 448, Figure 3 caption
+slow_decay:
+  alpha: 1.7e9
+  beta: 6.0e6
+  I_CM0: 0.44
+  T0: 6.0e-09
+  source_id: SRC-0001
+  source_location: PDF pp. 5-7, Figure 4a red curve description/caption
+later_transition:
+  alpha: 1.7e9
+  beta: 7.5e7
+  I_CM0: 2.3
+  T0: 7.0e-09
+  source_id: SRC-0001
+  source_location: PDF pp. 6-7, Figure 4a yellow curve description/caption
+frequency_bands_hz:
+  VHF:
+  - 3.0e7
+  - 3.0e8
+  UHF:
+  - 3.0e8
+  - 3.0e9
+  SHF:
+  - 3.0e9
+  - 3.0e10
+plot_curve_identity_colors:
+  primary: '#1f77b4'
+  slow_decay: '#d62728'
+  later_transition: '#d8a500'
+color_note: Colors identify the corresponding blue, red, and yellow analytical curves
+  in Shi 2019 Figure 4a only.
+stage_alias:
+  historical_name: A2-Lifecycle
+  current_stage: Stage 1.2 Analytical Lifecycle and Radiation Chain
+  status: completed

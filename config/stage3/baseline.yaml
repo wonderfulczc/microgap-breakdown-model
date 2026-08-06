@@ -1,0 +1,20 @@
+model:
+  value: morrow_lowke_1997_appendix
+  unit: dimensionless
+  provenance_type: direct
+  source_id: MorrowLowke1997
+  source_location: Appendix A1-A11
+  rationale: reproducible analytic Stage 3 baseline
+gas:
+  pressure: {value: 101325, unit: Pa, provenance_type: numerical_choice, source_id: stage3_prompt, source_location: baseline air, rationale: ground-pressure validation}
+  temperature: {value: 300, unit: K, provenance_type: numerical_choice, source_id: stage3_prompt, source_location: baseline air, rationale: fixed gas temperature}
+seed:
+  peak_density: {value: 1.0e20, unit: m^-3, provenance_type: numerical_choice, source_id: stage3_prompt, source_location: single seed, rationale: neutral Gaussian seed}
+  sigma: {value: 1.0e-4, unit: m, provenance_type: numerical_choice, source_id: stage3_prompt, source_location: single seed, rationale: Gaussian width}
+  z0: {value: 5.0e-3, unit: m, provenance_type: numerical_choice, source_id: stage3_prompt, source_location: single seed, rationale: centered seed}
+numerics:
+  poisson_rtol: {value: 1.0e-10, unit: dimensionless, provenance_type: numerical_choice, source_id: stage2_closure_v2, source_location: frozen solver tolerance, rationale: preserve Stage 2 tolerance}
+  poisson_atol: {value: 1.0e-14, unit: V, provenance_type: numerical_choice, source_id: stage2_closure_v2, source_location: frozen solver tolerance, rationale: preserve Stage 2 tolerance}
+  open_boundary_eta: {value: 1.0e-3, unit: dimensionless, provenance_type: numerical_choice, source_id: stage3_prompt, source_location: boundary sensitivity, rationale: baseline cost accuracy tradeoff}
+  open_boundary_quadrature: {value: cell_center_ring, unit: dimensionless, provenance_type: numerical_choice, source_id: stage2_closure_v2, source_location: validated OpenCharge modes, rationale: charge remains remote from Stage 3 boundaries; threshold and domain sensitivities quantify the production approximation}
+  excitation_ratio: {value: 0.1, unit: dimensionless, provenance_type: assumption, source_id: LiuPasko2004, source_location: Figure 1d dashed reference, rationale: Stage 3 photoemission baseline pending Stage 4 calibration}

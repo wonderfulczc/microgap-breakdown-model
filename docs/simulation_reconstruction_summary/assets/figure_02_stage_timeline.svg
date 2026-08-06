@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="410" viewBox="0 0 1200 410">
+<style>text{font-family:Arial,'Noto Sans CJK SC',sans-serif}.title{font-size:28px;font-weight:700}.box{fill:#f6f8fb;stroke:#2b4c7e;stroke-width:2;rx:12}.label{font-size:17px}.arrow{stroke:#4b5563;stroke-width:2;marker-end:url(#m)}</style>
+<defs><marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#4b5563"/></marker></defs>
+<text x="60" y="45" class="title">Stage 1–5 资源感知复现路线</text>
+<line class="arrow" x1="320" y1="125" x2="440" y2="125"/>
+<line class="arrow" x1="690" y1="125" x2="810" y2="125"/>
+<line class="arrow" x1="1060" y1="125" x2="70" y2="220"/>
+<line class="arrow" x1="320" y1="220" x2="440" y2="220"/>
+<rect class="box" x="70" y="95" width="250" height="60"/>
+<text class="label" x="195" y="132" text-anchor="middle">Stage 1
+公式/FFT</text>
+<rect class="box" x="440" y="95" width="250" height="60"/>
+<text class="label" x="565" y="132" text-anchor="middle">Stage 2
+Poisson/SP3</text>
+<rect class="box" x="810" y="95" width="250" height="60"/>
+<text class="label" x="935" y="132" text-anchor="middle">Stage 3
+单流注求解器</text>
+<rect class="box" x="70" y="190" width="250" height="60"/>
+<text class="label" x="195" y="227" text-anchor="middle">Stage 4
+碰撞/辐射链</text>
+<rect class="box" x="440" y="190" width="250" height="60"/>
+<text class="label" x="565" y="227" text-anchor="middle">Stage 5
+趋势/课题迁移</text>
+</svg>

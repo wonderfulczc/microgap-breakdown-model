@@ -1,0 +1,27 @@
+runs:
+  - {name: coarse_ml, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4}
+  - {name: coarse_ml_recovery, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, field_factor: 1.5, sp3: true, n0: 1.0e20, sigma_m: 1.0e-4, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4, max_steps: 50000}
+  - {name: coarse_ml_recovery_resume1, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, field_factor: 1.5, sp3: true, n0: 1.0e20, sigma_m: 1.0e-4, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4, max_steps: 50000, resume_checkpoint: results/stage3/single_seed/coarse_ml_recovery/checkpoint.bin, initial_step: 2070}
+  - {name: sp3_fork_off_resume1, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, field_factor: 1.5, sp3: false, n0: 1.0e20, sigma_m: 1.0e-4, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4, max_steps: 50000, minimum_dt_s: 1.0e-14, resume_checkpoint: results/stage3/single_seed/coarse_ml_recovery/checkpoint.bin, initial_step: 2070}
+  - {name: stage3_verification_baseline_10um, dr_m: 1.0e-5, t_end_s: 2.0e-9, field: ml, field_factor: 1.5, sp3: true, n0: 1.0e20, sigma_m: 1.0e-4, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4, max_steps: 120000, minimum_dt_s: 1.0e-15, output_interval_s: 2.0e-10, physical_stop_after_s: 5.0e-10}
+  - {name: stage3_verification_baseline_10um_resume1, dr_m: 1.0e-5, t_end_s: 2.0e-9, field: ml, field_factor: 1.5, sp3: true, n0: 1.0e20, sigma_m: 1.0e-4, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4, max_steps: 120000, minimum_dt_s: 1.0e-15, output_interval_s: 2.0e-10, physical_stop_after_s: 5.0e-10, resume_checkpoint: results/stage3/single_seed/stage3_verification_baseline_10um/checkpoint.bin, initial_step: 46}
+  - {name: stage3_verification_baseline_5um, dr_m: 5.0e-6, t_end_s: 2.0e-9, field: ml, field_factor: 1.5, sp3: true, n0: 1.0e20, sigma_m: 1.0e-4, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4, max_steps: 160000, minimum_dt_s: 5.0e-16, output_interval_s: 2.5e-10, physical_stop_after_s: 5.0e-10}
+  - {name: baseline_ml, dr_m: 1.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4}
+  - {name: fine_ml, dr_m: 5.0e-6, t_end_s: 1.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4}
+  - {name: coarse_paper, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: paper, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 1}
+  - {name: coarse_no_sp3, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: false, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 1}
+  - {name: nref_1e-14, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-14, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4}
+  - {name: nref_1e-12, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4}
+  - {name: nref_1e-10, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-10, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4}
+  - {name: nref_1e-8, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-8, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4}
+  - {name: nref_1e-6, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-6, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4}
+  - {name: dt_0.5, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4, dt_scale: 0.5}
+  - {name: dt_1.0, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4, dt_scale: 1.0}
+  - {name: dt_1.5, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4, dt_scale: 1.5}
+  - {name: eta_0, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 0, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4}
+  - {name: eta_1e-4, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-4, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4}
+  - {name: eta_1e-3, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4}
+  - {name: domain_r1.5, dr_m: 2.0e-5, t_end_s: 2.0e-9, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.5e-3, z_max_m: 1.0e-2, mpi_ranks: 4}
+  - {name: mpi_1, dr_m: 2.0e-5, t_end_s: 2.0e-10, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 1}
+  - {name: mpi_2, dr_m: 2.0e-5, t_end_s: 2.0e-10, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 2}
+  - {name: mpi_4, dr_m: 2.0e-5, t_end_s: 2.0e-10, field: ml, sp3: true, n_ref_ratio: 1.0e-12, eta: 1.0e-3, r_max_m: 1.0e-3, z_max_m: 1.0e-2, mpi_ranks: 4}

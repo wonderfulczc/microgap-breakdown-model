@@ -1,0 +1,21 @@
+check_id,requirement,status,evidence,run_id,notes
+S3-GATE-001,Stage 1 closure passes,PASS,tools/validate_stage1_closure.py,S1,checked by validate_stage3_closure.py
+S3-GATE-002,Stage 2 anti-fraud closure passes,PASS,tools/validate_stage2_closure.py,S2,"Stage 2 closure validation passed with traceable measured evidence."
+S3-GATE-003,Morrow-Lowke transport source audited,PASS,docs/stage3_formula_audit.md,S3-TRANSPORT-001,Morrow-Lowke 1997 PDF p.14 A1-A11 recorded
+S3-GATE-004,C++/Python transport agreement PASS,PASS,results/stage3/transport/cpp_python_comparison.csv,S3-TRANSPORT-001,max relative difference 4.048341942137943e-15
+S3-GATE-005,Model breakdown field computed,PASS,results/stage3/transport/breakdown_field.csv,S3-TRANSPORT-001,E_k_ML=2633104.8564786837 V/m
+S3-GATE-006,C++ Stage 3 unit tests pass,PASS,build/bin/stage3_cpp_tests,local-run,20 checks passed
+S3-GATE-007,Python Stage 3 tests pass,PASS,tests/stage3/test_stage3.py,local-run,7 pytest tests passed under .venv
+S3-GATE-008,Three-species coupled run produces double head,PARTIAL,results/stage3/closure/run_summary.csv,S3-COARSE_ML,formed=True and opposite_charge=True for coarse_ml
+S3-GATE-009,Field and charge head definitions agree within two cells,FAIL,results/stage3/closure/run_summary.csv,S3-COARSE_ML,coarse_ml head_definitions_agree=False; observed field-charge offsets are 3-5 cells
+S3-GATE-010,Positive-head photoionization exists,PASS,results/stage3/closure/run_summary.csv,S3-COARSE_ML,coarse_ml photoionization_ahead=2.4428275949957653e26
+S3-GATE-011,SP3-off positive-head response weakens,FAIL,results/stage3/closure/run_summary.csv,S3-COARSE_NO_SP3,coarse_no_sp3 upper_head_z_m equals coarse_ml upper_head_z_m; S_ph=0 as expected
+S3-GATE-012,n_ref has at least three-point stable interval,PASS,results/stage3/sensitivity/n_ref_sensitivity.csv,S3-NREF_1E-14..S3-NREF_1E-6,all five scanned points are within 1 percent for required metrics
+S3-GATE-013,MPI 1/2/4 rank consistency measured,PASS,results/stage3/mpi/rank_consistency.csv,S3-MPI_1..S3-MPI_4,1/2/4 runs completed; differences are numerical roundoff scale
+S3-GATE-014,Grid 20/10/5 um convergence completed,NOT_RUN,results/stage3/convergence/mesh_convergence.csv,none,baseline_ml and fine_ml were not run after core physics gates failed
+S3-GATE-015,Time-step sensitivity completed,NOT_RUN,results/stage3/convergence/timestep_sensitivity.csv,none,dt_0.5/dt_1.0/dt_1.5 not run after core physics gates failed
+S3-GATE-016,Open-boundary sensitivity completed,NOT_RUN,results/stage3/sensitivity/open_boundary_sensitivity.csv,none,eta_0/eta_1e-4/eta_1e-3 not run after core physics gates failed
+S3-GATE-017,Domain sensitivity completed,NOT_RUN,results/stage3/convergence/domain_sensitivity.csv,none,domain_r1.5 not run after core physics gates failed
+S3-GATE-018,Evidence audit has no static hardcoded observations,PASS,results/stage3/forensic/report.md,local-run,evidence_findings=0 bad_registered_hashes=0
+S3-GATE-019,Forbidden Stage 4/Case I/collision outputs absent,PASS,results/stage3,local-audit,no case_i collision current_moment fft esd radiation outputs under results/stage3
+S3-GATE-020,Stage 3 closure validator passes,FAIL,tools/validate_stage3_closure.py,local-run,closure validator still fails because required run matrix is incomplete and core physics gates fail

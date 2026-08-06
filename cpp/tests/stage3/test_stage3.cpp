@@ -1,0 +1,18 @@
+#include "streamer_rf/streamer/StreamerSolver.hpp"
+#include <algorithm>
+#include <petscsys.h>
+#include <cmath>
+#include <iostream>
+#include <stdexcept>
+#include <filesystem>
+using namespace streamer_rf;using namespace streamer_rf::streamer;
+int main(int argc,char**argv){PetscInitialize(&argc,&argv,nullptr,nullptr);int n=0;auto ck=[&](bool x,const char*m){if(!x){std::cerr<<"FAIL "<<m<<'\n';PetscFinalize();return false;}std::cout<<"ok "<<++n<<" - "<<m<<'\n';return true;};double N=101325/(1.380649e-23*300);auto c=evaluate_morrow_lowke(4.8e6,N,101325,300);
+ if(!ck(c.mobility>0&&c.diffusion>0,"Morrow-Lowke positive transport"))return 1;
+ if(!ck(c.ionization_frequency>=0&&c.attachment_two_body_frequency>=0&&c.attachment_three_body_frequency>=0,"nonnegative frequencies"))return 1;
+ auto z=evaluate_morrow_lowke(0,N,101325,300);if(!ck(z.ionization_frequency==0&&z.attachment_three_body_frequency==0,"zero-field reaction limit"))return 1;
+ double ek=morrow_lowke_breakdown_field(N,101325,300);if(!ck(ek>2e6&&ek<4e6,"computed breakdown field"))return 1;
+ for(double x:{1.05e-15,1.5e-15,2e-15,1e-16,2.6e-17}){double E=x*N/1e4;auto l=evaluate_morrow_lowke(E*(1-1e-10),N,101325,300),r=evaluate_morrow_lowke(E*(1+1e-10),N,101325,300);if(!ck(std::abs(l.drift_speed-r.drift_speed)/std::max(l.drift_speed,r.drift_speed)<1e-7,"piecewise junction continuous"))return 1;}
+ auto s=evaluate_reactions(1e18,1e18,2e17,1e20,c,300);if(!ck(std::abs(s.charge_balance)<1e-8*std::max(std::abs(s.electron),1.),"reaction charge balance"))return 1;
+ if(!ck(beta_np(300)==2e-13,"ion recombination"))return 1;if(!ck(beta_ep(c.mobility,c.diffusion)>0,"electron recombination"))return 1;
+ AxisymmetricGrid g(8,16,2e-4,0,4e-4);StreamerConfig cfg;cfg.background_field=1.5*ek;cfg.n_ref=1e6;cfg.open_boundary.threshold=1e-3;cfg.photoionization=false;StreamerSolver solver(g,cfg);solver.initialize_gaussian(1e14,4e-5,2e-4);if(!ck(solver.state().ne(0,7)==solver.state().np(0,7)&&solver.state().nn(0,7)==0,"neutral Gaussian initialization"))return 1;auto lim=solver.timestep_limits();double expected=std::min({lim.drift,lim.diffusion,lim.ionization,lim.dielectric,lim.reaction});if(!ck(lim.selected>0&&std::isfinite(lim.selected)&&lim.selected==expected,"adaptive timestep minimum"))return 1;StreamerDiagnostics d;if(!ck(solver.step(.1*lim.selected,d),"three-species coupled step"))return 1;if(!ck(std::isfinite(d.emax)&&d.ne_max>0,"finite coupled diagnostics"))return 1;if(!ck(d.conservation_residual<1e-12,"single-step conservation closure"))return 1;
+ StreamerConfig pcfg=cfg;pcfg.photoionization=true;StreamerSolver photo(g,pcfg);photo.initialize_gaussian(1e12,4e-5,2e-4);StreamerDiagnostics pd;auto plim=photo.timestep_limits();if(!ck(photo.step(.01*plim.selected,pd)&&*std::max_element(photo.state().sph.values().begin(),photo.state().sph.values().end())>0&&pd.sp3_boundary_iterations>0,"single-step coupled SP3"))return 1;auto cp=std::filesystem::temp_directory_path()/"streamer_rf_stage3_checkpoint.bin";solver.save_checkpoint(cp);StreamerSolver restarted(g,cfg);restarted.load_checkpoint(cp);if(!ck(restarted.state().time==solver.state().time&&restarted.state().ne.values()==solver.state().ne.values(),"checkpoint restart"))return 1;std::filesystem::remove(cp);StreamerSolver loss_case(g,cfg);loss_case.initialize_gaussian(1.,4e-5,2e-4);std::fill(loss_case.state().np.values().begin(),loss_case.state().np.values().end(),1e20);std::fill(loss_case.state().nn.values().begin(),loss_case.state().nn.values().end(),1e20);auto saved=loss_case.state().np.values();StreamerDiagnostics rejected;if(!ck(!loss_case.step(1e-3,rejected)&&loss_case.state().np.values()==saved,"negative-density rollback"))return 1;PetscFinalize();std::cout<<"passed "<<n<<" Stage 3 C++ checks\n";return 0;}

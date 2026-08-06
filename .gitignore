@@ -1,0 +1,22 @@
+# Local build and execution products
+build/
+results/
+archive/audit_only/
+
+# Local Python environment and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Temporary/editor files
+*.tmp
+*.bak
+*~
+core
+
+# Large local literature/data artifacts not required for toolchain execution
+references/*.pdf
+data/digitization/*.png

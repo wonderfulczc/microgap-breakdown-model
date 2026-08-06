@@ -1,0 +1,123 @@
+path,kind,status,note
+references/Bourdon 等 - 2007 - Efficient models for photoionization produced by non-thermal gas discharges in air based on radiativ.pdf,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+references/Shi 等 - 2019 - VHF and UHF electromagnetic radiation produced by streamers in lightning.pdf,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+references/Kulikovsky - 1995 - A more accurate scharfetter-gummel algorithm of electron transport for semiconductor and gas dischar.pdf,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+references/Morrow and Lowke - 1997 - Streamer propagation in air.pdf,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+references/Liu 等 - 2007 - Application of photoionization models based on radiative transfer and the helmholtz equations to stu.pdf,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+references/Liu和Pasko - 2004 - Effects of photoionization on propagation and branching of positive and negative streamers in sprite.pdf,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+references/Luque - 2017 - Radio frequency electromagnetic radiation from streamer collisions.pdf,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+references/Ihaddadene和Celestin - 2015 - Increase of the electric field in head-on collisions between negative and positive streamers.pdf,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+references/Shi 等 - 2016 - Properties of relatively long streamers initiated from an isolated hydrometeor.pdf,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+references/Shi 等 - 2017 - Three-dimensional modeling of two interacting streamers.pdf,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+data/digitization/liu_pasko_figure1_page_600dpi.png,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage4/stage4_analysis_summary.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/sensitivity/background_field_sensitivity.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/evidence_audit.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/recovery/progress_log.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/recovery/termination_audit.md,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/recovery/hypothesis_log.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/fields_2070.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/fields_103.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/fields_1584.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/fields_1337.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/fields_1089.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/fields_176.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/fields_000000.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/fields_1828.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/fields_839.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/fields_335.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/fields_46.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/fields_587.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/coupling_ledger.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/coarse_ml_recovery/scalar_history.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/stage3_verification_baseline_10um/fields_46.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/stage3_verification_baseline_10um/fields_0.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/stage3_verification_baseline_10um/coupling_ledger.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/stage3_verification_baseline_10um/scalar_history.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/stage3_verification_baseline_10um_resume1/checkpoint.bin,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/stage3_verification_baseline_10um_resume1/fields_46.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/stage3_verification_baseline_10um_resume1/coupling_ledger.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/stage3_verification_baseline_10um_resume1/scalar_history.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/single_seed/stage3_verification_baseline_10um_resume1/fields_104.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/development_2ns/fields_final.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/development_2ns/scalar_history.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_config_changed/checkpoint.bin,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_config_changed/fields_000000.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_config_changed/scalar_history.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/baseline_ml_gaussian_boundary_performance_20260722/fields_200.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/baseline_ml_gaussian_boundary_performance_20260722/fields_300.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/baseline_ml_gaussian_boundary_performance_20260722/fields_100.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/baseline_ml_gaussian_boundary_performance_20260722/checkpoint.bin,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/baseline_ml_gaussian_boundary_performance_20260722/fields_000000.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/baseline_ml_gaussian_boundary_performance_20260722/scalar_history.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/stale_registry_20260722/S3-TRANSPORT-001.stdout.log,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/stale_registry_20260722/S3-TRANSPORT-001.stderr.log,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_pre_formation_stop_20260722/fields_200.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_pre_formation_stop_20260722/fields_300.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_pre_formation_stop_20260722/fields_100.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_pre_formation_stop_20260722/checkpoint.bin,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_pre_formation_stop_20260722/fields_000000.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_pre_formation_stop_20260722/scalar_history.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/fields_final.h5,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/fields_200.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/fields_000000.h5,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/fields_400.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/fields_300.h5,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/solver_iterations.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/fields_300.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/conservation.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/fields_final.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/fields_100.h5,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/fields_100.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/timestep_controller.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/termination_reason.txt,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/fields_200.h5,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/checkpoint.bin,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/fields_000000.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/head_trajectory.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/scalar_history.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_old_head_gate_20260722/fields_400.h5,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/baseline_ml_head_ambiguity_gate_20260722/fields_200.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/baseline_ml_head_ambiguity_gate_20260722/fields_100.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/baseline_ml_head_ambiguity_gate_20260722/checkpoint.bin,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/baseline_ml_head_ambiguity_gate_20260722/fields_000000.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/baseline_ml_head_ambiguity_gate_20260722/scalar_history.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/fields_final.h5,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/fields_200.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/fields_000000.h5,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/fields_400.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/fields_300.h5,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/solver_iterations.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/fields_300.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/conservation.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/fields_final.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/fields_100.h5,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/fields_100.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/timestep_controller.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/termination_reason.txt,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/fields_200.h5,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/checkpoint.bin,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/fields_000000.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/head_trajectory.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/scalar_history.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_gaussian_boundary_evidence_superseded_20260722/fields_400.h5,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_cold_start_performance_20260722/checkpoint.bin,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_cold_start_performance_20260722/fields_000000.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/coarse_ml_cold_start_performance_20260722/scalar_history.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/smoke/fields_final.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage3/forensic/invalidated_development_runs/smoke/scalar_history.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage5/recovery/progress_log.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage_A2/data/lifecycle_all_cases.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage_A2/data/band_energy_summary.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage_A2/data/lifecycle_primary.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage_A2/data/esd_analytic_all_cases.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage_A2/data/spectrum_analytic_all_cases.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage2/forensic/suspicious_literals.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results/stage2/forensic/evidence_audit.csv,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+references/metadata/local_manifest.json,uncertain_file,deleted,listed in retained_uncertain.csv; not referenced by toolchain inventory
+results,simulation_results_directory,deleted,all current simulation results removed for GitHub toolchain archive
+archive/audit_only,audit_only_result_archives,deleted,large historical result archives removed for GitHub toolchain archive
+references,empty_directory,deleted,empty after metadata cleanup
+data/digitization,empty_directory,deleted,empty after archive cleanup
+data,empty_directory,deleted,empty after archive cleanup
+archive,empty_directory,deleted,empty after archive cleanup

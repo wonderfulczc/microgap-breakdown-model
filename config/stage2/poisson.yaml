@@ -1,0 +1,6 @@
+stage: "Stage 2: Verified Numerical Building Blocks"
+parameters:
+  epsilon_0: {value: 8.8541878128e-12, unit: "F/m", provenance_type: direct, source_id: CODATA, source_location: "vacuum permittivity", rationale: "SI Poisson equation"}
+  rtol: {value: 1.0e-10, unit: "1", provenance_type: numerical_choice, source_id: "Stage2 tolerance study", source_location: "results/stage2/wp2_2_poisson/tolerance_sweep.csv", rationale: "solution change below 0.1 percent"}
+  atol: {value: 1.0e-14, unit: "solver residual units", provenance_type: numerical_choice, source_id: "Stage2 tolerance study", source_location: "results/stage2/wp2_2_poisson/tolerance_sweep.csv", rationale: "paired frozen tolerance"}
+  charge_threshold: {value: 1.0e-3, unit: "1", provenance_type: numerical_choice, source_id: "Stage2 threshold study", source_location: "results/stage2/wp2_2_poisson/open_boundary_threshold_sweep.csv", rationale: "error below one percent"}

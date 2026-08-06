@@ -1,0 +1,6 @@
+stage: "Stage 2: Verified Numerical Building Blocks"
+parameters:
+  epsilon: {value: 0.01, unit: "1", provenance_type: direct, source_id: SRC-0005, source_location: "PDF p.4 Eq.21 and p.6 discussion", rationale: "Kulikovsky baseline"}
+  epsilon_scan: {value: [0.005, 0.01, 0.02, 0.04], unit: "1", provenance_type: numerical_choice, source_id: "Stage2-Prompt", source_location: "WP2.1", rationale: "required sensitivity"}
+  n_ref: {value: 1.0, unit: "benchmark density unit", provenance_type: assumption, source_id: "Stage2-Prompt", source_location: "WP2.1 dimensional interface", rationale: "nondimensional benchmark only; caller must supply physical value"}
+  cfl_scan: {value: [0.1, 0.2, 0.4], unit: "1", provenance_type: numerical_choice, source_id: "Stage2-Prompt", source_location: "WP2.1", rationale: "required stability study"}

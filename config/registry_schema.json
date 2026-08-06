@@ -1,0 +1,22 @@
+{
+  "provenance_type": [
+    "direct",
+    "derived",
+    "inferred_from_figure",
+    "assumption",
+    "unresolved"
+  ],
+  "confidence": [
+    "high",
+    "medium",
+    "low",
+    "unknown"
+  ],
+  "implementation_status": [
+    "frozen",
+    "provisional",
+    "blocked",
+    "not_required_yet"
+  ],
+  "Torr_Pa": 133.32236842105263
+}

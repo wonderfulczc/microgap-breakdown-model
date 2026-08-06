@@ -1,0 +1,10 @@
+stage: "Stage 2: Verified Numerical Building Blocks"
+parameters:
+  A: {value: [0.0067, 0.0346, 0.3059], unit: "cm^-1 Torr^-1", provenance_type: direct, source_id: SRC-0003, source_location: "Bourdon 2007 PDF p.8 Table 3", rationale: "SP3 three-group fit, not Helmholtz Table 2"}
+  lambda: {value: [0.0447, 0.1121, 0.5994], unit: "cm^-1 Torr^-1", provenance_type: direct, source_id: SRC-0003, source_location: "Bourdon 2007 PDF p.8 Table 3", rationale: "SP3 absorption coefficients"}
+  oxygen_pressure: {value: 150, unit: Torr, provenance_type: direct, source_id: SRC-0003, source_location: "Bourdon 2007 Eq.3", rationale: "atmospheric-air benchmark"}
+  total_pressure: {value: 760, unit: Torr, provenance_type: direct, source_id: SRC-0004, source_location: "Liu 2007 model description", rationale: "benchmark pressure"}
+  quenching_pressure: {value: 30, unit: Torr, provenance_type: direct, source_id: SRC-0003, source_location: "Bourdon 2007 Eq.2 discussion", rationale: "quenching factor metadata"}
+  boundary_tolerance: {value: 1.0e-8, unit: "1", provenance_type: numerical_choice, source_id: "Stage2 boundary study", source_location: "results/stage2/wp2_3_sp3/boundary_iteration.csv", rationale: "stable S_ph"}
+  rtol: {value: 1.0e-10, unit: "1", provenance_type: numerical_choice, source_id: "Stage2 tolerance study", source_location: "results/stage2/wp2_3_sp3/tolerance_sweep.csv", rationale: "S_ph change below 0.1 percent"}
+  atol: {value: 1.0e-14, unit: "solver residual units", provenance_type: numerical_choice, source_id: "Stage2 tolerance study", source_location: "results/stage2/wp2_3_sp3/tolerance_sweep.csv", rationale: "paired frozen tolerance"}

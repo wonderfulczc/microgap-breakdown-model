@@ -1,0 +1,4 @@
+stage: "Stage 2: Verified Numerical Building Blocks"
+parameters:
+  mpi_ranks: {value: [1, 2, 4], unit: ranks, provenance_type: numerical_choice, source_id: "Stage2-Prompt", source_location: "integration MPI consistency", rationale: "required decomposition comparison"}
+  deterministic_output: {value: true, unit: "1", provenance_type: numerical_choice, source_id: "Stage2-Prompt", source_location: reproducibility, rationale: "stable sorted output"}

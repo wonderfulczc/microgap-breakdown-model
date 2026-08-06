@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>基于C++/PETSc/MPI的流注碰撞与宽频辐射仿真工具链</title>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif;color:#172033;background:#f5f7fb;line-height:1.65}
+header{background:#14213d;color:white;padding:48px 7vw 36px}
+h1{font-size:34px;margin:0 0 8px} h2{margin-top:42px;border-left:5px solid #315f9b;padding-left:12px} h3{margin-top:28px}
+main{max-width:1180px;margin:0 auto;padding:30px 4vw 80px;background:white}
+.subtitle{font-size:19px;opacity:.88} .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.card{background:#eef4ff;color:#14213d;border:1px solid #bdd3f4;border-radius:12px;padding:16px;font-weight:600}
+.flow{background:#f8fafc;border:1px solid #d9e2ef;border-radius:10px;padding:14px;margin:16px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.fig{border:1px solid #d9e2ef;border-radius:10px;padding:10px;margin:0;background:#fff}
+.fig img{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:#344055;margin-top:8px} figcaption span{font-size:12px;color:#697386}
+table{border-collapse:collapse;width:100%;margin:14px 0} th,td{border:1px solid #d8dee9;padding:8px;text-align:left} th{background:#eef4ff}
+.note{background:#fff8e8;border-left:4px solid #d99b1a;padding:12px;margin:14px 0} .limit{background:#fef2f2;border-left:4px solid #c0392b;padding:12px;margin:14px 0}
+@media print{body{background:white} main{box-shadow:none} .grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<h1>基于C++/PETSc/MPI的流注碰撞与宽频辐射仿真工具链</h1>
+<div class="subtitle">Shi 2019仿真流程的资源感知复现及其向微间隙击穿无线传感课题的迁移</div>
+<div class="cards">
+<div class="card">求解器：三粒子流体 + Poisson + SP3</div>
+<div class="card">数值框架：C++17 + PETSc + MPI</div>
+<div class="card">后处理：Current moment + FFT + ESD</div>
+<div class="card">项目状态：Workflow complete, not 1:1 reproduction</div>
+</div>
+</header>
+<main>
+<section><h2>第一章 仿真方法和工具链</h2>
+<p>核心求解器由自主 C++17 代码实现，PETSc 提供线性代数与 KSP 求解，MPI 提供并行计算。Python 负责配置、调度、后处理、绘图和证据管理。COMSOL 后续仅作为复杂电极几何与静电场交叉验证工具。</p>
+<div class="grid">
+    <figure class="fig">
+      <img src="assets/figure_01_toolchain_architecture.svg" alt="图1 工具链架构图">
+      <figcaption>图1. 工具链架构图<br><span>run_id: DOCUMENTATION；source: docs/stage5_closure_report.md</span></figcaption>
+    </figure>
+    
+    <figure class="fig">
+      <img src="assets/figure_13_project_transfer.svg" alt="图13 面向微间隙击穿课题的迁移路线">
+      <figcaption>图13. 面向微间隙击穿课题的迁移路线<br><span>run_id: DOCUMENTATION；source: docs/project_simulation_transfer.md</span></figcaption>
+    </figure>
+    </div>
+<div class="flow">配置文件 → Python运行调度 → C++主求解器 → PETSc矩阵与KSP → MPI区域并行 → HDF5/CSV结果 → Python物理诊断 → 电流矩 → FFT/ESD → 图表 → validator与证据链</div>
+</section>
+<section><h2>第二章 文献复刻过程</h2>
+<p>Stage 1 重建参数、公式和频谱链；Stage 2 验证 ISG-0、Poisson OpenCharge 和 SP3；Stage 3 验证三粒子单流注求解器；Stage 4 跑通碰撞、isolated subtraction、电流矩和辐射链；Stage 5 做趋势逻辑和课题迁移。</p>
+
+    <figure class="fig">
+      <img src="assets/figure_02_stage_timeline.svg" alt="图2 Stage 1 至 Stage 5 时间线">
+      <figcaption>图2. Stage 1 至 Stage 5 时间线<br><span>run_id: DOCUMENTATION；source: docs/stage5_closure_report.md</span></figcaption>
+    </figure>
+    
+</section>
+<section><h2>第三章 单流注与光电离</h2>
+<p>Stage 3 资源感知结果表明，单 Gaussian 种子可形成双向流注，SP3 关闭后正头传播不能维持同等响应。</p>
+<div class="grid">
+    <figure class="fig">
+      <img src="assets/figure_03_stage3_streamer_evolution.png" alt="图3 单种子双向流注演化">
+      <figcaption>图3. 单种子双向流注演化<br><span>run_id: S3-COARSE_ML_RECOVERY_RESUME1；source: results/stage3/single_seed/coarse_ml_recovery_resume1/</span></figcaption>
+    </figure>
+    
+    <figure class="fig">
+      <img src="assets/figure_04_sp3_on_off.png" alt="图4 SP3 on/off 对比">
+      <figcaption>图4. SP3 on/off 对比<br><span>run_id: S3-COARSE_NO_SP3; S3-SP3_FORK_OFF_RESUME1；source: results/stage3/sensitivity/photoionization_sensitivity.csv</span></figcaption>
+    </figure>
+    </div>
+</section>
+<section><h2>第四章 双流注碰撞</h2>
+<p>Stage 4 基准 S4-PAPERLIKE-20UM 的碰撞时间为 1.954 ns，桥接密度增长 188.56 倍，碰撞区电场下降 66.18%。</p>
+<div class="grid">
+    <figure class="fig">
+      <img src="assets/figure_05_collision_sequence.png" alt="图5 双流注碰撞序列">
+      <figcaption>图5. 双流注碰撞序列<br><span>run_id: S4-PAPERLIKE-20UM；source: results/stage4/figures/</span></figcaption>
+    </figure>
+    
+    <figure class="fig">
+      <img src="assets/figure_06_collision_diagnostics.png" alt="图6 头距、桥接密度与间隙电场">
+      <figcaption>图6. 头距、桥接密度与间隙电场<br><span>run_id: S4-PAPERLIKE-20UM；source: results/stage4/collision/collision_event.csv</span></figcaption>
+    </figure>
+    </div>
+</section>
+<section><h2>第五章 电流矩与辐射后处理</h2>
+<p>主电流矩采用电子漂移电流积分，扩散电流作为敏感性。isolated subtraction 得到碰撞附加电流矩，Stage 4 Delta I 峰值为 4.471e-04 A m，SNR 为 209.78。</p>
+<div class="grid">
+    <figure class="fig">
+      <img src="assets/figure_07_current_moment.png" alt="图7 collision/left/right 漂移电流矩">
+      <figcaption>图7. collision/left/right 漂移电流矩<br><span>run_id: S4-PAPERLIKE-20UM；source: results/stage4/current_moment/</span></figcaption>
+    </figure>
+    
+    <figure class="fig">
+      <img src="assets/figure_08_delta_current.png" alt="图8 碰撞增量电流矩 Delta I">
+      <figcaption>图8. 碰撞增量电流矩 Delta I<br><span>run_id: S4-PAPERLIKE-20UM；source: results/stage4/current_moment/delta_current_moment.csv</span></figcaption>
+    </figure>
+    
+    <figure class="fig">
+      <img src="assets/figure_09_current_derivative.png" alt="图9 dDelta I/dt">
+      <figcaption>图9. dDelta I/dt<br><span>run_id: S4-PAPERLIKE-20UM；source: results/stage4/radiation/delta_current_derivative.csv</span></figcaption>
+    </figure>
+    
+    <figure class="fig">
+      <img src="assets/figure_10_fft_esd.png" alt="图10 FFT 与 ESD">
+      <figcaption>图10. FFT 与 ESD<br><span>run_id: S4-PAPERLIKE-20UM；source: results/stage4/radiation/</span></figcaption>
+    </figure>
+    
+    <figure class="fig">
+      <img src="assets/figure_11_band_energy.png" alt="图11 VHF/UHF/SHF 频带能量">
+      <figcaption>图11. VHF/UHF/SHF 频带能量<br><span>run_id: S4-PAPERLIKE-20UM; S5-HIGHFIELD-COLLISION；source: results/stage4/radiation/band_energy.csv; results/stage5/radiation/highfield_band_energy.csv</span></figcaption>
+    </figure>
+    </div>
+<div class="note">频谱中的 trusted 表示 sampling/Nyquist 可信，不代表空间网格、输运模型和辐射模型已经实现高频定量收敛。</div>
+</section>
+<section><h2>第六章 Stage 5趋势</h2>
+<p>高背景场工况 S5-HIGHFIELD-COLLISION 的碰撞时间为 1.000 ns，Delta I 峰值为 6.620e-03 A m，谱质心约 2.039 GHz。长间距工况状态为 NO_COLLISION_WITHIN_RESOURCE_WINDOW；不对称种子工况状态为 NO_COLLISION_WITHIN_RESOURCE_WINDOW，速度比诊断约 0.195。</p>
+
+    <figure class="fig">
+      <img src="assets/figure_12_stage5_trends.png" alt="图12 Stage 5 趋势比较">
+      <figcaption>图12. Stage 5 趋势比较<br><span>run_id: S5-HIGHFIELD-COLLISION; S5-LARGERGAP-COLLISION; S5-ASYMMETRIC-COLLISION；source: results/stage5/trends/case_comparison.csv</span></figcaption>
+    </figure>
+    
+<div class="note">G 和 A 工况没有完整 isolated 对照，因此只报告 event_local_proxy；不得与 strict_delta 绝对幅值直接排序。</div>
+</section>
+<section><h2>第七章 面向博士课题的迁移</h2>
+<p>可复用模块包括 PETSc/MPI 框架、网格与场数据结构、Poisson、SP3、ISG-0、时间推进、checkpoint、电流矩积分、FFT/ESD 和证据审计。必须替换的部分包括自由空间 Gaussian 种子、均匀背景场、Morrow–Lowke 输运、无电极边界、固定空气气氛和无外部电路耦合。</p>
+
+    <figure class="fig">
+      <img src="assets/figure_13_project_transfer.svg" alt="图13 面向微间隙击穿课题的迁移路线">
+      <figcaption>图13. 面向微间隙击穿课题的迁移路线<br><span>run_id: DOCUMENTATION；source: docs/project_simulation_transfer.md</span></figcaption>
+    </figure>
+    
+</section>
+<section><h2>第八章 结论与限制</h2>
+<p>项目已经完成仿真模型和流程主要复刻，跑通自主 C++/PETSc/MPI 求解工具链，并完成碰撞、电流矩、FFT 和 ESD 处理，可支撑课题仿真开发。</p>
+<div class="limit">限制：未完成 Shi 2019 的 1:1 定量复刻；未获得作者原始输运表；未完成严格高分辨率收敛；当前结果不直接代表实际微间隙电极击穿。</div>
+</section>
+</main>
+</body>
+</html>
