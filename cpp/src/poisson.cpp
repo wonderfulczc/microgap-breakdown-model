@@ -4,13 +4,15 @@
 #include <stdexcept>
 namespace streamer_rf {
 namespace { constexpr double eps0=8.8541878128e-12;int g_last_elliptic_iterations=0,g_last_poisson_iterations=0;
-void assemble(const AxisymmetricGrid& g,DM dm,Mat A,Vec b,const ScalarField2D& rhs,const PoissonBoundaryConfig& bc,double shift,const ScalarField2D* boundary){
+void assemble(const AxisymmetricGrid& g,DM dm,Mat A,Vec b,const ScalarField2D& rhs,const PoissonBoundaryConfig& bc,double shift,const ScalarField2D* boundary,const AxisymmetricNeedlePlaneGeometry* geometry=nullptr,double applied_voltage=0.0){
  DMDALocalInfo info;DMDAGetLocalInfo(dm,&info); const double dr=g.dr(),dz=g.dz();
  PetscScalar** barr;DMDAVecGetArray(dm,b,&barr);
  auto st=[](int ii,int jj){MatStencil s{};s.i=ii;s.j=jj;return s;};
  for(int j=info.ys;j<info.ys+info.ym;++j)for(int i=info.xs;i<info.xs+info.xm;++i){
   MatStencil row=st(i,j),col[5];PetscScalar val[5];int n=0;const bool boundary_cell=i==g.nr()-1||j==0||j==g.nz()-1;
-  if(boundary_cell){col[n]=row;val[n++]=1;barr[j][i]=boundary?(*boundary)(i,j):bc.r_outer.value;}
+  const auto electrode_cell=geometry?geometry->classify(g,i,j):ElectrodeCellType::Gas;
+  if(electrode_cell!=ElectrodeCellType::Gas){col[n]=row;val[n++]=1;barr[j][i]=electrode_cell==ElectrodeCellType::HighVoltageElectrode?applied_voltage:0.0;}
+  else if(boundary_cell){col[n]=row;val[n++]=1;barr[j][i]=boundary?(*boundary)(i,j):bc.r_outer.value;}
   else {const double r=g.r(i),rp=g.radial_face(i+1),rm=g.radial_face(i),ar=rp/(r*dr*dr),al=rm/(r*dr*dr),az=1/(dz*dz);
    col[n]=st(i,j);val[n++]=-(ar+al+2*az)-shift;
    col[n]=st(i+1,j);val[n++]=ar;if(i>0){col[n]=st(i-1,j);val[n++]=al;}
@@ -22,6 +24,14 @@ void solve_elliptic(const ScalarField2D& rhs,const PoissonBoundaryConfig& bc,Sca
  PetscSolverContext ctx(rhs.grid(),t);Mat A;Vec b,u;DMCreateMatrix(ctx.dm(),&A);DMCreateGlobalVector(ctx.dm(),&b);VecDuplicate(b,&u);
  assemble(rhs.grid(),ctx.dm(),A,b,rhs,bc,shift,boundary);MatAssemblyBegin(A,MAT_FINAL_ASSEMBLY);MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);VecAssemblyBegin(b);VecAssemblyEnd(b);
  KSPSetOperators(ctx.ksp(),A,A);KSPSolve(ctx.ksp(),b,u);PetscInt its;KSPGetIterationNumber(ctx.ksp(),&its);g_last_elliptic_iterations=static_cast<int>(its);KSPConvergedReason reason;KSPGetConvergedReason(ctx.ksp(),&reason);if(reason<0)throw std::runtime_error("PETSc elliptic solve diverged");
+ Vec natural,all;DMDACreateNaturalVector(ctx.dm(),&natural);DMDAGlobalToNaturalBegin(ctx.dm(),u,INSERT_VALUES,natural);DMDAGlobalToNaturalEnd(ctx.dm(),u,INSERT_VALUES,natural);VecScatter scatter;VecScatterCreateToAll(natural,&scatter,&all);VecScatterBegin(scatter,natural,all,INSERT_VALUES,SCATTER_FORWARD);VecScatterEnd(scatter,natural,all,INSERT_VALUES,SCATTER_FORWARD);
+ const PetscScalar* arr;VecGetArrayRead(all,&arr);for(std::size_t k=0;k<x.values().size();++k)x.values()[k]=PetscRealPart(arr[k]);VecRestoreArrayRead(all,&arr);
+ VecScatterDestroy(&scatter);VecDestroy(&all);VecDestroy(&natural);VecDestroy(&u);VecDestroy(&b);MatDestroy(&A);
+}
+void solve_electrode_elliptic(const ScalarField2D& rhs,const PoissonBoundaryConfig& bc,ScalarField2D& x,const SolverTolerances&t,const AxisymmetricNeedlePlaneGeometry& geometry,double applied_voltage,const ScalarField2D* boundary=nullptr){
+ PetscSolverContext ctx(rhs.grid(),t);Mat A;Vec b,u;DMCreateMatrix(ctx.dm(),&A);DMCreateGlobalVector(ctx.dm(),&b);VecDuplicate(b,&u);
+ assemble(rhs.grid(),ctx.dm(),A,b,rhs,bc,0,boundary,&geometry,applied_voltage);MatAssemblyBegin(A,MAT_FINAL_ASSEMBLY);MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);VecAssemblyBegin(b);VecAssemblyEnd(b);
+ KSPSetOperators(ctx.ksp(),A,A);KSPSolve(ctx.ksp(),b,u);PetscInt its;KSPGetIterationNumber(ctx.ksp(),&its);g_last_elliptic_iterations=static_cast<int>(its);KSPConvergedReason reason;KSPGetConvergedReason(ctx.ksp(),&reason);if(reason<0)throw std::runtime_error("PETSc electrode elliptic solve diverged");
  Vec natural,all;DMDACreateNaturalVector(ctx.dm(),&natural);DMDAGlobalToNaturalBegin(ctx.dm(),u,INSERT_VALUES,natural);DMDAGlobalToNaturalEnd(ctx.dm(),u,INSERT_VALUES,natural);VecScatter scatter;VecScatterCreateToAll(natural,&scatter,&all);VecScatterBegin(scatter,natural,all,INSERT_VALUES,SCATTER_FORWARD);VecScatterEnd(scatter,natural,all,INSERT_VALUES,SCATTER_FORWARD);
  const PetscScalar* arr;VecGetArrayRead(all,&arr);for(std::size_t k=0;k<x.values().size();++k)x.values()[k]=PetscRealPart(arr[k]);VecRestoreArrayRead(all,&arr);
  VecScatterDestroy(&scatter);VecDestroy(&all);VecDestroy(&natural);VecDestroy(&u);VecDestroy(&b);MatDestroy(&A);
@@ -41,6 +51,11 @@ void solve_potential(const ScalarField2D& rho,double background,const PoissonBou
  ScalarField2D rhs(rho.grid());for(std::size_t k=0;k<rho.values().size();++k)rhs.values()[k]=-rho.values()[k]/eps0;
  const bool open=bc.r_outer.kind==BoundaryKind::OpenCharge||bc.z_lower.kind==BoundaryKind::OpenCharge||bc.z_upper.kind==BoundaryKind::OpenCharge;ScalarField2D bd(rho.grid());if(open)bd=open_charge_boundary(rho,o);
  solve_elliptic(rhs,bc,phi,t,0,open?&bd:nullptr);g_last_poisson_iterations=g_last_elliptic_iterations;for(int j=0;j<rho.grid().nz();++j)for(int i=0;i<rho.grid().nr();++i)phi(i,j)+=-background*rho.grid().z(j);
+}
+void solve_potential_with_electrodes(const ScalarField2D& rho,const AxisymmetricNeedlePlaneGeometry& geometry,double applied_voltage,const PoissonBoundaryConfig& bc,ScalarField2D& phi,const SolverTolerances&t,const OpenBoundaryOptions&o){
+ ScalarField2D rhs(rho.grid());for(std::size_t k=0;k<rho.values().size();++k)rhs.values()[k]=-rho.values()[k]/eps0;
+ const bool open=bc.r_outer.kind==BoundaryKind::OpenCharge||bc.z_lower.kind==BoundaryKind::OpenCharge||bc.z_upper.kind==BoundaryKind::OpenCharge;ScalarField2D bd(rho.grid());if(open)bd=open_charge_boundary(rho,o);
+ solve_electrode_elliptic(rhs,bc,phi,t,geometry,applied_voltage,open?&bd:nullptr);g_last_poisson_iterations=g_last_elliptic_iterations;
 }
 void solve_axisymmetric_elliptic(const ScalarField2D& rhs,const PoissonBoundaryConfig& bc,ScalarField2D& solution,double shift,const SolverTolerances&t){solve_elliptic(rhs,bc,solution,t,shift);}
 void solve_axisymmetric_dirichlet(const ScalarField2D&rhs,const ScalarField2D&boundary,ScalarField2D&solution,double shift,const SolverTolerances&t){PoissonBoundaryConfig bc;solve_elliptic(rhs,bc,solution,t,shift,&boundary);}

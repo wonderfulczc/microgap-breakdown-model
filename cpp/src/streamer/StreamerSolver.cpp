@@ -12,6 +12,10 @@ void StreamerSolver::load_checkpoint(const std::filesystem::path&p){std::ifstrea
 void StreamerSolver::initialize_gaussian(double n0,double sigma,double z0){
  initialize_gaussians({GaussianSeed{n0,sigma,z0}});
 }
+void StreamerSolver::initialize_gaussian_at_tip_offset(double n0,double sigma,double z_offset_from_tip){
+ if(!c_.electrode_geometry)throw std::runtime_error("tip-relative seed requires electrode geometry");
+ initialize_gaussian(n0,sigma,c_.electrode_geometry->seed_z_from_tip_offset(z_offset_from_tip));
+}
 void StreamerSolver::initialize_gaussians(const std::vector<GaussianSeed>& seeds){
  for(int j=0;j<g_.nz();++j){
   for(int i=0;i<g_.nr();++i){
@@ -26,8 +30,13 @@ void StreamerSolver::initialize_gaussians(const std::vector<GaussianSeed>& seeds
 }
 void StreamerSolver::fields(){
  for(std::size_t k=0;k<state_.rho.values().size();++k)state_.rho.values()[k]=qe*(state_.np.values()[k]-state_.ne.values()[k]-state_.nn.values()[k]);
- PoissonBoundaryConfig b;b.r_outer.kind=b.z_lower.kind=b.z_upper.kind=BoundaryKind::OpenCharge;solve_potential(state_.rho,c_.background_field,b,state_.phi,c_.elliptic,c_.open_boundary);
+ PoissonBoundaryConfig b;b.r_outer.kind=b.z_lower.kind=b.z_upper.kind=BoundaryKind::OpenCharge;if(c_.electrode_geometry&&c_.voltage_waveform)solve_potential_with_electrodes(state_.rho,*c_.electrode_geometry,c_.voltage_waveform->value(state_.time),b,state_.phi,c_.elliptic,c_.open_boundary);else solve_potential(state_.rho,c_.background_field,b,state_.phi,c_.elliptic,c_.open_boundary);
  for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i){auto dr=[&](int a,int b){return(state_.phi(b,j)-state_.phi(a,j))/((b-a)*g_.dr());};auto dz=[&](int a,int b){return(state_.phi(i,b)-state_.phi(i,a))/((b-a)*g_.dz());};state_.er(i,j)=i==0?0:-(i==g_.nr()-1?dr(i-1,i):dr(i-1,i+1));state_.ez(i,j)=-(j==0?dz(0,1):j==g_.nz()-1?dz(j-1,j):dz(j-1,j+1));state_.emag(i,j)=std::hypot(state_.er(i,j),state_.ez(i,j));}
+}
+void StreamerSolver::fill_electrode_diagnostics(StreamerDiagnostics&diag)const{
+ if(!c_.electrode_geometry||!c_.voltage_waveform)return;
+ auto e=evaluate_electrode_diagnostics(state_.phi,state_.er,state_.ez,*c_.electrode_geometry,state_.time,c_.voltage_waveform->value(state_.time),last_poisson_iterations());
+ diag.applied_voltage=e.applied_voltage_V;diag.phi_hv_residual=e.phi_hv_residual_V;diag.phi_ground_residual=e.phi_ground_residual_V;diag.geometry_id=e.geometry_id;diag.gap=e.gap_m;diag.tip_radius=e.tip_radius_m;
 }
 TimeStepLimits StreamerSolver::timestep_limits()const{
  double vr=0,vz=0,dmax=0,numax=0,cond=0,loss=0;
@@ -51,7 +60,7 @@ bool StreamerSolver::step(double dt,StreamerDiagnostics&diag){
  }
  double tol=1e-12*std::max(*std::max_element(state_.ne.values().begin(),state_.ne.values().end()),c_.n_ref);
  for(std::size_t k=0;k<state_.ne.values().size();++k){double ne=state_.ne.values()[k]+dt*dne.values()[k],np=state_.np.values()[k]+dt*dnp.values()[k],nn=state_.nn.values()[k]+dt*dnn.values()[k];if(ne<-tol||np<-tol||nn<-tol)return false;state_.ne.values()[k]=std::max(0.,ne);state_.np.values()[k]=std::max(0.,np);state_.nn.values()[k]=std::max(0.,nn);}
- state_.time+=dt;fields();diag={};diag.time=state_.time;diag.dt=dt;diag.poisson_iterations=last_poisson_iterations();diag.sp3_ksp_iterations=c_.photoionization?last_sp3_ksp_iterations():0;diag.sp3_boundary_iterations=c_.photoionization?last_sp3_boundary_iterations():0;diag.emax=*std::max_element(state_.emag.values().begin(),state_.emag.values().end());diag.ne_max=*std::max_element(state_.ne.values().begin(),state_.ne.values().end());diag.np_max=*std::max_element(state_.np.values().begin(),state_.np.values().end());diag.nn_max=*std::max_element(state_.nn.values().begin(),state_.nn.values().end());diag.controller=timestep_limits().controller;
+ state_.time+=dt;fields();diag={};diag.time=state_.time;diag.dt=dt;diag.poisson_iterations=last_poisson_iterations();diag.sp3_ksp_iterations=c_.photoionization?last_sp3_ksp_iterations():0;diag.sp3_boundary_iterations=c_.photoionization?last_sp3_boundary_iterations():0;diag.emax=*std::max_element(state_.emag.values().begin(),state_.emag.values().end());diag.ne_max=*std::max_element(state_.ne.values().begin(),state_.ne.values().end());diag.np_max=*std::max_element(state_.np.values().begin(),state_.np.values().end());diag.nn_max=*std::max_element(state_.nn.values().begin(),state_.nn.values().end());diag.controller=timestep_limits().controller;fill_electrode_diagnostics(diag);
  for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i){double vol=g_.cell_volume(i);diag.total_electrons+=state_.ne(i,j)*vol;diag.total_charge+=qe*(state_.np(i,j)-state_.ne(i,j)-state_.nn(i,j))*vol;}
  double ne_expected=old_ne+dt*(re_int-boundary_out),q_expected=old_q+qe*dt*boundary_out;double re=std::abs(diag.total_electrons-ne_expected)/std::max({std::abs(diag.total_electrons),std::abs(ne_expected),1.0}),rq=std::abs(diag.total_charge-q_expected)/std::max(charge_inventory,1e-30);diag.conservation_residual=std::max(re,rq);return true;
 }
