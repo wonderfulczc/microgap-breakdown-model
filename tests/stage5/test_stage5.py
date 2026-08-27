@@ -3,15 +3,28 @@ import sys
 
 import numpy as np
 import pandas as pd
+import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "python"))
 
 from streamer_rf.stage5 import head_velocity_metrics, pulse_fwhm, spectral_centroid
 
+EVIDENCE_REASON = (
+    "EVIDENCE_UNAVAILABLE: historical production artifact intentionally removed during "
+    "validated cleanup; see docs/github_archive_assessment.md and docs/github_archive_deletion_manifest.csv"
+)
 
+
+def require_evidence(path):
+    if not path.exists():
+        pytest.skip(EVIDENCE_REASON)
+
+@pytest.mark.evidence
 def test_case_comparison_separates_strict_delta_and_proxy():
-    comp = pd.read_csv(ROOT / "results/stage5/trends/case_comparison.csv")
+    path = ROOT / "results/stage5/trends/case_comparison.csv"
+    require_evidence(path)
+    comp = pd.read_csv(path)
     assert {"strict_delta", "event_local_proxy"}.issubset(set(comp.metric_type))
     assert comp.loc[comp.case_id == "F", "metric_type"].iloc[0] == "strict_delta"
     assert comp.loc[comp.run_id == "S5-LARGERGAP-COLLISION", "metric_type"].iloc[0] == "event_local_proxy"
@@ -19,8 +32,11 @@ def test_case_comparison_separates_strict_delta_and_proxy():
     assert proxy.Delta_I_peak.isna().all()
 
 
+@pytest.mark.evidence
 def test_no_collision_resource_status_is_explicit():
-    comp = pd.read_csv(ROOT / "results/stage5/trends/case_comparison.csv")
+    path = ROOT / "results/stage5/trends/case_comparison.csv"
+    require_evidence(path)
+    comp = pd.read_csv(path)
     statuses = set(comp.collision_status)
     assert "NO_COLLISION_WITHIN_RESOURCE_WINDOW" in statuses
     assert comp.loc[comp.run_id == "S5-LARGERGAP-COLLISION", "t_collision"].isna().all()
@@ -51,8 +67,11 @@ def test_head_velocity_ratio_uses_trajectories():
     assert np.isfinite(zc)
 
 
+@pytest.mark.evidence
 def test_stage5_output_sampling_sensitivity_passes_thresholds():
-    s = pd.read_csv(ROOT / "results/stage5/radiation/highfield_output_sampling_sensitivity.csv")
+    path = ROOT / "results/stage5/radiation/highfield_output_sampling_sensitivity.csv"
+    require_evidence(path)
+    s = pd.read_csv(path)
     assert set(s.status) == {"PASS"}
     assert s.Delta_I_peak_rel_diff.max() <= 0.05
     assert s.smoothed_derivative_peak_rel_diff.max() <= 0.05

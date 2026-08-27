@@ -4,12 +4,17 @@ Historical file and directory names are retained because tests and reproduction 
 
 | historical_name | current_stage | scope | status |
 |---|---|---|---|
-| A1 | Stage 1.1 | Registry and audit | completed |
-| A2-Lifecycle | Stage 1.2 | Analytical lifecycle and radiation | completed |
-| A3-NumericalMethods | Stage 2 | Numerical methods | not started |
-| A4-FluidSolver | Stage 3 | Two-dimensional streamer fluid solver | not started |
-| A5-CaseI | Stage 4 | Shi 2019 Case I reconstruction | not started |
-| Cases II-IV | Stage 5 | Cases II-IV and uncertainty analysis | not started |
+| A1 | Stage 1.1 | Registry and audit | completed / frozen reference workflow |
+| A2-Lifecycle | Stage 1.2 | Analytical lifecycle and radiation | completed / frozen reference workflow |
+| A3-NumericalMethods | Stage 2 | Numerical methods | completed / frozen reference workflow |
+| A4-FluidSolver | Stage 3 | Two-dimensional streamer fluid solver | completed / frozen reference workflow |
+| A5-CaseI | Stage 4 | Shi 2019 Case I reconstruction | completed / frozen reference workflow |
+| Cases II-IV | Stage 5 | Cases II-IV and uncertainty analysis | completed / frozen reference workflow |
+
+The closure reports and validation matrices are the authoritative scientific
+record for completed Stage 1-5 work. This mapping only normalizes historical
+directory names and current workflow status; it does not alter any closure
+result, validation metric, or scientific conclusion.
 
 ## Naming policy
 

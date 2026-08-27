@@ -2,6 +2,10 @@
 build/
 results/
 archive/audit_only/
+checkpoints/
+checkpoint*/
+*.chk
+*.checkpoint
 
 # Local Python environment and caches
 .venv/
@@ -10,12 +14,20 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.coverage
+htmlcov/
 
 # Temporary/editor files
+.codex_skill_staging/
 *.tmp
 *.bak
 *~
 core
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
 
 # Large local literature/data artifacts not required for toolchain execution
 references/*.pdf

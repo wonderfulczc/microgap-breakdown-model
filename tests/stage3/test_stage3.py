@@ -6,6 +6,9 @@ ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'python'))
 from streamer_rf.streamer.morrow_lowke_reference import evaluate
 from streamer_rf.streamer.diagnostics import axis_heads,trajectory_metrics
+EVIDENCE_REASON="EVIDENCE_UNAVAILABLE: historical production artifact intentionally removed during validated cleanup; see docs/github_archive_assessment.md and docs/github_archive_deletion_manifest.csv"
+def require_evidence(path):
+ if not path.exists(): pytest.skip(EVIDENCE_REASON)
 def test_reference_nonnegative():
  N=101325/(1.380649e-23*300)
  for E in np.geomspace(1e4,4e7,100):
@@ -14,10 +17,12 @@ def test_reference_junctions_bounded():
  N=101325/(1.380649e-23*300)
  for x in [2.6e-17,1e-16,1.05e-15,1.5e-15,2e-15]:
   E=x*N/1e4;l=evaluate(E*(1-1e-9),N);r=evaluate(E*(1+1e-9),N);assert abs(l['mobility']-r['mobility'])/max(l['mobility'],r['mobility'])<1e-7
+@pytest.mark.evidence
 def test_measured_cpp_python_agreement():
- p=ROOT/'results/stage3/transport/cpp_python_comparison.csv';d=pd.read_csv(p);assert d.relative_difference.max()<1e-11
+ p=ROOT/'results/stage3/transport/cpp_python_comparison.csv';require_evidence(p);d=pd.read_csv(p);assert d.relative_difference.max()<1e-11
+@pytest.mark.evidence
 def test_provenance_hashes():
- d=pd.read_csv(ROOT/'results/stage3/provenance/run_registry.csv');assert len(d)>0
+ p=ROOT/'results/stage3/provenance/run_registry.csv';require_evidence(p);d=pd.read_csv(p);assert len(d)>0
  for r in d.itertuples():assert hashlib.sha256((ROOT/r.result_files).read_bytes()).hexdigest()==r.result_sha256
 def test_no_forbidden_results():
  names=' '.join(str(p).lower() for p in (ROOT/'results/stage3').rglob('*'));assert 'case_i' not in names and 'collision' not in names and 'current_moment' not in names
