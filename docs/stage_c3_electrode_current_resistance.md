@@ -52,11 +52,22 @@ The first dynamic step uses the initialized electrostatic field as the previous
 state. If no previous electrode field exists, displacement-current fields remain
 invalid instead of being silently treated as physical zero.
 
-Very small `Delta Q` below the Poisson residual scale is treated as numerical
-zero before division by `dt`. This prevents PETSc-level charge noise from being
-amplified by very small explicit timesteps. The deadband is derived from the
-configured elliptic tolerance and machine precision; it is not a physical
-current threshold.
+Stage C3 reports the direct finite difference of electrode charge. Near-zero
+MPI comparisons use absolute tolerances in validators rather than suppressing
+small but finite plasma-induced `Delta Q` in the diagnostic itself.
+
+The fixed-voltage/changing-space-charge closure check solves two artificial
+space-charge states at the same applied voltage and verifies the sampled
+terminal displacement current against `(Q_B - Q_A) / dt`:
+
+```text
+Q_HV_A = 2.1667460502646261e-13 C
+Q_HV_B = 1.9998283024256448e-13 C
+dt = 1.0e-12 s
+expected I_disp_HV = -0.016691774783898123 A
+computed I_disp_HV = -0.016691774783898123 A
+relative error = 0
+```
 
 ## Vacuum Capacitance
 
@@ -153,8 +164,8 @@ grid = 20 x 48
 steps = 500
 final_time = 3.0990278623269544e-12 s
 I_cond_HV range = [5.9792169968588989e-09, 1.276711222837963e-07] A
-I_disp_HV range = [0, 0] A after numerical Delta Q deadband
-I_total_HV range = [5.9792169968588989e-09, 1.276711222837963e-07] A
+I_disp_HV range = [-5.645350402483783e-08, 4.8438276158877679e-09] A
+I_total_HV range = [9.0127256087735536e-09, 7.2002987097997469e-08] A
 P_cond range = [5.4649056368108279e-06, 2.2362590051508193e-05] W
 Gb range = [2.185962254724331e-11, 8.9450360206032777e-11] S
 Rb range = [1.1179384830834446e10, 4.5746444058619339e10] ohm
@@ -208,4 +219,3 @@ Stage B calibrated geometry
 ```
 
 `BRIDGE_DEMO = NO` for the current Case B interface demo.
-

@@ -54,7 +54,7 @@ Options parse(int argc, char** argv) {
     else if (a == "--seed-offset") o.seed_offset = std::stod(need("--seed-offset"));
     else throw std::runtime_error("unknown option " + a);
   }
-  if (o.mode == "vacuum-ramp" || o.mode == "vacuum-constant") {
+  if (o.mode == "vacuum-ramp" || o.mode == "vacuum-constant" || o.mode == "fixed-rho") {
     o.sp3 = false;
     o.n0 = 0.0;
   }
@@ -135,11 +135,62 @@ int main(int argc, char** argv) {
   const double cgap = solver.vacuum_gap_capacitance();
   const double dvdt = opt.mode == "vacuum-ramp" ? opt.voltage / opt.ramp_time : 0.0;
 
+  if (opt.mode == "fixed-rho") {
+    auto set_positive_gaussian = [&](double z0) {
+      for (int j = 0; j < g.nz(); ++j) {
+        for (int i = 0; i < g.nr(); ++i) {
+          const bool gas = geom.classify(g, i, j) == ElectrodeCellType::Gas;
+          const double rr = g.r(i);
+          const double zz = g.z(j) - z0;
+          const double n = gas ? 5e20 * std::exp(-(rr * rr + zz * zz) / std::pow(8e-6, 2)) : 0.0;
+          solver.state().ne(i, j) = 0.0;
+          solver.state().np(i, j) = n;
+          solver.state().nn(i, j) = 0.0;
+        }
+      }
+      solver.refresh_electrostatic_fields();
+    };
+    const double dt = opt.dt_cap > 0.0 ? opt.dt_cap : 1e-12;
+    set_positive_gaussian(38e-6);
+    const auto qa = solver.electrode_surface_diagnostics();
+    solver.reset_electrode_history();
+    set_positive_gaussian(54e-6);
+    const auto qb = solver.electrode_surface_diagnostics();
+    const StreamerDiagnostics sd = solver.sample_terminal_diagnostics_from_history(dt);
+    const double expected = (qb.q_hv - qa.q_hv) / dt;
+    const double err = std::abs(sd.i_disp_hv - expected);
+    const double rel = err / std::max(std::abs(expected), 1e-300);
+    const bool ok = std::isfinite(sd.i_disp_hv) && std::abs(qb.q_hv - qa.q_hv) > 0.0 && rel < 1e-12;
+    if (!rank) {
+      std::filesystem::create_directories(opt.out);
+      std::ofstream summary(opt.out / "summary.txt");
+      summary << std::setprecision(17)
+              << "ranks=" << size << "\nstatus=" << (ok ? "PASS" : "FAIL") << "\ncase_id=" << opt.case_id
+              << "\nmode=fixed-rho\nvoltage_V=" << opt.voltage << "\ndt_s=" << dt
+              << "\nQ_HV_A_C=" << qa.q_hv << "\nQ_HV_B_C=" << qb.q_hv
+              << "\nQ_ground_A_C=" << qa.q_ground << "\nQ_ground_B_C=" << qb.q_ground
+              << "\nexpected_I_disp_HV_A=" << expected << "\ncomputed_I_disp_HV_A=" << sd.i_disp_hv
+              << "\nabsolute_error_A=" << err << "\nrelative_error=" << rel
+              << "\ntotal_plasma_charge_C=" << sd.total_charge << "\n";
+      std::ofstream csv(opt.out / "fixed_rho_diagnostics.csv");
+      csv << std::setprecision(17)
+          << "state,time_s,Q_HV_C,Q_ground_C,I_disp_HV_A,I_disp_ground_A,total_plasma_charge_C\n"
+          << "A," << solver.state().time << ',' << qa.q_hv << ',' << qa.q_ground << ",nan,nan,nan\n"
+          << "B," << solver.state().time << ',' << qb.q_hv << ',' << qb.q_ground << ',' << sd.i_disp_hv << ','
+          << sd.i_disp_ground << ',' << sd.total_charge << '\n';
+      std::cout << "stage_c3_current ranks=" << size << " status=" << (ok ? "PASS" : "FAIL")
+                << " case=" << opt.case_id << " mode=fixed-rho qdiff=" << (qb.q_hv - qa.q_hv)
+                << " I_disp=" << sd.i_disp_hv << " error=" << rel << '\n';
+    }
+    PetscFinalize();
+    return ok ? 0 : 1;
+  }
+
   std::ofstream csv;
   if (!rank) {
     std::filesystem::create_directories(opt.out);
     csv.open(opt.out / "current_diagnostics.csv");
-    csv << "time_s,voltage_V,I_cond_HV_A,I_disp_HV_A,I_total_HV_A,I_cond_ground_A,I_disp_ground_A,I_total_ground_A,Q_HV_C,Q_ground_C,Emax_Vpm,ne_max_m3,sigma_max_Spm,P_cond_W,Gb_S,Rb_ohm,Rb_valid,head_position_m,bridge_flag,current_continuity_residual\n"
+    csv << "time_s,voltage_V,I_cond_HV_A,I_disp_HV_A,I_total_HV_A,I_cond_ground_A,I_disp_ground_A,I_total_ground_A,Q_HV_C,Q_ground_C,total_plasma_charge_C,Emax_Vpm,ne_max_m3,sigma_max_Spm,P_cond_W,Gb_S,Rb_ohm,Rb_valid,head_position_m,bridge_flag,current_continuity_residual\n"
         << std::setprecision(17);
   }
 
@@ -171,7 +222,7 @@ int main(int argc, char** argv) {
     if (!rank) {
       csv << d.time << ',' << d.applied_voltage << ',' << d.i_cond_hv << ',' << d.i_disp_hv << ',' << d.i_total_hv << ','
           << d.i_cond_ground << ',' << d.i_disp_ground << ',' << d.i_total_ground << ',' << d.q_hv << ',' << d.q_ground << ','
-          << d.emax << ',' << d.ne_max << ',' << d.sigma_max << ',' << d.p_cond << ',' << d.gb << ',' << d.rb << ','
+          << d.total_charge << ',' << d.emax << ',' << d.ne_max << ',' << d.sigma_max << ',' << d.p_cond << ',' << d.gb << ',' << d.rb << ','
           << d.rb_valid << ',' << d.head_position << ',' << d.bridge_flag << ',' << d.current_continuity_residual << '\n';
     }
   }

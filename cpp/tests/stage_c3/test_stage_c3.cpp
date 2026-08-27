@@ -47,6 +47,23 @@ void set_uniform_state(StreamerSolver& solver, const AxisymmetricGrid& g, double
     }
   }
 }
+
+void set_positive_gaussian_space_charge(StreamerSolver& solver, const AxisymmetricGrid& g,
+                                        const AxisymmetricNeedlePlaneGeometry& eg, double z0) {
+  for (int j = 0; j < g.nz(); ++j) {
+    for (int i = 0; i < g.nr(); ++i) {
+      const bool gas = eg.classify(g, i, j) == ElectrodeCellType::Gas;
+      const double rr = g.r(i);
+      const double zz = g.z(j) - z0;
+      const double n = gas ? 5e20 * std::exp(-(rr * rr + zz * zz) / std::pow(8e-6, 2)) : 0.0;
+      solver.state().ne(i, j) = 0.0;
+      solver.state().np(i, j) = n;
+      solver.state().nn(i, j) = 0.0;
+      solver.state().sph(i, j) = 0.0;
+    }
+  }
+  solver.refresh_electrostatic_fields();
+}
 }
 
 int main(int argc, char** argv) {
@@ -84,6 +101,20 @@ int main(int argc, char** argv) {
     check(predicted > 0.0 && std::abs(rd.i_disp_hv - predicted) / predicted < 5e-5,
           "vacuum linear ramp displacement current matches C dV/dt");
     check(rd.i_disp_hv > 0.0 && rd.i_disp_ground < 0.0, "displacement current sign convention");
+
+    StreamerSolver fixed_rho(g, cfg);
+    fixed_rho.initialize_gaussian_at_tip_offset(0.0, 3e-6, -10e-6);
+    set_positive_gaussian_space_charge(fixed_rho, g, eg, 38e-6);
+    const auto qa = fixed_rho.electrode_surface_diagnostics();
+    fixed_rho.reset_electrode_history();
+    set_positive_gaussian_space_charge(fixed_rho, g, eg, 54e-6);
+    const auto qb = fixed_rho.electrode_surface_diagnostics();
+    const double synthetic_dt = 1e-12;
+    const auto sd = fixed_rho.sample_terminal_diagnostics_from_history(synthetic_dt);
+    const double expected_disp = (qb.q_hv - qa.q_hv) / synthetic_dt;
+    check(std::abs(qb.q_hv - qa.q_hv) > 0.0, "fixed-V changing rho changes induced HV charge");
+    check(std::abs(sd.i_disp_hv - expected_disp) / std::max(std::abs(expected_disp), 1e-300) < 1e-12,
+          "fixed-V changing rho displacement current equals dQ/dt");
 
     StreamerSolver absorption(g, cfg);
     absorption.initialize_gaussian_at_tip_offset(1e16, 3e-6, -1e-6);
