@@ -8,6 +8,8 @@
 namespace streamer_rf::streamer {
 namespace {constexpr double qe=1.602176634e-19,eps0=8.8541878128e-12;}
 StreamerSolver::StreamerSolver(const AxisymmetricGrid&g,StreamerConfig c):g_(g),c_(c),state_(g){}
+double axisymmetric_radial_face_area(const AxisymmetricGrid& g,int face_i){return 2*3.14159265358979323846*g.radial_face(face_i)*g.dz();}
+double axisymmetric_axial_face_area(const AxisymmetricGrid& g,int cell_i){return 3.14159265358979323846*(std::pow(g.radial_face(cell_i+1),2)-std::pow(g.radial_face(cell_i),2));}
 double absorbing_electrode_flux(double ne,double velocity_positive,double diffusion,double h,bool positive_face){
  if(ne<0||diffusion<0||h<=0)throw std::invalid_argument("invalid absorbing electrode flux input");
  const double diffusive=2.0*diffusion*ne/h;
@@ -23,7 +25,7 @@ void StreamerSolver::enforce_plasma_mask(){
  for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i)if(!is_gas(i,j)){state_.ne(i,j)=0;state_.np(i,j)=0;state_.nn(i,j)=0;state_.sph(i,j)=0;state_.rho(i,j)=0;}
 }
 void StreamerSolver::save_checkpoint(const std::filesystem::path&p)const{std::ofstream f(p,std::ios::binary);const char magic[8]={'S','R','F','S','3','C','P','1'};f.write(magic,8);int nr=g_.nr(),nz=g_.nz();f.write(reinterpret_cast<const char*>(&nr),sizeof nr);f.write(reinterpret_cast<const char*>(&nz),sizeof nz);f.write(reinterpret_cast<const char*>(&state_.time),sizeof state_.time);for(const auto*field:{&state_.ne,&state_.np,&state_.nn})f.write(reinterpret_cast<const char*>(field->values().data()),field->values().size()*sizeof(double));if(!f)throw std::runtime_error("checkpoint write failed");}
-void StreamerSolver::load_checkpoint(const std::filesystem::path&p){std::ifstream f(p,std::ios::binary);char magic[8];int nr,nz;f.read(magic,8);f.read(reinterpret_cast<char*>(&nr),sizeof nr);f.read(reinterpret_cast<char*>(&nz),sizeof nz);if(std::string(magic,8)!="SRFS3CP1"||nr!=g_.nr()||nz!=g_.nz())throw std::runtime_error("checkpoint mismatch");f.read(reinterpret_cast<char*>(&state_.time),sizeof state_.time);for(auto*field:{&state_.ne,&state_.np,&state_.nn})f.read(reinterpret_cast<char*>(field->values().data()),field->values().size()*sizeof(double));if(!f)throw std::runtime_error("checkpoint read failed");last_head_position_=last_head_time_=std::numeric_limits<double>::quiet_NaN();fields();}
+void StreamerSolver::load_checkpoint(const std::filesystem::path&p){std::ifstream f(p,std::ios::binary);char magic[8];int nr,nz;f.read(magic,8);f.read(reinterpret_cast<char*>(&nr),sizeof nr);f.read(reinterpret_cast<char*>(&nz),sizeof nz);if(std::string(magic,8)!="SRFS3CP1"||nr!=g_.nr()||nz!=g_.nz())throw std::runtime_error("checkpoint mismatch");f.read(reinterpret_cast<char*>(&state_.time),sizeof state_.time);for(auto*field:{&state_.ne,&state_.np,&state_.nn})f.read(reinterpret_cast<char*>(field->values().data()),field->values().size()*sizeof(double));if(!f)throw std::runtime_error("checkpoint read failed");last_head_position_=last_head_time_=std::numeric_limits<double>::quiet_NaN();fields();reset_electrode_history();}
 void StreamerSolver::initialize_gaussian(double n0,double sigma,double z0){
  initialize_gaussians({GaussianSeed{n0,sigma,z0}});
 }
@@ -44,6 +46,7 @@ void StreamerSolver::initialize_gaussians(const std::vector<GaussianSeed>& seeds
  last_head_position_=last_head_time_=std::numeric_limits<double>::quiet_NaN();
  enforce_plasma_mask();
  fields();
+ reset_electrode_history();
 }
 void StreamerSolver::fields(){
  enforce_plasma_mask();
@@ -79,6 +82,37 @@ bool StreamerSolver::bridge_flag()const{
  }
  return in_gap;
 }
+ElectrodeSurfaceDiagnostics StreamerSolver::electrode_surface_diagnostics()const{
+ ElectrodeSurfaceDiagnostics d;if(!electrode_mode())return d;
+ auto add=[&](ElectrodeCellType t,double en,double area){if(t==ElectrodeCellType::HighVoltageElectrode){d.q_hv+=eps0*en*area;d.area_hv+=area;}else if(t==ElectrodeCellType::GroundElectrode){d.q_ground+=eps0*en*area;d.area_ground+=area;}};
+ for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i){
+  if(!is_gas(i,j))continue;
+  if(i<g_.nr()-1&&!is_gas(i+1,j))add(cell_type(i+1,j),-state_.er(i,j),axisymmetric_radial_face_area(g_,i+1));
+  if(i>0&&!is_gas(i-1,j))add(cell_type(i-1,j),state_.er(i,j),axisymmetric_radial_face_area(g_,i));
+  if(j<g_.nz()-1&&!is_gas(i,j+1))add(cell_type(i,j+1),-state_.ez(i,j),axisymmetric_axial_face_area(g_,i));
+  if(j>0&&!is_gas(i,j-1))add(cell_type(i,j-1),state_.ez(i,j),axisymmetric_axial_face_area(g_,i));
+ }
+ return d;
+}
+ConductanceDiagnostics StreamerSolver::conductance_diagnostics(double voltage)const{
+ ConductanceDiagnostics d;
+ for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i){if(!is_gas(i,j))continue;auto q=evaluate_morrow_lowke(state_.emag(i,j),c_.neutral_density,c_.pressure,c_.temperature);const double sigma=qe*q.mobility*state_.ne(i,j);d.p_cond+=sigma*state_.emag(i,j)*state_.emag(i,j)*g_.cell_volume(i);}
+ const double vtol=std::max(c_.voltage_tolerance,1024*std::numeric_limits<double>::epsilon());
+ d.valid=std::isfinite(voltage)&&std::abs(voltage)>vtol;
+ if(d.valid){d.gb=d.p_cond/(voltage*voltage);d.rb=d.gb>0?1.0/d.gb:std::numeric_limits<double>::infinity();}
+ else{d.gb=std::numeric_limits<double>::quiet_NaN();d.rb=std::numeric_limits<double>::quiet_NaN();}
+ return d;
+}
+double StreamerSolver::vacuum_gap_capacitance()const{
+ if(!electrode_mode())return 0.0;
+ if(std::isfinite(c_gap_vacuum_cache_))return c_gap_vacuum_cache_;
+ ScalarField2D rho(g_),phi(g_),er(g_),ez(g_);PoissonBoundaryConfig b;b.r_outer.kind=b.z_lower.kind=b.z_upper.kind=BoundaryKind::OpenCharge;solve_potential_with_electrodes(rho,*c_.electrode_geometry,1.0,b,phi,c_.elliptic,c_.open_boundary);
+ for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i){auto dr=[&](int a,int b){return(phi(b,j)-phi(a,j))/((b-a)*g_.dr());};auto dz=[&](int a,int b){return(phi(i,b)-phi(i,a))/((b-a)*g_.dz());};er(i,j)=i==0?0:-(i==g_.nr()-1?dr(i-1,i):dr(i-1,i+1));ez(i,j)=-(j==0?dz(0,1):j==g_.nz()-1?dz(j-1,j):dz(j-1,j+1));}
+ double q_hv=0.0;auto add=[&](ElectrodeCellType t,double en,double area){if(t==ElectrodeCellType::HighVoltageElectrode)q_hv+=eps0*en*area;};
+ for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i){if(c_.electrode_geometry->classify(g_,i,j)!=ElectrodeCellType::Gas)continue;if(i<g_.nr()-1&&c_.electrode_geometry->classify(g_,i+1,j)!=ElectrodeCellType::Gas)add(c_.electrode_geometry->classify(g_,i+1,j),-er(i,j),axisymmetric_radial_face_area(g_,i+1));if(i>0&&c_.electrode_geometry->classify(g_,i-1,j)!=ElectrodeCellType::Gas)add(c_.electrode_geometry->classify(g_,i-1,j),er(i,j),axisymmetric_radial_face_area(g_,i));if(j<g_.nz()-1&&c_.electrode_geometry->classify(g_,i,j+1)!=ElectrodeCellType::Gas)add(c_.electrode_geometry->classify(g_,i,j+1),-ez(i,j),axisymmetric_axial_face_area(g_,i));if(j>0&&c_.electrode_geometry->classify(g_,i,j-1)!=ElectrodeCellType::Gas)add(c_.electrode_geometry->classify(g_,i,j-1),ez(i,j),axisymmetric_axial_face_area(g_,i));}
+ c_gap_vacuum_cache_=std::abs(q_hv);return c_gap_vacuum_cache_;
+}
+void StreamerSolver::reset_electrode_history(){if(!electrode_mode()){has_electrode_history_=false;return;}auto q=electrode_surface_diagnostics();last_q_hv_=q.q_hv;last_q_ground_=q.q_ground;has_electrode_history_=true;}
 double StreamerSolver::numerical_density_tolerance()const{
  double ne_max=0.0;
  if(electrode_mode()){for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i)if(is_gas(i,j))ne_max=std::max(ne_max,state_.ne(i,j));}
@@ -132,6 +166,8 @@ TimeStepLimits StreamerSolver::timestep_limits()const{
 bool StreamerSolver::step(double dt,StreamerDiagnostics&diag){
  enforce_plasma_mask();
  enforce_stage_c_activity_floor();
+ const bool had_electrode_history=has_electrode_history_;
+ const double prev_q_hv=last_q_hv_,prev_q_ground=last_q_ground_;
  ScalarField2D emission(g_);for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i){const std::size_t k=static_cast<std::size_t>(j)*g_.nr()+i;if(!is_gas(i,j)){emission.values()[k]=0;continue;}auto q=evaluate_morrow_lowke(state_.emag.values()[k],c_.neutral_density,c_.pressure,c_.temperature);emission.values()[k]=c_.excitation_ratio*q.ionization_frequency*state_.ne.values()[k];}
  if(c_.photoionization){PoissonBoundaryConfig b;solve_photoionization(emission,{},b,state_.sph,c_.elliptic,c_.sp3_boundary,nullptr,&sp3_warm_);if(electrode_mode())for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i)if(!is_gas(i,j))state_.sph(i,j)=0;}else std::fill(state_.sph.values().begin(),state_.sph.values().end(),0);
  ScalarField2D dne(g_),dnp(g_),dnn(g_);double old_ne=0,old_q=0,charge_inventory=0,re_int=0,boundary_out=0,hv_abs=0,ground_abs=0;
@@ -156,7 +192,10 @@ bool StreamerSolver::step(double dt,StreamerDiagnostics&diag){
  enforce_stage_c_activity_floor();
  state_.time+=dt;fields();diag={};diag.time=state_.time;diag.dt=dt;diag.poisson_iterations=last_poisson_iterations();diag.sp3_ksp_iterations=c_.photoionization?last_sp3_ksp_iterations():0;diag.sp3_boundary_iterations=c_.photoionization?last_sp3_boundary_iterations():0;diag.emax=*std::max_element(state_.emag.values().begin(),state_.emag.values().end());diag.ne_max=*std::max_element(state_.ne.values().begin(),state_.ne.values().end());diag.np_max=*std::max_element(state_.np.values().begin(),state_.np.values().end());diag.nn_max=*std::max_element(state_.nn.values().begin(),state_.nn.values().end());diag.controller=timestep_limits().controller;fill_electrode_diagnostics(diag);
  for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i){if(!is_gas(i,j))continue;double vol=g_.cell_volume(i);diag.total_electrons+=state_.ne(i,j)*vol;diag.total_charge+=qe*(state_.np(i,j)-state_.ne(i,j)-state_.nn(i,j))*vol;auto q=evaluate_morrow_lowke(state_.emag(i,j),c_.neutral_density,c_.pressure,c_.temperature);diag.sigma_max=std::max(diag.sigma_max,qe*q.mobility*state_.ne(i,j));}
- diag.absorbed_electron_hv=dt*hv_abs;diag.absorbed_electron_ground=dt*ground_abs;diag.head_position=head_position();diag.bridge_flag=bridge_flag();if(std::isfinite(last_head_position_)&&diag.time>last_head_time_)diag.head_velocity=(diag.head_position-last_head_position_)/(diag.time-last_head_time_);last_head_position_=diag.head_position;last_head_time_=diag.time;
- const double total_loss=boundary_out+hv_abs+ground_abs;double ne_expected=old_ne+dt*(re_int-total_loss),q_expected=old_q+qe*dt*total_loss;double re=std::abs(diag.total_electrons-ne_expected)/std::max({std::abs(diag.total_electrons),std::abs(ne_expected),1.0}),rq=std::abs(diag.total_charge-q_expected)/std::max(charge_inventory,1e-30);diag.conservation_residual=std::max(re,rq);return true;
+ diag.absorbed_electron_hv=dt*hv_abs;diag.absorbed_electron_ground=dt*ground_abs;diag.i_cond_hv=qe*hv_abs;diag.i_cond_ground=qe*ground_abs;diag.outer_boundary_current=qe*boundary_out;
+ if(electrode_mode()){auto qsurf=electrode_surface_diagnostics();diag.q_hv=qsurf.q_hv;diag.q_ground=qsurf.q_ground;diag.displacement_current_valid=had_electrode_history&&dt>0;diag.c_gap_vacuum=vacuum_gap_capacitance();if(diag.displacement_current_valid){auto dqdt=[&](double q1,double q0){double dq=q1-q0;const double qscale=std::max({std::abs(q1),std::abs(q0),diag.c_gap_vacuum*std::abs(diag.applied_voltage),1e-30});const double qtol=100.0*std::max(c_.elliptic.rtol,std::numeric_limits<double>::epsilon())*qscale;if(std::abs(dq)<=qtol)dq=0.0;return dq/dt;};diag.i_disp_hv=dqdt(qsurf.q_hv,prev_q_hv);diag.i_disp_ground=dqdt(qsurf.q_ground,prev_q_ground);diag.i_total_hv=diag.i_cond_hv+diag.i_disp_hv;diag.i_total_ground=diag.i_cond_ground+diag.i_disp_ground;}last_q_hv_=qsurf.q_hv;last_q_ground_=qsurf.q_ground;has_electrode_history_=true;}
+ auto gd=conductance_diagnostics(diag.applied_voltage);diag.p_cond=gd.p_cond;diag.gb=gd.gb;diag.rb=gd.rb;diag.rb_valid=gd.valid;
+ diag.head_position=head_position();diag.bridge_flag=bridge_flag();if(std::isfinite(last_head_position_)&&diag.time>last_head_time_)diag.head_velocity=(diag.head_position-last_head_position_)/(diag.time-last_head_time_);last_head_position_=diag.head_position;last_head_time_=diag.time;
+ const double total_loss=boundary_out+hv_abs+ground_abs;double ne_expected=old_ne+dt*(re_int-total_loss),q_expected=old_q+qe*dt*total_loss;double re=std::abs(diag.total_electrons-ne_expected)/std::max({std::abs(diag.total_electrons),std::abs(ne_expected),1.0}),rq=std::abs(diag.total_charge-q_expected)/std::max(charge_inventory,1e-30);diag.conservation_residual=std::max(re,rq);diag.plasma_charge_derivative=(diag.total_charge-old_q)/dt;const double expected_charge_rate=diag.i_cond_hv+diag.i_cond_ground+diag.outer_boundary_current;diag.current_continuity_residual=std::abs(diag.plasma_charge_derivative-expected_charge_rate)/std::max({std::abs(diag.plasma_charge_derivative),std::abs(expected_charge_rate),1e-30});return true;
 }
 }
