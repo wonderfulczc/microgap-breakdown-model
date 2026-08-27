@@ -12,6 +12,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE_UNAVAILABLE: list[str] = []
+DELETED_PATHS: set[str] | None = None
 
 
 def sha(path: Path) -> str:
@@ -33,6 +34,17 @@ def record_unavailable_evidence(rel: str) -> None:
         f"removed during validated cleanup: {rel}; see "
         "docs/github_archive_assessment.md and docs/github_archive_deletion_manifest.csv"
     )
+
+
+def deleted_paths() -> set[str]:
+    global DELETED_PATHS
+    if DELETED_PATHS is None:
+        manifest = ROOT / "docs/github_archive_deletion_manifest.csv"
+        if manifest.exists():
+            DELETED_PATHS = set(pd.read_csv(manifest)["path"].astype(str))
+        else:
+            DELETED_PATHS = set()
+    return DELETED_PATHS
 
 
 def check_registries() -> None:
@@ -84,7 +96,9 @@ def check_html_summary() -> None:
     df = pd.read_csv(source_csv)
     for row in df.itertuples():
         p = ROOT / row.source_file
-        if not p.exists() and str(row.source_file).startswith("results/") and not (ROOT / "results").exists():
+        if not p.exists() and str(row.source_file).startswith("results/") and (
+            not (ROOT / "results").exists() or str(row.source_file) in deleted_paths() or "results" in deleted_paths()
+        ):
             record_unavailable_evidence(row.source_file)
             continue
         require(p.exists(), f"figure source missing: {row.source_file}")
