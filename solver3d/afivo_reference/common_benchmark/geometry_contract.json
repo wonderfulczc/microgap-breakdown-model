@@ -1,0 +1,41 @@
+{
+  "case_id": "D2-B1-axisymmetric-electrostatic",
+  "units": "SI",
+  "voltage_V": 500.0,
+  "gap_definition": "distance from planar ground surface z=0 to lower apex of the hemispherical/capped HV needle",
+  "gap_m": 7.0e-5,
+  "domain": {
+    "x_min_m": -8.0e-5,
+    "x_max_m": 8.0e-5,
+    "y_min_m": -8.0e-5,
+    "y_max_m": 8.0e-5,
+    "z_min_m": -2.5e-6,
+    "z_max_m": 9.0e-5,
+    "petsc_r_max_m": 8.0e-5
+  },
+  "hv_electrode": {
+    "shape": "axis-aligned capped rod",
+    "axis": "z",
+    "center_x_m": 0.0,
+    "center_y_m": 0.0,
+    "rod_radius_m": 5.0e-6,
+    "tip_radius_m": 5.0e-6,
+    "tip_center_z_m": 7.5e-5,
+    "tip_apex_z_m": 7.0e-5,
+    "rod_top_z_m": 9.0e-5,
+    "potential_V": 500.0
+  },
+  "ground_electrode": {
+    "shape": "planar ground",
+    "surface_z_m": 0.0,
+    "petsc_slab_z_min_m": -2.5e-6,
+    "petsc_slab_z_max_m": 0.0,
+    "afivo_representation": "lower z boundary Dirichlet plane",
+    "potential_V": 0.0
+  },
+  "boundary_conditions": {
+    "petsc": "D2 app-local axisymmetric finite-volume PETSc solve with homogeneous Afivo-matched outer boundary: side Neumann zero, lower z Dirichlet 0, upper z Dirichlet applied voltage, plus structured electrode mask",
+    "afivo": "standard_3d homogeneous potential boundary: side Neumann zero, bottom Dirichlet 0, top Dirichlet applied voltage, plus embedded HV rod"
+  },
+  "known_discretization_difference": "PETSc uses an axisymmetric structured cell-center conductor mask; Afivo uses a Cartesian level-set electrode and AMR."
+}

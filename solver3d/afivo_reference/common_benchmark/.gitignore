@@ -1,0 +1,4 @@
+/transport/generated/
+/petsc/generated/
+/afivo/output/
+/compare/generated_*.json

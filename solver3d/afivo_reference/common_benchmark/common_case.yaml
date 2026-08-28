@@ -1,0 +1,79 @@
+case_id: D2-B0-B1-common-axisymmetric
+geometry_type: axisymmetric_capped_rod_over_ground_plane
+polarity: positive_needle
+units: SI
+
+gas:
+  pressure_Pa: 101325.0
+  temperature_K: 300.0
+
+voltage:
+  voltage_V: 500.0
+  waveform: constant
+
+geometry:
+  gap_m: 7.0e-5
+  tip_radius_m: 5.0e-6
+  tip_center_z_m: 7.5e-5
+  tip_apex_z_m: 7.0e-5
+  shank_radius_m: 5.0e-6
+  ground_surface_z_m: 0.0
+  ground_slab_thickness_m: 2.5e-6
+  electrode_dimensions:
+    hv_rod_axis: z
+    hv_rod_top_z_m: 9.0e-5
+    ground: planar_ground
+  domain_dimensions:
+    x_length_m: 1.6e-4
+    y_length_m: 1.6e-4
+    z_min_m: -2.5e-6
+    z_max_m: 9.0e-5
+    petsc_r_max_m: 8.0e-5
+
+seed:
+  type: axis_centered_gaussian
+  n0_m3: 1.0e16
+  sigma_m: 3.0e-6
+  center:
+    x_m: 0.0
+    y_m: 0.0
+    r_m: 0.0
+    z_m: 6.5e-5
+  species:
+    ne: gaussian
+    np: gaussian
+    nn: zero
+  formula_2d: "ne(r,z)=n0*exp(-(r^2+(z-z0)^2)/(2*sigma^2))"
+  formula_3d: "ne(x,y,z)=n0*exp(-((x^2+y^2)+(z-z0)^2)/(2*sigma^2))"
+
+physics:
+  transport_model: PETSc_frozen_Morrow_Lowke_exported_table
+  chemistry_model: PETSc_three_species_common_mapping
+  photoionization: OFF
+
+resolution:
+  petsc:
+    coarse:
+      nr: 32
+      nz: 74
+    medium:
+      nr: 64
+      nz: 148
+  afivo:
+    coarse:
+      box_size: 8
+      refine_electrode_dx_m: 8.0e-6
+    medium:
+      box_size: 8
+      refine_electrode_dx_m: 4.0e-6
+
+diagnostics:
+  axis_profile:
+    x_m: 0.0
+    y_m: 0.0
+    z_over_gap_samples: [0.1, 0.25, 0.5, 0.75, 0.9]
+  quantities:
+    - phi
+    - Ez
+    - Eabs
+    - Emax

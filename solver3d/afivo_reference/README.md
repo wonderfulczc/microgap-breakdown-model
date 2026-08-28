@@ -40,3 +40,5 @@ True 3D smoke command:
 cd /home/helianthusczc/projects/afivo-streamer/programs/standard_3d/tests
 OMP_NUM_THREADS=1 ../streamer test_3d.cfg
 ```
+
+Stage D2 common benchmark metadata and configs live in `common_benchmark/`.
