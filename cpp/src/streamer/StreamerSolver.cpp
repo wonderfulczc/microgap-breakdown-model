@@ -52,7 +52,7 @@ void StreamerSolver::fields(){
  enforce_plasma_mask();
  for(std::size_t k=0;k<state_.rho.values().size();++k)state_.rho.values()[k]=qe*(state_.np.values()[k]-state_.ne.values()[k]-state_.nn.values()[k]);
  enforce_plasma_mask();
- PoissonBoundaryConfig b;b.r_outer.kind=b.z_lower.kind=b.z_upper.kind=BoundaryKind::OpenCharge;if(c_.electrode_geometry&&c_.voltage_waveform)solve_potential_with_electrodes(state_.rho,*c_.electrode_geometry,c_.voltage_waveform->value(state_.time),b,state_.phi,c_.elliptic,c_.open_boundary);else solve_potential(state_.rho,c_.background_field,b,state_.phi,c_.elliptic,c_.open_boundary);
+ PoissonBoundaryConfig b=c_.poisson_boundary;if(c_.electrode_geometry&&c_.voltage_waveform)solve_potential_with_electrodes(state_.rho,*c_.electrode_geometry,c_.voltage_waveform->value(state_.time),b,state_.phi,c_.elliptic,c_.open_boundary);else solve_potential(state_.rho,c_.background_field,b,state_.phi,c_.elliptic,c_.open_boundary);
  for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i){auto dr=[&](int a,int b){return(state_.phi(b,j)-state_.phi(a,j))/((b-a)*g_.dr());};auto dz=[&](int a,int b){return(state_.phi(i,b)-state_.phi(i,a))/((b-a)*g_.dz());};state_.er(i,j)=i==0?0:-(i==g_.nr()-1?dr(i-1,i):dr(i-1,i+1));state_.ez(i,j)=-(j==0?dz(0,1):j==g_.nz()-1?dz(j-1,j):dz(j-1,j+1));state_.emag(i,j)=std::hypot(state_.er(i,j),state_.ez(i,j));}
 }
 void StreamerSolver::fill_electrode_diagnostics(StreamerDiagnostics&diag)const{

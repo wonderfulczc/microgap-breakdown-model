@@ -1,0 +1,8 @@
+{
+  "afivo_ne_max": 9520473422230594.0,
+  "afivo_total_electrons": 4.1603508,
+  "ne_max_rel_err": 0.021773245094601747,
+  "petsc_ne_max": 9732378893226340.0,
+  "petsc_total_electrons": 4.213751882453638,
+  "total_electrons_rel_err": 0.012673048613992795
+}

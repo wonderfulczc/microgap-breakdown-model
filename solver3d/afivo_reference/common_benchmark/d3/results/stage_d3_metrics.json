@@ -1,0 +1,12 @@
+{
+  "afivo_max_cm_offset_m": 7.942111148755277e-13,
+  "afivo_max_symmetry_metric": 1.4446915e-12,
+  "avalanche": true,
+  "bridge": false,
+  "max_Emax_rel_err": 0.059416250812633326,
+  "max_head_position_diff_m": 6.603033472803432e-07,
+  "max_head_velocity_rel_err": 1.0,
+  "max_ne_max_rel_err": 0.12987964000963337,
+  "max_total_electrons_rel_err": 0.06036714657580474,
+  "streamer_propagation": false
+}

@@ -66,6 +66,10 @@ resolution:
     medium:
       box_size: 8
       refine_electrode_dx_m: 4.0e-6
+    d3_dynamic_refined:
+      box_size: 8
+      finest_dx_m: 1.25e-6
+      reason: "local refinement used for exact Gaussian seed peak validation in Cartesian 3D"
 
 diagnostics:
   axis_profile:
@@ -77,3 +81,8 @@ diagnostics:
     - Ez
     - Eabs
     - Emax
+
+dynamic_diagnostics:
+  output_times_s: [0.0, 5.0e-13, 1.0e-12, 2.0e-12, 3.0e-12, 5.0e-12]
+  head_threshold_m3: 1.0e14
+  head_definition: "axis leading edge toward ground; minimum z with ne >= threshold, fallback to axis ne maximum"

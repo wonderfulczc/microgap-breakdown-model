@@ -110,6 +110,10 @@ int main(int argc, char** argv) {
     v.clear();
     for (const auto& r : rows) v.emplace_back(r.efield, getter(r));
   };
+  auto fill_td = [&](auto getter) {
+    v.clear();
+    for (const auto& r : rows) v.emplace_back(r.td, getter(r));
+  };
   fill([](const Row& r) { return r.c.mobility; });
   write_section(old_style, "efield[V/m]_vs_mu[m2/Vs]", v);
   fill([](const Row& r) { return r.c.diffusion; });
@@ -132,23 +136,23 @@ int main(int argc, char** argv) {
                << "P+ + N- -> N2,c1*(300/Tg)**c2,2e-13 0.5\n"
                << "-----------------------\n\n"
                << "ignored_species\n-----------------------\nN2\n-----------------------\n";
-  fill([&](const Row& r) { return r.c.mobility * neutral_density; });
+  fill_td([&](const Row& r) { return r.c.mobility * neutral_density; });
   write_section(afivo_common, "Mobility *N (1/m/V/s)", v);
-  fill([&](const Row& r) { return r.c.diffusion * neutral_density; });
+  fill_td([&](const Row& r) { return r.c.diffusion * neutral_density; });
   write_section(afivo_common, "Diffusion coefficient *N (1/m/s)", v);
-  fill([&](const Row& r) { return r.c.ionization_townsend / neutral_density; });
+  fill_td([&](const Row& r) { return r.c.ionization_townsend / neutral_density; });
   write_section(afivo_common, "Townsend ioniz. coef. alpha/N (m2)", v);
-  fill([&](const Row& r) {
+  fill_td([&](const Row& r) {
     return (r.c.attachment_two_body_townsend + r.c.attachment_three_body_townsend) / neutral_density;
   });
   write_section(afivo_common, "Townsend attach. coef. eta/N (m2)", v);
-  fill([](const Row& r) { return 1.5 * r.c.diffusion / std::max(r.c.mobility, 1e-300); });
+  fill_td([](const Row& r) { return 1.5 * r.c.diffusion / std::max(r.c.mobility, 1e-300); });
   write_section(afivo_common, "Mean energy (eV)", v);
-  fill([](const Row& r) { return r.c.ionization_frequency; });
+  fill_td([](const Row& r) { return r.c.ionization_frequency; });
   write_section(afivo_common, "ML ionization frequency", v);
-  fill([](const Row& r) { return r.c.attachment_two_body_frequency; });
+  fill_td([](const Row& r) { return r.c.attachment_two_body_frequency; });
   write_section(afivo_common, "ML attachment two-body frequency", v);
-  fill([](const Row& r) { return r.c.attachment_three_body_frequency; });
+  fill_td([](const Row& r) { return r.c.attachment_three_body_frequency; });
   write_section(afivo_common, "ML attachment three-body frequency", v);
 
   const std::vector<double> sample_td{0.2, 1.0, 10.0, 92.0, 120.0, 250.0, 600.0};

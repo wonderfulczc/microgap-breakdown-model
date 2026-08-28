@@ -2,3 +2,5 @@
 /petsc/generated/
 /afivo/output/
 /compare/generated_*.json
+/d3/afivo/output/
+/d3/petsc/output/

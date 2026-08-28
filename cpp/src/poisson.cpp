@@ -12,7 +12,21 @@ void assemble(const AxisymmetricGrid& g,DM dm,Mat A,Vec b,const ScalarField2D& r
   MatStencil row=st(i,j),col[5];PetscScalar val[5];int n=0;const bool boundary_cell=i==g.nr()-1||j==0||j==g.nz()-1;
   const auto electrode_cell=geometry?geometry->classify(g,i,j):ElectrodeCellType::Gas;
   if(electrode_cell!=ElectrodeCellType::Gas){col[n]=row;val[n++]=1;barr[j][i]=electrode_cell==ElectrodeCellType::HighVoltageElectrode?applied_voltage:0.0;}
-  else if(boundary_cell){col[n]=row;val[n++]=1;barr[j][i]=boundary?(*boundary)(i,j):bc.r_outer.value;}
+  else if(boundary_cell){
+   auto dirichlet=[&](double v){col[n]=row;val[n++]=1;barr[j][i]=v;};
+   auto neumann=[&](int ni,int nj,double h,double v){col[n]=row;val[n++]=1.0/h;col[n]=st(ni,nj);val[n++]=-1.0/h;barr[j][i]=v;};
+   if(boundary)dirichlet((*boundary)(i,j));
+   else if(j==0){
+    if(bc.z_lower.kind==BoundaryKind::Neumann)neumann(i,j+1,g.dz(),-bc.z_lower.value);
+    else dirichlet(bc.z_lower.value);
+   }else if(j==g.nz()-1){
+    if(bc.z_upper.kind==BoundaryKind::Neumann)neumann(i,j-1,g.dz(),bc.z_upper.value);
+    else dirichlet(bc.z_upper.value);
+   }else if(i==g.nr()-1){
+    if(bc.r_outer.kind==BoundaryKind::Neumann)neumann(i-1,j,g.dr(),bc.r_outer.value);
+    else dirichlet(bc.r_outer.value);
+   }
+  }
   else {const double r=g.r(i),rp=g.radial_face(i+1),rm=g.radial_face(i),ar=rp/(r*dr*dr),al=rm/(r*dr*dr),az=1/(dz*dz);
    col[n]=st(i,j);val[n++]=-(ar+al+2*az)-shift;
    col[n]=st(i+1,j);val[n++]=ar;if(i>0){col[n]=st(i-1,j);val[n++]=al;}
