@@ -84,16 +84,24 @@ def load_afivo_stage_e_source_csv(
     voltage_state: str,
     photoionization: str,
     max_rows: int | None = None,
+    row_indices: np.ndarray | None = None,
 ) -> SourceRecord:
     csv_path = Path(csv_path)
     data: dict[str, list[float]] = {}
+    index_set = None if row_indices is None else {int(i) for i in np.asarray(row_indices, dtype=int)}
     with csv_path.open(newline="") as handle:
         reader = csv.DictReader(handle)
         for n, row in enumerate(reader):
+            if index_set is not None and n not in index_set:
+                continue
             if max_rows is not None and n >= max_rows:
                 break
             for key, value in row.items():
                 data.setdefault(key, []).append(float(value))
+            if index_set is not None and len(data.get("time_s", [])) == len(index_set):
+                break
+    if not data:
+        raise ValueError(f"no source rows selected from {csv_path}")
 
     levels = np.asarray(data["level"], dtype=int)
     volume = np.asarray(data["cell_volume_m3"], dtype=float)

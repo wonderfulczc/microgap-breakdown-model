@@ -1,0 +1,93 @@
+{
+  "axisymmetric_phi": {
+    "Nphi_16_relative_error": 2.4439487589731745e-15,
+    "Nphi_32_relative_error": 8.482957175865245e-16,
+    "Nphi_8_relative_error": 3.8360469611098765e-09,
+    "Nphi_reference": 128
+  },
+  "implemented_equations": "Full Jefimenko E/B with rho, drho/dt, dJ/dt, J near-field terms and native SourceRecord volume integration.",
+  "radiation": {
+    "E90_expected_Vpm": 1.3159472541950079e-05,
+    "E90_relative_error": 0.03001184555034921,
+    "E90_simulated_Vpm": 1.2764532484497012e-05,
+    "E_over_B_max_relative_error": 0.05714903149855392,
+    "angular_sin_theta_max_abs_error": 2.1287335586595013e-05,
+    "current_moment_error_R1": 0.19435631955256166,
+    "current_moment_error_R2": 0.019318146725642187,
+    "interpolation_coarse_relative_error": 0.04285945702304987,
+    "interpolation_fine_relative_error": 0.03001184555034921,
+    "near_far_audit_R2": {
+      "epsilon_EM_L_over_ctau": 0.10249722530288816,
+      "epsilon_geom_L_over_R": 0.012226240994603841,
+      "observer_distance_m": 0.4,
+      "source_characteristic_size_m": 0.004890496397841537,
+      "source_timescale_s": 1.5915494309189535e-10
+    },
+    "propagation_delay_error_s": 1.0339757656912846e-25,
+    "radiation_1_over_R_slope": -0.9467298313985218
+  },
+  "real_afivo_pipeline_smoke": {
+    "F1_scientific_spectrum_valid": false,
+    "SCIENTIFIC_RF_VALID": false,
+    "csv": "/home/helianthusczc/projects/streamer-rf-replica/rf/jefimenko/validation/real_afivo_pipeline_smoke.csv",
+    "ran": true,
+    "reason": "Stage E source J is drift-only and this is an older sparse 5 ps development source window.",
+    "sample": {
+      "B_J_near": [
+        6.866114197842583e-182,
+        -1.64193045979675e-181,
+        -2.0221050382839453e-181
+      ],
+      "B_dJ_radiation": [
+        7.425615962747907e-176,
+        -1.7757789476273682e-175,
+        -2.1867476239633148e-175
+      ],
+      "B_total": [
+        7.425622828862106e-176,
+        -1.775780589557828e-175,
+        -2.186749646068353e-175
+      ],
+      "E_dJ_radiation": [
+        -7.835241854192451e-167,
+        -7.835289122946846e-167,
+        3.702148185292545e-167
+      ],
+      "E_drho_induction": [
+        -6.53263084142455e-163,
+        -8.756481039053352e-164,
+        -1.507220012770517e-163
+      ],
+      "E_rho_near": [
+        -6.039856252808886e-169,
+        -8.095315905750453e-170,
+        -1.3935130905597904e-169
+      ],
+      "E_total": [
+        -6.533420405466222e-163,
+        -8.764324423492204e-164,
+        -1.5068511914650784e-163
+      ],
+      "observer_id": "pipeline_observer",
+      "retarded_time_valid": true,
+      "retarded_time_valid_fraction": 1.0,
+      "source_manifest_id": "PIPELINE_ONLY",
+      "time_s": 4.354363988599806e-12
+    },
+    "source_rows_used_per_snapshot": 2048
+  },
+  "stage": "F2",
+  "static_charge": {
+    "B_norm_T": 0.0,
+    "E_expected_Vpm": 0.22468879480652923,
+    "E_simulated_Vpm": 0.22468879480617418,
+    "near_field_slope": -1.9999999999462827,
+    "relative_error": 1.5801825969151876e-12
+  },
+  "steady_current_magnetic": {
+    "B_dJ_norm_T": 1.6261084443664e-27,
+    "By_expected_T": 2.0000000010887508e-11,
+    "By_simulated_T": 1.9999999996327724e-11,
+    "relative_error": 7.279892166906892e-10
+  }
+}
