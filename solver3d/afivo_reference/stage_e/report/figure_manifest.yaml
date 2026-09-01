@@ -1,0 +1,127 @@
+figures:
+  - id: FIG_E1_solver_validation
+    panels:
+      - PETSc2D_vs_Afivo3D_axisymmetric_static_profiles
+      - PETSc2D_vs_Afivo3D_axisymmetric_dynamic_diagnostics
+    source_data:
+      - ../results_summary/e1_electrostatic_summary.json
+      - ../../common_benchmark/d3/results/stage_d3_comparison.csv
+    axes:
+      - z_over_gap
+      - time_ps
+    variables:
+      - phi
+      - Eabs
+      - Emax
+      - ne_max
+      - total_electrons
+      - head_position
+    intended_paper_conclusion: Afivo true 3D Cartesian backend reproduces the frozen axisymmetric benchmark within Stage D engineering tolerances.
+    current_limitation: Tip Emax remains sensitive to Cartesian/axisymmetric electrode discretization; photoionization commonization is deferred.
+
+  - id: FIG_E2_triangular_electrostatic
+    panels:
+      - triangular_foil_geometry_slices
+      - medium_vs_refined_field_profiles
+      - xz_vs_yz_field_asymmetry
+      - high_field_volume
+    source_data:
+      - ../geometry/geometry_contract.json
+      - ../results_summary/e1_electrostatic_summary.json
+      - ../results_summary/e1_profile_comparison_medium.csv
+    axes:
+      - x_m
+      - y_m
+      - z_m
+      - Eabs_Vpm
+    variables:
+      - phi
+      - Ex
+      - Ey
+      - Ez
+      - Eabs
+      - electrostatic_asymmetry_metric
+    intended_paper_conclusion: The triangular foil produces a genuinely non-axisymmetric 3D electrostatic field concentrated at the rounded tip and edges.
+    current_limitation: Geometry is a development geometry pending Stage B COMSOL dimensions.
+
+  - id: FIG_E3_triangular_dynamic
+    panels:
+      - PI_off_vs_PI_on_dynamic_diagnostics
+      - triangular_centroid_and_head_evolution
+      - triangular_ne_rho_field_source_slices
+      - triangular_dynamic_asymmetry
+    source_data:
+      - ../results_summary/e2_dynamic_summary.json
+      - ../results_summary/e2_dynamic_diagnostics.csv
+    axes:
+      - time_ps
+      - z_m
+      - transverse_coordinate_m
+    variables:
+      - Emax
+      - ne_max
+      - total_electrons
+      - total_charge
+      - head_position
+      - x_cm
+      - y_cm
+      - ne_plane_asymmetry
+      - rho_plane_asymmetry
+    intended_paper_conclusion: The non-axisymmetric triangular foil backend can evolve early 3D avalanche/source fields and export rho, ne, E, and J for later source integration.
+    current_limitation: No bridge or experiment-calibrated breakdown claim is made in Stage E.
+
+  - id: FIG_E4_misaligned_needle
+    panels:
+      - aligned_vs_misaligned_geometry
+      - aligned_xz_yz_field_profiles
+      - misaligned_xz_yz_field_profiles
+      - centroid_trajectory
+      - asymmetry_time_history
+    source_data:
+      - ../geometry/e3_needle_pair_contract.json
+      - ../results_summary/e3_summary.json
+      - ../results_summary/e3_case_comparison.csv
+      - ../results_summary/e3_centroid_trajectory.csv
+      - ../results_summary/e3_profiles_aligned.csv
+      - ../results_summary/e3_profiles_misaligned.csv
+    axes:
+      - time_ps
+      - x_m
+      - y_m
+      - z_m
+      - transverse_coordinate_m
+    variables:
+      - Emax
+      - ne_max
+      - total_electrons
+      - total_charge
+      - head_position
+      - x_cm
+      - y_cm
+      - z_cm
+      - field_plane_asymmetry
+      - ne_plane_asymmetry
+      - rho_plane_asymmetry
+    intended_paper_conclusion: The aligned double-needle case remains symmetric while a 10 um controlled lateral offset produces strong field asymmetry and measurable early plasma asymmetry.
+    current_limitation: Early-time 5 ps dynamics do not bridge the 70 um gap.
+
+  - id: FIG_E5_2d_3d_validity_summary
+    panels:
+      - axisymmetric_backend_validity
+      - non_axisymmetric_geometry_requires_3d
+      - stage_boundaries_and_deferred_validation
+    source_data:
+      - ../../common_benchmark/d3/results/stage_d3_comparison.csv
+      - ../results_summary/e1_electrostatic_summary.json
+      - ../results_summary/e2_dynamic_summary.json
+      - ../results_summary/e3_summary.json
+    axes:
+      - stage
+      - diagnostic_metric
+    variables:
+      - D3_dynamic_error_metrics
+      - E1_field_asymmetry
+      - E2_dynamic_asymmetry
+      - E3_controlled_symmetry_breaking
+    intended_paper_conclusion: The project has a validated 2D/3D axisymmetric bridge and a separate 3D-only path for real non-axisymmetric geometries.
+    current_limitation: Final experimental validation remains deferred to Stage B geometry and measured voltage waveforms.

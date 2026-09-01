@@ -108,3 +108,41 @@ consistent with its `Je_1..3` output convention: `J_e = e mu_e n_e E`.
 Diffusive electron current is not exported in E2. The E2 source contract is for
 future Stage F integration only; no current moment, RF, Jefimenko, RLC, or
 radiation calculation is performed in Stage E.
+
+## Stage E3 Controlled Needle-Pair Symmetry Breaking
+
+Stage E3 adds a controlled aligned-vs-misaligned double-needle benchmark using
+Afivo's built-in `rod_rod` finite electrodes with semi-spherical caps. It does
+not use a single needle over a plane, and the only controlled geometry variable
+between the two cases is the ground needle lateral offset:
+
+- aligned: offset `0 um`
+- misaligned: offset `10 um` in `x`
+- gap: `70 um`
+- rod/tip radius: `5 um`
+- voltage: `+500 V` on the HV needle, `0 V` on the ground needle
+- physics: Stage D common Morrow-Lowke transport and three-species chemistry
+- photoionization: OFF
+- seed: Gaussian, `n0 = 1e16 m^-3`, `sigma = 3 um`, center `(0, 0, 60 um)`
+
+The coordinate convention for E3 is:
+
+- `x`: controlled lateral offset direction
+- `y`: transverse direction
+- `z`: gap / propagation direction
+- propagation direction: `-z`
+
+Run the E3 summaries after both Afivo cases complete:
+
+```bash
+solver3d/afivo_reference/stage_e/scripts/e3_summarize_misaligned.py
+```
+
+Tracked E3 output files are compact JSON/CSV summaries under
+`results_summary/`. Raw source snapshots remain ignored under `results_raw/`
+and use the same rho/ne/E/J schema introduced in E2.
+
+The Stage E report-data manifest is stored under `report/` and reserves figure
+slots for the final paper-style Stage E smoke report. Stage E3 does not start
+Stage F and performs no current moment, RF, Jefimenko, RLC, or radiation
+calculation.

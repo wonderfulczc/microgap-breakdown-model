@@ -1,0 +1,56 @@
+{
+  "case_id": "Stage E3 controlled aligned-vs-misaligned needle pair",
+  "geometry_source": "development",
+  "coordinate_convention": {
+    "x": "lateral offset direction",
+    "y": "transverse direction",
+    "z": "gap and propagation direction",
+    "propagation_direction": "-z"
+  },
+  "domain": {
+    "origin_m": [-6.0e-5, -6.0e-5, -6.5e-5],
+    "length_m": [1.2e-4, 1.2e-4, 2.0e-4],
+    "boundary_condition": "all_neumann outer boundary with embedded rod_rod electrodes"
+  },
+  "electrodes": {
+    "type": "Afivo built-in rod_rod finite rods with semi-spherical caps",
+    "hv_voltage_V": 500.0,
+    "ground_voltage_V": 0.0,
+    "rod_radius_m": 5.0e-6,
+    "tip_radius_m": 5.0e-6,
+    "gap_m": 70.0e-6,
+    "hv_centerline": {
+      "r0_m": [0.0, 0.0, 125.0e-6],
+      "r1_m": [0.0, 0.0, 75.0e-6],
+      "tip_surface_z_m": 70.0e-6
+    },
+    "ground_centerline_aligned": {
+      "r0_m": [0.0, 0.0, -55.0e-6],
+      "r1_m": [0.0, 0.0, -5.0e-6],
+      "tip_surface_z_m": 0.0
+    },
+    "ground_centerline_misaligned": {
+      "r0_m": [10.0e-6, 0.0, -55.0e-6],
+      "r1_m": [10.0e-6, 0.0, -5.0e-6],
+      "tip_surface_z_m": 0.0
+    }
+  },
+  "controlled_variable": {
+    "name": "ground needle lateral offset in x",
+    "aligned_m": 0.0,
+    "misaligned_m": 10.0e-6
+  },
+  "physics": {
+    "transport": "Stage D common PETSc frozen Morrow-Lowke table",
+    "chemistry": "Stage D common three-species chemistry",
+    "photoionization": "OFF",
+    "seed": {
+      "type": "3D Gaussian",
+      "n0_m3": 1.0e16,
+      "sigma_m": 3.0e-6,
+      "center_m": [0.0, 0.0, 60.0e-6],
+      "ne_equals_np": true,
+      "nn_zero": true
+    }
+  }
+}

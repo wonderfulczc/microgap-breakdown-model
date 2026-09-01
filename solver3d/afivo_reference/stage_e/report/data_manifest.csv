@@ -1,0 +1,16 @@
+stage,figure,panel,source_path,description,variables,tracked_in_git,notes
+E1,FIG_E2_triangular_electrostatic,geometry_slices,../geometry/geometry_contract.json,E1 triangular foil development geometry contract,geometry dimensions and coordinate convention,yes,Machine-readable geometry metadata
+E1,FIG_E2_triangular_electrostatic,profile_summary,../results_summary/e1_electrostatic_summary.json,Coarse/medium electrostatic summary,Emax high-field volume asymmetry runtime,yes,COMSOL comparison importer deferred
+E1,FIG_E2_triangular_electrostatic,medium_profiles,../results_summary/e1_profile_comparison_medium.csv,Central x-z/y-z field profile comparison,Eabs profile asymmetry,yes,Paper-ready compact profile data
+E2,FIG_E3_triangular_dynamic,dynamic_summary,../results_summary/e2_dynamic_summary.json,Triangular foil PI-off/PI-on dynamic source summary,Emax ne_max total_electrons head asymmetry export schema,yes,Development geometry only
+E2,FIG_E3_triangular_dynamic,dynamic_diagnostics,../results_summary/e2_dynamic_diagnostics.csv,Triangular dynamic compact case table,I/O ranges avalanche bridge asymmetry,yes,Raw source snapshots are ignored
+E2,FIG_E3_triangular_dynamic,raw_source_snapshots,../results_raw/e2_case_*_source_*.csv,Compact 3D rho/ne/E/J source snapshots,rho ne Ex Ey Ez Jx Jy Jz cell_volume level,no,Available locally but intentionally not committed
+E3,FIG_E4_misaligned_needle,geometry_contract,../geometry/e3_needle_pair_contract.json,Aligned and 10 um misaligned double-needle geometry contract,rod endpoints radius gap voltage offset seed,yes,Only controlled variable is lateral offset
+E3,FIG_E4_misaligned_needle,summary,../results_summary/e3_summary.json,Controlled symmetry-breaking summary,Emax ne_max total_electrons centroid asymmetry conclusion,yes,Main E3 acceptance data
+E3,FIG_E4_misaligned_needle,case_comparison,../results_summary/e3_case_comparison.csv,Aligned vs misaligned scalar comparison,Emax ne_max Ne charge head asymmetry,yes,Ratio is used for asymmetry rows
+E3,FIG_E4_misaligned_needle,centroid_trajectory,../results_summary/e3_centroid_trajectory.csv,Electron centroid and diagnostic time history,x_cm y_cm z_cm r_cm Emax ne_max total_electrons head,yes,Matched times include 0/1/3/5 ps
+E3,FIG_E4_misaligned_needle,aligned_profiles,../results_summary/e3_profiles_aligned.csv,Aligned central x-z/y-z source profiles,Eabs ne rho vs transverse coordinate and z,yes,Profile data from final source snapshot
+E3,FIG_E4_misaligned_needle,misaligned_profiles,../results_summary/e3_profiles_misaligned.csv,Misaligned central x-z/y-z source profiles,Eabs ne rho vs transverse coordinate and z,yes,Profile data from final source snapshot
+E3,FIG_E4_misaligned_needle,raw_source_snapshots,../results_raw/e3_*_needle_pair_500V_source_*.csv,Compact 3D rho/ne/E/J source snapshots,rho ne Ex Ey Ez Jx Jy Jz cell_volume level,no,Available locally but intentionally not committed
+StageSummary,FIG_E5_2d_3d_validity_summary,d3_axisymmetric,../../common_benchmark/d3/results/stage_d3_comparison.csv,D3 PETSc2D vs Afivo3D axisymmetric dynamic comparison,Emax ne_max total_electrons head symmetry,yes,Stage D is frozen
+StageSummary,FIG_E5_2d_3d_validity_summary,e_stage_summary,../results_summary/e3_summary.json,Stage E controlled 3D validity summary,controlled_symmetry_breaking_conclusion blockers,yes,Stage F not started

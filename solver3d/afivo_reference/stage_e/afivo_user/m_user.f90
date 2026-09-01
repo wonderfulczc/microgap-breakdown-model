@@ -206,7 +206,7 @@ contains
     real(dp) :: vol, emax, eabs, lsf
     real(dp) :: vol_high_05, vol_high_08, conductor_vol
     real(dp) :: ne, np, nn, charge_number, total_charge_C
-    real(dp) :: total_electrons, sum_x, sum_y, sum_r2, sum_x2_minus_y2
+    real(dp) :: total_electrons, sum_x, sum_y, sum_z, sum_r2, sum_x2_minus_y2
     real(dp) :: sum_rho_abs, sum_rho_x2_minus_y2, min_ne, head_z
     type(af_loc_t) :: loc_field
     real(dp) :: r_field(3)
@@ -227,6 +227,7 @@ contains
     total_electrons = 0.0_dp
     sum_x = 0.0_dp
     sum_y = 0.0_dp
+    sum_z = 0.0_dp
     sum_r2 = 0.0_dp
     sum_x2_minus_y2 = 0.0_dp
     sum_rho_abs = 0.0_dp
@@ -265,6 +266,7 @@ contains
                    if (ne > 0.0_dp) then
                       sum_x = sum_x + rr(1) * ne * vol
                       sum_y = sum_y + rr(2) * ne * vol
+                      sum_z = sum_z + rr(3) * ne * vol
                       sum_r2 = sum_r2 + (rr(1)**2 + rr(2)**2) * ne * vol
                       sum_x2_minus_y2 = sum_x2_minus_y2 + &
                            (rr(1)**2 - rr(2)**2) * ne * vol
@@ -288,7 +290,7 @@ contains
        e2_source_call_counter = e2_source_call_counter + 1
     end if
 
-    n_vars = 16
+    n_vars = 17
     var_names(1) = "e1_vol_Egt_0p5"
     var_names(2) = "e1_vol_Egt_0p8"
     var_names(3) = "e1_conductor_vol"
@@ -305,6 +307,7 @@ contains
     var_names(14) = "e2_ne_moment_asym"
     var_names(15) = "e2_rho_moment_asym"
     var_names(16) = "e2_total_electrons"
+    var_names(17) = "e3_z_cm"
     var_values(1) = vol_high_05
     var_values(2) = vol_high_08
     var_values(3) = conductor_vol
@@ -318,9 +321,11 @@ contains
        var_values(10) = sqrt((sum_x / total_electrons)**2 + &
             (sum_y / total_electrons)**2)
        var_values(14) = abs(sum_x2_minus_y2) / max(sum_r2, 1.0e-300_dp)
+       var_values(17) = sum_z / total_electrons
     else
        var_values(8:10) = 0.0_dp
        var_values(14) = 0.0_dp
+       var_values(17) = 0.0_dp
     end if
     if (head_z < huge(1.0_dp) / 10.0_dp) then
        var_values(11) = head_z
