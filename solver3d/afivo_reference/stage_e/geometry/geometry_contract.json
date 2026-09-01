@@ -1,0 +1,58 @@
+{
+  "boundary_conditions": {
+    "bottom_z": "Dirichlet 0 V ground plane",
+    "foil": "user level-set conductor at applied voltage",
+    "side_boundaries": "homogeneous Neumann",
+    "top_z": "Dirichlet applied voltage from homogeneous Afivo BC"
+  },
+  "case_id": "Stage-E1-triangular-foil-electrostatic",
+  "coordinate_convention": {
+    "ground_plane": "low-z boundary",
+    "hv_foil": "high-z conductor, tip points toward ground",
+    "propagation_direction_reserved": "-z",
+    "x": "foil width direction",
+    "y": "foil thickness / transverse direction",
+    "z": "gap / propagation direction"
+  },
+  "domain_len_m": [
+    0.00012,
+    0.00012,
+    0.0001525
+  ],
+  "domain_origin_m": [
+    -6e-05,
+    -6e-05,
+    -2.5e-06
+  ],
+  "edge_radius_m": 1e-06,
+  "export_contract": "x_m,y_m,z_m,phi_V,Ex_Vpm,Ey_Vpm,Ez_Vpm,Eabs_Vpm,lsf_m,level",
+  "foil_length_m": 5e-05,
+  "foil_thickness_m": 1e-05,
+  "foil_width_m": 4e-05,
+  "gap_m": 7e-05,
+  "geometry_checks": {
+    "conductor_contacts_ground": false,
+    "conductor_volume_estimate_m3": 1.2876304023845365e-14,
+    "conductor_volume_finite": true,
+    "estimated_gap_m": 6.978896103896103e-05,
+    "estimated_tip_z_m": 6.978896103896103e-05,
+    "estimated_x_extent_m": 4.327868852459017e-05,
+    "estimated_y_thickness_m": 7.868852459016394e-06,
+    "estimated_z_length_m": 4.951298701298702e-05,
+    "grounded_plane_z_m": 0.0,
+    "sample_step_m": 2e-06,
+    "self_intersection_detected": false,
+    "triangle_tip_angle_deg": 43.60281897270362
+  },
+  "geometry_source": "development",
+  "geometry_type": "rounded_triangular_copper_foil_tip",
+  "ground_z_m": 0.0,
+  "photoionization": "OFF",
+  "plasma": "OFF",
+  "polarity": "positive_hv_foil",
+  "pressure_Pa": 101325.0,
+  "temperature_K": 300.0,
+  "tip_radius_m": 3e-06,
+  "triangle_tip_angle_deg": 43.60281897270362,
+  "voltage_V": 500.0
+}

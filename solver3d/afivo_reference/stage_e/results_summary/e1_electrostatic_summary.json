@@ -1,0 +1,54 @@
+{
+  "all_field_exports_finite": true,
+  "coarse": {
+    "Emax_Vpm": 16658552.0,
+    "Emax_log_x_m": 3.75e-06,
+    "Emax_log_y_m": 3.75e-06,
+    "Emax_log_z_m": 6.8984375e-05,
+    "Emax_user_x_m": 3.75e-06,
+    "Emax_user_y_m": 3.75e-06,
+    "Emax_user_z_m": 6.8984375e-05,
+    "conductor_volume_afivo_m3": 1.9300781e-14,
+    "field_export_Emax_Vpm": 16658552.27548269,
+    "field_export_Emax_x_m": 3.75e-06,
+    "field_export_Emax_y_m": 3.75e-06,
+    "field_export_Emax_z_m": 6.8984375e-05,
+    "field_export_all_finite": true,
+    "field_export_rows": 4096,
+    "min_dx_m": 7.5e-06,
+    "n_cells": 4096.0,
+    "vol_E_gt_0p5_Emax_m3": 1.5011719e-14,
+    "vol_E_gt_0p8_Emax_m3": 2.1445312e-15
+  },
+  "coarse_profile": {
+    "electrostatic_asymmetry_metric": 0.02004600504752848,
+    "profile_max_pointwise_relative_difference": 0.035239675889777555,
+    "profile_points": 241
+  },
+  "coarse_to_medium_Emax_relative_change": 0.6971867662927727,
+  "medium": {
+    "Emax_Vpm": 28272674.0,
+    "Emax_log_x_m": 1.875e-06,
+    "Emax_log_y_m": 5.625e-06,
+    "Emax_log_z_m": 7.1367188e-05,
+    "Emax_user_x_m": 1.875e-06,
+    "Emax_user_y_m": 5.625e-06,
+    "Emax_user_z_m": 7.1367188e-05,
+    "conductor_volume_afivo_m3": 1.0186523e-14,
+    "field_export_Emax_Vpm": 28272673.60854901,
+    "field_export_Emax_x_m": 1.875e-06,
+    "field_export_Emax_y_m": 5.625e-06,
+    "field_export_Emax_z_m": 7.13671875e-05,
+    "field_export_all_finite": true,
+    "field_export_rows": 32768,
+    "min_dx_m": 3.75e-06,
+    "n_cells": 32768.0,
+    "vol_E_gt_0p5_Emax_m3": 2.4125977e-15,
+    "vol_E_gt_0p8_Emax_m3": 2.6806641e-16
+  },
+  "medium_profile": {
+    "electrostatic_asymmetry_metric": 0.15862255155198043,
+    "profile_max_pointwise_relative_difference": 0.38569807417052004,
+    "profile_points": 241
+  }
+}
