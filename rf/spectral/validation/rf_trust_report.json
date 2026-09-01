@@ -1,0 +1,29 @@
+{
+  "band_status": {
+    "1-3 GHz": "UNTRUSTED",
+    "100-200 MHz": "PARTIALLY_TRUSTED",
+    "200-300 MHz": "UNTRUSTED",
+    "3-10 GHz": "UNTRUSTED",
+    "300-500 MHz": "UNTRUSTED",
+    "500 MHz-1 GHz": "UNTRUSTED",
+    "60-90 MHz": "TRUSTED"
+  },
+  "continuity_status": "PASS",
+  "current_provenance": "synthetic continuity-consistent current",
+  "derivative_trust_frequency_Hz": 209960937.5,
+  "df_Hz": 4885197.850512946,
+  "dt_s": 1e-10,
+  "duration_s": 2.047e-07,
+  "far_field_valid": true,
+  "interpolation_trust_frequency_Hz": 122070312.5,
+  "limiting_factor": "interpolation",
+  "low_frequency_interpretation_bound_Hz": 14655593.551538838,
+  "mesh_trust_frequency_Hz": 122070312.5,
+  "nyquist_Hz": 5000000000.0,
+  "remap_status": "CONSERVATIVE",
+  "sampling_trust_frequency_Hz": 5000000000.0,
+  "scientific_rf_valid": true,
+  "source_valid": true,
+  "trusted_frequency_high_Hz": 122070312.5,
+  "trusted_frequency_low_Hz": 14655593.551538838
+}

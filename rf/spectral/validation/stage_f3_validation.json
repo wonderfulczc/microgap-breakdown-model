@@ -1,0 +1,148 @@
+{
+  "aliasing": {
+    "above_nyquist_rejected": true,
+    "dominant_peak_Hz": 999999999.9999999,
+    "expected_alias_Hz": 1000000000.0,
+    "input_above_nyquist_Hz": 5000000000.0,
+    "nyquist_Hz": 1999999999.9999998,
+    "sample_rate_Hz": 4000000000.0
+  },
+  "cwt_and_burst": {
+    "burst_expected_peak_times_s": {
+      "GHz": 5.5e-08,
+      "UHF": 3.5e-08,
+      "VHF": 1.5e-08
+    },
+    "burst_recovered_peak_times_s": {
+      "GHz": 5.49e-08,
+      "UHF": 3.49e-08,
+      "VHF": 2.05e-08
+    },
+    "chirp_ridge_median_relative_error": 0.018204664515367817,
+    "coi_edge_masked": true,
+    "temporal_order_recovered": true
+  },
+  "fft": {
+    "N": 8192,
+    "band_energy_relative_error": 0.005246990198760256,
+    "df_Hz": 2441406.25,
+    "dt_s": 5e-11,
+    "duration_s": 4.0955e-07,
+    "fluence_parseval_relative_error": 3.993077293742076e-15,
+    "frequency_peaks": {
+      "2000000000.0": {
+        "detected_Hz": 1999511718.75,
+        "error_Hz": 488281.25
+      },
+      "400000000.0": {
+        "detected_Hz": 400390625.0,
+        "error_Hz": 390625.0
+      },
+      "5000000000.0": {
+        "detected_Hz": 5000000000.0,
+        "error_Hz": 0.0
+      },
+      "80000000.0": {
+        "detected_Hz": 80566406.25,
+        "error_Hz": 566406.25
+      }
+    },
+    "nyquist_Hz": 10000000000.0,
+    "parseval_relative_error": 4.522367637688684e-16
+  },
+  "polarization_direction": {
+    "circular_ellipticity_abs_error": 0.023784181100042323,
+    "elliptical_ellipticity_abs_error": 0.00011323786178285555,
+    "linear_dolp": 1.0,
+    "linear_ellipticity_abs": 0.0,
+    "peak_direction": [
+      1.0,
+      0.0,
+      6.123233995736766e-17
+    ],
+    "radiation_pattern_sin2_max_error": 2.220446049250313e-16
+  },
+  "rf_trust_report": {
+    "band_status": {
+      "1-3 GHz": "UNTRUSTED",
+      "100-200 MHz": "PARTIALLY_TRUSTED",
+      "200-300 MHz": "UNTRUSTED",
+      "3-10 GHz": "UNTRUSTED",
+      "300-500 MHz": "UNTRUSTED",
+      "500 MHz-1 GHz": "UNTRUSTED",
+      "60-90 MHz": "TRUSTED"
+    },
+    "continuity_status": "PASS",
+    "current_provenance": "synthetic continuity-consistent current",
+    "derivative_trust_frequency_Hz": 209960937.5,
+    "df_Hz": 4885197.850512946,
+    "dt_s": 1e-10,
+    "duration_s": 2.047e-07,
+    "far_field_valid": true,
+    "interpolation_trust_frequency_Hz": 122070312.5,
+    "limiting_factor": "interpolation",
+    "low_frequency_interpretation_bound_Hz": 14655593.551538838,
+    "mesh_trust_frequency_Hz": 122070312.5,
+    "nyquist_Hz": 5000000000.0,
+    "remap_status": "CONSERVATIVE",
+    "sampling_trust_frequency_Hz": 5000000000.0,
+    "scientific_rf_valid": true,
+    "source_valid": true,
+    "trusted_frequency_high_Hz": 122070312.5,
+    "trusted_frequency_low_Hz": 14655593.551538838
+  },
+  "stage": "F3",
+  "stage_e_smoke": {
+    "cwt_shape": [
+      12,
+      32
+    ],
+    "fft_bins": 17,
+    "n_samples": 32,
+    "ran": true,
+    "reason": "drift-only J, 5 ps development data, sparse source snapshots; band results NOT INTERPRETABLE",
+    "scientific_RF_valid": false,
+    "trust_report": {
+      "band_status": {
+        "1-3 GHz": "UNTRUSTED",
+        "100-200 MHz": "UNTRUSTED",
+        "200-300 MHz": "UNTRUSTED",
+        "3-10 GHz": "UNTRUSTED",
+        "300-500 MHz": "UNTRUSTED",
+        "500 MHz-1 GHz": "UNTRUSTED",
+        "60-90 MHz": "UNTRUSTED"
+      },
+      "continuity_status": "PIPELINE_ONLY",
+      "current_provenance": "AFIVO_STAGE_E_CELL_CENTERED_DRIFT_CURRENT",
+      "derivative_trust_frequency_Hz": 0.0,
+      "df_Hz": 1111111111111.1113,
+      "dt_s": 2.903225806451581e-14,
+      "duration_s": 8.999999999999998e-13,
+      "far_field_valid": false,
+      "interpolation_trust_frequency_Hz": 0.0,
+      "limiting_factor": "derivative",
+      "low_frequency_interpretation_bound_Hz": 3333333333333.334,
+      "mesh_trust_frequency_Hz": 0.0,
+      "nyquist_Hz": 17222222222222.412,
+      "remap_status": "CONSERVATIVE",
+      "sampling_trust_frequency_Hz": 17222222222222.412,
+      "scientific_rf_valid": false,
+      "source_valid": false,
+      "trusted_frequency_high_Hz": 0.0,
+      "trusted_frequency_low_Hz": 3333333333333.334
+    }
+  },
+  "trust_sensitivity": {
+    "derivative_trust_frequency_Hz": 209960937.5,
+    "interpolation_trust_frequency_Hz": 122070312.5,
+    "mesh_trust_frequency_Hz": 122070312.5,
+    "sampling_trust_frequency_Hz": 5000000000.0
+  },
+  "validation_figures": [
+    "/home/helianthusczc/projects/streamer-rf-replica/rf/spectral/figures/F3_fft_multitone.png",
+    "/home/helianthusczc/projects/streamer-rf-replica/rf/spectral/figures/F3_aliasing_demonstration.png",
+    "/home/helianthusczc/projects/streamer-rf-replica/rf/spectral/figures/F3_cwt_chirp.png",
+    "/home/helianthusczc/projects/streamer-rf-replica/rf/spectral/figures/F3_staged_bursts.png",
+    "/home/helianthusczc/projects/streamer-rf-replica/rf/spectral/figures/F3_trusted_frequency_error_envelope.png"
+  ]
+}
