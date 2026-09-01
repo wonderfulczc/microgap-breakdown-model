@@ -1,127 +1,184 @@
 figures:
-  - id: FIG_E1_solver_validation
-    panels:
-      - PETSc2D_vs_Afivo3D_axisymmetric_static_profiles
-      - PETSc2D_vs_Afivo3D_axisymmetric_dynamic_diagnostics
-    source_data:
-      - ../results_summary/e1_electrostatic_summary.json
-      - ../../common_benchmark/d3/results/stage_d3_comparison.csv
-    axes:
-      - z_over_gap
-      - time_ps
-    variables:
-      - phi
-      - Eabs
-      - Emax
-      - ne_max
-      - total_electrons
-      - head_position
-    intended_paper_conclusion: Afivo true 3D Cartesian backend reproduces the frozen axisymmetric benchmark within Stage D engineering tolerances.
-    current_limitation: Tip Emax remains sensitive to Cartesian/axisymmetric electrode discretization; photoionization commonization is deferred.
-
-  - id: FIG_E2_triangular_electrostatic
-    panels:
-      - triangular_foil_geometry_slices
-      - medium_vs_refined_field_profiles
-      - xz_vs_yz_field_asymmetry
-      - high_field_volume
-    source_data:
-      - ../geometry/geometry_contract.json
-      - ../results_summary/e1_electrostatic_summary.json
-      - ../results_summary/e1_profile_comparison_medium.csv
-    axes:
-      - x_m
-      - y_m
-      - z_m
-      - Eabs_Vpm
-    variables:
-      - phi
-      - Ex
-      - Ey
-      - Ez
-      - Eabs
-      - electrostatic_asymmetry_metric
-    intended_paper_conclusion: The triangular foil produces a genuinely non-axisymmetric 3D electrostatic field concentrated at the rounded tip and edges.
-    current_limitation: Geometry is a development geometry pending Stage B COMSOL dimensions.
-
-  - id: FIG_E3_triangular_dynamic
-    panels:
-      - PI_off_vs_PI_on_dynamic_diagnostics
-      - triangular_centroid_and_head_evolution
-      - triangular_ne_rho_field_source_slices
-      - triangular_dynamic_asymmetry
-    source_data:
-      - ../results_summary/e2_dynamic_summary.json
-      - ../results_summary/e2_dynamic_diagnostics.csv
-    axes:
-      - time_ps
-      - z_m
-      - transverse_coordinate_m
-    variables:
-      - Emax
-      - ne_max
-      - total_electrons
-      - total_charge
-      - head_position
-      - x_cm
-      - y_cm
-      - ne_plane_asymmetry
-      - rho_plane_asymmetry
-    intended_paper_conclusion: The non-axisymmetric triangular foil backend can evolve early 3D avalanche/source fields and export rho, ne, E, and J for later source integration.
-    current_limitation: No bridge or experiment-calibrated breakdown claim is made in Stage E.
-
-  - id: FIG_E4_misaligned_needle
-    panels:
-      - aligned_vs_misaligned_geometry
-      - aligned_xz_yz_field_profiles
-      - misaligned_xz_yz_field_profiles
-      - centroid_trajectory
-      - asymmetry_time_history
-    source_data:
-      - ../geometry/e3_needle_pair_contract.json
-      - ../results_summary/e3_summary.json
-      - ../results_summary/e3_case_comparison.csv
-      - ../results_summary/e3_centroid_trajectory.csv
-      - ../results_summary/e3_profiles_aligned.csv
-      - ../results_summary/e3_profiles_misaligned.csv
-    axes:
-      - time_ps
-      - x_m
-      - y_m
-      - z_m
-      - transverse_coordinate_m
-    variables:
-      - Emax
-      - ne_max
-      - total_electrons
-      - total_charge
-      - head_position
-      - x_cm
-      - y_cm
-      - z_cm
-      - field_plane_asymmetry
-      - ne_plane_asymmetry
-      - rho_plane_asymmetry
-    intended_paper_conclusion: The aligned double-needle case remains symmetric while a 10 um controlled lateral offset produces strong field asymmetry and measurable early plasma asymmetry.
-    current_limitation: Early-time 5 ps dynamics do not bridge the 70 um gap.
-
-  - id: FIG_E5_2d_3d_validity_summary
-    panels:
-      - axisymmetric_backend_validity
-      - non_axisymmetric_geometry_requires_3d
-      - stage_boundaries_and_deferred_validation
-    source_data:
-      - ../../common_benchmark/d3/results/stage_d3_comparison.csv
-      - ../results_summary/e1_electrostatic_summary.json
-      - ../results_summary/e2_dynamic_summary.json
-      - ../results_summary/e3_summary.json
-    axes:
-      - stage
-      - diagnostic_metric
-    variables:
-      - D3_dynamic_error_metrics
-      - E1_field_asymmetry
-      - E2_dynamic_asymmetry
-      - E3_controlled_symmetry_breaking
-    intended_paper_conclusion: The project has a validated 2D/3D axisymmetric bridge and a separate 3D-only path for real non-axisymmetric geometries.
-    current_limitation: Final experimental validation remains deferred to Stage B geometry and measured voltage waveforms.
+- id: FIG_E1_solver_validation
+  panels:
+  - PETSc2D_vs_Afivo3D_axisymmetric_static_profiles
+  - PETSc2D_vs_Afivo3D_axisymmetric_dynamic_diagnostics
+  source_data:
+  - ../results_summary/e1_electrostatic_summary.json
+  - ../../common_benchmark/d3/results/stage_d3_comparison.csv
+  axes:
+  - z_over_gap
+  - time_ps
+  variables:
+  - phi
+  - Eabs
+  - Emax
+  - ne_max
+  - total_electrons
+  - head_position
+  intended_paper_conclusion: Afivo true 3D Cartesian backend reproduces the frozen
+    axisymmetric benchmark within Stage D engineering tolerances.
+  current_limitation: Tip Emax remains sensitive to Cartesian/axisymmetric electrode
+    discretization; photoionization commonization is deferred.
+  final_files: &id001
+    png: figures/Fig_E1_solver_validation.png
+    pdf: figures/Fig_E1_solver_validation.pdf
+    png_sha256: 900462fa28d5aeaccc0facfdd9bf2d7352585ce38f2113b378070d4bca19d7ac
+    pdf_sha256: e487e88580200d7fb9ec9559147f5fac032025d32c87d9aeae8dba7e77f05120
+  caption_zh: 图 E1. Afivo true 3D Cartesian 模型相对于 PETSc 2D 轴对称模型的退化验证。(a) PETSc 轴对称截面示意；(b)
+    Afivo 真实 3D Cartesian 对齐电极示意；(c-e) Emax、ne,max 与总电子数随时间的对比；(f) 稳健误差指标汇总。最大差异为
+    Emax 5.94%、ne,max 12.99%、Ne 6.04%，head position 最大差异 0.66 um。
+  data_hash_metadata: *id001
+  report_html: stage_e_smoke_paper_report.html
+- id: FIG_E2_triangular_electrostatic
+  panels:
+  - triangular_foil_geometry_slices
+  - medium_vs_refined_field_profiles
+  - xz_vs_yz_field_asymmetry
+  - high_field_volume
+  source_data:
+  - ../geometry/geometry_contract.json
+  - ../results_summary/e1_electrostatic_summary.json
+  - ../results_summary/e1_profile_comparison_medium.csv
+  axes:
+  - x_m
+  - y_m
+  - z_m
+  - Eabs_Vpm
+  variables:
+  - phi
+  - Ex
+  - Ey
+  - Ez
+  - Eabs
+  - electrostatic_asymmetry_metric
+  intended_paper_conclusion: The triangular foil produces a genuinely non-axisymmetric
+    3D electrostatic field concentrated at the rounded tip and edges.
+  current_limitation: Geometry is a development geometry pending Stage B COMSOL dimensions.
+  final_files: &id002
+    png: figures/Fig_E2_triangular_electrostatic.png
+    pdf: figures/Fig_E2_triangular_electrostatic.pdf
+    png_sha256: 78df3750a4a9e2e17c42f0a65cd12f11cdc117423eef217361ac6718ff826865
+    pdf_sha256: f835c8d75c42ca6908f0189d1a79c34550b679bd0a6f8e2359d0f2edea1500a3
+  caption_zh: 图 E2. 三角铜箔 development geometry 的三维静电场。(a) 有限圆角三角箔示意；(b,c) refined x-z
+    与 y-z 中心截面 |E|；(d) 两个截面的 selected field profile；(e) medium 与 refined 非对称性指标；(f)
+    高场体积。refined asymmetry metric 为 0.1031，medium 为 0.1586；Emax 从 2.827e7 增至 5.734e7
+    V/m，局部峰值场尚未网格收敛。
+  data_hash_metadata: *id002
+  report_html: stage_e_smoke_paper_report.html
+- id: FIG_E3_triangular_dynamic
+  panels:
+  - PI_off_vs_PI_on_dynamic_diagnostics
+  - triangular_centroid_and_head_evolution
+  - triangular_ne_rho_field_source_slices
+  - triangular_dynamic_asymmetry
+  source_data:
+  - ../results_summary/e2_dynamic_summary.json
+  - ../results_summary/e2_dynamic_diagnostics.csv
+  axes:
+  - time_ps
+  - z_m
+  - transverse_coordinate_m
+  variables:
+  - Emax
+  - ne_max
+  - total_electrons
+  - total_charge
+  - head_position
+  - x_cm
+  - y_cm
+  - ne_plane_asymmetry
+  - rho_plane_asymmetry
+  intended_paper_conclusion: The non-axisymmetric triangular foil backend can evolve
+    early 3D avalanche/source fields and export rho, ne, E, and J for later source
+    integration.
+  current_limitation: No bridge or experiment-calibrated breakdown claim is made in
+    Stage E.
+  final_files: &id003
+    png: figures/Fig_E3_triangular_dynamic.png
+    pdf: figures/Fig_E3_triangular_dynamic.pdf
+    png_sha256: 7286d5b3b1c92d6d3d14a9029fcbc847bb37b07ac0a9f69f69fa2636cac6cdbd
+    pdf_sha256: 0b400966c2543d7f152f3e10ccd57720d72e663a6430111b2b90447a641a166c
+  caption_zh: 图 E3. 三角箔几何非对称性向早期放电动力学的传递。(a) 初始电子密度切片；(b,c) 5 ps 时 x-z 与 y-z 电子密度切片；(d)
+    5 ps 电荷密度切片；(e) PI OFF/ON 总电子数演化；(f) ne/rho 非对称性。PI OFF 总电子数 4.249896→5.1771357，PI
+    ON 为 4.249896→5.1776558；Avalanche=YES，Streamer propagation=NO，Bridge=NO。
+  data_hash_metadata: *id003
+  report_html: stage_e_smoke_paper_report.html
+- id: FIG_E4_misaligned_needle
+  panels:
+  - aligned_vs_misaligned_geometry
+  - aligned_xz_yz_field_profiles
+  - misaligned_xz_yz_field_profiles
+  - centroid_trajectory
+  - asymmetry_time_history
+  source_data:
+  - ../geometry/e3_needle_pair_contract.json
+  - ../results_summary/e3_summary.json
+  - ../results_summary/e3_case_comparison.csv
+  - ../results_summary/e3_centroid_trajectory.csv
+  - ../results_summary/e3_profiles_aligned.csv
+  - ../results_summary/e3_profiles_misaligned.csv
+  axes:
+  - time_ps
+  - x_m
+  - y_m
+  - z_m
+  - transverse_coordinate_m
+  variables:
+  - Emax
+  - ne_max
+  - total_electrons
+  - total_charge
+  - head_position
+  - x_cm
+  - y_cm
+  - z_cm
+  - field_plane_asymmetry
+  - ne_plane_asymmetry
+  - rho_plane_asymmetry
+  intended_paper_conclusion: The aligned double-needle case remains symmetric while
+    a 10 um controlled lateral offset produces strong field asymmetry and measurable
+    early plasma asymmetry.
+  current_limitation: Early-time 5 ps dynamics do not bridge the 70 um gap.
+  final_files: &id004
+    png: figures/Fig_E4_misaligned_needle.png
+    pdf: figures/Fig_E4_misaligned_needle.pdf
+    png_sha256: e9840c99b5a012c6ed0694520a32bf809eb8c3ce53347dc1679742a9b99347b6
+    pdf_sha256: 94ec41a3da395d4e4065119880452acfbecb9f221887abb18f7461a43233faf8
+  caption_zh: 图 E4. 双针 lateral misalignment 导致的受控对称性破缺。(a,b) aligned 与 10 um misaligned
+    双针几何；(c,d) 两组中心切面场 profile；(e) field asymmetry；(f) ne/rho asymmetry；(g) 电子横向质心；(h)
+    Emax、ne,max、Ne 归一化对比。field asymmetry 从 9.59e-10 增至 0.3719，ne asymmetry 从 2.80e-5
+    增至 3.52e-3，rho asymmetry 从 4.10e-3 增至 1.154e-2；整体强度指标保持接近。
+  data_hash_metadata: *id004
+  report_html: stage_e_smoke_paper_report.html
+- id: FIG_E5_2d_3d_validity_summary
+  panels:
+  - axisymmetric_backend_validity
+  - non_axisymmetric_geometry_requires_3d
+  - stage_boundaries_and_deferred_validation
+  source_data:
+  - ../../common_benchmark/d3/results/stage_d3_comparison.csv
+  - ../results_summary/e1_electrostatic_summary.json
+  - ../results_summary/e2_dynamic_summary.json
+  - ../results_summary/e3_summary.json
+  axes:
+  - stage
+  - diagnostic_metric
+  variables:
+  - D3_dynamic_error_metrics
+  - E1_field_asymmetry
+  - E2_dynamic_asymmetry
+  - E3_controlled_symmetry_breaking
+  intended_paper_conclusion: The project has a validated 2D/3D axisymmetric bridge
+    and a separate 3D-only path for real non-axisymmetric geometries.
+  current_limitation: Final experimental validation remains deferred to Stage B geometry
+    and measured voltage waveforms.
+  final_files: &id005
+    png: figures/Fig_E5_2d_3d_validity_summary.png
+    pdf: figures/Fig_E5_2d_3d_validity_summary.pdf
+    png_sha256: 68bc0fc9d189f910d427e64c35bdf209df73620a84a5586801c369908a2787f3
+    pdf_sha256: 683362580e90fa07c61164b34d90bd05d8236454a9f5182c1957e7d2dee21f12
+  caption_zh: 图 E5. 轴对称模型与三维模型适用性的证据图。(a) D3 轴对称 PETSc/Afivo 动态验证误差；(b) D3/E2/E3 的场非对称性与等离子体非对称性证据图。该图不定义通用阈值，而用于说明轴对称几何可由
+    2D 表示，内禀或受控破缺几何需要 3D 分辨。
+  data_hash_metadata: *id005
+  report_html: stage_e_smoke_paper_report.html

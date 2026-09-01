@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Stage E 3D Non-axisymmetric Simulation Smoke-Test and Paper-Figure Assessment</title>
+<style>
+body { font-family: Arial, "Noto Sans CJK SC", sans-serif; margin: 32px auto; max-width: 1100px; line-height: 1.55; color: #222; }
+h1, h2, h3 { line-height: 1.25; }
+h1 { font-size: 24px; }
+h2 { margin-top: 36px; border-top: 1px solid #ddd; padding-top: 20px; }
+h3 { font-size: 16px; margin-bottom: 4px; }
+img { max-width: 100%; border: 1px solid #ddd; }
+figure { margin: 16px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+td, th { border: 1px solid #ccc; padding: 6px; vertical-align: top; }
+th { background: #f3f3f3; }
+.note { background: #f7f7f7; border-left: 4px solid #888; padding: 10px 14px; }
+</style>
+</head>
+<body>
+<h1>Stage E 3D Non-axisymmetric Simulation Smoke-Test and Paper-Figure Assessment</h1>
+<p>本报告汇总 Stage D3、Stage E1、Stage E2 和 Stage E3 已完成的真实 smoke-test 数据，用于评估未来投稿论文中 3D 仿真部分的候选图。Stage D 的作用是验证 Afivo true 3D Cartesian solver 在轴对称条件下能够退化到 PETSc 2D 轴对称结果；Stage E 的作用是验证真实 non-axisymmetric geometry 会导致 3D field/plasma response。</p>
+<p class="note">本报告属于 development/smoke-level validation，不是 final calibrated experimental simulation。所有三角箔和双针尺寸均为 development geometry；正式实验定量图应在 Stage B 几何和 measured voltage waveform 完成后重跑。</p>
+
+<section class="figure-block">
+<h2>Fig. E1</h2>
+<figure>
+<img src="figures/Fig_E1_solver_validation.png" alt="Fig. E1">
+</figure>
+<h3>图号与拟投稿标题</h3>
+<p><strong>Validation of the 3D Afivo model against the axisymmetric PETSc model</strong></p>
+<h3>中文图注</h3>
+<p>图 E1. Afivo true 3D Cartesian 模型相对于 PETSc 2D 轴对称模型的退化验证。(a) PETSc 轴对称截面示意；(b) Afivo 真实 3D Cartesian 对齐电极示意；(c-e) Emax、ne,max 与总电子数随时间的对比；(f) 稳健误差指标汇总。最大差异为 Emax 5.94%、ne,max 12.99%、Ne 6.04%，head position 最大差异 0.66 um。</p>
+<h3>论文式结果描述</h3>
+
+<p>在相同的轴对称物理设定下，Afivo true 3D Cartesian 计算给出的 Emax、峰值电子密度和总电子数均跟随 PETSc 2D 轴对称基准演化。最大相对差异分别为 5.94%、12.99% 和 6.04%，前沿位置最大差异为 0.66 um。</p>
+<p>Afivo 解的横向质心偏移低于 7.94e-13 m，中心切面对称性指标为 1.44e-12。由于 leading edge 基本 pinned，head velocity 的相对误差不作为主要判据。</p>
+
+<h3>物理解释</h3>
+<p>该结果说明，当几何、电压、输运、化学和种子均保持轴对称时，3D Cartesian AMR 求解不会自发引入显著非轴对称响应；剩余差异主要来自电极离散和数值格式差异。</p>
+<h3>可支撑的结论</h3>
+<ul><li>Afivo 3D backend 可作为真正 3D 非轴对称问题的可信求解器基础。</li>
+<li>PETSc 2D 与 Afivo 3D 在轴对称退化工况下具有工程一致性。</li></ul>
+<h3>当前不能得出的结论</h3>
+<ul><li>不能声称两个不同数值框架逐点场完全一致。</li>
+<li>不能用该图证明真实实验击穿或成熟火花阶段。</li></ul>
+<h3>对未来论文的作用</h3>
+<p><strong>方法验证图</strong>。它是进入 3D 非轴对称结果之前的必要数值可信度证据，适合正文 Methods/validation 或补充材料主图。</p>
+</section>
+
+<section class="figure-block">
+<h2>Fig. E2</h2>
+<figure>
+<img src="figures/Fig_E2_triangular_electrostatic.png" alt="Fig. E2">
+</figure>
+<h3>图号与拟投稿标题</h3>
+<p><strong>Three-dimensional electrostatic field of the triangular-foil electrode</strong></p>
+<h3>中文图注</h3>
+<p>图 E2. 三角铜箔 development geometry 的三维静电场。(a) 有限圆角三角箔示意；(b,c) refined x-z 与 y-z 中心截面 |E|；(d) 两个截面的 selected field profile；(e) medium 与 refined 非对称性指标；(f) 高场体积。refined asymmetry metric 为 0.1031，medium 为 0.1586；Emax 从 2.827e7 增至 5.734e7 V/m，局部峰值场尚未网格收敛。</p>
+<h3>论文式结果描述</h3>
+
+<p>三角铜箔 development geometry 在 x-z 与 y-z 中心截面给出明显不同的电场分布。局部加密后，电场非对称性指标由 medium 的 0.1586 变为 refined 的 0.1031，非轴对称结论保持稳定。</p>
+<p>同时，局部峰值场从 2.827e7 V/m 增至 5.734e7 V/m，变化约 102.8%。因此图中可展示尖端/边缘的高场集中位置，但不能把 57.3 MV/m 解释为已经收敛的实验物理峰值场。</p>
+
+<h3>物理解释</h3>
+<p>有限宽度、有限厚度和有限边缘圆角破坏了任何绕 z 轴的旋转对称性，使高场区域同时受尖端曲率和侧边缘影响；这是 2D 轴对称投影无法保持的几何信息。</p>
+<h3>可支撑的结论</h3>
+<ul><li>三角箔电极的局部电场是本质 3D 问题。</li>
+<li>高场区域稳定出现在 rounded tip/edge 附近。</li></ul>
+<h3>当前不能得出的结论</h3>
+<ul><li>不能声称 Emax=57.3 MV/m 是真实实验峰值场。</li>
+<li>不能声称 tip/edge Emax 已经网格收敛。</li></ul>
+<h3>对未来论文的作用</h3>
+<p><strong>重要支撑图</strong>。它支撑 Stage E 进入 3D 的几何必要性；正式投稿前应使用 Stage B 校准几何重跑。</p>
+</section>
+
+<section class="figure-block">
+<h2>Fig. E3</h2>
+<figure>
+<img src="figures/Fig_E3_triangular_dynamic.png" alt="Fig. E3">
+</figure>
+<h3>图号与拟投稿标题</h3>
+<p><strong>Transfer of geometric asymmetry to early discharge dynamics</strong></p>
+<h3>中文图注</h3>
+<p>图 E3. 三角箔几何非对称性向早期放电动力学的传递。(a) 初始电子密度切片；(b,c) 5 ps 时 x-z 与 y-z 电子密度切片；(d) 5 ps 电荷密度切片；(e) PI OFF/ON 总电子数演化；(f) ne/rho 非对称性。PI OFF 总电子数 4.249896→5.1771357，PI ON 为 4.249896→5.1776558；Avalanche=YES，Streamer propagation=NO，Bridge=NO。</p>
+<h3>论文式结果描述</h3>
+
+<p>在三角箔 development geometry 中，PI OFF case 的总电子数由 4.2499 增至 5.177136，PI ON case 由 4.2499 增至 5.177656。两者均表现出早期 avalanche 增长，但未出现 streamer propagation 或 bridge。</p>
+<p>5 ps 时，electron-density plane asymmetry 约为 0.0503，charge-density plane asymmetry 约为 0.0529。PI ON/OFF 在这个 5 ps development case 中差异很小，因此该图不把 photoionization 作为主结论。</p>
+
+<h3>物理解释</h3>
+<p>初始种子仍位于尖端附近，但三角箔电场在两个中心截面上不同，电子漂移和反应源在早期即采样到这种几何非对称性，使 avalanche 的 ne/rho 分布继承电极的 3D 特征。</p>
+<h3>可支撑的结论</h3>
+<ul><li>early discharge/avalanche inherits the 3D geometric asymmetry。</li>
+<li>rho、ne、E、J 的 3D source export pipeline 可用于后续 Stage F 数据输入。</li></ul>
+<h3>当前不能得出的结论</h3>
+<ul><li>不能写 triangular foil streamer has been demonstrated。</li>
+<li>不能写 photoionization generally negligible，只能说本 5 ps development case 中差异小。</li></ul>
+<h3>对未来论文的作用</h3>
+<p><strong>Supplementary候选</strong>。它证明动态和 source export 管线工作，但当前只是早期 avalanche，尚不足以作为主物理图。</p>
+</section>
+
+<section class="figure-block">
+<h2>Fig. E4</h2>
+<figure>
+<img src="figures/Fig_E4_misaligned_needle.png" alt="Fig. E4">
+</figure>
+<h3>图号与拟投稿标题</h3>
+<p><strong>Controlled symmetry breaking by lateral needle misalignment</strong></p>
+<h3>中文图注</h3>
+<p>图 E4. 双针 lateral misalignment 导致的受控对称性破缺。(a,b) aligned 与 10 um misaligned 双针几何；(c,d) 两组中心切面场 profile；(e) field asymmetry；(f) ne/rho asymmetry；(g) 电子横向质心；(h) Emax、ne,max、Ne 归一化对比。field asymmetry 从 9.59e-10 增至 0.3719，ne asymmetry 从 2.80e-5 增至 3.52e-3，rho asymmetry 从 4.10e-3 增至 1.154e-2；整体强度指标保持接近。</p>
+<h3>论文式结果描述</h3>
+
+<p>双针 controlled benchmark 中，aligned case 的 field asymmetry 为 9.59e-10，misaligned case 增至 0.3719。对应的电子密度非对称性从 2.80e-05 增至 3.5190e-03，电荷密度非对称性从 4.1044e-03 增至 1.1543e-02。</p>
+<p>与此同时，两组整体放电强度量基本不变：aligned/misaligned 的 Emax 分别为 3.8197e+07 和 3.8470e+07 V/m，ne,max 分别为 8.0038e+15 和 8.0061e+15 m^-3，总电子数分别为 4.5526 和 4.5479。电子横向质心最大偏移从 6.12e-18 m 增至 1.48e-08 m。</p>
+
+<h3>物理解释</h3>
+<p>在相同电压、输运、化学、seed 和分辨率下，10 um lateral offset 改变的是边界几何本身，而不是总体电离强度。整体 Emax、ne,max 和 Ne 接近，说明观测到的空间非对称性主要由 geometry symmetry breaking 触发。</p>
+<h3>可支撑的结论</h3>
+<ul><li>真实几何错位能够在 3D Afivo 中产生强的场非对称性和可测的早期 plasma asymmetry。</li>
+<li>该响应不是 Cartesian numerical noise，因为 aligned control 保持近对称。</li></ul>
+<h3>当前不能得出的结论</h3>
+<ul><li>不能写 10 um offset causes streamer deflection。</li>
+<li>不能声称已经产生 bridge 或完整 streamer crossing。</li></ul>
+<h3>对未来论文的作用</h3>
+<p><strong>核心主图</strong>。这是 Stage E 最强的 controlled 证据，可作为论文中说明 3D 几何必要性的机制支撑主图。</p>
+</section>
+
+<section class="figure-block">
+<h2>Fig. E5</h2>
+<figure>
+<img src="figures/Fig_E5_2d_3d_validity_summary.png" alt="Fig. E5">
+</figure>
+<h3>图号与拟投稿标题</h3>
+<p><strong>Evidence map for the applicability of axisymmetric and three-dimensional models</strong></p>
+<h3>中文图注</h3>
+<p>图 E5. 轴对称模型与三维模型适用性的证据图。(a) D3 轴对称 PETSc/Afivo 动态验证误差；(b) D3/E2/E3 的场非对称性与等离子体非对称性证据图。该图不定义通用阈值，而用于说明轴对称几何可由 2D 表示，内禀或受控破缺几何需要 3D 分辨。</p>
+<h3>论文式结果描述</h3>
+
+<p>证据图分为两部分：一部分展示 D3 轴对称退化验证误差，另一部分比较 Stage E 的非轴对称场/等离子体响应指标。该图不定义 universal 2D/3D threshold，而是把不同 benchmark 的证据边界清楚分开。</p>
+<p>D3 表明轴对称 geometry 可由 PETSc 2D 高效表示；E2/E3 表明三角箔和错位双针会产生 2D 轴对称模型无法表达的空间非对称性。</p>
+
+<h3>物理解释</h3>
+<p>轴对称模型的有效性取决于几何、边界和初始条件是否保持旋转对称。一旦电极具有有限厚度/边缘或 deliberate lateral offset，空间电场和源项不再能由单一 r-z 截面代表。</p>
+<h3>可支撑的结论</h3>
+<ul><li>axisymmetric geometries can be efficiently represented by PETSc 2D。</li>
+<li>intrinsically or deliberately symmetry-broken geometries require 3D resolution。</li></ul>
+<h3>当前不能得出的结论</h3>
+<ul><li>不能声称建立了 asymmetry &gt; X 的通用阈值。</li>
+<li>不能用当前 smoke 数据替代 Stage B/实验校准后的生产仿真。</li></ul>
+<h3>对未来论文的作用</h3>
+<p><strong>重要支撑图</strong>。它适合作为 Discussion/summary 图，帮助读者理解 2D 与 3D backend 的职责边界。</p>
+</section>
+
+<h2>总结表</h2>
+<table>
+<thead><tr><th>Figure</th><th>Scientific question</th><th>Evidence strength</th><th>Current limitation</th><th>Recommended paper role</th><th>Need rerun later?</th></tr></thead>
+<tbody><tr><td>Fig E1</td><td>3D solver 是否可信</td><td>Strong</td><td>early-time only</td><td>Method validation</td><td>No, production refinement only</td></tr>
+<tr><td>Fig E2</td><td>triangular foil 是否真正 3D</td><td>Strong qualitative</td><td>tip Emax not converged</td><td>Important support</td><td>Yes, Stage B calibrated geometry</td></tr>
+<tr><td>Fig E3</td><td>几何非对称是否进入 early dynamics</td><td>Moderate</td><td>avalanche only, no streamer</td><td>Supplementary candidate</td><td>Yes, if used as main physics</td></tr>
+<tr><td>Fig E4</td><td>misalignment 是否产生 controlled symmetry breaking</td><td>Strong</td><td>early-time only, no bridge</td><td>Mechanism-supporting main figure</td><td>Yes, for final experimental geometry</td></tr>
+<tr><td>Fig E5</td><td>2D/3D 适用性边界如何表达</td><td>Strong as synthesis</td><td>not a universal threshold</td><td>Important support</td><td>No for method summary; update values after production</td></tr></tbody>
+</table>
+<h2>总体论文贡献判断</h2>
+<p><strong>A. Stage D/E 是否值得进入论文正文？</strong> PARTIAL。D/E 值得进入论文，但不应被包装成主科学创新本身。它们更适合作为 numerical validation 与 mechanism-supporting evidence：Fig E1 证明 3D backend 可信，Fig E4 证明受控几何破缺确实产生 3D 响应。</p>
+<p><strong>B. 推荐角色。</strong> Fig E4 可承担 mechanism-supporting evidence 并作为正文核心支撑图；Fig E1 主要属于 numerical validation；Fig E2 是 3D 几何必要性的支撑图；Fig E3 更适合作为 Supplementary 候选；Fig E5 可作为 discussion summary。</p>
+<p><strong>C. 当前最强结果。</strong> Fig E4：仅改变 10 um lateral offset，field asymmetry 从近零增至 0.3719，而 Emax、ne,max 和 Ne 基本保持一致，这是 controlled symmetry-breaking 的最干净证据。</p>
+<p><strong>D. 当前最弱结果。</strong> Fig E3：只显示 early avalanche 继承三角箔非对称性，没有 streamer propagation 或 bridge，PI ON/OFF 差异也很小。</p>
+<p><strong>E. Stage B 和实验数据完成后需要正式重跑。</strong> Fig E2 和 Fig E4 的几何/电压应以 Stage B calibrated geometry 和 measured voltage waveform 重跑；若 Fig E3 要作为正文动态物理图，也必须重跑。</p>
+<p><strong>F. 可保留为方法验证的现有 smoke 结果。</strong> Fig E1 作为 2D/3D backend validation 可保留；Fig E5 的方法边界逻辑可保留但数值可随生产 case 更新。</p>
+<h2>禁止过度表述</h2>
+<ul><li>triangular foil streamer has been demonstrated</li>
+<li>10 um offset causes streamer deflection</li>
+<li>Emax=57.3 MV/m is the physical electrode field</li>
+<li>photoionization has negligible effect generally</li>
+<li>a universal 2D/3D threshold was established</li></ul>
+</body>
+</html>

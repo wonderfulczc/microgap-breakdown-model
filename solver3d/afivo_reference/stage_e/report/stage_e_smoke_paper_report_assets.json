@@ -1,0 +1,32 @@
+{
+  "FIG_E1_solver_validation": {
+    "pdf": "figures/Fig_E1_solver_validation.pdf",
+    "pdf_sha256": "e487e88580200d7fb9ec9559147f5fac032025d32c87d9aeae8dba7e77f05120",
+    "png": "figures/Fig_E1_solver_validation.png",
+    "png_sha256": "900462fa28d5aeaccc0facfdd9bf2d7352585ce38f2113b378070d4bca19d7ac"
+  },
+  "FIG_E2_triangular_electrostatic": {
+    "pdf": "figures/Fig_E2_triangular_electrostatic.pdf",
+    "pdf_sha256": "f835c8d75c42ca6908f0189d1a79c34550b679bd0a6f8e2359d0f2edea1500a3",
+    "png": "figures/Fig_E2_triangular_electrostatic.png",
+    "png_sha256": "78df3750a4a9e2e17c42f0a65cd12f11cdc117423eef217361ac6718ff826865"
+  },
+  "FIG_E3_triangular_dynamic": {
+    "pdf": "figures/Fig_E3_triangular_dynamic.pdf",
+    "pdf_sha256": "0b400966c2543d7f152f3e10ccd57720d72e663a6430111b2b90447a641a166c",
+    "png": "figures/Fig_E3_triangular_dynamic.png",
+    "png_sha256": "7286d5b3b1c92d6d3d14a9029fcbc847bb37b07ac0a9f69f69fa2636cac6cdbd"
+  },
+  "FIG_E4_misaligned_needle": {
+    "pdf": "figures/Fig_E4_misaligned_needle.pdf",
+    "pdf_sha256": "94ec41a3da395d4e4065119880452acfbecb9f221887abb18f7461a43233faf8",
+    "png": "figures/Fig_E4_misaligned_needle.png",
+    "png_sha256": "e9840c99b5a012c6ed0694520a32bf809eb8c3ce53347dc1679742a9b99347b6"
+  },
+  "FIG_E5_2d_3d_validity_summary": {
+    "pdf": "figures/Fig_E5_2d_3d_validity_summary.pdf",
+    "pdf_sha256": "683362580e90fa07c61164b34d90bd05d8236454a9f5182c1957e7d2dee21f12",
+    "png": "figures/Fig_E5_2d_3d_validity_summary.png",
+    "png_sha256": "68bc0fc9d189f910d427e64c35bdf209df73620a84a5586801c369908a2787f3"
+  }
+}
