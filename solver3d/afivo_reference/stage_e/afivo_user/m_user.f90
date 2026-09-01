@@ -7,10 +7,15 @@
 module m_user
 #include "../../afivo/src/cpp_macros.h"
   use m_af_all
+  use m_chemistry
   use m_config
   use m_field, only: field_get_E_vector
+  use m_gas
+  use m_lookup_table
   use m_streamer
+  use m_transport_data
   use m_types
+  use m_units_constants
   use m_user_methods
 
   implicit none
@@ -28,6 +33,17 @@ module m_user
   logical :: e1_write_field_export = .false.
   character(len=512) :: e1_field_export_prefix = "e1_triangular_foil"
   integer, save :: e1_export_counter = 0
+  character(len=32) :: e2_mode = "electrostatic"
+  real(dp) :: e2_seed_n0 = 1.0e16_dp
+  real(dp) :: e2_seed_sigma = 3.0e-6_dp
+  real(dp) :: e2_seed_center(3) = [0.0_dp, 0.0_dp, 60.0e-6_dp]
+  real(dp) :: e2_head_threshold = 1.0e14_dp
+  logical :: e2_write_source_export = .false.
+  character(len=512) :: e2_source_export_prefix = "e2_triangular_foil"
+  integer :: e2_source_export_stride = 1
+  integer, save :: e2_source_export_counter = 0
+  integer, save :: e2_source_call_counter = 0
+  integer, save :: e2_i_neg = -1
 
 contains
 
@@ -53,10 +69,65 @@ contains
          "Stage E1 field-cell CSV export prefix")
     call CFG_add_get(cfg, "e1%write_field_export", e1_write_field_export, &
          "Write Stage E1 compact field-cell CSV export")
+    call CFG_add_get(cfg, "e2%mode", e2_mode, &
+         "Stage E2 mode: electrostatic or dynamic_gaussian")
+    call CFG_add_get(cfg, "e2%seed_n0", e2_seed_n0, &
+         "Stage E2 Gaussian seed peak density")
+    call CFG_add_get(cfg, "e2%seed_sigma", e2_seed_sigma, &
+         "Stage E2 Gaussian seed sigma")
+    call CFG_add_get(cfg, "e2%seed_center", e2_seed_center, &
+         "Stage E2 Gaussian seed center")
+    call CFG_add_get(cfg, "e2%head_threshold", e2_head_threshold, &
+         "Stage E2 electron-density threshold for leading edge")
+    call CFG_add_get(cfg, "e2%source_export_prefix", e2_source_export_prefix, &
+         "Stage E2 source snapshot CSV export prefix")
+    call CFG_add_get(cfg, "e2%source_export_stride", e2_source_export_stride, &
+         "Write one Stage E2 source snapshot every this many output calls")
+    call CFG_add_get(cfg, "e2%write_source_export", e2_write_source_export, &
+         "Write Stage E2 rho/ne/E/J source snapshots")
 
     user_lsf => e1_triangular_foil_lsf
+    if (trim(e2_mode) == "dynamic_gaussian") then
+       user_initial_conditions => e2_initial_conditions
+    end if
     user_log_variables => e1_log_variables
   end subroutine user_initialize
+
+  integer function e2_negative_ion_index()
+    if (e2_i_neg < 1) then
+       e2_i_neg = species_itree(species_index("N_min"))
+    end if
+    e2_negative_ion_index = e2_i_neg
+  end function e2_negative_ion_index
+
+  subroutine e2_initial_conditions(box)
+    type(box_t), intent(inout) :: box
+    integer :: i, j, k, nc
+    integer :: ijk(3)
+    real(dp) :: rr(3), dens, r2
+
+    if (e2_negative_ion_index() < 1) error stop "Stage E2 requires N_min species"
+    nc = box%n_cell
+    do k = 0, nc+1
+       do j = 0, nc+1
+          do i = 0, nc+1
+             ijk = [i, j, k]
+             rr = af_r_cc(box, ijk)
+             if (e1_triangular_foil_lsf(rr) <= 0.0_dp) then
+                dens = 0.0_dp
+             else
+                r2 = (rr(1) - e2_seed_center(1))**2 + &
+                     (rr(2) - e2_seed_center(2))**2 + &
+                     (rr(3) - e2_seed_center(3))**2
+                dens = e2_seed_n0 * exp(-r2 / (2.0_dp * e2_seed_sigma**2))
+             end if
+             box%cc(i, j, k, i_electron) = dens
+             box%cc(i, j, k, i_1pos_ion) = dens
+             box%cc(i, j, k, e2_negative_ion_index()) = 0.0_dp
+          end do
+       end do
+    end do
+  end subroutine e2_initial_conditions
 
   real(dp) function e1_triangular_foil_lsf(rr)
     real(dp), intent(in) :: rr(NDIM)
@@ -134,8 +205,13 @@ contains
     integer :: lvl, n, id, nc, i, j, k
     real(dp) :: vol, emax, eabs, lsf
     real(dp) :: vol_high_05, vol_high_08, conductor_vol
+    real(dp) :: ne, np, nn, charge_number, total_charge_C
+    real(dp) :: total_electrons, sum_x, sum_y, sum_r2, sum_x2_minus_y2
+    real(dp) :: sum_rho_abs, sum_rho_x2_minus_y2, min_ne, head_z
     type(af_loc_t) :: loc_field
     real(dp) :: r_field(3)
+    real(dp) :: rr(3)
+    integer :: ijk(3)
 
     call af_tree_max_cc(tree, i_electric_fld, emax, loc_field)
     if (loc_field%id > 0) then
@@ -147,6 +223,16 @@ contains
     vol_high_05 = 0.0_dp
     vol_high_08 = 0.0_dp
     conductor_vol = 0.0_dp
+    total_charge_C = 0.0_dp
+    total_electrons = 0.0_dp
+    sum_x = 0.0_dp
+    sum_y = 0.0_dp
+    sum_r2 = 0.0_dp
+    sum_x2_minus_y2 = 0.0_dp
+    sum_rho_abs = 0.0_dp
+    sum_rho_x2_minus_y2 = 0.0_dp
+    min_ne = huge(1.0_dp)
+    head_z = huge(1.0_dp)
     do lvl = 1, tree%highest_lvl
        vol = product(af_lvl_dr(tree, lvl))
        do n = 1, size(tree%lvls(lvl)%leaves)
@@ -157,12 +243,38 @@ contains
                 do i = 1, nc
                    eabs = tree%boxes(id)%cc(i, j, k, i_electric_fld)
                    lsf = tree%boxes(id)%cc(i, j, k, i_lsf)
+                   ne = tree%boxes(id)%cc(i, j, k, i_electron)
+                   np = tree%boxes(id)%cc(i, j, k, i_1pos_ion)
+                   if (e2_negative_ion_index() > 0) then
+                      nn = tree%boxes(id)%cc(i, j, k, e2_negative_ion_index())
+                   else
+                      nn = 0.0_dp
+                   end if
+                   charge_number = np - ne - nn
+                   total_charge_C = total_charge_C + UC_elem_charge * charge_number * vol
+                   total_electrons = total_electrons + ne * vol
+                   min_ne = min(min_ne, ne)
                    if (lsf <= 0.0_dp) then
                       conductor_vol = conductor_vol + vol
                    else if (emax > 0.0_dp) then
                       if (eabs > 0.5_dp * emax) vol_high_05 = vol_high_05 + vol
                       if (eabs > 0.8_dp * emax) vol_high_08 = vol_high_08 + vol
                    end if
+                   ijk = [i, j, k]
+                   rr = af_r_cc(tree%boxes(id), ijk)
+                   if (ne > 0.0_dp) then
+                      sum_x = sum_x + rr(1) * ne * vol
+                      sum_y = sum_y + rr(2) * ne * vol
+                      sum_r2 = sum_r2 + (rr(1)**2 + rr(2)**2) * ne * vol
+                      sum_x2_minus_y2 = sum_x2_minus_y2 + &
+                           (rr(1)**2 - rr(2)**2) * ne * vol
+                   end if
+                   if (abs(charge_number) > 0.0_dp) then
+                      sum_rho_abs = sum_rho_abs + abs(charge_number) * vol
+                      sum_rho_x2_minus_y2 = sum_rho_x2_minus_y2 + &
+                           abs(charge_number) * (rr(1)**2 - rr(2)**2) * vol
+                   end if
+                   if (ne >= e2_head_threshold) head_z = min(head_z, rr(3))
                 end do
              end do
           end do
@@ -170,8 +282,13 @@ contains
     end do
 
     if (e1_write_field_export) call e1_write_field_cells(tree)
+    if (e2_write_source_export) then
+       if (mod(e2_source_call_counter, max(e2_source_export_stride, 1)) == 0) &
+            call e2_write_source_cells(tree)
+       e2_source_call_counter = e2_source_call_counter + 1
+    end if
 
-    n_vars = 7
+    n_vars = 16
     var_names(1) = "e1_vol_Egt_0p5"
     var_names(2) = "e1_vol_Egt_0p8"
     var_names(3) = "e1_conductor_vol"
@@ -179,6 +296,15 @@ contains
     var_names(5) = "e1_Emax_y"
     var_names(6) = "e1_Emax_z"
     var_names(7) = "e1_min_dx"
+    var_names(8) = "e2_x_cm"
+    var_names(9) = "e2_y_cm"
+    var_names(10) = "e2_r_cm"
+    var_names(11) = "e2_head_z"
+    var_names(12) = "e2_total_charge_C"
+    var_names(13) = "e2_min_ne"
+    var_names(14) = "e2_ne_moment_asym"
+    var_names(15) = "e2_rho_moment_asym"
+    var_names(16) = "e2_total_electrons"
     var_values(1) = vol_high_05
     var_values(2) = vol_high_08
     var_values(3) = conductor_vol
@@ -186,6 +312,30 @@ contains
     var_values(5) = r_field(2)
     var_values(6) = r_field(3)
     var_values(7) = af_min_dr(tree)
+    if (total_electrons > 0.0_dp) then
+       var_values(8) = sum_x / total_electrons
+       var_values(9) = sum_y / total_electrons
+       var_values(10) = sqrt((sum_x / total_electrons)**2 + &
+            (sum_y / total_electrons)**2)
+       var_values(14) = abs(sum_x2_minus_y2) / max(sum_r2, 1.0e-300_dp)
+    else
+       var_values(8:10) = 0.0_dp
+       var_values(14) = 0.0_dp
+    end if
+    if (head_z < huge(1.0_dp) / 10.0_dp) then
+       var_values(11) = head_z
+    else
+       var_values(11) = -huge(1.0_dp) / 10.0_dp
+    end if
+    var_values(12) = total_charge_C
+    var_values(13) = min_ne
+    if (sum_rho_abs > 0.0_dp) then
+       var_values(15) = abs(sum_rho_x2_minus_y2) / &
+            max(sum_rho_abs * e1_gap**2, 1.0e-300_dp)
+    else
+       var_values(15) = 0.0_dp
+    end if
+    var_values(16) = total_electrons
   end subroutine e1_log_variables
 
   subroutine e1_write_field_cells(tree)
@@ -231,5 +381,63 @@ contains
        end do
     end do
   end subroutine e1_write_box_cells
+
+  subroutine e2_write_source_cells(tree)
+    type(af_t), intent(in) :: tree
+    integer :: unit, lvl, n, id
+    character(len=1024) :: path
+
+    write(path, "(A,'_source_',I6.6,'.csv')") &
+         trim(e2_source_export_prefix), e2_source_export_counter
+    open(newunit=unit, file=trim(path), status="replace", action="write")
+    write(unit, "(A)") "time_s,x_m,y_m,z_m,cell_volume_m3,rho_Cpm3,ne_m3," // &
+         "Ex_Vpm,Ey_Vpm,Ez_Vpm,Jx_Apm2,Jy_Apm2,Jz_Apm2,Eabs_Vpm,lsf_m,level"
+    do lvl = 1, tree%highest_lvl
+       do n = 1, size(tree%lvls(lvl)%leaves)
+          id = tree%lvls(lvl)%leaves(n)
+          call e2_write_box_source_cells(unit, tree%boxes(id), lvl, &
+               product(af_lvl_dr(tree, lvl)))
+       end do
+    end do
+    close(unit)
+    e2_source_export_counter = e2_source_export_counter + 1
+  end subroutine e2_write_source_cells
+
+  subroutine e2_write_box_source_cells(unit, box, lvl, cell_vol)
+    integer, intent(in) :: unit, lvl
+    type(box_t), intent(in) :: box
+    real(dp), intent(in) :: cell_vol
+    integer :: i, j, k, nc
+    integer :: ijk(3)
+    real(dp) :: rr(3)
+    real(dp) :: evec(DTIMES(1:box%n_cell), NDIM)
+    real(dp) :: ne, np, nn, rho, eabs, Td, sigma
+    real(dp) :: jx, jy, jz
+
+    nc = box%n_cell
+    evec = field_get_E_vector(box)
+    do k = 1, nc
+       do j = 1, nc
+          do i = 1, nc
+             ijk = [i, j, k]
+             rr = af_r_cc(box, ijk)
+             ne = box%cc(i, j, k, i_electron)
+             np = box%cc(i, j, k, i_1pos_ion)
+             nn = box%cc(i, j, k, e2_negative_ion_index())
+             rho = UC_elem_charge * (np - ne - nn)
+             eabs = box%cc(i, j, k, i_electric_fld)
+             Td = SI_to_Townsend * eabs * gas_inverse_number_density
+             sigma = LT_get_col(td_tbl, td_mobility, Td) * &
+                  gas_inverse_number_density * max(ne, 0.0_dp) * UC_elem_charge
+             jx = sigma * evec(i, j, k, 1)
+             jy = sigma * evec(i, j, k, 2)
+             jz = sigma * evec(i, j, k, 3)
+             write(unit, "(15(ES25.16E3,','),I0)") global_time, rr(1), rr(2), rr(3), &
+                  cell_vol, rho, ne, evec(i, j, k, 1), evec(i, j, k, 2), &
+                  evec(i, j, k, 3), jx, jy, jz, eabs, box%cc(i, j, k, i_lsf), lvl
+          end do
+       end do
+    end do
+  end subroutine e2_write_box_source_cells
 
 end module m_user

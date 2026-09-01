@@ -1,0 +1,3 @@
+case,final_time_s,final_Emax_Vpm,final_ne_max_m3,final_total_electrons,final_total_charge_C,final_head_z_m,head_velocity_mps,final_x_cm_m,final_y_cm_m,ne_plane_asymmetry,rho_plane_asymmetry,avalanche,streamer_propagation,bridge
+case_a_pi_off_500V,5e-12,57342880.0,8875454300000000.0,5.1771357,5.1299023e-20,5.1708984e-05,0.0,7.4023106e-18,9.7882894e-18,0.05026301949445373,0.05288060732416776,True,False,False
+case_b_pi_on_500V,5e-12,57342880.0,8875459600000000.0,5.1776558,5.1299522e-20,5.1708984e-05,0.0,-2.517409e-16,-2.3935794e-16,0.05026303083095524,0.052880626847889994,True,False,False

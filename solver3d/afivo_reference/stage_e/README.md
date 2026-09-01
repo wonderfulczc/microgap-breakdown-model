@@ -86,3 +86,25 @@ Stage E1 is electrostatic only:
 - `ne = np = nn = 0`
 - `photoionization = OFF`
 - no avalanche, streamer propagation, bridge, current, Rb, RLC, RF, or Stage E2
+
+## Stage E2 Dynamic Source Benchmark
+
+Stage E2 reuses the same development triangular foil and adds a local refined
+dynamic benchmark:
+
+- refined electrostatic local finest dx: about `0.94 um`
+- seed: Gaussian, `n0 = 1e16 m^-3`, `sigma = 3 um`, center `(0, 0, 60 um)`
+- Case A: `500 V`, photoionization OFF
+- Case B: `500 V`, Afivo Helmholtz photoionization ON
+- output cadence: `0.5 ps` compact diagnostics to `5 ps`
+- source snapshots: sparse output stride, raw files ignored under `results_raw/`
+
+The source snapshot schema is:
+
+`time_s,x_m,y_m,z_m,cell_volume_m3,rho_Cpm3,ne_m3,Ex_Vpm,Ey_Vpm,Ez_Vpm,Jx_Apm2,Jy_Apm2,Jz_Apm2,Eabs_Vpm,lsf_m,level`
+
+Here `J` is Afivo's electron drift conventional-current representation,
+consistent with its `Je_1..3` output convention: `J_e = e mu_e n_e E`.
+Diffusive electron current is not exported in E2. The E2 source contract is for
+future Stage F integration only; no current moment, RF, Jefimenko, RLC, or
+radiation calculation is performed in Stage E.
