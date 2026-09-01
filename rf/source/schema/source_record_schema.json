@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stage F1 Canonical RF SourceRecord",
+  "type": "object",
+  "required": ["metadata", "cells"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": [
+        "case_id",
+        "solver",
+        "solver_version",
+        "time_s",
+        "coordinate_system",
+        "pressure_Pa",
+        "temperature_K",
+        "geometry_id",
+        "voltage_state",
+        "photoionization",
+        "source_definition",
+        "units"
+      ]
+    },
+    "cells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "cell_id",
+          "level",
+          "x_center",
+          "y_center",
+          "z_center",
+          "dx",
+          "dy",
+          "dz",
+          "cell_volume",
+          "rho_Cpm3",
+          "Jx_Apm2",
+          "Jy_Apm2",
+          "Jz_Apm2"
+        ]
+      }
+    }
+  }
+}
+

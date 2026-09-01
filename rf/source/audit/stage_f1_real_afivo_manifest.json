@@ -1,0 +1,56 @@
+{
+  "J_transport_available": false,
+  "M_Am": [
+    [
+      5.8596469717753064e-24,
+      5.7186088971135595e-24,
+      -1.8203131705175487e-13
+    ],
+    [
+      -1.252853045554768e-24,
+      -1.2005137022140386e-24,
+      -2.281678868138844e-13
+    ]
+  ],
+  "Q_C": [
+    0.0,
+    1.3820406133146252e-20
+  ],
+  "USABLE_FOR_RF_PIPELINE_TEST": true,
+  "USABLE_FOR_VHF_UHF_SCIENTIFIC_SPECTRUM": false,
+  "actual_output_times_s": [
+    0.0,
+    5e-12
+  ],
+  "available": true,
+  "boundary_flux_A_final": 1.9515163651057553e-56,
+  "duration_s": 5e-12,
+  "note": "Existing committed Stage E source cadence contains two full raw source snapshots, so real-source time derivatives are not claimed here. Synthetic three-snapshot tests validate derivative and remap logic.",
+  "nyquist_frequency_Hz": 100000000000.0,
+  "output_dt_s": 5e-12,
+  "raw_frequency_resolution_Hz": 200000000000.0,
+  "same_partition_identity_audit": {
+    "M_after": [
+      -1.252853045554768e-24,
+      -1.2005137022140386e-24,
+      -2.281678868138844e-13
+    ],
+    "M_before": [
+      -1.252853045554768e-24,
+      -1.2005137022140386e-24,
+      -2.281678868138844e-13
+    ],
+    "charge_after": 1.3820406133146252e-20,
+    "charge_before": 1.3820406133146252e-20,
+    "relative_M_error": 0.0,
+    "relative_charge_error": 0.0,
+    "rho_max": 0.0005131840673185911,
+    "rho_min": -0.00034784036457022116
+  },
+  "snapshot_count": 2,
+  "source_definition": "AFIVO_STAGE_E_CELL_CENTERED_DRIFT_CURRENT: J=e*mu_e(E/N)*ne*E; diffusive finite-volume electron flux is not included",
+  "source_files": [
+    "/home/helianthusczc/projects/streamer-rf-replica/solver3d/afivo_reference/stage_e/results_raw/e3_aligned_needle_pair_500V_source_000000.csv",
+    "/home/helianthusczc/projects/streamer-rf-replica/solver3d/afivo_reference/stage_e/results_raw/e3_aligned_needle_pair_500V_source_000001.csv"
+  ]
+}

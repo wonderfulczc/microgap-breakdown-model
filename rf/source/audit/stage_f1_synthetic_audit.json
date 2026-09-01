@@ -1,0 +1,67 @@
+{
+  "bad_nearest_remap": {
+    "M_after": [
+      0.3179676025211169,
+      0.0,
+      0.0
+    ],
+    "M_before": [
+      0.28202794619557703,
+      0.0,
+      0.0
+    ],
+    "charge_after": 1.5898380126055847,
+    "charge_before": 1.4101397309778851,
+    "relative_M_error": 0.11302930248421467,
+    "relative_charge_error": 0.11302930248421479,
+    "rho_max": 0.7268217086671787,
+    "rho_min": 1.9212204942719813e-25
+  },
+  "conservative_remap": {
+    "M_after": [
+      0.28202794619557703,
+      0.0,
+      0.0
+    ],
+    "M_before": [
+      0.28202794619557703,
+      0.0,
+      0.0
+    ],
+    "charge_after": 1.4101397309778851,
+    "charge_before": 1.4101397309778851,
+    "relative_M_error": 0.0,
+    "relative_charge_error": 0.0,
+    "rho_max": 0.709524056022982,
+    "rho_min": 1.9212204942719813e-25
+  },
+  "dMdt_artifact_bad_nearest_norm": 0.041241456014107225,
+  "dMdt_artifact_conservative_norm": 0.0066780857532792726,
+  "dQdt_artifact_bad_nearest": 0.20620728007053613,
+  "dQdt_artifact_conservative": 0.03339042876639664,
+  "frequency_metadata": {
+    "actual_output_times_s": [
+      0.0,
+      0.3,
+      0.8
+    ],
+    "nyquist_frequency_Hz": null,
+    "output_dt_s": null,
+    "raw_frequency_resolution_Hz": 1.25,
+    "record_duration_s": 0.8,
+    "uniform_output_interval": false
+  },
+  "global_continuity": {
+    "continuity_global_abs_A": 0.0333905395240994,
+    "continuity_global_rel": 1.0000033170494316,
+    "dQdt_Cps": -0.03339042876639664,
+    "surface_flux_A": -1.1075770275779392e-07
+  },
+  "local_continuity": {
+    "continuity_local_L1": 0.00039354890840077113,
+    "continuity_local_L2": 0.0028868656133614725,
+    "continuity_local_Linf": 0.043100631001620954,
+    "method": "cell-centered finite-difference reconstruction on matching Cartesian partition"
+  },
+  "test": "moving Gaussian across AMR refinement boundary"
+}
