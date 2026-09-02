@@ -134,6 +134,17 @@ int main(int argc, char** argv) {
     const double voltage = efield * length;
     auto q = evaluate_morrow_lowke(efield, ucfg.neutral_density, ucfg.pressure, ucfg.temperature);
     const double sigma = qe * q.mobility * ne;
+    auto rf_source = uniform.electron_transport_current_source();
+    check(std::isfinite(rf_source.current_moment_z) && rf_source.integral_abs_jz > 0.0,
+          "PETSc flux-derived RF current source finite");
+    check(std::abs(rf_source.jz(5, 5) - sigma * efield) / std::max(std::abs(sigma * efield), 1e-300) < 1e-12,
+          "PETSc RF current source matches uniform drift face flux");
+    double mz_sum = 0.0;
+    for (int jj = 0; jj < ug.nz(); ++jj) {
+      for (int ii = 0; ii < ug.nr(); ++ii) mz_sum += rf_source.jz(ii, jj) * ug.cell_volume(ii);
+    }
+    check(std::abs(mz_sum - rf_source.current_moment_z) / std::max(std::abs(mz_sum), 1e-300) < 1e-14,
+          "PETSc RF current moment equals cell-volume integral");
     const double analytic_g = sigma * M_PI * std::pow(ug.nr() * ug.dr(), 2) / length;
     auto gd = uniform.conductance_diagnostics(voltage);
     check(gd.valid && std::abs(gd.gb - analytic_g) / analytic_g < 1e-12, "uniform sigma Gb equals sigma A over d");

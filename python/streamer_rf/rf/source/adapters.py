@@ -13,6 +13,11 @@ AFIVO_STAGE_E_SOURCE_DEFINITION = (
     "AFIVO_STAGE_E_CELL_CENTERED_DRIFT_CURRENT: J=e*mu_e(E/N)*ne*E; "
     "diffusive finite-volume electron flux is not included"
 )
+AFIVO_CONTINUITY_CONSISTENT_SOURCE_DEFINITION = (
+    "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX: J_RF=-e*Gamma_e; "
+    "Gamma_e is Afivo's electron transport face flux including drift and diffusion, "
+    "cell-centered by averaging opposing faces"
+)
 
 
 def _parse_vector_config(path: Path, key: str) -> tuple[float, float, float]:
@@ -117,6 +122,12 @@ def load_afivo_stage_e_source_csv(
         dx, dy, dz = _infer_widths_from_coordinates(x, y, z, volume, levels)
 
     time_s = float(np.asarray(data["time_s"])[0])
+    has_transport_j = {"Jrf_x_Apm2", "Jrf_y_Apm2", "Jrf_z_Apm2"}.issubset(data)
+    source_definition = (
+        AFIVO_CONTINUITY_CONSISTENT_SOURCE_DEFINITION
+        if has_transport_j
+        else AFIVO_STAGE_E_SOURCE_DEFINITION
+    )
     meta = SourceMetadata(
         case_id=case_id,
         solver="afivo-streamer",
@@ -128,7 +139,7 @@ def load_afivo_stage_e_source_csv(
         geometry_id=geometry_id,
         voltage_state=voltage_state,
         photoionization=photoionization,
-        source_definition=AFIVO_STAGE_E_SOURCE_DEFINITION,
+        source_definition=source_definition,
         units={
             "rho": "C m^-3",
             "J": "A m^-2",
@@ -139,9 +150,15 @@ def load_afivo_stage_e_source_csv(
         extra={
             "source_file": str(csv_path),
             "config_file": str(config_path),
-            "J_transport_available": False,
+            "J_transport_available": has_transport_j,
             "J_RF_reference_definition": "-e * Gamma_e using the finite-volume electron transport flux",
+            "J_export_columns": "Jrf_x_Apm2,Jrf_y_Apm2,Jrf_z_Apm2" if has_transport_j else "Jx_Apm2,Jy_Apm2,Jz_Apm2",
         },
+    )
+    jx_key, jy_key, jz_key = (
+        ("Jrf_x_Apm2", "Jrf_y_Apm2", "Jrf_z_Apm2")
+        if has_transport_j
+        else ("Jx_Apm2", "Jy_Apm2", "Jz_Apm2")
     )
     cols = {
         "cell_id": np.arange(len(volume)),
@@ -154,9 +171,9 @@ def load_afivo_stage_e_source_csv(
         "dz": dz,
         "cell_volume": volume,
         "rho": np.asarray(data["rho_Cpm3"], dtype=float),
-        "Jx": np.asarray(data["Jx_Apm2"], dtype=float),
-        "Jy": np.asarray(data["Jy_Apm2"], dtype=float),
-        "Jz": np.asarray(data["Jz_Apm2"], dtype=float),
+        "Jx": np.asarray(data[jx_key], dtype=float),
+        "Jy": np.asarray(data[jy_key], dtype=float),
+        "Jz": np.asarray(data[jz_key], dtype=float),
         "ne": np.asarray(data["ne_m3"], dtype=float),
         "Ex": np.asarray(data["Ex_Vpm"], dtype=float),
         "Ey": np.asarray(data["Ey_Vpm"], dtype=float),

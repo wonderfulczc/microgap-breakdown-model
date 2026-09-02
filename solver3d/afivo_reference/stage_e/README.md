@@ -99,7 +99,7 @@ dynamic benchmark:
 - output cadence: `0.5 ps` compact diagnostics to `5 ps`
 - source snapshots: sparse output stride, raw files ignored under `results_raw/`
 
-The source snapshot schema is:
+The Stage E2/E3 historical source snapshot schema is:
 
 `time_s,x_m,y_m,z_m,cell_volume_m3,rho_Cpm3,ne_m3,Ex_Vpm,Ey_Vpm,Ez_Vpm,Jx_Apm2,Jy_Apm2,Jz_Apm2,Eabs_Vpm,lsf_m,level`
 
@@ -108,6 +108,15 @@ consistent with its `Je_1..3` output convention: `J_e = e mu_e n_e E`.
 Diffusive electron current is not exported in E2. The E2 source contract is for
 future Stage F integration only; no current moment, RF, Jefimenko, RLC, or
 radiation calculation is performed in Stage E.
+
+Stage F4 adds a benchmark-hook source export extension for future reruns:
+
+`Jrf_x_Apm2,Jrf_y_Apm2,Jrf_z_Apm2`
+
+These columns are `J_RF = -e Gamma_e`, where `Gamma_e` is Afivo's finite-volume
+electron transport face flux, including drift and diffusion, reconstructed to
+cell centers by averaging opposing faces. Source CSV files without these
+columns remain drift-only and are not valid for scientific RF spectra.
 
 ## Stage E3 Controlled Needle-Pair Symmetry Breaking
 

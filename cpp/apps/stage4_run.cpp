@@ -18,15 +18,18 @@ namespace {
 constexpr double qe = 1.602176634e-19;
 constexpr double pi = 3.14159265358979323846;
 
-void write_fields(const std::filesystem::path& p, const AxisymmetricGrid& g, const StreamerState& s) {
+void write_fields(const std::filesystem::path& p, const AxisymmetricGrid& g, const StreamerSolver& solver) {
+  const auto& s = solver.state();
+  const auto source = solver.electron_transport_current_source();
   std::ofstream f(p);
-  f << "i,j,r_m,z_m,ne_m_3,np_m_3,nn_m_3,rho_C_m_3,phi_V,Er_V_m,Ez_V_m,E_V_m,Sph_m_3_s_1\n"
+  f << "i,j,r_m,z_m,ne_m_3,np_m_3,nn_m_3,rho_C_m_3,phi_V,Er_V_m,Ez_V_m,E_V_m,Sph_m_3_s_1,Jr_RF_A_m2,Jz_RF_A_m2\n"
     << std::setprecision(17);
   for (int j = 0; j < g.nz(); ++j) {
     for (int i = 0; i < g.nr(); ++i) {
       f << i << ',' << j << ',' << g.r(i) << ',' << g.z(j) << ',' << s.ne(i, j) << ','
         << s.np(i, j) << ',' << s.nn(i, j) << ',' << s.rho(i, j) << ',' << s.phi(i, j) << ','
-        << s.er(i, j) << ',' << s.ez(i, j) << ',' << s.emag(i, j) << ',' << s.sph(i, j) << '\n';
+        << s.er(i, j) << ',' << s.ez(i, j) << ',' << s.emag(i, j) << ',' << s.sph(i, j) << ','
+        << source.jr(i, j) << ',' << source.jz(i, j) << '\n';
     }
   }
 }
@@ -35,7 +38,9 @@ struct CurrentMoment {
   double drift{}, electron{}, integral_abs_jz{}, max_abs_jz{};
 };
 
-CurrentMoment current_moment(const AxisymmetricGrid& g, const StreamerState& s, const StreamerConfig& c) {
+CurrentMoment current_moment(const AxisymmetricGrid& g, const StreamerSolver& solver, const StreamerConfig& c) {
+  const auto& s = solver.state();
+  const auto source = solver.electron_transport_current_source();
   CurrentMoment out;
   for (int j = 0; j < g.nz(); ++j) {
     for (int i = 0; i < g.nr(); ++i) {
@@ -45,14 +50,14 @@ CurrentMoment current_moment(const AxisymmetricGrid& g, const StreamerState& s, 
       else if (j == g.nz() - 1) grad = (s.ne(i, j) - s.ne(i, j - 1)) / g.dz();
       else grad = (s.ne(i, j + 1) - s.ne(i, j - 1)) / (2.0 * g.dz());
       const double j_drift = qe * s.ne(i, j) * q.mobility * s.ez(i, j);
-      const double j_total = j_drift + qe * q.diffusion * grad;
       const double vol = g.cell_volume(i);
       out.drift += j_drift * vol;
-      out.electron += j_total * vol;
-      out.integral_abs_jz += std::abs(j_total) * vol;
-      out.max_abs_jz = std::max(out.max_abs_jz, std::abs(j_total));
+      (void)grad;
     }
   }
+  out.electron = source.current_moment_z;
+  out.integral_abs_jz = source.integral_abs_jz;
+  out.max_abs_jz = source.max_abs_jz;
   return out;
 }
 
@@ -170,7 +175,7 @@ int main(int argc, char** argv) {
   if (!rank) {
     std::filesystem::create_directories(out);
     if (!resuming) {
-      write_fields(out / ("fields_" + std::to_string(initial_step) + ".csv"), g, solver.state());
+      write_fields(out / ("fields_" + std::to_string(initial_step) + ".csv"), g, solver);
       solver.save_checkpoint(out / "checkpoint.bin");
     }
   }
@@ -217,7 +222,7 @@ int main(int argc, char** argv) {
     const auto& s = solver.state();
     last_metrics = collision_metrics(g, s, z1, z2);
     gap_peak = std::max(gap_peak, last_metrics.gap_emax);
-    const auto I = current_moment(g, s, c);
+    const auto I = current_moment(g, solver, c);
     const bool distance_event = last_metrics.d_head <= std::max(2.0 * g.dz(), 2.0e-4);
     const bool bridge_field_event = s.time > 0.5e-9 &&
       last_metrics.bridge_mean_ne >= 50.0 * initial_bridge &&
@@ -242,7 +247,7 @@ int main(int argc, char** argv) {
 
     const bool due = s.time + 1e-18 >= next_output || s.time >= tend || (event_time > 0.0 && s.time - event_time < 2.0e-11);
     if (!rank && due) {
-      write_fields(out / ("fields_" + std::to_string(step) + ".csv"), g, s);
+      write_fields(out / ("fields_" + std::to_string(step) + ".csv"), g, solver);
       solver.save_checkpoint(out / "checkpoint.bin");
       hist.flush(); cm.flush(); coll.flush();
       next_output = s.time + output_interval(last_metrics.d_head);
@@ -262,7 +267,7 @@ int main(int argc, char** argv) {
   const auto wall1 = std::chrono::steady_clock::now();
   const double wall_time = std::chrono::duration_cast<std::chrono::duration<double>>(wall1 - wall0).count();
   if (!rank) {
-    write_fields(out / "fields_final.csv", g, solver.state());
+    write_fields(out / "fields_final.csv", g, solver);
     solver.save_checkpoint(out / "checkpoint.bin");
     std::ofstream meta(out / "termination.csv");
     meta << "termination_reason,requested_end_time,actual_end_time,completed_steps,accepted_steps,rejected_steps,last_dt,wall_time,checkpoint_path,event_time,mpi_ranks\n";

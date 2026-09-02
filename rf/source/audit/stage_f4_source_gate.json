@@ -1,0 +1,43 @@
+{
+  "stage": "F4",
+  "gate": "scientific RF source prerequisite",
+  "status": "BLOCKED_FOR_SCIENTIFIC_STAGE_ATTRIBUTION",
+  "current_source_required": "J_RF = -e * Gamma_e",
+  "required_provenance": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+  "afivo_export_status": {
+    "hook_support": "IMPLEMENTED_AND_COMPILE_CHECKED",
+    "core_modified": false,
+    "new_columns": [
+      "Jrf_x_Apm2",
+      "Jrf_y_Apm2",
+      "Jrf_z_Apm2"
+    ],
+    "reconstruction": "cell-centered average of opposing Afivo flux_elec faces",
+    "includes": [
+      "drift",
+      "diffusion"
+    ],
+    "existing_stage_e_raw_data_status": "DRIFT_ONLY_PIPELINE_SMOKE"
+  },
+  "petsc_export_status": {
+    "source_method": "StreamerSolver::electron_transport_current_source",
+    "runner_output": "stage4_run sparse fields append Jr_RF_A_m2,Jz_RF_A_m2",
+    "current_moment": "I_CM_electron now uses flux-derived J_RF",
+    "core_physics_modified": false
+  },
+  "available_data_audit": {
+    "stage_e_source_jrf_columns_present": false,
+    "results_stage4_present": false,
+    "results_stage5_present": false
+  },
+  "reason_scientific_f4_not_run": [
+    "Existing Stage E source snapshots were produced before continuity-consistent J_RF columns existed.",
+    "No reusable Stage 4 propagation or Stage 5 collision result directories are present in this workspace.",
+    "Using drift-only J or synthetic waveforms for VHF/UHF/GHz discharge-stage attribution would violate the Stage F4 source contract."
+  ],
+  "allowed_next_action": "rerun the frozen F4 source windows with the new J_RF exports, then run RFTrustReport-filtered stage attribution",
+  "stage_e_5ps_data": {
+    "USABLE_FOR_RF_PIPELINE_TEST": true,
+    "USABLE_FOR_VHF_UHF_SCIENTIFIC_SPECTRUM": false
+  }
+}

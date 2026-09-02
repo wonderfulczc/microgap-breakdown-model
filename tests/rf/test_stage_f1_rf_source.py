@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "python"))
 
 from streamer_rf.rf.source.adapters import (  # noqa: E402
+    AFIVO_CONTINUITY_CONSISTENT_SOURCE_DEFINITION,
     AFIVO_STAGE_E_SOURCE_DEFINITION,
     infer_afivo_cell_widths_from_config,
     load_afivo_stage_e_source_csv,
@@ -148,6 +149,33 @@ def test_afivo_stage_e_adapter_smoke_if_raw_available() -> None:
     assert total_charge(rec) == total_charge(rec)
     assert np.linalg.norm(current_moment(rec)) >= 0.0
     assert AFIVO_STAGE_E_SOURCE_DEFINITION == rec.metadata.source_definition
+
+
+def test_afivo_adapter_prefers_continuity_consistent_jrf_columns(tmp_path: Path) -> None:
+    cfg = tmp_path / "case.cfg"
+    cfg.write_text("domain_len = 1.0 1.0 1.0\nbox_size = 1\n")
+    raw = tmp_path / "source.csv"
+    raw.write_text(
+        "time_s,x_m,y_m,z_m,cell_volume_m3,rho_Cpm3,ne_m3,"
+        "Ex_Vpm,Ey_Vpm,Ez_Vpm,Jx_Apm2,Jy_Apm2,Jz_Apm2,"
+        "Jrf_x_Apm2,Jrf_y_Apm2,Jrf_z_Apm2,Eabs_Vpm,lsf_m,level\n"
+        "1e-12,0.5,0.5,0.5,1.0,2.0,3.0,4.0,5.0,6.0,10.0,20.0,30.0,-1.0,-2.0,-3.0,7.0,8.0,1\n"
+    )
+    rec = load_afivo_stage_e_source_csv(
+        raw,
+        cfg,
+        case_id="unit",
+        solver_version="afivo-test",
+        geometry_id="g",
+        voltage_state="v",
+        photoionization="off",
+    )
+    assert rec.metadata.source_definition == AFIVO_CONTINUITY_CONSISTENT_SOURCE_DEFINITION
+    assert rec.metadata.extra["J_transport_available"] is True
+    assert rec.metadata.extra["J_export_columns"] == "Jrf_x_Apm2,Jrf_y_Apm2,Jrf_z_Apm2"
+    np.testing.assert_allclose(rec.columns["Jx"], [-1.0])
+    np.testing.assert_allclose(rec.columns["Jy"], [-2.0])
+    np.testing.assert_allclose(rec.columns["Jz"], [-3.0])
 
 
 def test_afivo_cell_width_inference_matches_known_config() -> None:

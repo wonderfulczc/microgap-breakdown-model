@@ -103,6 +103,67 @@ ConductanceDiagnostics StreamerSolver::conductance_diagnostics(double voltage)co
  else{d.gb=std::numeric_limits<double>::quiet_NaN();d.rb=std::numeric_limits<double>::quiet_NaN();}
  return d;
 }
+ElectronTransportCurrentSource StreamerSolver::electron_transport_current_source()const{
+ ElectronTransportCurrentSource out(g_);
+ auto radial_face_flux=[&](int left_i,int right_i,int j)->double{
+  const bool left_gas=left_i>=0&&left_i<g_.nr()&&is_gas(left_i,j);
+  const bool right_gas=right_i>=0&&right_i<g_.nr()&&is_gas(right_i,j);
+  if(left_gas&&right_gas){
+   auto f=evaluate_morrow_lowke(.5*(state_.emag(left_i,j)+state_.emag(right_i,j)),c_.neutral_density,c_.pressure,c_.temperature);
+   auto l=evaluate_morrow_lowke(state_.emag(left_i,j),c_.neutral_density,c_.pressure,c_.temperature);
+   auto r=evaluate_morrow_lowke(state_.emag(right_i,j),c_.neutral_density,c_.pressure,c_.temperature);
+   return gas_gas_electron_flux(state_.ne(left_i,j),state_.ne(right_i,j),-l.mobility*state_.er(left_i,j),-r.mobility*state_.er(right_i,j),f.diffusion,g_.dr(),c_.isg_epsilon,c_.n_ref);
+  }
+  if(left_gas&&!right_gas){
+   auto q=evaluate_morrow_lowke(state_.emag(left_i,j),c_.neutral_density,c_.pressure,c_.temperature);
+   const double v=-q.mobility*state_.er(left_i,j);
+   return right_i<g_.nr()?absorbing_electrode_flux(state_.ne(left_i,j),v,q.diffusion,g_.dr(),true):std::max(v,0.0)*state_.ne(left_i,j);
+  }
+  if(!left_gas&&right_gas){
+   auto q=evaluate_morrow_lowke(state_.emag(right_i,j),c_.neutral_density,c_.pressure,c_.temperature);
+   const double v=-q.mobility*state_.er(right_i,j);
+   return left_i>=0?absorbing_electrode_flux(state_.ne(right_i,j),v,q.diffusion,g_.dr(),false):0.0;
+  }
+  return 0.0;
+ };
+ auto axial_face_flux=[&](int i,int lower_j,int upper_j)->double{
+  const bool lower_gas=lower_j>=0&&lower_j<g_.nz()&&is_gas(i,lower_j);
+  const bool upper_gas=upper_j>=0&&upper_j<g_.nz()&&is_gas(i,upper_j);
+  if(lower_gas&&upper_gas){
+   auto f=evaluate_morrow_lowke(.5*(state_.emag(i,lower_j)+state_.emag(i,upper_j)),c_.neutral_density,c_.pressure,c_.temperature);
+   auto l=evaluate_morrow_lowke(state_.emag(i,lower_j),c_.neutral_density,c_.pressure,c_.temperature);
+   auto r=evaluate_morrow_lowke(state_.emag(i,upper_j),c_.neutral_density,c_.pressure,c_.temperature);
+   return gas_gas_electron_flux(state_.ne(i,lower_j),state_.ne(i,upper_j),-l.mobility*state_.ez(i,lower_j),-r.mobility*state_.ez(i,upper_j),f.diffusion,g_.dz(),c_.isg_epsilon,c_.n_ref);
+  }
+  if(lower_gas&&!upper_gas){
+   auto q=evaluate_morrow_lowke(state_.emag(i,lower_j),c_.neutral_density,c_.pressure,c_.temperature);
+   const double v=-q.mobility*state_.ez(i,lower_j);
+   return upper_j<g_.nz()?absorbing_electrode_flux(state_.ne(i,lower_j),v,q.diffusion,g_.dz(),true):std::max(v,0.0)*state_.ne(i,lower_j);
+  }
+  if(!lower_gas&&upper_gas){
+   auto q=evaluate_morrow_lowke(state_.emag(i,upper_j),c_.neutral_density,c_.pressure,c_.temperature);
+   const double v=-q.mobility*state_.ez(i,upper_j);
+   return lower_j>=0?absorbing_electrode_flux(state_.ne(i,upper_j),v,q.diffusion,g_.dz(),false):std::min(v,0.0)*state_.ne(i,upper_j);
+  }
+  return 0.0;
+ };
+ for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i){
+  if(!is_gas(i,j)){out.jr(i,j)=0.0;out.jz(i,j)=0.0;continue;}
+  const double gamma_r_minus=radial_face_flux(i-1,i,j);
+  const double gamma_r_plus=radial_face_flux(i,i+1,j);
+  const double gamma_z_minus=axial_face_flux(i,j-1,j);
+  const double gamma_z_plus=axial_face_flux(i,j,j+1);
+  out.jr(i,j)=-0.5*qe*(gamma_r_minus+gamma_r_plus);
+  out.jz(i,j)=-0.5*qe*(gamma_z_minus+gamma_z_plus);
+  const double vol=g_.cell_volume(i);
+  out.current_moment_r+=out.jr(i,j)*vol;
+  out.current_moment_z+=out.jz(i,j)*vol;
+  out.integral_abs_jz+=std::abs(out.jz(i,j))*vol;
+  out.max_abs_jz=std::max(out.max_abs_jz,std::abs(out.jz(i,j)));
+  out.max_abs_j=std::max({out.max_abs_j,std::abs(out.jr(i,j)),std::abs(out.jz(i,j))});
+ }
+ return out;
+}
 double StreamerSolver::vacuum_gap_capacitance()const{
  if(!electrode_mode())return 0.0;
  if(std::isfinite(c_gap_vacuum_cache_))return c_gap_vacuum_cache_;

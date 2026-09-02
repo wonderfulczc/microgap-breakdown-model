@@ -396,7 +396,8 @@ contains
          trim(e2_source_export_prefix), e2_source_export_counter
     open(newunit=unit, file=trim(path), status="replace", action="write")
     write(unit, "(A)") "time_s,x_m,y_m,z_m,cell_volume_m3,rho_Cpm3,ne_m3," // &
-         "Ex_Vpm,Ey_Vpm,Ez_Vpm,Jx_Apm2,Jy_Apm2,Jz_Apm2,Eabs_Vpm,lsf_m,level"
+         "Ex_Vpm,Ey_Vpm,Ez_Vpm,Jx_Apm2,Jy_Apm2,Jz_Apm2," // &
+         "Jrf_x_Apm2,Jrf_y_Apm2,Jrf_z_Apm2,Eabs_Vpm,lsf_m,level"
     do lvl = 1, tree%highest_lvl
        do n = 1, size(tree%lvls(lvl)%leaves)
           id = tree%lvls(lvl)%leaves(n)
@@ -418,6 +419,7 @@ contains
     real(dp) :: evec(DTIMES(1:box%n_cell), NDIM)
     real(dp) :: ne, np, nn, rho, eabs, Td, sigma
     real(dp) :: jx, jy, jz
+    real(dp) :: jrf_x, jrf_y, jrf_z
 
     nc = box%n_cell
     evec = field_get_E_vector(box)
@@ -437,9 +439,16 @@ contains
              jx = sigma * evec(i, j, k, 1)
              jy = sigma * evec(i, j, k, 2)
              jz = sigma * evec(i, j, k, 3)
-             write(unit, "(15(ES25.16E3,','),I0)") global_time, rr(1), rr(2), rr(3), &
+             jrf_x = -0.5_dp * UC_elem_charge * &
+                  (box%fc(i, j, k, 1, flux_elec) + box%fc(i + 1, j, k, 1, flux_elec))
+             jrf_y = -0.5_dp * UC_elem_charge * &
+                  (box%fc(i, j, k, 2, flux_elec) + box%fc(i, j + 1, k, 2, flux_elec))
+             jrf_z = -0.5_dp * UC_elem_charge * &
+                  (box%fc(i, j, k, 3, flux_elec) + box%fc(i, j, k + 1, 3, flux_elec))
+             write(unit, "(18(ES25.16E3,','),I0)") global_time, rr(1), rr(2), rr(3), &
                   cell_vol, rho, ne, evec(i, j, k, 1), evec(i, j, k, 2), &
-                  evec(i, j, k, 3), jx, jy, jz, eabs, box%cc(i, j, k, i_lsf), lvl
+                  evec(i, j, k, 3), jx, jy, jz, jrf_x, jrf_y, jrf_z, &
+                  eabs, box%cc(i, j, k, i_lsf), lvl
           end do
        end do
     end do
