@@ -1,0 +1,5 @@
+dataset,stage,start_time_s,end_time_s,evidence
+F4-C,PRE_INTERACTION,2.7273982102533226e-12,7.038639999999999e-10,before event-time minus 0.2 ns
+F4-C,ENCOUNTER,7.038639999999999e-10,8.538639999999999e-10,heads approaching event-time window
+F4-C,COLLISION,8.538639999999999e-10,9.538639999999999e-10,stage4_run event_time_s=9.038640e-10
+F4-C,POST_COLLISION,9.538639999999999e-10,1.1040907202412387e-09,early post-event response

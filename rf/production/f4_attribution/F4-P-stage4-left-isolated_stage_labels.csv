@@ -1,0 +1,4 @@
+dataset,stage,start_time_s,end_time_s,evidence
+F4-P,AVALANCHE,2.516256903067121e-12,4.840034765615241e-10,Ne or ne_max before 1.5x growth threshold
+F4-P,INCEPTION,4.840034765615241e-10,6.37146361358746e-10,Ne/ne_max growth established; head displacement below 40 um
+F4-P,PROPAGATION,6.37146361358746e-10,1.117517760861587e-09,head displacement=2.200e-04 m; peak |dM/dt|=2.766e+05 A m s^-1

@@ -1,0 +1,176 @@
+{
+  "CURRENT_SOURCE_PROVENANCE": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+  "GHz_SHF_ATTRIBUTION": "SUPPORTED",
+  "STAGE_F4_ATTRIBUTION_STATUS": "PASS_CANDIDATE",
+  "THREE_D_SCIENTIFIC_POLARIZATION": "DEFERRED",
+  "UHF_ATTRIBUTION": "NOT_RESOLVED",
+  "VHF_ATTRIBUTION": "NOT_RESOLVED",
+  "datasets": [
+    {
+      "J_provenance": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+      "M_dMdt_vs_jefimenko": {
+        "correlation": 0.9996309418161705,
+        "normalized_waveform_error": 0.026243867583957907,
+        "peak_time_difference_s": 0.0
+      },
+      "band_status": {
+        "1-3 GHz": "PARTIALLY_TRUSTED",
+        "100-200 MHz": "UNTRUSTED",
+        "200-300 MHz": "UNTRUSTED",
+        "3-10 GHz": "PARTIALLY_TRUSTED",
+        "300-500 MHz": "UNTRUSTED",
+        "500 MHz-1 GHz": "UNTRUSTED",
+        "60-90 MHz": "UNTRUSTED",
+        "SHF": "PARTIALLY_TRUSTED",
+        "UHF": "PARTIALLY_TRUSTED",
+        "VHF": "UNTRUSTED"
+      },
+      "case_id": "F4-P-stage4-left-isolated",
+      "fluence_parseval_relative_error": 0.5348957492907277,
+      "near_far_audit": {
+        "epsilon_EM_L_over_ctau": 12.144484833684032,
+        "epsilon_geom_L_over_R": 0.025436292968905847,
+        "observer_distance_m": 0.2,
+        "source_characteristic_size_m": 0.00508725859378117,
+        "source_timescale_s": 1.3972818387215823e-12
+      },
+      "observer_waveform_duration_s": 1.0199195354583838e-09,
+      "observer_waveform_samples": 26,
+      "remap_note": "native 2D axisymmetric source uses an unchanged structured partition; no AMR remap is required",
+      "rf_trust_report": {
+        "band_status": {
+          "1-3 GHz": "PARTIALLY_TRUSTED",
+          "100-200 MHz": "UNTRUSTED",
+          "200-300 MHz": "UNTRUSTED",
+          "3-10 GHz": "PARTIALLY_TRUSTED",
+          "300-500 MHz": "UNTRUSTED",
+          "500 MHz-1 GHz": "UNTRUSTED",
+          "60-90 MHz": "UNTRUSTED",
+          "SHF": "PARTIALLY_TRUSTED",
+          "UHF": "PARTIALLY_TRUSTED",
+          "VHF": "UNTRUSTED"
+        },
+        "continuity_status": "PASS",
+        "current_provenance": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+        "derivative_trust_frequency_Hz": 7966314711.629051,
+        "df_Hz": 980469502.9697305,
+        "dt_s": 4.07967814183354e-11,
+        "duration_s": 1.0199195354583838e-09,
+        "far_field_valid": true,
+        "interpolation_trust_frequency_Hz": 8579108150.985131,
+        "limiting_factor": "derivative",
+        "low_frequency_interpretation_bound_Hz": 2941408508.9091916,
+        "mesh_trust_frequency_Hz": 12255868787.121616,
+        "nyquist_Hz": 12255868787.121616,
+        "remap_status": "CONSERVATIVE",
+        "sampling_trust_frequency_Hz": 11030281908.409454,
+        "scientific_rf_valid": true,
+        "source_valid": true,
+        "trusted_frequency_high_Hz": 7966314711.629051,
+        "trusted_frequency_low_Hz": 2941408508.9091916
+      },
+      "role": "single continuous S4-LEFT-ISOLATED avalanche/inception/propagation",
+      "runtime_s": 11.941977927999687,
+      "source_dir": "results/stage_f4/source_gate_recovery/F4-P-streamer-propagation",
+      "source_duration_s": 1.1150015039585198e-09,
+      "source_output_dt_median_s": 2.0872818820536504e-11,
+      "source_snapshots": 51,
+      "validity": {
+        "conservation_residual": 2.912188548713751e-14,
+        "continuity_abs_A_max": 1.976366525947501e-13,
+        "continuity_abs_A_median": 1.6230213025191778e-14,
+        "continuity_rel_skip_first_max": 1.5950962873651254e-07,
+        "continuity_valid": true,
+        "no_nan": true
+      }
+    },
+    {
+      "J_provenance": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+      "M_dMdt_vs_jefimenko": {
+        "correlation": 0.9990575835069816,
+        "normalized_waveform_error": 0.03540884307803112,
+        "peak_time_difference_s": 0.0
+      },
+      "band_status": {
+        "1-3 GHz": "UNTRUSTED",
+        "100-200 MHz": "UNTRUSTED",
+        "200-300 MHz": "UNTRUSTED",
+        "3-10 GHz": "PARTIALLY_TRUSTED",
+        "300-500 MHz": "UNTRUSTED",
+        "500 MHz-1 GHz": "UNTRUSTED",
+        "60-90 MHz": "UNTRUSTED",
+        "SHF": "PARTIALLY_TRUSTED",
+        "UHF": "UNTRUSTED",
+        "VHF": "UNTRUSTED"
+      },
+      "case_id": "F4-C-stage5-highfield-collision",
+      "fluence_parseval_relative_error": 0.8750553482549952,
+      "near_far_audit": {
+        "epsilon_EM_L_over_ctau": 16.947211407942437,
+        "epsilon_geom_L_over_R": 0.025436292968905847,
+        "observer_distance_m": 0.2,
+        "source_characteristic_size_m": 0.00508725859378117,
+        "source_timescale_s": 1.001301493812936e-12
+      },
+      "observer_waveform_duration_s": 9.844867514150984e-10,
+      "observer_waveform_samples": 32,
+      "remap_note": "native 2D axisymmetric source uses an unchanged structured partition; no AMR remap is required",
+      "rf_trust_report": {
+        "band_status": {
+          "1-3 GHz": "UNTRUSTED",
+          "100-200 MHz": "UNTRUSTED",
+          "200-300 MHz": "UNTRUSTED",
+          "3-10 GHz": "PARTIALLY_TRUSTED",
+          "300-500 MHz": "UNTRUSTED",
+          "500 MHz-1 GHz": "UNTRUSTED",
+          "60-90 MHz": "UNTRUSTED",
+          "SHF": "PARTIALLY_TRUSTED",
+          "UHF": "UNTRUSTED",
+          "VHF": "UNTRUSTED"
+        },
+        "continuity_status": "PASS",
+        "current_provenance": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+        "derivative_trust_frequency_Hz": 10233758844.919172,
+        "df_Hz": 1015757701.7289495,
+        "dt_s": 3.175763714242251e-11,
+        "duration_s": 9.844867514150984e-10,
+        "far_field_valid": true,
+        "interpolation_trust_frequency_Hz": 11020971063.759108,
+        "limiting_factor": "derivative",
+        "low_frequency_interpretation_bound_Hz": 3047273105.1868486,
+        "mesh_trust_frequency_Hz": 28147656620.574436,
+        "nyquist_Hz": 15744244376.798727,
+        "remap_status": "CONSERVATIVE",
+        "sampling_trust_frequency_Hz": 14169819939.118855,
+        "scientific_rf_valid": true,
+        "source_valid": true,
+        "trusted_frequency_high_Hz": 10233758844.919172,
+        "trusted_frequency_low_Hz": 3047273105.1868486
+      },
+      "role": "S5-HIGHFIELD-COLLISION event-centered collision window",
+      "runtime_s": 13.166297137000583,
+      "source_dir": "results/stage_f4/source_gate_recovery/F4-C-interaction-collision",
+      "source_duration_s": 1.1013633220309854e-09,
+      "source_output_dt_median_s": 1.0463220065371108e-11,
+      "source_snapshots": 96,
+      "validity": {
+        "conservation_residual": 2.518105776435493e-14,
+        "continuity_abs_A_max": 1.3756273897769233e-11,
+        "continuity_abs_A_median": 1.416991524116895e-13,
+        "continuity_rel_skip_first_max": 6.967140115577733e-08,
+        "continuity_valid": true,
+        "no_nan": true
+      }
+    }
+  ],
+  "mesh_trust": {
+    "coarse_grid_um": 40.0,
+    "fine_grid_um": 20.0,
+    "mesh_trust_frequency_Hz": 28147656620.574436,
+    "overlap_end_s": 1.1029879420944296e-09,
+    "overlap_start_s": 2.782495308887034e-12,
+    "status": "COARSE40UM_VS_FINE20UM",
+    "tolerance": 0.5
+  },
+  "peak_rss_kb": 834888
+}
