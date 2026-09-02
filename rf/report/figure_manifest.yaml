@@ -1,0 +1,61 @@
+FIG_F1:
+  final_files:
+  - rf/report/figures/Fig_F1_rf_trustworthiness.png
+  - rf/report/figures/Fig_F1_rf_trustworthiness.pdf
+  source_files:
+  - rf/source/audit/stage_f1_synthetic_audit.json
+  - rf/spectral/validation/stage_f3_validation.json
+  caption: 守恒约束的RF可信度框架和重映射artifact验证。
+  conclusion: non-conservative remap can generate artificial RF derivatives.
+  limitation: controlled synthetic validation, not discharge physics spectrum.
+  source_sha256:
+    rf/source/audit/stage_f1_synthetic_audit.json: 7dc26dcefd7ed9dee16b61d1a988f488c99f94d0fc6872622181153d1e0cf4b0
+    rf/spectral/validation/stage_f3_validation.json: 1fa3a55c335e01e6973caab6ced6f403a3721e216bdafef917c0a37c3598f76a
+FIG_F2:
+  final_files:
+  - rf/report/figures/Fig_F2_jefimenko_validation.png
+  - rf/report/figures/Fig_F2_jefimenko_validation.pdf
+  source_files:
+  - rf/jefimenko/validation/stage_f2_validation.json
+  caption: 完整Jefimenko求解器解析/半解析验证。
+  conclusion: full Jefimenko solver passes static, magnetic, radiation, delay, and
+    far-field checks.
+  limitation: method validation only.
+  source_sha256:
+    rf/jefimenko/validation/stage_f2_validation.json: 978c5d6b43e38c580746ca21cf8b62915e5f5a7af91cba04b4c9afd7bb2b93f5
+FIG_F3:
+  final_files:
+  - rf/report/figures/Fig_F3_stage_time_frequency.png
+  - rf/report/figures/Fig_F3_stage_time_frequency.pdf
+  source_files:
+  - rf/production/f4_attribution/F4-P-stage4-left-isolated_jefimenko_waveform.csv
+  - rf/production/f4_attribution/F4-C-stage5-highfield-collision_jefimenko_waveform.csv
+  - rf/production/f4_attribution/F4-P-stage4-left-isolated_stage_labels.csv
+  - rf/production/f4_attribution/F4-C-stage5-highfield-collision_stage_labels.csv
+  caption: Stage4/Stage5阶段分辨时频对应。
+  conclusion: trusted GHz/low-SHF activity is temporally resolved for early propagation
+    and collision windows.
+  limitation: VHF/UHF not resolved.
+  source_sha256:
+    rf/production/f4_attribution/F4-P-stage4-left-isolated_jefimenko_waveform.csv: a40eb67deaebb3164d527b453b9b4ef4b4d65fef3ea26b19623215ddfe631ed8
+    rf/production/f4_attribution/F4-C-stage5-highfield-collision_jefimenko_waveform.csv: 1511975749e903718a65223edf6c17272293fab36b88cd75b6f7b07d96a02615
+    rf/production/f4_attribution/F4-P-stage4-left-isolated_stage_labels.csv: 4da8843670d210ea219418b6c96c43bd3bcb01a9938fc1da86c199bc2e903ee3
+    rf/production/f4_attribution/F4-C-stage5-highfield-collision_stage_labels.csv: 4af042a1544270dbb302f5a3e00476c032ce3e423247b6874ed293ae3d712175
+FIG_F4:
+  final_files:
+  - rf/report/figures/Fig_F4_stage_frequency_fingerprint.png
+  - rf/report/figures/Fig_F4_stage_frequency_fingerprint.pdf
+  source_files:
+  - rf/production/f4_attribution/stage_rf_summary.csv
+  caption: 阶段-频段可信频谱指纹矩阵。
+  conclusion: only trusted or partially trusted GHz/low-SHF cells receive energy values.
+  limitation: not a universal stage-frequency threshold.
+  source_sha256:
+    rf/production/f4_attribution/stage_rf_summary.csv: 878b8a59277451ad270c271b56790abe6645b6af17c2fb2bc7f9de2f4824c189
+FIG_F5:
+  status: DATA_INSUFFICIENT
+  source_files: []
+  caption: 3D polarization/direction not generated.
+  conclusion: deferred until continuity-consistent 3D scientific J source exists.
+  limitation: Stage E 3D data are drift-only for scientific RF purposes.
+  source_sha256: {}

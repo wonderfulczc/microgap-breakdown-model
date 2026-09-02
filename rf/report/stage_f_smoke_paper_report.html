@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<title>Stage F Trusted RF Simulation Smoke-Test and Paper-Figure Assessment</title>
+<style>
+body{font-family:Arial, sans-serif; max-width:1100px; margin:32px auto; line-height:1.55; color:#222;}
+img{max-width:100%; border:1px solid #ddd;}
+h1,h2,h3{line-height:1.25;}
+h3{margin-bottom:0.2rem;}
+table{border-collapse:collapse; width:100%; font-size:0.9rem;}
+td,th{border:1px solid #ccc; padding:0.35rem; text-align:left;}
+.note{background:#f6f6f6; padding:0.8rem; border-left:4px solid #777;}
+</style></head><body>
+<h1>Stage F Trusted RF Simulation Smoke-Test and Paper-Figure Assessment</h1>
+<p>本报告汇总Stage F1-F4的真实输出，用于评估“原生宽频电磁辐射仿真”在未来投稿论文中的图件潜力。Stage F已经建立守恒可信源、完整Jefimenko场求解、频谱可信带审核和阶段分辨归因pilot，但当前仍属于development/smoke-level validation，不是最终实验校准仿真。</p>
+<p class="note">关键限制：没有用zero padding、人工静态尾段或UNTRUSTED频带生成物理结论。Stage E三维源仍非正式continuity-consistent scientific RF source，因此Fig. F5标记为DATA_INSUFFICIENT。</p>
+
+<section>
+<h2>Fig. F1</h2>
+<img src="figures/Fig_F1_rf_trustworthiness.png" alt="Fig. F1">
+<h3>拟投稿图题</h3><p>Conservation-aware RF trustworthiness framework for streamer-radiation simulations</p>
+<h3>中文图注</h3><p>图F1  守恒约束的射频源可信度框架。该图展示从等离子体源项、连续性一致电流、保守重映射、Jefimenko积分到频谱可信区间判定的完整链路，并用受控算例说明非保守重映射会在时间导数中引入伪射频信号。</p>
+<h3>Results式结果描述</h3><p>保守重映射在受控AMR测试中保持Q和M相对误差为0，而bad nearest重映射产生约0.113的Q/M误差。对应的dQ/dt artifact从0.03339增至0.2062，dM/dt artifact从0.006678增至0.04124。</p>
+<h3>物理解释</h3><p>非守恒后处理足以制造人工RF；因此后续频谱必须先通过源项守恒、连续性和可信频带审核。</p>
+<h3>可支撑的论文结论</h3><p>可以支撑RF后处理需要守恒门控和可信频带门控的论文方法结论。</p>
+<h3>当前不能得出的结论</h3><p>这些数值来自controlled/synthetic validation，不能被解释为真实放电频谱强度。</p>
+<h3>推荐论文角色</h3><p>方法贡献</p>
+</section>
+
+<section>
+<h2>Fig. F2</h2>
+<img src="figures/Fig_F2_jefimenko_validation.png" alt="Fig. F2">
+<h3>拟投稿图题</h3><p>Validation of the full Jefimenko electromagnetic-field solver</p>
+<h3>中文图注</h3><p>图F2  完整Jefimenko电磁场求解器验证。图中给出静电近场、稳恒电流磁场、辐射场距离标度、电流矩近似与完整Jefimenko积分、E/B关系和传播延迟误差。</p>
+<h3>Results式结果描述</h3><p>近场距离斜率为-2.0000，辐射项斜率为-0.9467。角向误差为2.13e-5，E/B相对误差为5.71%，传播延迟误差为1.03e-25 s。电流矩近似误差从R1的19.4%降至R2的1.93%。</p>
+<h3>物理解释</h3><p>在远场条件改善时，电流矩近似向完整Jefimenko解收敛；完整积分保留了空间源分布和延迟传播信息。</p>
+<h3>可支撑的论文结论</h3><p>可以支撑完整Jefimenko求解器和远场电流矩近似收敛性的数值验证结论。</p>
+<h3>当前不能得出的结论</h3><p>不能声称电流矩在近场或任意观测距离均可替代Jefimenko积分。</p>
+<h3>推荐论文角色</h3><p>数值验证</p>
+</section>
+
+<section>
+<h2>Fig. F3</h2>
+<img src="figures/Fig_F3_stage_time_frequency.png" alt="Fig. F3">
+<h3>拟投稿图题</h3><p>Temporal correspondence between discharge evolution and trusted radio-frequency emission</p>
+<h3>中文图注</h3><p>图F3  放电演化与可信射频辐射的时间对应关系。左列为Stage4单流注传播，右列为Stage5高场碰撞窗口；每列依次给出放电诊断、电流矩、远场辐射波形、CWT时频图和可信频带能量。</p>
+<h3>Results式结果描述</h3><p>Stage4在avalanche、inception和early propagation期间均出现处于2.94-7.97 GHz可信区间内的可解析辐射活动。Stage5在encounter/collision/post-collision窗口中伴随快速current-moment变化，并在3.05-10.23 GHz可信区间内产生增强的GHz/low-SHF响应。</p>
+<h3>物理解释</h3><p>快速电流矩变化控制远场主要辐射时序；碰撞/相互作用窗口比平滑早期传播更容易产生高频时间结构。</p>
+<h3>可支撑的论文结论</h3><p>可以支撑GHz/low-SHF子区间与早期传播和碰撞窗口存在时间对应关系。</p>
+<h3>当前不能得出的结论</h3><p>VHF/UHF由于当前时间窗不足，没有得到可解释的stage attribution；不能写成传播主要产生VHF，也不能写成collision产生全部GHz辐射。</p>
+<h3>推荐论文角色</h3><p>核心主图</p>
+</section>
+
+<section>
+<h2>Fig. F4</h2>
+<img src="figures/Fig_F4_stage_frequency_fingerprint.png" alt="Fig. F4">
+<h3>拟投稿图题</h3><p>Stage-resolved trusted spectral fingerprints of microgap discharge dynamics</p>
+<h3>中文图注</h3><p>图F4  微间隙放电阶段分辨的可信频谱指纹。矩阵仅对通过RFTrustReport的频带或其重叠子区间显示能量；未可信频段以灰色NOT RESOLVED显示。</p>
+<h3>Results式结果描述</h3><p>当前可信结果集中在GHz/low-SHF子区间。VHF、UHF和1-3 GHz均为NOT_RESOLVED，这表示时间窗和可信频带不足以归因，而不是证明这些频段没有辐射。</p>
+<h3>物理解释</h3><p>该图把stage mask、CWT能量和RFTrustReport合并，防止把不可解释频段误读为低能量或无辐射。</p>
+<h3>可支撑的论文结论</h3><p>可以支撑Stage F当前只完成GHz/low-SHF子区间pilot归因的边界清晰结论。</p>
+<h3>当前不能得出的结论</h3><p>不能建立普适的stage-frequency阈值，也不能从未解析频带推断物理缺失。</p>
+<h3>推荐论文角色</h3><p>重要机制支撑</p>
+</section>
+
+<section>
+<h2>Fig. F5</h2>
+<h3>拟投稿图题</h3><p>Three-dimensional polarization and radiation characteristics</p>
+<h3>状态</h3><p><strong>FIG_F5_STATUS = DATA_INSUFFICIENT</strong></p>
+<h3>说明</h3><p>F3已经验证polarization和radiation-direction算法能力，但Stage E三维source仍是drift-only历史输出，缺少continuity-consistent 3D scientific J_RF、source time series、RFTrustReport和far-field audit的完整闭环。因此本报告不生成Fig. F5物理结果图。</p>
+<h3>推荐论文角色</h3><p>暂不建议使用。</p>
+</section>
+<section>
+<h2>Summary Matrix</h2>
+<table border="1" class="dataframe matrix">
+  <thead>
+    <tr style="text-align: right;">
+      <th>dataset</th>
+      <th>stage</th>
+      <th>VHF</th>
+      <th>UHF</th>
+      <th>1-3 GHz</th>
+      <th>3-10 GHz</th>
+      <th>SHF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>F4-P</td>
+      <td>AVALANCHE</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+    </tr>
+    <tr>
+      <td>F4-P</td>
+      <td>INCEPTION</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+    </tr>
+    <tr>
+      <td>F4-P</td>
+      <td>PROPAGATION</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+    </tr>
+    <tr>
+      <td>F4-C</td>
+      <td>PRE_INTERACTION</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+    </tr>
+    <tr>
+      <td>F4-C</td>
+      <td>ENCOUNTER</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+    </tr>
+    <tr>
+      <td>F4-C</td>
+      <td>COLLISION</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+    </tr>
+    <tr>
+      <td>F4-C</td>
+      <td>POST_COLLISION</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>NOT_RESOLVED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+      <td>PARTIALLY_SUPPORTED</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+<section>
+<h2>总体判断</h2>
+<p><strong>当前Stage F是否已经证明“VHF/UHF/GHz分别来自哪个放电阶段”？PARTIAL。</strong> 已经支持GHz/low-SHF子区间与Stage4早期传播及Stage5 encounter/collision窗口的时间关联；VHF、UHF和1-3 GHz仍未解析。</p>
+<p><strong>RF trustworthiness framework贡献评级：methodological contribution。</strong> 最强方法证据是保守重映射、Jefimenko解析验证、RFTrustReport和current-moment/Jefimenko一致性。最强物理证据是Stage5 collision window在可信GHz/low-SHF子区间内的增强响应。</p>
+<p>正式论文前必须重跑：更长物理有效VHF/UHF窗口、正式mesh sensitivity、continuity-consistent 3D source与polarization/direction case、实验/Stage B约束几何和电压。可直接保留的方法验证：F1 remap trust、F2 Jefimenko analytic validation、F3 FFT/CWT/trust synthetic validation。</p>
+</section>
+</body></html>

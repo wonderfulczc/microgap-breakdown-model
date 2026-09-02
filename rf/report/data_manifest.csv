@@ -1,0 +1,9 @@
+figure,source_file,exists,sha256,trust_report,limitation
+FIG_F1,rf/source/audit/stage_f1_synthetic_audit.json,True,7dc26dcefd7ed9dee16b61d1a988f488c99f94d0fc6872622181153d1e0cf4b0,,"controlled synthetic validation, not discharge physics spectrum."
+FIG_F1,rf/spectral/validation/stage_f3_validation.json,True,1fa3a55c335e01e6973caab6ced6f403a3721e216bdafef917c0a37c3598f76a,,"controlled synthetic validation, not discharge physics spectrum."
+FIG_F2,rf/jefimenko/validation/stage_f2_validation.json,True,978c5d6b43e38c580746ca21cf8b62915e5f5a7af91cba04b4c9afd7bb2b93f5,,method validation only.
+FIG_F3,rf/production/f4_attribution/F4-P-stage4-left-isolated_jefimenko_waveform.csv,True,a40eb67deaebb3164d527b453b9b4ef4b4d65fef3ea26b19623215ddfe631ed8,rf/production/f4_attribution/stage_f4_attribution_summary.json,VHF/UHF not resolved.
+FIG_F3,rf/production/f4_attribution/F4-C-stage5-highfield-collision_jefimenko_waveform.csv,True,1511975749e903718a65223edf6c17272293fab36b88cd75b6f7b07d96a02615,rf/production/f4_attribution/stage_f4_attribution_summary.json,VHF/UHF not resolved.
+FIG_F3,rf/production/f4_attribution/F4-P-stage4-left-isolated_stage_labels.csv,True,4da8843670d210ea219418b6c96c43bd3bcb01a9938fc1da86c199bc2e903ee3,rf/production/f4_attribution/stage_f4_attribution_summary.json,VHF/UHF not resolved.
+FIG_F3,rf/production/f4_attribution/F4-C-stage5-highfield-collision_stage_labels.csv,True,4af042a1544270dbb302f5a3e00476c032ce3e423247b6874ed293ae3d712175,rf/production/f4_attribution/stage_f4_attribution_summary.json,VHF/UHF not resolved.
+FIG_F4,rf/production/f4_attribution/stage_rf_summary.csv,True,878b8a59277451ad270c271b56790abe6645b6af17c2fb2bc7f9de2f4824c189,rf/production/f4_attribution/stage_f4_attribution_summary.json,not a universal stage-frequency threshold.
