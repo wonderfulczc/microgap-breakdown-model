@@ -1,7 +1,7 @@
 {
   "stage": "F4",
   "gate": "scientific RF source prerequisite",
-  "status": "BLOCKED_FOR_SCIENTIFIC_STAGE_ATTRIBUTION",
+  "status": "RECOVERED_FOR_SHORT_SOURCE_GATE_WINDOWS",
   "current_source_required": "J_RF = -e * Gamma_e",
   "required_provenance": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
   "afivo_export_status": {
@@ -17,7 +17,8 @@
       "drift",
       "diffusion"
     ],
-    "existing_stage_e_raw_data_status": "DRIFT_ONLY_PIPELINE_SMOKE"
+    "existing_stage_e_raw_data_status": "DRIFT_ONLY_PIPELINE_SMOKE",
+    "stage_f4_recovery_status": "PETSc 2D source windows regenerated with flux-derived J_RF"
   },
   "petsc_export_status": {
     "source_method": "StreamerSolver::electron_transport_current_source",
@@ -28,14 +29,20 @@
   "available_data_audit": {
     "stage_e_source_jrf_columns_present": false,
     "results_stage4_present": false,
-    "results_stage5_present": false
+    "results_stage5_present": false,
+    "results_stage_f4_source_gate_recovery_present": true
   },
-  "reason_scientific_f4_not_run": [
+  "previous_blocker": [
     "Existing Stage E source snapshots were produced before continuity-consistent J_RF columns existed.",
     "No reusable Stage 4 propagation or Stage 5 collision result directories are present in this workspace.",
     "Using drift-only J or synthetic waveforms for VHF/UHF/GHz discharge-stage attribution would violate the Stage F4 source contract."
   ],
-  "allowed_next_action": "rerun the frozen F4 source windows with the new J_RF exports, then run RFTrustReport-filtered stage attribution",
+  "recovery_outputs": {
+    "summary_csv": "rf/production/f4_source_recovery/stage_f4_source_gate_summary.csv",
+    "summary_json": "rf/production/f4_source_recovery/stage_f4_source_gate_summary.json",
+    "raw_source_root": "results/stage_f4/source_gate_recovery"
+  },
+  "allowed_next_action": "perform RFTrustReport-filtered stage attribution on recovered source windows; VHF/UHF remain unresolved by the short 0.5 ns recovery windows",
   "stage_e_5ps_data": {
     "USABLE_FOR_RF_PIPELINE_TEST": true,
     "USABLE_FOR_VHF_UHF_SCIENTIFIC_SPECTRUM": false

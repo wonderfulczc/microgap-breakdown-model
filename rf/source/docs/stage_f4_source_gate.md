@@ -35,9 +35,21 @@ outer-boundary electron face flux formulas used by `StreamerSolver::step()`.
 snapshots, and its `I_CM_electron` column is based on the flux-derived current
 moment.
 
-## Current Gate Outcome
+## Recovery Outcome
 
-The source export path is implemented, but F4 scientific stage attribution is
-blocked until the frozen F4 source windows are rerun with these new exports.
-The workspace currently has no reusable `results/stage4` or `results/stage5`
-directories, and existing Stage E 5 ps source snapshots are drift-only.
+The source export path is implemented and the F4 source-gate recovery generated
+short PETSc 2D source windows under `results/stage_f4/source_gate_recovery/`.
+Small tracked summaries are stored under `rf/production/f4_source_recovery/`.
+
+Recovered windows:
+
+- `F4-A-avalanche-inception`: early Stage4 left-isolated window, source-valid
+  but too short for scientific RF interpretation.
+- `F4-P-streamer-propagation`: Stage4 left-isolated source-gate window with
+  flux-derived `J_RF`.
+- `F4-C-interaction-collision`: Stage5 high-field collision parameters in a
+  short source-gate window with flux-derived `J_RF`.
+
+The short recovery windows restore the source gate for GHz/SHF pipeline smoke.
+They do not resolve VHF/UHF attribution. Existing Stage E 5 ps source snapshots
+remain drift-only and pipeline-only.

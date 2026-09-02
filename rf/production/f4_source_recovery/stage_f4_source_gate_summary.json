@@ -1,0 +1,515 @@
+{
+  "F4_SOURCE_GATE_STATUS": "PASS_CANDIDATE",
+  "VHF_LONG_WINDOW_PHYSICS_VALID": false,
+  "VHF_STAGE_ATTRIBUTION": "NOT_RESOLVED",
+  "manifests": [
+    {
+      "J_provenance": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+      "M_Am_sample": [
+        [
+          -2.643696448887906e-07,
+          0.0,
+          1.9254450592088116e-05
+        ],
+        [
+          -1.9036674473755563e-07,
+          0.0,
+          1.6592667748522207e-05
+        ],
+        [
+          -2.1639253582016345e-07,
+          0.0,
+          1.4741672837506376e-05
+        ],
+        [
+          -2.624226675724205e-07,
+          0.0,
+          1.3401579576591714e-05
+        ],
+        [
+          -3.500017271083831e-07,
+          0.0,
+          1.1793060886439838e-05
+        ]
+      ],
+      "N_snapshots": 6,
+      "Nyquist_Hz": 23867238784.386036,
+      "Q_C_sample": [
+        0.0,
+        1.6869157251730754e-19,
+        6.547853819181975e-19,
+        1.4273437788950289e-18,
+        3.715568469319073e-18
+      ],
+      "Q_conservation_status": "FINITE",
+      "band_status": {
+        "1-3 GHz": "UNTRUSTED",
+        "100-200 MHz": "UNTRUSTED",
+        "200-300 MHz": "UNTRUSTED",
+        "3-10 GHz": "UNTRUSTED",
+        "300-500 MHz": "UNTRUSTED",
+        "500 MHz-1 GHz": "UNTRUSTED",
+        "60-90 MHz": "UNTRUSTED",
+        "SHF": "UNTRUSTED",
+        "UHF": "UNTRUSTED",
+        "VHF": "UNTRUSTED"
+      },
+      "candidate_bands": [
+        "3-10 GHz"
+      ],
+      "case_id": "F4-A-avalanche-inception",
+      "conservation_residual": 2.1109455096718577e-14,
+      "continuity_metrics": {
+        "continuity_global_abs_A_max": 4.991147623866155e-15,
+        "continuity_global_abs_A_median": 1.0228493361107767e-15,
+        "continuity_global_rel_median": 3.379425493356201e-08,
+        "continuity_global_rel_skip_first_max": 1.5950962873651254e-07,
+        "current_continuity_residual_max": 1.0,
+        "method": "PETSc step-level plasma-charge derivative vs boundary current diagnostic",
+        "note": "raw relative maximum is retained; skip-first robust relative metric avoids the first near-zero boundary-current sample"
+      },
+      "duration_s": 1e-10,
+      "end_time_s": 1e-10,
+      "f2_smoke": {
+        "B_dJ_radiation_norm_T": 1.2336351373031883e-10,
+        "E_dJ_radiation_norm_Vpm": 0.036984444417721675,
+        "observer": {
+          "observer_id": "f4_source_gate_far_observer",
+          "x_m": 0.2,
+          "y_m": 0.0,
+          "z_m": 0.005
+        },
+        "retarded_time_valid": true,
+        "retarded_time_valid_fraction": 1.0
+      },
+      "frozen_config": "config/stage4/runs.yaml:S4-LEFT-ISOLATED early-time window",
+      "frozen_run_name": "left_isolated_20um",
+      "model_validity_end_s": 1e-10,
+      "model_validity_start_s": 0.0,
+      "output_dt_s": 2.094921848802637e-11,
+      "parameters": {
+        "dr_m": 2e-05,
+        "dt_scale": 1.0,
+        "eta": 0.001,
+        "field_value_V_m": "4.8e6",
+        "max_steps": 90000,
+        "minimum_dt_s": 1e-15,
+        "mode": "left",
+        "mpi_ranks": 4,
+        "n0": "1.0e20",
+        "n_ref_ratio": 1e-12,
+        "name": "left_isolated_20um",
+        "post_event_s": 2e-10,
+        "r_max_m": 0.001,
+        "run_id": "S4-LEFT-ISOLATED",
+        "sigma_m": 0.0001,
+        "sp3": true,
+        "t_end_s": 2.25e-09,
+        "z1_m": 0.0035,
+        "z2_m": 0.0065,
+        "z_max_m": 0.01
+      },
+      "physical_role": "AVALANCHE_INCEPTION_EARLY_WINDOW",
+      "raw_df_Hz": 10000000000.0,
+      "remap_status": "CONSERVATIVE",
+      "rf_trust_report": {
+        "band_status": {
+          "1-3 GHz": "UNTRUSTED",
+          "100-200 MHz": "UNTRUSTED",
+          "200-300 MHz": "UNTRUSTED",
+          "3-10 GHz": "UNTRUSTED",
+          "300-500 MHz": "UNTRUSTED",
+          "500 MHz-1 GHz": "UNTRUSTED",
+          "60-90 MHz": "UNTRUSTED"
+        },
+        "continuity_status": "FINITE_DIAGNOSTIC",
+        "current_provenance": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+        "derivative_trust_frequency_Hz": 23867238784.386036,
+        "df_Hz": 10000000000.0,
+        "dt_s": 2.094921848802637e-11,
+        "duration_s": 1e-10,
+        "far_field_valid": true,
+        "interpolation_trust_frequency_Hz": 23867238784.386036,
+        "limiting_factor": "derivative",
+        "low_frequency_interpretation_bound_Hz": 30000000000.0,
+        "mesh_trust_frequency_Hz": 23867238784.386036,
+        "nyquist_Hz": 23867238784.386036,
+        "remap_status": "CONSERVATIVE",
+        "sampling_trust_frequency_Hz": 23867238784.386036,
+        "scientific_rf_valid": false,
+        "source_valid": true,
+        "trusted_frequency_high_Hz": 23867238784.386036,
+        "trusted_frequency_low_Hz": 30000000000.0
+      },
+      "run_result": {
+        "case_id": "F4-A-avalanche-inception",
+        "returncode": 0,
+        "skipped_existing": true,
+        "wall_time_s": 0.0
+      },
+      "scalar_metrics": {
+        "Emax_max_Vpm": 6971633.252669926,
+        "accepted_steps": 45,
+        "conservation_residual_max": 2.1109455096718577e-14,
+        "continuity_global_abs_A_max": 4.991147623866155e-15,
+        "continuity_global_abs_A_median": 1.0228493361107767e-15,
+        "continuity_global_rel_median": 3.379425493356201e-08,
+        "continuity_global_rel_skip_first_max": 1.5950962873651254e-07,
+        "current_continuity_residual_max": 1.0,
+        "dt_median_s": 2.243153887029759e-12,
+        "dt_min_s": 5.751355281269061e-13,
+        "final_time_s": 1e-10,
+        "ne_max_max_m3": 1.0008540437380596e+20,
+        "termination_reason": "reached_end_time",
+        "total_electrons_final": 620151719.0212655,
+        "total_electrons_initial": 562381087.5923592
+      },
+      "solver": "PETSc-2D axisymmetric",
+      "source_commit": "4697b79",
+      "start_time_s": 0.0,
+      "usable_for_jefimenko": true,
+      "usable_for_scientific_rf": false
+    },
+    {
+      "J_provenance": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+      "M_Am_sample": [
+        [
+          -2.643696448887906e-07,
+          0.0,
+          1.9254450592088116e-05
+        ],
+        [
+          -4.1765457977705884e-07,
+          0.0,
+          1.1004854606694429e-05
+        ],
+        [
+          -7.205309155096336e-07,
+          0.0,
+          1.0175865314234088e-05
+        ],
+        [
+          -9.93046351619907e-07,
+          0.0,
+          1.138000687046756e-05
+        ],
+        [
+          -1.202728030587156e-06,
+          0.0,
+          1.3499215789244091e-05
+        ]
+      ],
+      "N_snapshots": 21,
+      "Nyquist_Hz": 19217391347.523273,
+      "Q_C_sample": [
+        0.0,
+        6.541057779822557e-18,
+        3.3862594376993006e-17,
+        1.0698918478637207e-16,
+        2.424527309638087e-16
+      ],
+      "Q_conservation_status": "FINITE",
+      "band_status": {
+        "1-3 GHz": "UNTRUSTED",
+        "100-200 MHz": "UNTRUSTED",
+        "200-300 MHz": "UNTRUSTED",
+        "3-10 GHz": "PARTIALLY_TRUSTED",
+        "300-500 MHz": "UNTRUSTED",
+        "500 MHz-1 GHz": "UNTRUSTED",
+        "60-90 MHz": "UNTRUSTED",
+        "SHF": "PARTIALLY_TRUSTED",
+        "UHF": "UNTRUSTED",
+        "VHF": "UNTRUSTED"
+      },
+      "candidate_bands": [
+        "UHF",
+        "1-3 GHz",
+        "3-10 GHz"
+      ],
+      "case_id": "F4-P-streamer-propagation",
+      "conservation_residual": 2.5269867753427843e-14,
+      "continuity_metrics": {
+        "continuity_global_abs_A_max": 8.385703575453129e-14,
+        "continuity_global_abs_A_median": 5.410896230246122e-15,
+        "continuity_global_rel_median": 1.6114990858618296e-08,
+        "continuity_global_rel_skip_first_max": 1.5950962873651254e-07,
+        "current_continuity_residual_max": 1.0,
+        "method": "PETSc step-level plasma-charge derivative vs boundary current diagnostic",
+        "note": "raw relative maximum is retained; skip-first robust relative metric avoids the first near-zero boundary-current sample"
+      },
+      "duration_s": 5e-10,
+      "end_time_s": 5e-10,
+      "f2_smoke": {
+        "B_dJ_radiation_norm_T": 3.6807337759115215e-12,
+        "E_dJ_radiation_norm_Vpm": 0.0011035413033446983,
+        "observer": {
+          "observer_id": "f4_source_gate_far_observer",
+          "x_m": 0.2,
+          "y_m": 0.0,
+          "z_m": 0.005
+        },
+        "retarded_time_valid": true,
+        "retarded_time_valid_fraction": 1.0
+      },
+      "frozen_config": "config/stage4/runs.yaml:S4-LEFT-ISOLATED",
+      "frozen_run_name": "left_isolated_20um",
+      "model_validity_end_s": 5e-10,
+      "model_validity_start_s": 0.0,
+      "output_dt_s": 2.601809948905681e-11,
+      "parameters": {
+        "dr_m": 2e-05,
+        "dt_scale": 1.0,
+        "eta": 0.001,
+        "field_value_V_m": "4.8e6",
+        "max_steps": 90000,
+        "minimum_dt_s": 1e-15,
+        "mode": "left",
+        "mpi_ranks": 4,
+        "n0": "1.0e20",
+        "n_ref_ratio": 1e-12,
+        "name": "left_isolated_20um",
+        "post_event_s": 2e-10,
+        "r_max_m": 0.001,
+        "run_id": "S4-LEFT-ISOLATED",
+        "sigma_m": 0.0001,
+        "sp3": true,
+        "t_end_s": 2.25e-09,
+        "z1_m": 0.0035,
+        "z2_m": 0.0065,
+        "z_max_m": 0.01
+      },
+      "physical_role": "SINGLE_STREAMER_PROPAGATION",
+      "raw_df_Hz": 1999999999.9999998,
+      "remap_status": "CONSERVATIVE",
+      "rf_trust_report": {
+        "band_status": {
+          "1-3 GHz": "UNTRUSTED",
+          "100-200 MHz": "UNTRUSTED",
+          "200-300 MHz": "UNTRUSTED",
+          "3-10 GHz": "PARTIALLY_TRUSTED",
+          "300-500 MHz": "UNTRUSTED",
+          "500 MHz-1 GHz": "UNTRUSTED",
+          "60-90 MHz": "UNTRUSTED"
+        },
+        "continuity_status": "FINITE_DIAGNOSTIC",
+        "current_provenance": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+        "derivative_trust_frequency_Hz": 19217391347.523273,
+        "df_Hz": 1999999999.9999998,
+        "dt_s": 2.601809948905681e-11,
+        "duration_s": 5e-10,
+        "far_field_valid": true,
+        "interpolation_trust_frequency_Hz": 19217391347.523273,
+        "limiting_factor": "derivative",
+        "low_frequency_interpretation_bound_Hz": 6000000000.0,
+        "mesh_trust_frequency_Hz": 19217391347.523273,
+        "nyquist_Hz": 19217391347.523273,
+        "remap_status": "CONSERVATIVE",
+        "sampling_trust_frequency_Hz": 19217391347.523273,
+        "scientific_rf_valid": true,
+        "source_valid": true,
+        "trusted_frequency_high_Hz": 19217391347.523273,
+        "trusted_frequency_low_Hz": 6000000000.0
+      },
+      "run_result": {
+        "case_id": "F4-P-streamer-propagation",
+        "returncode": 0,
+        "skipped_existing": true,
+        "wall_time_s": 0.0
+      },
+      "scalar_metrics": {
+        "Emax_max_Vpm": 9862801.48258238,
+        "accepted_steps": 291,
+        "conservation_residual_max": 2.5269867753427843e-14,
+        "continuity_global_abs_A_max": 8.385703575453129e-14,
+        "continuity_global_abs_A_median": 5.410896230246122e-15,
+        "continuity_global_rel_median": 1.6114990858618296e-08,
+        "continuity_global_rel_skip_first_max": 1.5950962873651254e-07,
+        "current_continuity_residual_max": 1.0,
+        "dt_median_s": 1.6179055222962545e-12,
+        "dt_min_s": 8.149221099596064e-14,
+        "final_time_s": 5e-10,
+        "ne_max_max_m3": 1.0008540437380596e+20,
+        "termination_reason": "reached_end_time",
+        "total_electrons_final": 858333736.8339201,
+        "total_electrons_initial": 562381087.5923592
+      },
+      "solver": "PETSc-2D axisymmetric",
+      "source_commit": "4697b79",
+      "start_time_s": 0.0,
+      "usable_for_jefimenko": true,
+      "usable_for_scientific_rf": true
+    },
+    {
+      "J_provenance": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+      "M_Am_sample": [
+        [
+          -5.699032544003661e-07,
+          0.0,
+          4.737031703936011e-05
+        ],
+        [
+          -1.8593015871513219e-06,
+          0.0,
+          4.5841249203236006e-05
+        ],
+        [
+          -3.797669045649882e-06,
+          0.0,
+          7.464512178713521e-05
+        ],
+        [
+          -5.338964955305609e-06,
+          0.0,
+          0.0001531944972437348
+        ],
+        [
+          -7.1039128724376975e-06,
+          0.0,
+          0.0002982984246741226
+        ]
+      ],
+      "N_snapshots": 21,
+      "Nyquist_Hz": 19493632949.6859,
+      "Q_C_sample": [
+        0.0,
+        6.649216029744121e-17,
+        7.390113317731305e-16,
+        5.169678240716323e-15,
+        2.5588978179471197e-14
+      ],
+      "Q_conservation_status": "FINITE",
+      "band_status": {
+        "1-3 GHz": "UNTRUSTED",
+        "100-200 MHz": "UNTRUSTED",
+        "200-300 MHz": "UNTRUSTED",
+        "3-10 GHz": "PARTIALLY_TRUSTED",
+        "300-500 MHz": "UNTRUSTED",
+        "500 MHz-1 GHz": "UNTRUSTED",
+        "60-90 MHz": "UNTRUSTED",
+        "SHF": "PARTIALLY_TRUSTED",
+        "UHF": "UNTRUSTED",
+        "VHF": "UNTRUSTED"
+      },
+      "candidate_bands": [
+        "UHF",
+        "1-3 GHz",
+        "3-10 GHz"
+      ],
+      "case_id": "F4-C-interaction-collision",
+      "conservation_residual": 2.3171665325954764e-14,
+      "continuity_metrics": {
+        "continuity_global_abs_A_max": 2.474000008762661e-13,
+        "continuity_global_abs_A_median": 2.3900003612471743e-14,
+        "continuity_global_rel_median": 1.2298965374150485e-09,
+        "continuity_global_rel_skip_first_max": 6.967140115577733e-08,
+        "current_continuity_residual_max": 1.0,
+        "method": "PETSc step-level plasma-charge derivative vs boundary current diagnostic",
+        "note": "raw relative maximum is retained; skip-first robust relative metric avoids the first near-zero boundary-current sample"
+      },
+      "duration_s": 5e-10,
+      "end_time_s": 5e-10,
+      "f2_smoke": {
+        "B_dJ_radiation_norm_T": 7.238980990193231e-10,
+        "E_dJ_radiation_norm_Vpm": 0.217025866761973,
+        "observer": {
+          "observer_id": "f4_source_gate_far_observer",
+          "x_m": 0.2,
+          "y_m": 0.0,
+          "z_m": 0.005
+        },
+        "retarded_time_valid": true,
+        "retarded_time_valid_fraction": 1.0
+      },
+      "frozen_config": "config/stage5/runs.yaml:S5-HIGHFIELD-COLLISION from frozen parameters; missing self-checkpoint resume omitted",
+      "frozen_run_name": "highfield_collision_20um",
+      "model_validity_end_s": 5e-10,
+      "model_validity_start_s": 0.0,
+      "output_dt_s": 2.5649400565329532e-11,
+      "parameters": {
+        "dr_m": 2e-05,
+        "dt_scale": 1.0,
+        "eta": 0.001,
+        "field_value_V_m": "6.4e6",
+        "max_steps": 90000,
+        "minimum_dt_s": 1e-15,
+        "mode": "collision",
+        "mpi_ranks": 4,
+        "n0": "1.0e20",
+        "n_ref_ratio": 1e-12,
+        "name": "highfield_collision_20um",
+        "post_event_s": 2e-10,
+        "r_max_m": 0.001,
+        "run_id": "S5-HIGHFIELD-COLLISION",
+        "sigma2_m": 0.0001,
+        "sigma_m": 0.0001,
+        "sp3": true,
+        "standard_current": false,
+        "t_end_s": 2.5e-09,
+        "z1_m": 0.0035,
+        "z2_m": 0.0065,
+        "z_max_m": 0.01
+      },
+      "physical_role": "HIGH_FIELD_HEAD_ON_COLLISION",
+      "raw_df_Hz": 1999999999.9999998,
+      "remap_status": "CONSERVATIVE",
+      "rf_trust_report": {
+        "band_status": {
+          "1-3 GHz": "UNTRUSTED",
+          "100-200 MHz": "UNTRUSTED",
+          "200-300 MHz": "UNTRUSTED",
+          "3-10 GHz": "PARTIALLY_TRUSTED",
+          "300-500 MHz": "UNTRUSTED",
+          "500 MHz-1 GHz": "UNTRUSTED",
+          "60-90 MHz": "UNTRUSTED"
+        },
+        "continuity_status": "FINITE_DIAGNOSTIC",
+        "current_provenance": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+        "derivative_trust_frequency_Hz": 19493632949.6859,
+        "df_Hz": 1999999999.9999998,
+        "dt_s": 2.5649400565329532e-11,
+        "duration_s": 5e-10,
+        "far_field_valid": true,
+        "interpolation_trust_frequency_Hz": 19493632949.6859,
+        "limiting_factor": "derivative",
+        "low_frequency_interpretation_bound_Hz": 6000000000.0,
+        "mesh_trust_frequency_Hz": 19493632949.6859,
+        "nyquist_Hz": 19493632949.6859,
+        "remap_status": "CONSERVATIVE",
+        "sampling_trust_frequency_Hz": 19493632949.6859,
+        "scientific_rf_valid": true,
+        "source_valid": true,
+        "trusted_frequency_high_Hz": 19493632949.6859,
+        "trusted_frequency_low_Hz": 6000000000.0
+      },
+      "run_result": {
+        "case_id": "F4-C-interaction-collision",
+        "returncode": 0,
+        "skipped_existing": true,
+        "wall_time_s": 0.0
+      },
+      "scalar_metrics": {
+        "Emax_max_Vpm": 12296616.290211294,
+        "accepted_steps": 406,
+        "conservation_residual_max": 2.3171665325954764e-14,
+        "continuity_global_abs_A_max": 2.474000008762661e-13,
+        "continuity_global_abs_A_median": 2.3900003612471743e-14,
+        "continuity_global_rel_median": 1.2298965374150485e-09,
+        "continuity_global_rel_skip_first_max": 6.967140115577733e-08,
+        "current_continuity_residual_max": 1.0,
+        "dt_median_s": 1.0343126078336502e-12,
+        "dt_min_s": 8.828863141599652e-13,
+        "final_time_s": 5e-10,
+        "ne_max_max_m3": 1.0695695343867563e+20,
+        "termination_reason": "reached_end_time",
+        "total_electrons_final": 9034357154.250547,
+        "total_electrons_initial": 1143309660.5790806
+      },
+      "solver": "PETSc-2D axisymmetric",
+      "source_commit": "4697b79",
+      "start_time_s": 0.0,
+      "usable_for_jefimenko": true,
+      "usable_for_scientific_rf": true
+    }
+  ],
+  "peak_rss_kb": 533180
+}

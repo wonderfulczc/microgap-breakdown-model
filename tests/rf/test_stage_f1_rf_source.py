@@ -13,6 +13,7 @@ from streamer_rf.rf.source.adapters import (  # noqa: E402
     AFIVO_STAGE_E_SOURCE_DEFINITION,
     infer_afivo_cell_widths_from_config,
     load_afivo_stage_e_source_csv,
+    load_petsc_stage4_field_source_csv,
     source_record_from_petsc_axisymmetric,
 )
 from streamer_rf.rf.source.audit import (  # noqa: E402
@@ -73,6 +74,31 @@ def test_axisymmetric_volume_integration_and_petsc_adapter() -> None:
     expected_vol = np.sum(2.0 * np.pi * r[:, None] * 1.0 * 0.5 * np.ones_like(rho))
     np.testing.assert_allclose(total_charge(rec), 2.0 * expected_vol)
     np.testing.assert_allclose(current_moment(rec)[2], 4.0 * expected_vol)
+
+
+def test_petsc_stage4_field_adapter_requires_flux_derived_columns(tmp_path: Path) -> None:
+    raw = tmp_path / "fields_0.csv"
+    raw.write_text(
+        "i,j,time_s,r_m,z_m,ne_m_3,np_m_3,nn_m_3,rho_C_m_3,phi_V,Er_V_m,Ez_V_m,E_V_m,Sph_m_3_s_1,Jr_RF_A_m2,Jz_RF_A_m2\n"
+        "0,0,1e-12,0.5,0.25,1,1,0,2,0,0,4,4,0,3,5\n"
+        "1,0,1e-12,1.5,0.25,1,1,0,2,0,0,4,4,0,3,5\n"
+        "0,1,1e-12,0.5,0.75,1,1,0,2,0,0,4,4,0,3,5\n"
+        "1,1,1e-12,1.5,0.75,1,1,0,2,0,0,4,4,0,3,5\n"
+    )
+    rec = load_petsc_stage4_field_source_csv(
+        raw,
+        case_id="S4-test",
+        solver_version="unit",
+        geometry_id="axisymmetric",
+        voltage_state="E0",
+        photoionization="off",
+    )
+    assert rec.metadata.extra["J_transport_available"] is True
+    assert rec.metadata.time_s == 1e-12
+    assert "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX" in rec.metadata.source_definition
+    assert total_charge(rec) > 0.0
+    np.testing.assert_allclose(rec.columns["Jx"], 3.0)
+    np.testing.assert_allclose(rec.columns["Jz"], 5.0)
 
 
 def test_conservative_amr_remap_preserves_Q_and_M() -> None:

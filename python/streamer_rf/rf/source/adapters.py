@@ -210,3 +210,81 @@ def source_record_from_petsc_axisymmetric(
         "Jz": Jz.ravel(),
     }
     return SourceRecord(metadata, cols)
+
+
+def load_petsc_stage4_field_source_csv(
+    csv_path: str | Path,
+    *,
+    case_id: str,
+    solver_version: str,
+    geometry_id: str,
+    voltage_state: str,
+    photoionization: str,
+    time_s: float | None = None,
+) -> SourceRecord:
+    csv_path = Path(csv_path)
+    rows = list(csv.DictReader(csv_path.open(newline="")))
+    if not rows:
+        raise ValueError(f"no rows in {csv_path}")
+    required = {"r_m", "z_m", "rho_C_m_3", "Jr_RF_A_m2", "Jz_RF_A_m2"}
+    missing = required - set(rows[0])
+    if missing:
+        raise ValueError(f"{csv_path} missing flux-derived PETSc source columns: {sorted(missing)}")
+    r = np.asarray([float(row["r_m"]) for row in rows], dtype=float)
+    z = np.asarray([float(row["z_m"]) for row in rows], dtype=float)
+    ru = np.unique(np.round(r, decimals=18))
+    zu = np.unique(np.round(z, decimals=18))
+    dr = float(np.min(np.diff(ru))) if ru.size > 1 else 1.0
+    dz = float(np.min(np.diff(zu))) if zu.size > 1 else 1.0
+    if time_s is not None:
+        record_time_s = float(time_s)
+    elif "time_s" in rows[0]:
+        record_time_s = float(rows[0]["time_s"])
+    else:
+        match = re.search(r"fields_(?:snapshot_)?([0-9]+)\.csv$", csv_path.name)
+        record_time_s = 0.0 if match and match.group(1) == "0" else float("nan")
+    meta = SourceMetadata(
+        case_id=case_id,
+        solver="PETSc-2D",
+        solver_version=solver_version,
+        time_s=record_time_s,
+        coordinate_system="axisymmetric_rz",
+        pressure_Pa=101325.0,
+        temperature_K=300.0,
+        geometry_id=geometry_id,
+        voltage_state=voltage_state,
+        photoionization=photoionization,
+        source_definition="CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX: J_RF=-e*Gamma_e from StreamerSolver::electron_transport_current_source",
+        units={
+            "rho": "C m^-3",
+            "J": "A m^-2",
+            "cell_volume": "m^3",
+            "E": "V m^-1",
+            "ne": "m^-3",
+        },
+        extra={
+            "source_file": str(csv_path),
+            "J_transport_available": True,
+            "J_export_columns": "Jr_RF_A_m2,Jz_RF_A_m2",
+        },
+    )
+    volume = 2.0 * np.pi * r * dr * dz
+    cols = {
+        "cell_id": np.arange(len(rows)),
+        "level": np.zeros(len(rows), dtype=int),
+        "x_center": r,
+        "y_center": np.zeros(len(rows)),
+        "z_center": z,
+        "dx": np.full(len(rows), dr),
+        "dy": np.maximum(2.0 * np.pi * r, dr),
+        "dz": np.full(len(rows), dz),
+        "cell_volume": volume,
+        "rho": np.asarray([float(row["rho_C_m_3"]) for row in rows], dtype=float),
+        "Jx": np.asarray([float(row["Jr_RF_A_m2"]) for row in rows], dtype=float),
+        "Jy": np.zeros(len(rows)),
+        "Jz": np.asarray([float(row["Jz_RF_A_m2"]) for row in rows], dtype=float),
+    }
+    for csv_col, src_col in (("ne_m_3", "ne"), ("Er_V_m", "Ex"), ("Ez_V_m", "Ez")):
+        if csv_col in rows[0]:
+            cols[src_col] = np.asarray([float(row[csv_col]) for row in rows], dtype=float)
+    return SourceRecord(meta, cols)

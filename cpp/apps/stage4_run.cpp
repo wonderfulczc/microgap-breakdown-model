@@ -22,11 +22,11 @@ void write_fields(const std::filesystem::path& p, const AxisymmetricGrid& g, con
   const auto& s = solver.state();
   const auto source = solver.electron_transport_current_source();
   std::ofstream f(p);
-  f << "i,j,r_m,z_m,ne_m_3,np_m_3,nn_m_3,rho_C_m_3,phi_V,Er_V_m,Ez_V_m,E_V_m,Sph_m_3_s_1,Jr_RF_A_m2,Jz_RF_A_m2\n"
+  f << "i,j,time_s,r_m,z_m,ne_m_3,np_m_3,nn_m_3,rho_C_m_3,phi_V,Er_V_m,Ez_V_m,E_V_m,Sph_m_3_s_1,Jr_RF_A_m2,Jz_RF_A_m2\n"
     << std::setprecision(17);
   for (int j = 0; j < g.nz(); ++j) {
     for (int i = 0; i < g.nr(); ++i) {
-      f << i << ',' << j << ',' << g.r(i) << ',' << g.z(j) << ',' << s.ne(i, j) << ','
+      f << i << ',' << j << ',' << s.time << ',' << g.r(i) << ',' << g.z(j) << ',' << s.ne(i, j) << ','
         << s.np(i, j) << ',' << s.nn(i, j) << ',' << s.rho(i, j) << ',' << s.phi(i, j) << ','
         << s.er(i, j) << ',' << s.ez(i, j) << ',' << s.emag(i, j) << ',' << s.sph(i, j) << ','
         << source.jr(i, j) << ',' << source.jz(i, j) << '\n';
@@ -120,7 +120,7 @@ int main(int argc, char** argv) {
 
   if (argc < 19) {
     if (!rank) {
-      std::cerr << "usage: output nr nz tend E0 nref sp3 eta rmax zmax dt_scale n0 sigma z1 z2 mode max_steps minimum_dt_s post_event_s [--sigma2 value] [resume_checkpoint] [initial_step]\n";
+      std::cerr << "usage: output nr nz tend E0 nref sp3 eta rmax zmax dt_scale n0 sigma z1 z2 mode max_steps minimum_dt_s post_event_s [--sigma2 value] [--field-output-interval seconds] [resume_checkpoint] [initial_step]\n";
     }
     PetscFinalize();
     return 2;
@@ -138,12 +138,15 @@ int main(int argc, char** argv) {
   const double minimum_dt = std::stod(argv[18]);
   const double post_event = argc > 19 ? std::stod(argv[19]) : 0.2e-9;
   double sigma2 = sigma;
+  double fixed_field_output_interval = -1.0;
   std::filesystem::path resume_checkpoint;
   int initial_step = 0;
   for (int a = 20; a < argc; ++a) {
     const std::string opt = argv[a];
     if (opt == "--sigma2" && a + 1 < argc) {
       sigma2 = std::stod(argv[++a]);
+    } else if (opt == "--field-output-interval" && a + 1 < argc) {
+      fixed_field_output_interval = std::stod(argv[++a]);
     } else if (resume_checkpoint.empty()) {
       resume_checkpoint = std::filesystem::path(argv[a]);
     } else {
@@ -184,7 +187,7 @@ int main(int argc, char** argv) {
   std::ofstream hist, cm, coll;
   if (!rank) {
     hist.open(out / "scalar_history.csv", resuming ? std::ios::app : std::ios::out);
-    if (!resuming) hist << "step,time_s,dt_s,controller,E_max_V_m,ne_max_m_3,total_electrons,total_charge_C,rejected_steps,poisson_iterations,sp3_ksp_iterations,sp3_boundary_iterations,conservation_residual\n";
+    if (!resuming) hist << "step,time_s,dt_s,controller,E_max_V_m,ne_max_m_3,total_electrons,total_charge_C,rejected_steps,poisson_iterations,sp3_ksp_iterations,sp3_boundary_iterations,conservation_residual,current_continuity_residual,outer_boundary_current_A,plasma_charge_derivative_A\n";
     hist << std::setprecision(17);
     cm.open(out / "current_moment.csv", resuming ? std::ios::app : std::ios::out);
     if (!resuming) cm << "time,I_CM_drift,I_CM_electron,integral_abs_Jz,max_abs_Jz\n";
@@ -201,7 +204,7 @@ int main(int argc, char** argv) {
   CollisionMetrics last_metrics = collision_metrics(g, solver.state(), z1, z2);
   const double initial_bridge = std::max(last_metrics.bridge_mean_ne, 1.0);
   double gap_peak = std::max(last_metrics.gap_emax, 1.0);
-  next_output = solver.state().time + output_interval(last_metrics.d_head);
+  next_output = solver.state().time + (fixed_field_output_interval > 0.0 ? fixed_field_output_interval : output_interval(last_metrics.d_head));
 
   while (solver.state().time < tend && step < max_steps) {
     auto lim = solver.timestep_limits();
@@ -237,7 +240,8 @@ int main(int argc, char** argv) {
       hist << step << ',' << d.time << ',' << d.dt << ',' << lim.controller << ',' << d.emax << ','
            << d.ne_max << ',' << d.total_electrons << ',' << d.total_charge << ',' << rejected_steps << ','
            << d.poisson_iterations << ',' << d.sp3_ksp_iterations << ',' << d.sp3_boundary_iterations << ','
-           << d.conservation_residual << '\n';
+           << d.conservation_residual << ',' << d.current_continuity_residual << ','
+           << d.outer_boundary_current << ',' << d.plasma_charge_derivative << '\n';
       cm << d.time << ',' << I.drift << ',' << I.electron << ',' << I.integral_abs_jz << ',' << I.max_abs_jz << '\n';
       coll << d.time << ',' << last_metrics.left_inner_z << ',' << last_metrics.right_inner_z << ','
            << last_metrics.d_head << ',' << last_metrics.bridge_min_ne << ',' << last_metrics.bridge_mean_ne << ','
@@ -250,7 +254,7 @@ int main(int argc, char** argv) {
       write_fields(out / ("fields_" + std::to_string(step) + ".csv"), g, solver);
       solver.save_checkpoint(out / "checkpoint.bin");
       hist.flush(); cm.flush(); coll.flush();
-      next_output = s.time + output_interval(last_metrics.d_head);
+      next_output = s.time + (fixed_field_output_interval > 0.0 ? fixed_field_output_interval : output_interval(last_metrics.d_head));
     }
     if (event_time > 0.0 && post_event > 0.0 && s.time - event_time >= post_event) {
       termination = "reached_collision_post_window";
