@@ -1,0 +1,58 @@
+{
+  "STAGE_G1_STATUS": "PASS_CANDIDATE",
+  "conductive_gap": {
+    "Gb_S": 0.0002,
+    "energy_balance_residual_relative": 3.2534682361599616e-06,
+    "gap_loss_integrated_direct_J": 4.938718789155114e-09,
+    "gap_loss_integrated_solver_J": 4.938718789155129e-09,
+    "gap_loss_relative_error": 3.014800328103245e-15,
+    "max_KCL_residual_A": 2.0816681711721685e-17,
+    "max_KVL_residual_V": 1.4210854715202004e-14
+  },
+  "constant_rlc": {
+    "alpha_simulated_1_s": 4999892.262804554,
+    "alpha_theory_1_s": 5000000.0,
+    "damping_relative_error": 2.1547439089231194e-05,
+    "frequency_relative_error": 4.894988564200507e-05,
+    "omega0_theory_rad_s": 1000000000.0000001,
+    "omega_d_simulated_rad_s": 999938550.6481096,
+    "omega_d_theory_rad_s": 999987499.9218742
+  },
+  "coupling_validity": {
+    "ONE_WAY_COUPLING_ERROR": 0.0156463995100205,
+    "definition": "max |Vgap_circuit - Vgap_reference| / max |Vgap_reference|"
+  },
+  "ngspice": {
+    "NGSPICE_AVAILABLE": false,
+    "path": null,
+    "version": null
+  },
+  "ode_equations": {
+    "dI_L_dt": "(Vs(t) - Rs*I_L - Vgap)/L",
+    "dVgap_dt": "(I_L - Gb(t)*Vgap)/(Cext + Cgap)",
+    "gap_current": "I_gap = Gb(t)*Vgap + Cgap*dVgap/dt"
+  },
+  "ode_state": [
+    "I_L_A",
+    "Vgap_V"
+  ],
+  "open_gap": {
+    "energy_balance_residual_J": 1.9025154088719637e-23,
+    "max_KCL_residual_A": 2.0816681711721685e-17,
+    "max_KVL_residual_V": 1.4210854715202004e-14,
+    "max_cond_current_A": 0.0,
+    "max_disp_current_A": 0.019999998759211143
+  },
+  "runtime_s": 4.166402767999955,
+  "time_varying_G": {
+    "G_high_S": 0.0008,
+    "G_low_S": 1e-09,
+    "I_gap_total_peak_A": 0.02828536371350492,
+    "Vgap_final_V": -0.03457981764187423,
+    "Vgap_initial_V": 100.0,
+    "rise_end_s": 1.5e-08,
+    "rise_start_s": 5e-09,
+    "stable_no_nan": true
+  },
+  "topology": "Vs -> Rs -> L -> node; node -> ground via Cext || Cgap || Gb(t)"
+}

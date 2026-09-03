@@ -1,0 +1,15 @@
+case_id: G1-canonical-series-rlc-gap
+topology: voltage_source -> source_resistance -> inductor -> gap_node; gap_node -> ground through Cext || Cgap || Gb(t)
+units: SI
+parameters:
+  L_H: 1.0e-6
+  Cext_F: 1.0e-12
+  Cgap_F: 2.0e-14
+  Rs_ohm: 10.0
+  Cgap_source: synthetic
+source_voltage:
+  type: constant
+  voltage_V: 0.0
+conductance:
+  type: synthetic_piecewise_linear
+  note: G1 validation only; not Stage C production data
