@@ -15,4 +15,16 @@ ReactionSources evaluate_reactions(double ne,double np,double nn,double sph,cons
  s.negative_ion=s.attachment_two_body+s.attachment_three_body-s.ion_recombination;
  s.charge_balance=s.positive_ion-s.electron-s.negative_ion;return s;
 }
+ElectronReactionSourceComponents electron_reaction_source_components(double ne,double np,double nn,double sph,const TransportCoefficients& c,double T){
+ const auto s=evaluate_reactions(ne,np,nn,sph,c,T);
+ ElectronReactionSourceComponents out;
+ out.impact_source_m3s=s.ionization;
+ out.photo_source_m3s=sph;
+ out.attachment2_loss_m3s=s.attachment_two_body;
+ out.attachment3_loss_m3s=s.attachment_three_body;
+ out.electron_recombination_loss_m3s=s.electron_positive_recombination;
+ out.net_electron_reaction_source_m3s=s.electron;
+ out.algebraic_closure_residual_m3s=out.impact_source_m3s+out.photo_source_m3s-out.attachment2_loss_m3s-out.attachment3_loss_m3s-out.electron_recombination_loss_m3s-out.net_electron_reaction_source_m3s;
+ return out;
+}
 }

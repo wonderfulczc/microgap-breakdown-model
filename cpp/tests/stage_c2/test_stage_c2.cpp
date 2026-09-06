@@ -231,6 +231,88 @@ int main(int argc, char** argv) {
     check(legacy_lim.controller == "reaction" && legacy_lim.reaction < 1e-18, "legacy timestep regression unchanged");
 
     {
+      TransportCoefficients tc;
+      tc.mobility = 1.0;
+      tc.diffusion = 0.5;
+      tc.ionization_frequency = 7.0;
+      auto impact = electron_reaction_source_components(2.0, 0.0, 0.0, 0.0, tc, 300.0);
+      check(impact.impact_source_m3s == 14.0 && impact.net_electron_reaction_source_m3s == 14.0 &&
+                impact.algebraic_closure_residual_m3s == 0.0,
+            "reaction source decomposition impact-only closure");
+
+      tc.ionization_frequency = 0.0;
+      tc.attachment_two_body_frequency = 11.0;
+      tc.attachment_three_body_frequency = 13.0;
+      auto attach = electron_reaction_source_components(3.0, 0.0, 0.0, 0.0, tc, 300.0);
+      check(attach.attachment2_loss_m3s == 33.0 && attach.attachment3_loss_m3s == 39.0 &&
+                attach.net_electron_reaction_source_m3s == -72.0,
+            "reaction source decomposition separates 2-body and 3-body attachment");
+
+      tc.attachment_two_body_frequency = 0.0;
+      tc.attachment_three_body_frequency = 0.0;
+      auto recomb = electron_reaction_source_components(4.0, 5.0, 6.0, 0.0, tc, 300.0);
+      check(recomb.electron_recombination_loss_m3s > 0.0 &&
+                recomb.net_electron_reaction_source_m3s == -recomb.electron_recombination_loss_m3s,
+            "reaction source decomposition includes electron-positive recombination");
+
+      auto photo = electron_reaction_source_components(0.0, 0.0, 0.0, 9.0, tc, 300.0);
+      auto no_photo = electron_reaction_source_components(0.0, 0.0, 0.0, 0.0, tc, 300.0);
+      check(photo.photo_source_m3s == 9.0 && photo.net_electron_reaction_source_m3s == 9.0 &&
+                no_photo.photo_source_m3s == 0.0 && no_photo.net_electron_reaction_source_m3s == 0.0,
+            "reaction source decomposition maps SP3 source and SP3-off zero source");
+
+      check(impact.impact_source_m3s >= 0.0 && attach.attachment2_loss_m3s >= 0.0 &&
+                attach.attachment3_loss_m3s >= 0.0 && recomb.electron_recombination_loss_m3s >= 0.0,
+            "reaction source decomposition component magnitudes are nonnegative");
+    }
+
+    {
+      AxisymmetricGrid sg(8, 16, 80e-6, 0.0, 90e-6);
+      AxisymmetricNeedlePlaneGeometry sgeom("stage-c2-source-decomp-test", 0.0, 75e-6, 5e-6, 2.5e-6, 5e-6);
+      ConstantVoltage svoltage(500.0);
+      auto scfg2 = electrode_config(sgeom, svoltage, false);
+      scfg2.n_ref = 1e12;
+      StreamerSolver src_solver(sg, scfg2);
+      src_solver.initialize_gaussian_at_tip_offset(0.0, 3e-6, -10e-6);
+      set_uniform_field(src_solver, sg, 3.0e6);
+      for (int j = 0; j < sg.nz(); ++j) {
+        for (int i = 0; i < sg.nr(); ++i) {
+          if (sgeom.classify(sg, i, j) == ElectrodeCellType::Gas) {
+            src_solver.state().ne(i, j) = 1.0e12 * (1 + i + j);
+            src_solver.state().np(i, j) = 0.5e12 * (1 + i);
+            src_solver.state().nn(i, j) = 0.25e12 * (1 + j);
+            src_solver.state().sph(i, j) = 1.0e18;
+          } else {
+            src_solver.state().ne(i, j) = src_solver.state().np(i, j) = 1e30;
+            src_solver.state().nn(i, j) = 1e30;
+            src_solver.state().sph(i, j) = 1e40;
+          }
+        }
+      }
+      auto sdg = src_solver.reaction_source_decomposition_diagnostics();
+      double manual_impact = 0.0, manual_photo = 0.0, manual_net = 0.0;
+      int manual_gas = 0;
+      for (int j = 0; j < sg.nz(); ++j) {
+        for (int i = 0; i < sg.nr(); ++i) {
+          if (sgeom.classify(sg, i, j) != ElectrodeCellType::Gas) continue;
+          ++manual_gas;
+          auto q = evaluate_morrow_lowke(src_solver.state().emag(i, j), scfg2.neutral_density, scfg2.pressure, scfg2.temperature);
+          auto s = evaluate_reactions(src_solver.state().ne(i, j), src_solver.state().np(i, j), src_solver.state().nn(i, j),
+                                      src_solver.state().sph(i, j), q, scfg2.temperature);
+          manual_impact += s.ionization * sg.cell_volume(i);
+          manual_photo += src_solver.state().sph(i, j) * sg.cell_volume(i);
+          manual_net += s.electron * sg.cell_volume(i);
+        }
+      }
+      check(sdg.gas_cells == manual_gas && relerr(sdg.impact_rate_s1, manual_impact) < 1e-14 &&
+                relerr(sdg.photo_rate_s1, manual_photo) < 1e-14 && relerr(sdg.net_electron_reaction_rate_s1, manual_net) < 1e-14,
+            "reaction source decomposition uses gas mask and axisymmetric volume integration");
+      check(sdg.source_closure_abs_s1 <= 1e-6 * std::max(std::abs(sdg.net_electron_reaction_rate_s1), 1.0) &&
+                sdg.source_closure_rel < 1e-14 && sdg.source_stage == "PRE_LIMITER",
+            "reaction source decomposition algebraic closure is exact before positivity limiter");
+    }
+
+    {
       AxisymmetricGrid lg(12, 80, 0.6e-3, 0.0, 2.0e-3);
       StreamerConfig lcfg;
       lcfg.photoionization = false;

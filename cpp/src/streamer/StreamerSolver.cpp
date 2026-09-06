@@ -103,6 +103,28 @@ ConductanceDiagnostics StreamerSolver::conductance_diagnostics(double voltage)co
  else{d.gb=std::numeric_limits<double>::quiet_NaN();d.rb=std::numeric_limits<double>::quiet_NaN();}
  return d;
 }
+ReactionSourceDecompositionDiagnostics StreamerSolver::reaction_source_decomposition_diagnostics()const{
+ ReactionSourceDecompositionDiagnostics d;
+ for(int j=0;j<g_.nz();++j)for(int i=0;i<g_.nr();++i){
+  if(!is_gas(i,j))continue;
+  ++d.gas_cells;
+  const auto q=evaluate_morrow_lowke(state_.emag(i,j),c_.neutral_density,c_.pressure,c_.temperature);
+  const auto s=electron_reaction_source_components(state_.ne(i,j),state_.np(i,j),state_.nn(i,j),state_.sph(i,j),q,c_.temperature);
+  const double vol=g_.cell_volume(i);
+  d.impact_rate_s1+=s.impact_source_m3s*vol;
+  d.photo_rate_s1+=s.photo_source_m3s*vol;
+  d.attach2_rate_s1+=s.attachment2_loss_m3s*vol;
+  d.attach3_rate_s1+=s.attachment3_loss_m3s*vol;
+  d.recomb_e_rate_s1+=s.electron_recombination_loss_m3s*vol;
+  d.net_electron_reaction_rate_s1+=s.net_electron_reaction_source_m3s*vol;
+  d.local_source_closure_max_abs_m3s=std::max(d.local_source_closure_max_abs_m3s,std::abs(s.algebraic_closure_residual_m3s));
+ }
+ const double component_net=d.impact_rate_s1+d.photo_rate_s1-d.attach2_rate_s1-d.attach3_rate_s1-d.recomb_e_rate_s1;
+ d.source_closure_abs_s1=std::abs(component_net-d.net_electron_reaction_rate_s1);
+ const double denom=std::abs(d.impact_rate_s1)+std::abs(d.photo_rate_s1)+std::abs(d.attach2_rate_s1)+std::abs(d.attach3_rate_s1)+std::abs(d.recomb_e_rate_s1)+std::abs(d.net_electron_reaction_rate_s1);
+ d.source_closure_rel=denom>0.0?d.source_closure_abs_s1/denom:(d.source_closure_abs_s1==0.0?0.0:std::numeric_limits<double>::infinity());
+ return d;
+}
 ElectronTransportCurrentSource StreamerSolver::electron_transport_current_source()const{
  ElectronTransportCurrentSource out(g_);
  auto radial_face_flux=[&](int left_i,int right_i,int j)->double{

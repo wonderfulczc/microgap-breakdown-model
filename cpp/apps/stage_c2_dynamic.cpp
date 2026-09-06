@@ -36,6 +36,7 @@ struct Options {
   bool screen_only{false};
   bool debug_reaction_limit{false};
   bool lfa_audit{false};
+  bool source_decomposition{false};
 };
 
 Options parse(int argc, char** argv) {
@@ -61,6 +62,7 @@ Options parse(int argc, char** argv) {
     else if (a == "--screen-only") o.screen_only = true;
     else if (a == "--debug-reaction-limit") o.debug_reaction_limit = true;
     else if (a == "--lfa-audit") o.lfa_audit = true;
+    else if (a == "--source-decomposition") o.source_decomposition = true;
     else throw std::runtime_error("unknown option " + a);
   }
   return o;
@@ -155,6 +157,7 @@ int main(int argc, char** argv) {
          << "head_ne_threshold_m_3=" << cfg.head_ne_threshold << "\nbridge_ne_threshold_m_3=" << cfg.bridge_ne_threshold << "\n"
          << "max_steps=" << opt.max_steps << "\ndt_scale=" << opt.dt_scale << "\ndt_cap_s=" << opt.dt_cap << "\n";
     if (opt.lfa_audit) meta << "lfa_audit=1\n";
+    if (opt.source_decomposition) meta << "source_decomposition=1\n";
     meta << "Ek_V_m=" << Ek << "\nEavg_V_m=" << eavg << "\nzero_charge_Emax_V_m=" << initial_electrostatic_emax
          << "\nEavg_over_Ek=" << eavg / Ek << "\nzero_charge_Emax_over_Ek=" << initial_electrostatic_emax / Ek
          << "\nzero_charge_EoverN_max_Td=" << initial_eover_n_max << "\n";
@@ -178,6 +181,7 @@ int main(int argc, char** argv) {
   std::ofstream diag;
   std::ofstream reaction_debug;
   std::ofstream lfa_csv;
+  std::ofstream source_csv;
   if (!rank) {
     diag.open(opt.out / "diagnostics.csv");
     diag << "step,time,dt,dt_controller,voltage,Emax,EoverN_max_Td,ne_max,np_max,nn_max,total_electrons,total_charge,conservation_residual,sigma_max,head_position,head_velocity,bridge_flag,absorbed_electron_hv,absorbed_electron_ground,poisson_iterations,rejected_retries\n"
@@ -198,12 +202,20 @@ int main(int argc, char** argv) {
                  "lfa_applicability\n"
               << std::setprecision(17);
     }
+    if (opt.source_decomposition) {
+      source_csv.open(opt.out / "reaction_source_diagnostics.csv");
+      source_csv << "step,time_s,dt_s,impact_rate_s_1,photo_rate_s_1,attach2_rate_s_1,attach3_rate_s_1,"
+                    "recomb_e_rate_s_1,net_electron_reaction_rate_s_1,source_closure_abs_s_1,"
+                    "source_closure_rel,local_source_closure_max_abs_m_3_s_1,gas_cells,source_stage\n"
+                 << std::setprecision(17);
+    }
   }
 
   StreamerDiagnostics d;
   const auto lfa_regions = default_lfa_audit_regions();
   std::vector<LfaAuditHistory> lfa_histories(lfa_regions.size());
   std::vector<LfaAuditSummary> last_lfa_summaries(lfa_regions.size());
+  ReactionSourceDecompositionDiagnostics last_source_decomp;
   double max_head_velocity = 0.0;
   double bridge_time = -1.0;
   double max_emax = initial_electrostatic_emax;
@@ -237,6 +249,7 @@ int main(int argc, char** argv) {
         last_lfa_summaries[n] = lfa_histories[n].sample(g, solver.state(), cfg, d.dt, nullptr, nullptr, lfa_regions[n]);
       }
     }
+    if (opt.source_decomposition) last_source_decomp = solver.reaction_source_decomposition_diagnostics();
     ++accepted_steps;
     total_retries += retries;
     controller_counts[lim.controller]++;
@@ -270,6 +283,15 @@ int main(int argc, char** argv) {
                   << last_lfa.fraction_outside_relaxation_table << ',' << last_lfa.temporal_status << ','
                   << last_lfa.lfa_relaxation_data_status << ',' << last_lfa.lfa_applicability << '\n';
         }
+      }
+      if (opt.source_decomposition) {
+        source_csv << step << ',' << d.time << ',' << d.dt << ',' << last_source_decomp.impact_rate_s1 << ','
+                   << last_source_decomp.photo_rate_s1 << ',' << last_source_decomp.attach2_rate_s1 << ','
+                   << last_source_decomp.attach3_rate_s1 << ',' << last_source_decomp.recomb_e_rate_s1 << ','
+                   << last_source_decomp.net_electron_reaction_rate_s1 << ',' << last_source_decomp.source_closure_abs_s1
+                   << ',' << last_source_decomp.source_closure_rel << ','
+                   << last_source_decomp.local_source_closure_max_abs_m3s << ',' << last_source_decomp.gas_cells
+                   << ',' << last_source_decomp.source_stage << '\n';
       }
       if ((step == 5 || step == 30 || step == 80 || d.bridge_flag) && snapshots < 4) {
         write_fields(opt.out / ("fields_snapshot_" + std::to_string(step) + ".csv"), g, solver.state(), geom);
@@ -326,6 +348,19 @@ int main(int argc, char** argv) {
                 << "\nlfa_region_" << region_summary.region_name << "_coverage_fraction="
                 << region_summary.relaxation_coverage_fraction << "\n";
       }
+    }
+    if (opt.source_decomposition && accepted_steps > 0) {
+      summary << "source_decomposition_stage=" << last_source_decomp.source_stage
+              << "\nimpact_rate_s_1=" << last_source_decomp.impact_rate_s1
+              << "\nphoto_rate_s_1=" << last_source_decomp.photo_rate_s1
+              << "\nattach2_rate_s_1=" << last_source_decomp.attach2_rate_s1
+              << "\nattach3_rate_s_1=" << last_source_decomp.attach3_rate_s1
+              << "\nrecomb_e_rate_s_1=" << last_source_decomp.recomb_e_rate_s1
+              << "\nnet_electron_reaction_rate_s_1=" << last_source_decomp.net_electron_reaction_rate_s1
+              << "\nsource_closure_abs_s_1=" << last_source_decomp.source_closure_abs_s1
+              << "\nsource_closure_rel=" << last_source_decomp.source_closure_rel
+              << "\nlocal_source_closure_max_abs_m_3_s_1=" << last_source_decomp.local_source_closure_max_abs_m3s
+              << "\nsource_decomposition_gas_cells=" << last_source_decomp.gas_cells << "\n";
     }
     std::cout << "stage_c2_dynamic ranks=" << size << " status=" << (ok ? "PASS" : "FAILED_STEP")
               << " case=" << opt.case_id << " final_time=" << solver.state().time
