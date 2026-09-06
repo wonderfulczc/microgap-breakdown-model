@@ -1,11 +1,15 @@
 #include "streamer_rf/streamer/StreamerSolver.hpp"
+#include "streamer_rf/streamer/LfaAudit.hpp"
 #include "streamer_rf/transport.hpp"
 #include "streamer_rf/voltage_waveform.hpp"
 #include <petscsys.h>
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+#include <limits>
+#include <optional>
 #include <stdexcept>
+#include <vector>
 
 using namespace streamer_rf;
 using namespace streamer_rf::streamer;
@@ -43,6 +47,41 @@ void set_uniform_field(StreamerSolver& solver, const AxisymmetricGrid& g, double
       solver.state().sph(i, j) = 0.0;
     }
   }
+}
+
+void fill_exponential_z(StreamerState& state, const AxisymmetricGrid& g, double e0, double scale) {
+  for (int j = 0; j < g.nz(); ++j) {
+    for (int i = 0; i < g.nr(); ++i) {
+      state.er(i, j) = 0.0;
+      state.ez(i, j) = e0 * std::exp(g.z(j) / scale);
+      state.emag(i, j) = std::abs(state.ez(i, j));
+    }
+  }
+}
+
+double relerr(double a, double b) {
+  return std::abs(a - b) / std::max(std::abs(b), 1e-300);
+}
+
+ElectronRelaxationMetadata synthetic_relaxation_metadata() {
+  ElectronRelaxationMetadata m;
+  m.source_id = "synthetic-unit-test";
+  m.source_reference = "C-R1c deterministic synthetic table";
+  m.gas_composition = "synthetic air";
+  m.pressure_Pa = 101325.0;
+  m.temperature_K = 300.0;
+  m.neutral_density_m3 = 101325.0 / (1.380649e-23 * 300.0);
+  return m;
+}
+
+bool throws_invalid_relaxation_table(std::vector<double> eovern, std::optional<std::vector<double>> tau,
+                                     std::optional<std::vector<double>> lambda) {
+  try {
+    ElectronRelaxationTable bad(synthetic_relaxation_metadata(), std::move(eovern), std::move(tau), std::move(lambda));
+  } catch (const std::invalid_argument&) {
+    return true;
+  }
+  return false;
 }
 }  // namespace
 
@@ -190,6 +229,184 @@ int main(int argc, char** argv) {
     legacy.state().ne(7, 15) = legacy.state().np(7, 15) = 50.0 * legacy.numerical_density_tolerance();
     auto legacy_lim = legacy.timestep_limits();
     check(legacy_lim.controller == "reaction" && legacy_lim.reaction < 1e-18, "legacy timestep regression unchanged");
+
+    {
+      AxisymmetricGrid lg(12, 80, 0.6e-3, 0.0, 2.0e-3);
+      StreamerConfig lcfg;
+      lcfg.photoionization = false;
+      StreamerState ls(lg);
+      const double L0 = 0.45e-3;
+      fill_exponential_z(ls, lg, 2.0e5, L0);
+      auto audit = compute_lfa_audit(lg, ls, lcfg, 0.0);
+      check(audit.le_valid_fraction > 0.95 && relerr(audit.le_median_m, L0) < 2e-3,
+            "LFA spatial field scale recovers exponential scale");
+      check(audit.tauE_valid_fraction == 0.0 && audit.temporal_status == "INVALID_INITIAL_SAMPLE",
+            "LFA initial temporal sample invalid");
+    }
+
+    {
+      AxisymmetricGrid tg(10, 16, 0.5e-3, 0.0, 0.8e-3);
+      StreamerConfig tcfg;
+      tcfg.photoionization = false;
+      StreamerState old_s(tg), new_s(tg);
+      const double tau0 = 2.5e-12;
+      const double dt1 = 3.0e-14;
+      fill_exponential_z(old_s, tg, 1.0e6, 0.3e-3);
+      fill_exponential_z(new_s, tg, 1.0e6 * std::exp(dt1 / tau0), 0.3e-3);
+      auto ta = compute_lfa_audit(tg, new_s, tcfg, dt1, &old_s.emag);
+      check(ta.temporal_status == "VALID" && ta.tauE_valid_fraction > 0.99 && relerr(ta.tauE_median_s, tau0) < 0.01,
+            "LFA temporal field scale recovers exponential scale");
+      const double dt2 = 7.0e-14;
+      fill_exponential_z(new_s, tg, 1.0e6 * std::exp(dt2 / tau0), 0.3e-3);
+      auto tb = compute_lfa_audit(tg, new_s, tcfg, dt2, &old_s.emag);
+      check(tb.temporal_status == "VALID" && tb.tauE_valid_fraction > 0.99 && relerr(tb.tauE_median_s, tau0) < 0.02,
+            "LFA temporal field scale handles variable accepted dt");
+    }
+
+    {
+      AxisymmetricGrid zg(8, 10, 0.4e-3, 0.0, 0.5e-3);
+      StreamerConfig zcfg;
+      StreamerState zs(zg);
+      for (int j = 0; j < zg.nz(); ++j) {
+        for (int i = 0; i < zg.nr(); ++i) zs.emag(i, j) = 3.0e6;
+      }
+      auto za = compute_lfa_audit(zg, zs, zcfg, 0.0);
+      check(za.le_valid_fraction == 0.0 && za.near_zero_gradE_cells == za.selected_gas_cells,
+            "LFA near-zero spatial gradient is explicitly invalid");
+      StreamerState zn(zg);
+      fill_exponential_z(zn, zg, 2.0e5, 0.2e-3);
+      zn.emag(3, 4) = std::numeric_limits<double>::quiet_NaN();
+      auto nf = compute_lfa_audit(zg, zn, zcfg, 0.0);
+      check(nf.nonfinite_input_cells > 0 && std::isfinite(nf.eovern_max_Td), "LFA nonfinite field input is counted");
+    }
+
+    {
+      AxisymmetricGrid mg(8, 16, 80e-6, 0.0, 90e-6);
+      AxisymmetricNeedlePlaneGeometry mgeom("stage-c2-lfa-mask-test", 0.0, 75e-6, 5e-6, 2.5e-6, 5e-6);
+      ConstantVoltage mvoltage(500.0);
+      auto mcfg = electrode_config(mgeom, mvoltage, false);
+      StreamerState ms(mg);
+      fill_exponential_z(ms, mg, 1.0e6, 25e-6);
+      int conductor_cells = 0;
+      for (int j = 0; j < mg.nz(); ++j) {
+        for (int i = 0; i < mg.nr(); ++i) {
+          if (mgeom.classify(mg, i, j) != ElectrodeCellType::Gas) {
+            ++conductor_cells;
+            ms.emag(i, j) = 1.0e99;
+          }
+        }
+      }
+      auto ma = compute_lfa_audit(mg, ms, mcfg, 0.0);
+      check(conductor_cells > 0 && ma.gas_cells + conductor_cells == mg.nr() * mg.nz() && ma.eovern_max_Td < 1e10,
+            "LFA audit excludes conductor cells");
+      std::vector<unsigned char> mask(mg.size(), 0);
+      int selected = 0;
+      for (int j = 0; j < mg.nz(); ++j) {
+        for (int i = 0; i < mg.nr(); ++i) {
+          if (mgeom.classify(mg, i, j) == ElectrodeCellType::Gas && mg.z(j) < 50e-6) {
+            mask[static_cast<std::size_t>(j) * mg.nr() + i] = 1;
+            ++selected;
+          }
+        }
+      }
+      auto masked = compute_lfa_audit(mg, ms, mcfg, 0.0, nullptr, &mask);
+      check(masked.selected_gas_cells == selected && masked.selected_gas_cells < masked.gas_cells,
+            "LFA optional gas-cell mask restricts summary region");
+    }
+
+    {
+      auto meta = synthetic_relaxation_metadata();
+      ElectronRelaxationTable table(meta, {10.0, 20.0, 40.0}, std::vector<double>{1e-12, 2e-12, 4e-12},
+                                    std::vector<double>{1e-6, 2e-6, 4e-6});
+      auto mid = table.lookup(15.0);
+      check(mid.status == "IN_RANGE" && mid.has_tau_epsilon && mid.has_lambda_epsilon &&
+                relerr(mid.tau_epsilon_s, 1.5e-12) < 1e-14 && relerr(mid.lambda_epsilon_m, 1.5e-6) < 1e-14,
+            "electron relaxation table interpolates linearly");
+      auto lo = table.lookup(10.0);
+      auto hi = table.lookup(40.0);
+      check(lo.status == "IN_RANGE" && hi.status == "IN_RANGE" && lo.tau_epsilon_s == 1e-12 &&
+                hi.lambda_epsilon_m == 4e-6,
+            "electron relaxation table handles exact bounds");
+      auto outside = table.lookup(5.0);
+      check(outside.status == "OUTSIDE_RELAXATION_TABLE_RANGE" && !outside.has_tau_epsilon,
+            "electron relaxation table rejects silent extrapolation");
+      check(throws_invalid_relaxation_table({10.0, 10.0, 40.0}, std::vector<double>{1e-12, 2e-12, 4e-12},
+                                            std::vector<double>{1e-6, 2e-6, 4e-6}),
+            "electron relaxation table rejects duplicate E/N");
+      check(throws_invalid_relaxation_table({20.0, 10.0, 40.0}, std::vector<double>{1e-12, 2e-12, 4e-12},
+                                            std::vector<double>{1e-6, 2e-6, 4e-6}),
+            "electron relaxation table rejects nonmonotonic E/N");
+      check(throws_invalid_relaxation_table({10.0, 20.0}, std::vector<double>{1e-12, -2e-12},
+                                            std::vector<double>{1e-6, 2e-6}),
+            "electron relaxation table rejects nonpositive relaxation quantities");
+      ElectronRelaxationTable tau_only(meta, {10.0, 20.0}, std::vector<double>{1e-12, 2e-12}, std::nullopt);
+      ElectronRelaxationTable lambda_only(meta, {10.0, 20.0}, std::nullopt, std::vector<double>{1e-6, 2e-6});
+      check(tau_only.has_tau_epsilon() && !tau_only.has_lambda_epsilon() &&
+                lambda_only.has_lambda_epsilon() && !lambda_only.has_tau_epsilon(),
+            "electron relaxation table supports missing tau or lambda");
+    }
+
+    {
+      AxisymmetricGrid cg(10, 64, 0.5e-3, 0.0, 1.0e-3);
+      StreamerConfig ccfg;
+      ccfg.photoionization = false;
+      StreamerState cold(cg), cnew(cg);
+      const double L0 = 0.8e-3;
+      const double tau0 = 3.0e-12;
+      const double dt = 4.0e-14;
+      fill_exponential_z(cold, cg, 1.0e6, L0);
+      fill_exponential_z(cnew, cg, 1.0e6 * std::exp(dt / tau0), L0);
+      ElectronRelaxationTable table(synthetic_relaxation_metadata(), {1.0, 100.0, 1000.0},
+                                    std::vector<double>{6e-12, 6e-12, 6e-12},
+                                    std::vector<double>{2e-6, 2e-6, 2e-6});
+      auto chi = compute_lfa_audit(cg, cnew, ccfg, dt, &cold.emag, nullptr, &table);
+      check(chi.lfa_relaxation_data_status == "AVAILABLE_TAU_AND_LAMBDA" &&
+                chi.lfa_applicability == "UNRESOLVED_NO_APPROVED_CRITERION",
+            "LFA chi audit keeps applicability unresolved without approved criterion");
+      check(chi.chiL_valid_cells > 0 && relerr(chi.chiL_median, 2e-6 / L0) < 0.01,
+            "LFA chi_L reconstructs lambda over L_E");
+      check(chi.chiT_valid_cells > 0 && relerr(chi.chiT_median, 6e-12 / tau0) < 0.02,
+            "LFA chi_t reconstructs tau over tau_E");
+      auto no_data = compute_lfa_audit(cg, cnew, ccfg, dt, &cold.emag);
+      check(no_data.lfa_relaxation_data_status == "NOT_AVAILABLE" && no_data.chiL_valid_cells == 0 &&
+                no_data.chiT_valid_cells == 0,
+            "LFA no-relaxation-data path produces no fake chi values");
+      ElectronRelaxationTable narrow(synthetic_relaxation_metadata(), {1.0, 2.0}, std::vector<double>{1e-12, 2e-12},
+                                     std::vector<double>{1e-6, 2e-6});
+      auto outside = compute_lfa_audit(cg, cnew, ccfg, dt, &cold.emag, nullptr, &narrow);
+      check(outside.fraction_outside_relaxation_table > 0.9 && outside.relaxation_coverage_fraction < 0.1,
+            "LFA audit reports outside relaxation table coverage");
+      StreamerState flat_old(cg), flat_new(cg);
+      for (int j = 0; j < cg.nz(); ++j) {
+        for (int i = 0; i < cg.nr(); ++i) flat_old.emag(i, j) = flat_new.emag(i, j) = 1.0e6;
+      }
+      auto invalid = compute_lfa_audit(cg, flat_new, ccfg, dt, &flat_old.emag, nullptr, &table);
+      check(invalid.chiL_valid_cells == 0 && invalid.chiT_valid_cells == 0,
+            "LFA chi audit excludes invalid L_E and tau_E cells");
+    }
+
+    {
+      AxisymmetricGrid rg2(10, 30, 0.5e-3, 0.0, 1.5e-3);
+      StreamerConfig rcfg2;
+      rcfg2.photoionization = false;
+      rcfg2.n_ref = 1e8;
+      StreamerState rs(rg2);
+      fill_exponential_z(rs, rg2, 1.0e5, 0.3e-3);
+      for (int j = 0; j < rg2.nz(); ++j) {
+        for (int i = 0; i < rg2.nr(); ++i) rs.ne(i, j) = j > rg2.nz() / 2 ? 1e12 : 0.0;
+      }
+      auto regions = default_lfa_audit_regions();
+      auto all = compute_lfa_audit(rg2, rs, rcfg2, 0.0, nullptr, nullptr, nullptr, regions[0]);
+      auto active = compute_lfa_audit(rg2, rs, rcfg2, 0.0, nullptr, nullptr, nullptr, regions[1]);
+      auto high = compute_lfa_audit(rg2, rs, rcfg2, 0.0, nullptr, nullptr, nullptr, regions[2]);
+      check(all.region_name == "ALL_GAS" && active.region_name == "ACTIVE_ELECTRON" &&
+                high.region_name == "HIGH_FIELD",
+            "LFA default region names are stable");
+      check(active.selected_gas_cells < all.selected_gas_cells && active.selected_gas_cells > 0,
+            "LFA active-electron region uses numerical electron mask");
+      check(high.selected_gas_cells < all.selected_gas_cells && high.selected_gas_cells > 0,
+            "LFA high-field region uses diagnostic relative field mask");
+    }
 
     std::cout << "passed " << checks << " Stage C2 C++ checks\n";
   } catch (const std::exception& e) {

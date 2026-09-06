@@ -8,7 +8,8 @@ pkg_check_modules(PETSC REQUIRED IMPORTED_TARGET PETSc)
 add_library(streamer_rf_numerics
   cpp/src/grid.cpp cpp/src/transport.cpp cpp/src/petsc_solver.cpp cpp/src/poisson.cpp cpp/src/sp3.cpp
   cpp/src/electrode.cpp cpp/src/voltage_waveform.cpp
-  cpp/src/streamer/MorrowLowke.cpp cpp/src/streamer/ReactionModel.cpp cpp/src/streamer/StreamerSolver.cpp)
+  cpp/src/streamer/MorrowLowke.cpp cpp/src/streamer/ReactionModel.cpp cpp/src/streamer/StreamerSolver.cpp
+  cpp/src/streamer/LfaAudit.cpp)
 target_include_directories(streamer_rf_numerics PUBLIC cpp/include)
 target_link_libraries(streamer_rf_numerics PUBLIC PkgConfig::PETSC MPI::MPI_CXX)
 target_compile_options(streamer_rf_numerics PRIVATE -Wall -Wextra -Wpedantic)

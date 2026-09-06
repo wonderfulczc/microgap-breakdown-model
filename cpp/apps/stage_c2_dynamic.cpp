@@ -1,4 +1,5 @@
 #include "streamer_rf/streamer/StreamerSolver.hpp"
+#include "streamer_rf/streamer/LfaAudit.hpp"
 #include "streamer_rf/voltage_waveform.hpp"
 #include <petscsys.h>
 #include <algorithm>
@@ -34,6 +35,7 @@ struct Options {
   double bridge_threshold{1e15};
   bool screen_only{false};
   bool debug_reaction_limit{false};
+  bool lfa_audit{false};
 };
 
 Options parse(int argc, char** argv) {
@@ -58,6 +60,7 @@ Options parse(int argc, char** argv) {
     else if (a == "--bridge-threshold") o.bridge_threshold = std::stod(need("--bridge-threshold"));
     else if (a == "--screen-only") o.screen_only = true;
     else if (a == "--debug-reaction-limit") o.debug_reaction_limit = true;
+    else if (a == "--lfa-audit") o.lfa_audit = true;
     else throw std::runtime_error("unknown option " + a);
   }
   return o;
@@ -151,6 +154,7 @@ int main(int argc, char** argv) {
          << "grid_nr=20\ngrid_nz=48\nrmax_m=8e-5\nzmax_m=9e-5\nphotoionization=" << opt.sp3 << "\n"
          << "head_ne_threshold_m_3=" << cfg.head_ne_threshold << "\nbridge_ne_threshold_m_3=" << cfg.bridge_ne_threshold << "\n"
          << "max_steps=" << opt.max_steps << "\ndt_scale=" << opt.dt_scale << "\ndt_cap_s=" << opt.dt_cap << "\n";
+    if (opt.lfa_audit) meta << "lfa_audit=1\n";
     meta << "Ek_V_m=" << Ek << "\nEavg_V_m=" << eavg << "\nzero_charge_Emax_V_m=" << initial_electrostatic_emax
          << "\nEavg_over_Ek=" << eavg / Ek << "\nzero_charge_Emax_over_Ek=" << initial_electrostatic_emax / Ek
          << "\nzero_charge_EoverN_max_Td=" << initial_eover_n_max << "\n";
@@ -173,6 +177,7 @@ int main(int argc, char** argv) {
 
   std::ofstream diag;
   std::ofstream reaction_debug;
+  std::ofstream lfa_csv;
   if (!rank) {
     diag.open(opt.out / "diagnostics.csv");
     diag << "step,time,dt,dt_controller,voltage,Emax,EoverN_max_Td,ne_max,np_max,nn_max,total_electrons,total_charge,conservation_residual,sigma_max,head_position,head_velocity,bridge_flag,absorbed_electron_hv,absorbed_electron_ground,poisson_iterations,rejected_retries\n"
@@ -182,9 +187,23 @@ int main(int argc, char** argv) {
       reaction_debug << "step,global_controller,i,j,r_m,z_m,cell_type,E_V_m,EoverN_Td,ne_m_3,np_m_3,nn_m_3,nu_ion_s_1,nu_att2_s_1,nu_att3_s_1,recombination_frequency_s_1,reaction_dt_s,ne_max_m_3,numerical_density_tolerance_m_3\n"
                      << std::setprecision(17);
     }
+    if (opt.lfa_audit) {
+      lfa_csv.open(opt.out / "lfa_audit.csv");
+      lfa_csv << "step,time_s,dt_s,region,EoverN_max_Td,LE_min_valid_m,LE_p05_m,LE_median_m,LE_valid_fraction,"
+                 "tauE_min_valid_s,tauE_p05_s,tauE_median_s,tauE_valid_fraction,gas_cells,selected_gas_cells,"
+                 "LE_valid_cells,tauE_valid_cells,insufficient_stencil_cells,near_zero_gradE_cells,"
+                 "near_zero_dEdt_cells,nonfinite_input_cells,chiL_p95,chiL_median,chiT_p95,chiT_median,"
+                 "relaxation_coverage_fraction,relaxation_table_min_Td,relaxation_table_max_Td,"
+                 "fraction_outside_relaxation_table,temporal_status,lfa_relaxation_data_status,"
+                 "lfa_applicability\n"
+              << std::setprecision(17);
+    }
   }
 
   StreamerDiagnostics d;
+  const auto lfa_regions = default_lfa_audit_regions();
+  std::vector<LfaAuditHistory> lfa_histories(lfa_regions.size());
+  std::vector<LfaAuditSummary> last_lfa_summaries(lfa_regions.size());
   double max_head_velocity = 0.0;
   double bridge_time = -1.0;
   double max_emax = initial_electrostatic_emax;
@@ -213,6 +232,11 @@ int main(int argc, char** argv) {
       dt *= 0.5;
     }
     if (!ok || !std::isfinite(d.emax) || !std::isfinite(d.ne_max)) break;
+    if (opt.lfa_audit) {
+      for (std::size_t n = 0; n < lfa_regions.size(); ++n) {
+        last_lfa_summaries[n] = lfa_histories[n].sample(g, solver.state(), cfg, d.dt, nullptr, nullptr, lfa_regions[n]);
+      }
+    }
     ++accepted_steps;
     total_retries += retries;
     controller_counts[lim.controller]++;
@@ -230,6 +254,23 @@ int main(int argc, char** argv) {
            << d.conservation_residual << ',' << d.sigma_max << ',' << d.head_position << ',' << d.head_velocity << ','
            << d.bridge_flag << ',' << d.absorbed_electron_hv << ',' << d.absorbed_electron_ground << ','
            << d.poisson_iterations << ',' << retries << '\n';
+      if (opt.lfa_audit) {
+        for (const auto& last_lfa : last_lfa_summaries) {
+          lfa_csv << step << ',' << d.time << ',' << d.dt << ',' << last_lfa.region_name << ','
+                  << last_lfa.eovern_max_Td << ',' << last_lfa.le_min_valid_m << ',' << last_lfa.le_p05_m << ','
+                  << last_lfa.le_median_m << ',' << last_lfa.le_valid_fraction << ',' << last_lfa.tauE_min_valid_s
+                  << ',' << last_lfa.tauE_p05_s << ',' << last_lfa.tauE_median_s << ','
+                  << last_lfa.tauE_valid_fraction << ',' << last_lfa.gas_cells << ',' << last_lfa.selected_gas_cells
+                  << ',' << last_lfa.le_valid_cells << ',' << last_lfa.tauE_valid_cells << ','
+                  << last_lfa.insufficient_stencil_cells << ',' << last_lfa.near_zero_gradE_cells << ','
+                  << last_lfa.near_zero_dEdt_cells << ',' << last_lfa.nonfinite_input_cells << ','
+                  << last_lfa.chiL_p95 << ',' << last_lfa.chiL_median << ',' << last_lfa.chiT_p95 << ','
+                  << last_lfa.chiT_median << ',' << last_lfa.relaxation_coverage_fraction << ','
+                  << last_lfa.relaxation_table_min_Td << ',' << last_lfa.relaxation_table_max_Td << ','
+                  << last_lfa.fraction_outside_relaxation_table << ',' << last_lfa.temporal_status << ','
+                  << last_lfa.lfa_relaxation_data_status << ',' << last_lfa.lfa_applicability << '\n';
+        }
+      }
       if ((step == 5 || step == 30 || step == 80 || d.bridge_flag) && snapshots < 4) {
         write_fields(opt.out / ("fields_snapshot_" + std::to_string(step) + ".csv"), g, solver.state(), geom);
         write_axis_profile(opt.out / ("axis_profile_" + std::to_string(step) + ".csv"), g, solver.state());
@@ -266,6 +307,26 @@ int main(int argc, char** argv) {
             << "head_position=" << d.head_position << "\nmaximum_head_velocity=" << max_head_velocity << "\n"
             << "bridge_flag=" << d.bridge_flag << "\nbridging_time=" << bridge_time << "\n"
             << "conservation_residual=" << d.conservation_residual << "\nelapsed_s=" << elapsed << "\n";
+    if (opt.lfa_audit && accepted_steps > 0 && !last_lfa_summaries.empty()) {
+      const auto& all = last_lfa_summaries[0];
+      summary << "lfa_EoverN_max_Td=" << all.eovern_max_Td
+              << "\nlfa_LE_p05_m=" << all.le_p05_m
+              << "\nlfa_LE_median_m=" << all.le_median_m
+              << "\nlfa_LE_valid_fraction=" << all.le_valid_fraction
+              << "\nlfa_tauE_p05_s=" << all.tauE_p05_s
+              << "\nlfa_tauE_median_s=" << all.tauE_median_s
+              << "\nlfa_tauE_valid_fraction=" << all.tauE_valid_fraction
+              << "\nlfa_relaxation_data_status=" << all.lfa_relaxation_data_status
+              << "\nLFA_APPLICABILITY=" << all.lfa_applicability << "\n";
+      for (const auto& region_summary : last_lfa_summaries) {
+        summary << "lfa_region_" << region_summary.region_name << "_LE_p05_m=" << region_summary.le_p05_m
+                << "\nlfa_region_" << region_summary.region_name << "_LE_median_m=" << region_summary.le_median_m
+                << "\nlfa_region_" << region_summary.region_name << "_tauE_p05_s=" << region_summary.tauE_p05_s
+                << "\nlfa_region_" << region_summary.region_name << "_tauE_median_s=" << region_summary.tauE_median_s
+                << "\nlfa_region_" << region_summary.region_name << "_coverage_fraction="
+                << region_summary.relaxation_coverage_fraction << "\n";
+      }
+    }
     std::cout << "stage_c2_dynamic ranks=" << size << " status=" << (ok ? "PASS" : "FAILED_STEP")
               << " case=" << opt.case_id << " final_time=" << solver.state().time
               << " steps=" << accepted_steps << " dt_min=" << (accepted_dt.empty() ? 0.0 : dt_min)
