@@ -1,4 +1,5 @@
 #include "streamer_rf/streamer/StreamerSolver.hpp"
+#include "streamer_rf/streamer/HeadTracker.hpp"
 #include "streamer_rf/streamer/LfaAudit.hpp"
 #include "streamer_rf/transport.hpp"
 #include "streamer_rf/voltage_waveform.hpp"
@@ -82,6 +83,17 @@ bool throws_invalid_relaxation_table(std::vector<double> eovern, std::optional<s
     return true;
   }
   return false;
+}
+
+void set_single_charge_head(StreamerState& state, const AxisymmetricGrid& g, int i0, int j0, double rho) {
+  for (int j = 0; j < g.nz(); ++j) {
+    for (int i = 0; i < g.nr(); ++i) {
+      state.rho(i, j) = 0.0;
+      state.emag(i, j) = 1.0e6;
+    }
+  }
+  state.rho(i0, j0) = rho;
+  state.emag(i0, j0) = 2.0e6;
 }
 }  // namespace
 
@@ -310,6 +322,127 @@ int main(int argc, char** argv) {
       check(sdg.source_closure_abs_s1 <= 1e-6 * std::max(std::abs(sdg.net_electron_reaction_rate_s1), 1.0) &&
                 sdg.source_closure_rel < 1e-14 && sdg.source_stage == "PRE_LIMITER",
             "reaction source decomposition algebraic closure is exact before positivity limiter");
+    }
+
+    {
+      AxisymmetricGrid hg(8, 20, 80e-6, 0.0, 100e-6);
+      StreamerConfig hcfg;
+      hcfg.photoionization = false;
+      StreamerState hs(hg);
+      StreamerHeadTracker tracker(StreamerHeadSegmentationConfig{0.2});
+      set_single_charge_head(hs, hg, 2, 8, 1.0);
+      hs.time = 0.0;
+      auto h0 = tracker.sample(hg, hs, hcfg);
+      hs.time = 1.0e-12;
+      auto h1 = tracker.sample(hg, hs, hcfg);
+      hs.time = 2.0e-12;
+      auto h2 = tracker.sample(hg, hs, hcfg);
+      check(h0.head_valid && h1.velocity_valid && h2.acceleration_valid &&
+                h1.head_velocity_z_m_s == 0.0 && h2.head_acceleration_z_m_s2 == 0.0,
+            "head tracker stationary compact charge has zero velocity and acceleration");
+      check(h0.velocity_status == "INSUFFICIENT_HISTORY_FOR_VELOCITY" &&
+                h1.acceleration_status == "INSUFFICIENT_HISTORY_FOR_ACCELERATION",
+            "head tracker reports insufficient kinematic history");
+
+      StreamerHeadTracker vtracker(StreamerHeadSegmentationConfig{0.2});
+      set_single_charge_head(hs, hg, 2, 5, 1.0);
+      hs.time = 0.0;
+      vtracker.sample(hg, hs, hcfg);
+      set_single_charge_head(hs, hg, 2, 7, 1.0);
+      hs.time = 1.0e-12;
+      auto v1 = vtracker.sample(hg, hs, hcfg);
+      set_single_charge_head(hs, hg, 2, 9, 1.0);
+      hs.time = 2.0e-12;
+      auto v2 = vtracker.sample(hg, hs, hcfg);
+      const double v_expected = 2.0 * hg.dz() / 1.0e-12;
+      check(v1.velocity_valid && v2.acceleration_valid && relerr(v2.head_velocity_z_m_s, v_expected) < 1e-14 &&
+                std::abs(v2.head_acceleration_z_m_s2) < 1e-9 * std::abs(v_expected) / 1.0e-12,
+            "head tracker recovers constant-velocity moving head");
+
+      StreamerHeadTracker atracker(StreamerHeadSegmentationConfig{0.2});
+      set_single_charge_head(hs, hg, 2, 5, 1.0);
+      hs.time = 0.0;
+      atracker.sample(hg, hs, hcfg);
+      set_single_charge_head(hs, hg, 2, 6, 1.0);
+      hs.time = 1.0e-12;
+      atracker.sample(hg, hs, hcfg);
+      set_single_charge_head(hs, hg, 2, 9, 1.0);
+      hs.time = 2.0e-12;
+      auto a2 = atracker.sample(hg, hs, hcfg);
+      const double a_expected = 2.0 * hg.dz() / (1.0e-12 * 1.0e-12);
+      check(a2.acceleration_valid && relerr(a2.head_acceleration_z_m_s2, a_expected) < 1e-14,
+            "head tracker recovers constant acceleration with uniform dt");
+
+      StreamerHeadTracker ndt_tracker(StreamerHeadSegmentationConfig{0.2});
+      set_single_charge_head(hs, hg, 2, 5, 1.0);
+      hs.time = 0.0;
+      ndt_tracker.sample(hg, hs, hcfg);
+      set_single_charge_head(hs, hg, 2, 6, 1.0);
+      hs.time = 1.0e-12;
+      ndt_tracker.sample(hg, hs, hcfg);
+      set_single_charge_head(hs, hg, 2, 8, 1.0);
+      hs.time = 3.0e-12;
+      auto ndt = ndt_tracker.sample(hg, hs, hcfg);
+      check(ndt.acceleration_valid && std::abs(ndt.head_acceleration_z_m_s2) < 1e-9 * std::abs(v_expected) / 1.0e-12,
+            "head tracker handles variable accepted dt");
+
+      set_single_charge_head(hs, hg, 3, 8, 2.0);
+      auto hp = compute_streamer_head_diagnostics(hg, hs, hcfg);
+      set_single_charge_head(hs, hg, 3, 8, -2.0);
+      auto hn = compute_streamer_head_diagnostics(hg, hs, hcfg);
+      check(hp.head_valid && hp.head_polarity == 1 && hp.head_charge_C > 0.0 &&
+                hn.head_valid && hn.head_polarity == -1 && hn.head_charge_C < 0.0,
+            "head tracker supports positive and negative polarity");
+      set_single_charge_head(hs, hg, 2, 7, 1.0);
+      hs.rho(6, 15) = -5.0;
+      auto auto_polarity = compute_streamer_head_diagnostics(hg, hs, hcfg);
+      auto requested_positive = compute_streamer_head_diagnostics(hg, hs, hcfg, StreamerHeadSegmentationConfig{0.2, 1});
+      check(auto_polarity.head_polarity == -1 && requested_positive.head_polarity == 1 &&
+                relerr(requested_positive.head_z_m, hg.z(7)) < 1e-14,
+            "head tracker honors explicit case polarity");
+
+      set_single_charge_head(hs, hg, 4, 10, 3.0);
+      auto qh = compute_streamer_head_diagnostics(hg, hs, hcfg);
+      check(qh.head_cell_count == 1 && relerr(qh.head_charge_C, 3.0 * hg.cell_volume(4)) < 1e-14 &&
+                qh.head_peak_E_V_m == 2.0e6,
+            "head tracker integrates axisymmetric head charge");
+
+      for (int j = 0; j < hg.nz(); ++j) for (int i = 0; i < hg.nr(); ++i) hs.rho(i, j) = 0.0;
+      hs.emag(0, 0) = 1.0;
+      auto none = compute_streamer_head_diagnostics(hg, hs, hcfg);
+      check(!none.head_valid && none.head_status == "INSUFFICIENT_CHARGE",
+            "head tracker reports no-head invalid state");
+
+      set_single_charge_head(hs, hg, 1, 3, 10.0);
+      hs.rho(6, 16) = 9.0;
+      auto island = compute_streamer_head_diagnostics(hg, hs, hcfg);
+      check(island.head_valid && island.head_cell_count == 1,
+            "head tracker excludes disconnected same-polarity background island");
+    }
+
+    {
+      AxisymmetricGrid cg(8, 16, 80e-6, 0.0, 90e-6);
+      AxisymmetricNeedlePlaneGeometry cgeom("stage-c2-head-conductor-test", 0.0, 75e-6, 5e-6, 2.5e-6, 5e-6);
+      ConstantVoltage cvoltage(500.0);
+      auto ccfg = electrode_config(cgeom, cvoltage, false);
+      StreamerState cs(cg);
+      int gas_i = -1, gas_j = -1;
+      for (int j = 0; j < cg.nz(); ++j) {
+        for (int i = 0; i < cg.nr(); ++i) {
+          cs.rho(i, j) = 0.0;
+          cs.emag(i, j) = 1.0e6;
+          if (gas_i < 0 && cgeom.classify(cg, i, j) == ElectrodeCellType::Gas) {
+            gas_i = i;
+            gas_j = j;
+          }
+          if (cgeom.classify(cg, i, j) != ElectrodeCellType::Gas) cs.rho(i, j) = 1.0e9;
+        }
+      }
+      cs.rho(gas_i, gas_j) = 1.0;
+      auto masked_head = compute_streamer_head_diagnostics(cg, cs, ccfg);
+      check(masked_head.head_valid && masked_head.head_charge_C < 1e-12 &&
+                relerr(masked_head.head_z_m, cg.z(gas_j)) < 1e-14,
+            "head tracker masks conductor charge");
     }
 
     {

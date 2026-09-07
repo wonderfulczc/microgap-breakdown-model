@@ -1,4 +1,5 @@
 #include "streamer_rf/streamer/StreamerSolver.hpp"
+#include "streamer_rf/streamer/HeadTracker.hpp"
 #include "streamer_rf/streamer/LfaAudit.hpp"
 #include "streamer_rf/voltage_waveform.hpp"
 #include <petscsys.h>
@@ -37,6 +38,9 @@ struct Options {
   bool debug_reaction_limit{false};
   bool lfa_audit{false};
   bool source_decomposition{false};
+  bool head_tracking{false};
+  double head_rho_threshold{0.2};
+  int head_polarity{0};
 };
 
 Options parse(int argc, char** argv) {
@@ -63,6 +67,9 @@ Options parse(int argc, char** argv) {
     else if (a == "--debug-reaction-limit") o.debug_reaction_limit = true;
     else if (a == "--lfa-audit") o.lfa_audit = true;
     else if (a == "--source-decomposition") o.source_decomposition = true;
+    else if (a == "--head-tracking") o.head_tracking = true;
+    else if (a == "--head-rho-threshold") o.head_rho_threshold = std::stod(need("--head-rho-threshold"));
+    else if (a == "--head-polarity") o.head_polarity = std::stoi(need("--head-polarity"));
     else throw std::runtime_error("unknown option " + a);
   }
   return o;
@@ -158,6 +165,9 @@ int main(int argc, char** argv) {
          << "max_steps=" << opt.max_steps << "\ndt_scale=" << opt.dt_scale << "\ndt_cap_s=" << opt.dt_cap << "\n";
     if (opt.lfa_audit) meta << "lfa_audit=1\n";
     if (opt.source_decomposition) meta << "source_decomposition=1\n";
+    const int effective_head_polarity = opt.head_polarity != 0 ? opt.head_polarity : (opt.voltage > 0.0 ? 1 : (opt.voltage < 0.0 ? -1 : 0));
+    if (opt.head_tracking) meta << "head_tracking=1\nhead_rho_relative_threshold=" << opt.head_rho_threshold
+                                << "\nhead_polarity=" << effective_head_polarity << "\n";
     meta << "Ek_V_m=" << Ek << "\nEavg_V_m=" << eavg << "\nzero_charge_Emax_V_m=" << initial_electrostatic_emax
          << "\nEavg_over_Ek=" << eavg / Ek << "\nzero_charge_Emax_over_Ek=" << initial_electrostatic_emax / Ek
          << "\nzero_charge_EoverN_max_Td=" << initial_eover_n_max << "\n";
@@ -182,6 +192,7 @@ int main(int argc, char** argv) {
   std::ofstream reaction_debug;
   std::ofstream lfa_csv;
   std::ofstream source_csv;
+  std::ofstream head_csv;
   if (!rank) {
     diag.open(opt.out / "diagnostics.csv");
     diag << "step,time,dt,dt_controller,voltage,Emax,EoverN_max_Td,ne_max,np_max,nn_max,total_electrons,total_charge,conservation_residual,sigma_max,head_position,head_velocity,bridge_flag,absorbed_electron_hv,absorbed_electron_ground,poisson_iterations,rejected_retries\n"
@@ -209,6 +220,15 @@ int main(int argc, char** argv) {
                     "source_closure_rel,local_source_closure_max_abs_m_3_s_1,gas_cells,source_stage\n"
                  << std::setprecision(17);
     }
+    if (opt.head_tracking) {
+      head_csv.open(opt.out / "streamer_head_tracking.csv");
+      head_csv << "step,time_s,head_valid,head_status,head_polarity,head_cell_count,head_charge_C,"
+                  "head_z_m,head_r_mean_m,head_r_rms_m,head_velocity_z_m_s,head_acceleration_z_m_s2,"
+                  "velocity_valid,velocity_status,acceleration_valid,acceleration_status,"
+                  "head_peak_rho_C_m3,head_peak_E_V_m,head_peak_EoverN_Td,segmentation_fraction,"
+                  "segmentation_parameter,position_method,legacy_head_position_m\n"
+               << std::setprecision(17);
+    }
   }
 
   StreamerDiagnostics d;
@@ -216,7 +236,15 @@ int main(int argc, char** argv) {
   std::vector<LfaAuditHistory> lfa_histories(lfa_regions.size());
   std::vector<LfaAuditSummary> last_lfa_summaries(lfa_regions.size());
   ReactionSourceDecompositionDiagnostics last_source_decomp;
+  const int effective_head_polarity = opt.head_polarity != 0 ? opt.head_polarity : (opt.voltage > 0.0 ? 1 : (opt.voltage < 0.0 ? -1 : 0));
+  StreamerHeadTracker head_tracker(StreamerHeadSegmentationConfig{opt.head_rho_threshold, effective_head_polarity});
+  StreamerHeadDiagnostics last_head_track;
   double max_head_velocity = 0.0;
+  double tracked_head_z_min = std::numeric_limits<double>::infinity(), tracked_head_z_max = -std::numeric_limits<double>::infinity();
+  double tracked_velocity_min = std::numeric_limits<double>::infinity(), tracked_velocity_max = -std::numeric_limits<double>::infinity();
+  double tracked_acceleration_min = std::numeric_limits<double>::infinity(), tracked_acceleration_max = -std::numeric_limits<double>::infinity();
+  double tracked_first_valid_time = std::numeric_limits<double>::quiet_NaN();
+  int tracked_valid_samples = 0;
   double bridge_time = -1.0;
   double max_emax = initial_electrostatic_emax;
   double dt_min = std::numeric_limits<double>::infinity(), dt_max = 0.0;
@@ -250,6 +278,23 @@ int main(int argc, char** argv) {
       }
     }
     if (opt.source_decomposition) last_source_decomp = solver.reaction_source_decomposition_diagnostics();
+    if (opt.head_tracking) {
+      last_head_track = head_tracker.sample(g, solver.state(), cfg);
+      if (last_head_track.head_valid) {
+        if (tracked_valid_samples == 0) tracked_first_valid_time = last_head_track.time_s;
+        ++tracked_valid_samples;
+        tracked_head_z_min = std::min(tracked_head_z_min, last_head_track.head_z_m);
+        tracked_head_z_max = std::max(tracked_head_z_max, last_head_track.head_z_m);
+        if (last_head_track.velocity_valid) {
+          tracked_velocity_min = std::min(tracked_velocity_min, last_head_track.head_velocity_z_m_s);
+          tracked_velocity_max = std::max(tracked_velocity_max, last_head_track.head_velocity_z_m_s);
+        }
+        if (last_head_track.acceleration_valid) {
+          tracked_acceleration_min = std::min(tracked_acceleration_min, last_head_track.head_acceleration_z_m_s2);
+          tracked_acceleration_max = std::max(tracked_acceleration_max, last_head_track.head_acceleration_z_m_s2);
+        }
+      }
+    }
     ++accepted_steps;
     total_retries += retries;
     controller_counts[lim.controller]++;
@@ -292,6 +337,18 @@ int main(int argc, char** argv) {
                    << ',' << last_source_decomp.source_closure_rel << ','
                    << last_source_decomp.local_source_closure_max_abs_m3s << ',' << last_source_decomp.gas_cells
                    << ',' << last_source_decomp.source_stage << '\n';
+      }
+      if (opt.head_tracking) {
+        head_csv << step << ',' << d.time << ',' << last_head_track.head_valid << ',' << last_head_track.head_status
+                 << ',' << last_head_track.head_polarity << ',' << last_head_track.head_cell_count << ','
+                 << last_head_track.head_charge_C << ',' << last_head_track.head_z_m << ',' << last_head_track.head_r_mean_m
+                 << ',' << last_head_track.head_r_rms_m << ',' << last_head_track.head_velocity_z_m_s << ','
+                 << last_head_track.head_acceleration_z_m_s2 << ',' << last_head_track.velocity_valid << ','
+                 << last_head_track.velocity_status << ',' << last_head_track.acceleration_valid << ','
+                 << last_head_track.acceleration_status << ',' << last_head_track.head_peak_rho_C_m3 << ','
+                 << last_head_track.head_peak_E_V_m << ',' << last_head_track.head_peak_EoverN_Td << ','
+                 << last_head_track.segmentation_fraction << ',' << last_head_track.segmentation_parameter << ','
+                 << last_head_track.position_method << ',' << d.head_position << '\n';
       }
       if ((step == 5 || step == 30 || step == 80 || d.bridge_flag) && snapshots < 4) {
         write_fields(opt.out / ("fields_snapshot_" + std::to_string(step) + ".csv"), g, solver.state(), geom);
@@ -361,6 +418,39 @@ int main(int argc, char** argv) {
               << "\nsource_closure_rel=" << last_source_decomp.source_closure_rel
               << "\nlocal_source_closure_max_abs_m_3_s_1=" << last_source_decomp.local_source_closure_max_abs_m3s
               << "\nsource_decomposition_gas_cells=" << last_source_decomp.gas_cells << "\n";
+    }
+    if (opt.head_tracking && accepted_steps > 0) {
+      double sensitivity_z_min = std::numeric_limits<double>::infinity(), sensitivity_z_max = -std::numeric_limits<double>::infinity();
+      double sensitivity_q_min = std::numeric_limits<double>::infinity(), sensitivity_q_max = -std::numeric_limits<double>::infinity();
+      std::ofstream hs(opt.out / "streamer_head_segmentation_sensitivity.csv");
+      hs << "relative_threshold,head_valid,head_status,head_charge_C,head_z_m,head_cell_count\n" << std::setprecision(17);
+      for (double threshold : {0.1, 0.2, 0.3}) {
+        auto h = compute_streamer_head_diagnostics(g, solver.state(), cfg, StreamerHeadSegmentationConfig{threshold, effective_head_polarity});
+        hs << threshold << ',' << h.head_valid << ',' << h.head_status << ',' << h.head_charge_C << ','
+           << h.head_z_m << ',' << h.head_cell_count << '\n';
+        if (h.head_valid) {
+          sensitivity_z_min = std::min(sensitivity_z_min, h.head_z_m);
+          sensitivity_z_max = std::max(sensitivity_z_max, h.head_z_m);
+          sensitivity_q_min = std::min(sensitivity_q_min, std::abs(h.head_charge_C));
+          sensitivity_q_max = std::max(sensitivity_q_max, std::abs(h.head_charge_C));
+        }
+      }
+      const double q_span_rel = std::isfinite(sensitivity_q_min) && sensitivity_q_max > 0.0
+                                    ? (sensitivity_q_max - sensitivity_q_min) / sensitivity_q_max
+                                    : std::numeric_limits<double>::quiet_NaN();
+      summary << "head_tracking_valid_samples=" << tracked_valid_samples
+              << "\nhead_tracking_first_valid_time_s=" << tracked_first_valid_time
+              << "\nhead_tracking_final_status=" << last_head_track.head_status
+              << "\nhead_tracking_final_charge_C=" << last_head_track.head_charge_C
+              << "\nhead_tracking_final_z_m=" << last_head_track.head_z_m
+              << "\nhead_tracking_z_min_m=" << tracked_head_z_min
+              << "\nhead_tracking_z_max_m=" << tracked_head_z_max
+              << "\nhead_tracking_velocity_min_m_s=" << tracked_velocity_min
+              << "\nhead_tracking_velocity_max_m_s=" << tracked_velocity_max
+              << "\nhead_tracking_acceleration_min_m_s2=" << tracked_acceleration_min
+              << "\nhead_tracking_acceleration_max_m_s2=" << tracked_acceleration_max
+              << "\nhead_tracking_sensitivity_z_span_m=" << (sensitivity_z_max - sensitivity_z_min)
+              << "\nhead_tracking_sensitivity_charge_rel_span=" << q_span_rel << "\n";
     }
     std::cout << "stage_c2_dynamic ranks=" << size << " status=" << (ok ? "PASS" : "FAILED_STEP")
               << " case=" << opt.case_id << " final_time=" << solver.state().time
