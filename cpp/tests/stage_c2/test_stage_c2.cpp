@@ -1,5 +1,6 @@
 #include "streamer_rf/streamer/StreamerSolver.hpp"
 #include "streamer_rf/streamer/HeadTracker.hpp"
+#include "streamer_rf/streamer/JouleHandoff.hpp"
 #include "streamer_rf/streamer/LfaAudit.hpp"
 #include "streamer_rf/transport.hpp"
 #include "streamer_rf/voltage_waveform.hpp"
@@ -527,6 +528,114 @@ int main(int argc, char** argv) {
       auto masked = compute_lfa_audit(mg, ms, mcfg, 0.0, nullptr, &mask);
       check(masked.selected_gas_cells == selected && masked.selected_gas_cells < masked.gas_cells,
             "LFA optional gas-cell mask restricts summary region");
+    }
+
+    {
+      AxisymmetricGrid jg(4, 4, 4.0e-6, 0.0, 4.0e-6);
+      StreamerConfig jcfg;
+      jcfg.photoionization = false;
+      StreamerState js(jg);
+      ElectronTransportCurrentSource jc(jg);
+      const double E = 2.0e6;
+      const double sigma = 3.0e-4;
+      double volume = 0.0;
+      for (int j = 0; j < jg.nz(); ++j) {
+        for (int i = 0; i < jg.nr(); ++i) {
+          js.er(i, j) = 0.0;
+          js.ez(i, j) = E;
+          js.emag(i, j) = E;
+          jc.jr(i, j) = 0.0;
+          jc.jz(i, j) = sigma * E;
+          volume += jg.cell_volume(i);
+        }
+      }
+      auto jd = compute_joule_handoff_diagnostics(jg, js, jcfg, jc, 1e-12, 1e12, true, false,
+                                                  JouleHandoffConfig{0.0});
+      check(relerr(jd.PJ_gas_W, sigma * E * E * volume) < 1e-14 &&
+                jd.PJ_negative_W == 0.0 && jd.PJ_positive_W > 0.0,
+            "Joule handoff integrates uniform J dot E over axisymmetric gas volume");
+
+      for (auto& v : jc.jz.values()) v = 0.0;
+      auto zero_current = compute_joule_handoff_diagnostics(jg, js, jcfg, jc, 1e-12, 1e12, true, false);
+      check(zero_current.PJ_gas_W == 0.0 && zero_current.PJ_positive_W == 0.0 &&
+                zero_current.PJ_negative_W == 0.0,
+            "Joule handoff excludes displacement current from changing electric field");
+
+      jc.jz(0, 0) = E;
+      jc.jz(1, 0) = -0.25 * E;
+      auto signed_power = compute_joule_handoff_diagnostics(jg, js, jcfg, jc, 1e-12, 1e12, true, false);
+      check(signed_power.PJ_positive_W > 0.0 && signed_power.PJ_negative_W < 0.0 &&
+                relerr(signed_power.PJ_gas_W, signed_power.PJ_positive_W + signed_power.PJ_negative_W) < 1e-14,
+            "Joule handoff reports positive and negative J dot E without absolute-value clamping");
+    }
+
+    {
+      AxisymmetricGrid ag(2, 3, 2.0e-6, 0.0, 3.0e-6);
+      StreamerConfig acfg;
+      acfg.photoionization = false;
+      StreamerState as(ag);
+      ElectronTransportCurrentSource ac(ag);
+      const double E = 1.0e6;
+      const double J0 = 4.0;
+      for (int j = 0; j < ag.nz(); ++j) {
+        for (int i = 0; i < ag.nr(); ++i) {
+          as.er(i, j) = 0.0;
+          as.ez(i, j) = E;
+          as.emag(i, j) = E;
+          ac.jr(i, j) = 0.0;
+          ac.jz(i, j) = J0;
+        }
+      }
+      JouleHandoffAccumulator acc(JouleHandoffConfig{0.0});
+      as.time = 0.0;
+      auto a0 = acc.sample(ag, as, acfg, ac, 1.0e-9, 1.0e9, true, false);
+      as.time = 1.0e-12;
+      auto a1 = acc.sample(ag, as, acfg, ac, 2.0e-9, 5.0e8, true, false);
+      as.time = 3.0e-12;
+      auto a2 = acc.sample(ag, as, acfg, ac, 5.0e-9, 2.0e8, true, false);
+      check(a0.energy_accumulator_status == "INITIAL_SAMPLE" &&
+                relerr(a1.QJ_gas_J, a1.PJ_gas_W * 1.0e-12) < 1e-14 &&
+                relerr(a2.QJ_gas_J, a2.PJ_gas_W * 3.0e-12) < 1e-14,
+            "Joule accumulator handles constant power and variable accepted dt");
+      const double expected_dgbdt = (5.0e-9 - 2.0e-9) / (2.0e-12);
+      check(a2.tau_evolution_status == "VALID" &&
+                relerr(a2.dGb_dt_S_s, expected_dgbdt) < 1e-14 &&
+                relerr(a2.tau_evolution_s, std::abs(5.0e-9 / expected_dgbdt)) < 1e-14,
+            "Joule handoff computes tau_evolution from accepted-state Gb history");
+      check(a2.thermal_energy_reference_status == "NOT_AVAILABLE" && std::isnan(a2.Pi_H) &&
+                a2.handoff_status == "UNRESOLVED_CALIBRATION",
+            "Joule handoff keeps Pi_H unresolved without Q_required");
+    }
+
+    {
+      AxisymmetricGrid cg2(4, 5, 4.0e-6, 0.0, 5.0e-6);
+      StreamerConfig ccfg2;
+      ccfg2.photoionization = false;
+      StreamerState cs2(cg2);
+      ElectronTransportCurrentSource current(cg2);
+      for (int j = 0; j < cg2.nz(); ++j) {
+        for (int i = 0; i < cg2.nr(); ++i) {
+          cs2.er(i, j) = 0.0;
+          cs2.ez(i, j) = 1.5e6;
+          cs2.emag(i, j) = 1.5e6;
+          cs2.ne(i, j) = (j == 2 && i < 2) ? 1.0e16 : 1.0e10;
+          current.jz(i, j) = 2.0;
+        }
+      }
+      auto cd = compute_joule_handoff_diagnostics(cg2, cs2, ccfg2, current, 1e-12, 1e12, true, true,
+                                                  JouleHandoffConfig{0.5});
+      check(cd.channel_valid && cd.bridge_flag && cd.channel_volume_m3 > 0.0 &&
+                relerr(cd.channel_length_m, cg2.dz()) < 1e-14 && cd.channel_effective_radius_m > 0.0 &&
+                cd.tau_sigma_status == "VALID" && cd.tau_sigma_s > 0.0,
+            "Joule handoff reports channel mask, geometry, effective radius and tau_sigma");
+
+      JouleHandoffAccumulator invalid_acc;
+      cs2.time = 0.0;
+      invalid_acc.sample(cg2, cs2, ccfg2, current, 0.0, std::numeric_limits<double>::infinity(), true, false);
+      cs2.time = 1.0e-12;
+      auto invalid = invalid_acc.sample(cg2, cs2, ccfg2, current, 0.0, std::numeric_limits<double>::infinity(), true, false);
+      check(invalid.tau_evolution_status == "ZERO_GB_OR_DGBDT" && invalid.Xi_sigma_status == "UNAVAILABLE",
+            "Joule handoff marks invalid zero-Gb evolution cases");
     }
 
     {

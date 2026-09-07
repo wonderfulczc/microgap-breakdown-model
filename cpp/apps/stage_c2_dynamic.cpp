@@ -1,5 +1,6 @@
 #include "streamer_rf/streamer/StreamerSolver.hpp"
 #include "streamer_rf/streamer/HeadTracker.hpp"
+#include "streamer_rf/streamer/JouleHandoff.hpp"
 #include "streamer_rf/streamer/LfaAudit.hpp"
 #include "streamer_rf/voltage_waveform.hpp"
 #include <petscsys.h>
@@ -39,8 +40,10 @@ struct Options {
   bool lfa_audit{false};
   bool source_decomposition{false};
   bool head_tracking{false};
+  bool joule_handoff{false};
   double head_rho_threshold{0.2};
   int head_polarity{0};
+  double joule_channel_sigma_threshold{0.1};
 };
 
 Options parse(int argc, char** argv) {
@@ -68,8 +71,10 @@ Options parse(int argc, char** argv) {
     else if (a == "--lfa-audit") o.lfa_audit = true;
     else if (a == "--source-decomposition") o.source_decomposition = true;
     else if (a == "--head-tracking") o.head_tracking = true;
+    else if (a == "--joule-handoff") o.joule_handoff = true;
     else if (a == "--head-rho-threshold") o.head_rho_threshold = std::stod(need("--head-rho-threshold"));
     else if (a == "--head-polarity") o.head_polarity = std::stoi(need("--head-polarity"));
+    else if (a == "--joule-channel-sigma-threshold") o.joule_channel_sigma_threshold = std::stod(need("--joule-channel-sigma-threshold"));
     else throw std::runtime_error("unknown option " + a);
   }
   return o;
@@ -168,6 +173,10 @@ int main(int argc, char** argv) {
     const int effective_head_polarity = opt.head_polarity != 0 ? opt.head_polarity : (opt.voltage > 0.0 ? 1 : (opt.voltage < 0.0 ? -1 : 0));
     if (opt.head_tracking) meta << "head_tracking=1\nhead_rho_relative_threshold=" << opt.head_rho_threshold
                                 << "\nhead_polarity=" << effective_head_polarity << "\n";
+    if (opt.joule_handoff) meta << "joule_handoff=1\njoule_current_definition=J_cond=-e*Gamma_e finite-volume electron transport flux\n"
+                                << "joule_channel_region=NUMERICAL_CHANNEL_DIAGNOSTIC_REGION\n"
+                                << "joule_channel_sigma_relative_threshold=" << opt.joule_channel_sigma_threshold << "\n"
+                                << "thermal_energy_reference_status=NOT_AVAILABLE\nhandoff_status=UNRESOLVED_CALIBRATION\n";
     meta << "Ek_V_m=" << Ek << "\nEavg_V_m=" << eavg << "\nzero_charge_Emax_V_m=" << initial_electrostatic_emax
          << "\nEavg_over_Ek=" << eavg / Ek << "\nzero_charge_Emax_over_Ek=" << initial_electrostatic_emax / Ek
          << "\nzero_charge_EoverN_max_Td=" << initial_eover_n_max << "\n";
@@ -193,6 +202,7 @@ int main(int argc, char** argv) {
   std::ofstream lfa_csv;
   std::ofstream source_csv;
   std::ofstream head_csv;
+  std::ofstream joule_csv;
   if (!rank) {
     diag.open(opt.out / "diagnostics.csv");
     diag << "step,time,dt,dt_controller,voltage,Emax,EoverN_max_Td,ne_max,np_max,nn_max,total_electrons,total_charge,conservation_residual,sigma_max,head_position,head_velocity,bridge_flag,absorbed_electron_hv,absorbed_electron_ground,poisson_iterations,rejected_retries\n"
@@ -229,6 +239,17 @@ int main(int argc, char** argv) {
                   "segmentation_parameter,position_method,legacy_head_position_m\n"
                << std::setprecision(17);
     }
+    if (opt.joule_handoff) {
+      joule_csv.open(opt.out / "cold_thermal_handoff.csv");
+      joule_csv << "step,time_s,bridge_flag,PJ_gas_W,PJ_channel_W,PJ_positive_W,PJ_negative_W,"
+                   "QJ_gas_J,QJ_channel_J,channel_valid,channel_status,channel_volume_m3,"
+                   "channel_length_m,channel_effective_radius_m,sigma_eff_S_m,E_channel_mean_V_m,"
+                   "ne_channel_mean_m3,ne_channel_max_m3,Gb_S,Rb_ohm,Gb_valid,dGb_dt_S_s,"
+                   "tau_sigma_s,tau_sigma_status,tau_evolution_s,tau_evolution_status,Xi_sigma,"
+                   "Xi_sigma_status,thermal_energy_reference_status,Pi_H,handoff_status,"
+                   "energy_accumulator_status,joule_current_definition,channel_region_definition\n"
+                << std::setprecision(17);
+    }
   }
 
   StreamerDiagnostics d;
@@ -239,6 +260,14 @@ int main(int argc, char** argv) {
   const int effective_head_polarity = opt.head_polarity != 0 ? opt.head_polarity : (opt.voltage > 0.0 ? 1 : (opt.voltage < 0.0 ? -1 : 0));
   StreamerHeadTracker head_tracker(StreamerHeadSegmentationConfig{opt.head_rho_threshold, effective_head_polarity});
   StreamerHeadDiagnostics last_head_track;
+  JouleHandoffAccumulator joule_accumulator(JouleHandoffConfig{opt.joule_channel_sigma_threshold});
+  JouleHandoffDiagnostics last_joule;
+  double joule_PJ_min = std::numeric_limits<double>::infinity(), joule_PJ_max = -std::numeric_limits<double>::infinity();
+  double joule_QJ_max = 0.0;
+  int joule_channel_valid_samples = 0;
+  double joule_tau_sigma_min = std::numeric_limits<double>::infinity(), joule_tau_sigma_max = 0.0;
+  double joule_tau_evolution_min = std::numeric_limits<double>::infinity(), joule_tau_evolution_max = 0.0;
+  double joule_Xi_min = std::numeric_limits<double>::infinity(), joule_Xi_max = 0.0;
   double max_head_velocity = 0.0;
   double tracked_head_z_min = std::numeric_limits<double>::infinity(), tracked_head_z_max = -std::numeric_limits<double>::infinity();
   double tracked_velocity_min = std::numeric_limits<double>::infinity(), tracked_velocity_max = -std::numeric_limits<double>::infinity();
@@ -295,6 +324,26 @@ int main(int argc, char** argv) {
         }
       }
     }
+    if (opt.joule_handoff) {
+      const auto current_source = solver.electron_transport_current_source();
+      last_joule = joule_accumulator.sample(g, solver.state(), cfg, current_source, d.gb, d.rb, d.rb_valid, d.bridge_flag);
+      joule_PJ_min = std::min(joule_PJ_min, last_joule.PJ_gas_W);
+      joule_PJ_max = std::max(joule_PJ_max, last_joule.PJ_gas_W);
+      joule_QJ_max = std::max(joule_QJ_max, last_joule.QJ_gas_J);
+      if (last_joule.channel_valid) ++joule_channel_valid_samples;
+      if (last_joule.tau_sigma_status == "VALID") {
+        joule_tau_sigma_min = std::min(joule_tau_sigma_min, last_joule.tau_sigma_s);
+        joule_tau_sigma_max = std::max(joule_tau_sigma_max, last_joule.tau_sigma_s);
+      }
+      if (last_joule.tau_evolution_status == "VALID") {
+        joule_tau_evolution_min = std::min(joule_tau_evolution_min, last_joule.tau_evolution_s);
+        joule_tau_evolution_max = std::max(joule_tau_evolution_max, last_joule.tau_evolution_s);
+      }
+      if (last_joule.Xi_sigma_status == "VALID") {
+        joule_Xi_min = std::min(joule_Xi_min, last_joule.Xi_sigma);
+        joule_Xi_max = std::max(joule_Xi_max, last_joule.Xi_sigma);
+      }
+    }
     ++accepted_steps;
     total_retries += retries;
     controller_counts[lim.controller]++;
@@ -349,6 +398,22 @@ int main(int argc, char** argv) {
                  << last_head_track.head_peak_E_V_m << ',' << last_head_track.head_peak_EoverN_Td << ','
                  << last_head_track.segmentation_fraction << ',' << last_head_track.segmentation_parameter << ','
                  << last_head_track.position_method << ',' << d.head_position << '\n';
+      }
+      if (opt.joule_handoff) {
+        joule_csv << step << ',' << d.time << ',' << last_joule.bridge_flag << ',' << last_joule.PJ_gas_W << ','
+                  << last_joule.PJ_channel_W << ',' << last_joule.PJ_positive_W << ',' << last_joule.PJ_negative_W
+                  << ',' << last_joule.QJ_gas_J << ',' << last_joule.QJ_channel_J << ',' << last_joule.channel_valid
+                  << ',' << last_joule.channel_status << ',' << last_joule.channel_volume_m3 << ','
+                  << last_joule.channel_length_m << ',' << last_joule.channel_effective_radius_m << ','
+                  << last_joule.sigma_eff_S_m << ',' << last_joule.E_channel_mean_V_m << ','
+                  << last_joule.ne_channel_mean_m3 << ',' << last_joule.ne_channel_max_m3 << ','
+                  << last_joule.Gb_S << ',' << last_joule.Rb_ohm << ',' << last_joule.Gb_valid << ','
+                  << last_joule.dGb_dt_S_s << ',' << last_joule.tau_sigma_s << ',' << last_joule.tau_sigma_status
+                  << ',' << last_joule.tau_evolution_s << ',' << last_joule.tau_evolution_status << ','
+                  << last_joule.Xi_sigma << ',' << last_joule.Xi_sigma_status << ','
+                  << last_joule.thermal_energy_reference_status << ',' << last_joule.Pi_H << ','
+                  << last_joule.handoff_status << ',' << last_joule.energy_accumulator_status << ','
+                  << last_joule.joule_current_definition << ',' << last_joule.channel_region_definition << '\n';
       }
       if ((step == 5 || step == 30 || step == 80 || d.bridge_flag) && snapshots < 4) {
         write_fields(opt.out / ("fields_snapshot_" + std::to_string(step) + ".csv"), g, solver.state(), geom);
@@ -451,6 +516,39 @@ int main(int argc, char** argv) {
               << "\nhead_tracking_acceleration_max_m_s2=" << tracked_acceleration_max
               << "\nhead_tracking_sensitivity_z_span_m=" << (sensitivity_z_max - sensitivity_z_min)
               << "\nhead_tracking_sensitivity_charge_rel_span=" << q_span_rel << "\n";
+    }
+    if (opt.joule_handoff && accepted_steps > 0) {
+      summary << "joule_current_definition=" << last_joule.joule_current_definition
+              << "\njoule_PJ_gas_min_W=" << joule_PJ_min
+              << "\njoule_PJ_gas_max_W=" << joule_PJ_max
+              << "\njoule_PJ_gas_final_W=" << last_joule.PJ_gas_W
+              << "\njoule_PJ_channel_final_W=" << last_joule.PJ_channel_W
+              << "\njoule_PJ_positive_final_W=" << last_joule.PJ_positive_W
+              << "\njoule_PJ_negative_final_W=" << last_joule.PJ_negative_W
+              << "\njoule_QJ_gas_final_J=" << last_joule.QJ_gas_J
+              << "\njoule_QJ_channel_final_J=" << last_joule.QJ_channel_J
+              << "\njoule_QJ_gas_max_J=" << joule_QJ_max
+              << "\njoule_channel_valid_samples=" << joule_channel_valid_samples
+              << "\njoule_channel_status=" << last_joule.channel_status
+              << "\njoule_channel_volume_m3=" << last_joule.channel_volume_m3
+              << "\njoule_channel_length_m=" << last_joule.channel_length_m
+              << "\njoule_channel_effective_radius_m=" << last_joule.channel_effective_radius_m
+              << "\njoule_sigma_eff_S_m=" << last_joule.sigma_eff_S_m
+              << "\njoule_E_channel_mean_V_m=" << last_joule.E_channel_mean_V_m
+              << "\njoule_ne_channel_mean_m3=" << last_joule.ne_channel_mean_m3
+              << "\njoule_ne_channel_max_m3=" << last_joule.ne_channel_max_m3
+              << "\njoule_Gb_final_S=" << last_joule.Gb_S
+              << "\njoule_Rb_final_ohm=" << last_joule.Rb_ohm
+              << "\njoule_dGb_dt_final_S_s=" << last_joule.dGb_dt_S_s
+              << "\njoule_tau_sigma_min_s=" << joule_tau_sigma_min
+              << "\njoule_tau_sigma_max_s=" << joule_tau_sigma_max
+              << "\njoule_tau_evolution_min_s=" << joule_tau_evolution_min
+              << "\njoule_tau_evolution_max_s=" << joule_tau_evolution_max
+              << "\njoule_Xi_sigma_min=" << joule_Xi_min
+              << "\njoule_Xi_sigma_max=" << joule_Xi_max
+              << "\nthermal_energy_reference_status=" << last_joule.thermal_energy_reference_status
+              << "\nPi_H=" << last_joule.Pi_H
+              << "\nhandoff_status=" << last_joule.handoff_status << "\n";
     }
     std::cout << "stage_c2_dynamic ranks=" << size << " status=" << (ok ? "PASS" : "FAILED_STEP")
               << " case=" << opt.case_id << " final_time=" << solver.state().time
