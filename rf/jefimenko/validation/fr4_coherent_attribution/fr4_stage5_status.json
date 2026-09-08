@@ -1,0 +1,22 @@
+{
+  "FULL_MAXWELL_REFERENCE_PENDING": true,
+  "F_R3_closure": 1.2679225326881047,
+  "F_R3_mechanism_status": {
+    "basis": "closure=1.27 exceeds reduced-order interpretation range",
+    "current_moment_redistribution": "NOT_RESOLVED",
+    "head_acceleration": "NOT_RESOLVED",
+    "head_charge_evolution": "NOT_RESOLVED"
+  },
+  "MECHANISM_ATTRIBUTION": "NOT_RESOLVED",
+  "case_id": "F4-C-stage5-highfield-collision",
+  "current_moment_full_jefimenko_cross_check": {
+    "correlation": 0.9990575835069816,
+    "normalized_waveform_error": 0.03540884307803112,
+    "peak_time_difference_s": 0.0
+  },
+  "eta_fields": null,
+  "formal_eta_available": false,
+  "reason": "F_R3_MECHANISM_DECOMPOSITION_NOT_RESOLVED",
+  "trusted_frequency_high_Hz": 10233758844.919172,
+  "trusted_frequency_low_Hz": 3047273105.1868486
+}

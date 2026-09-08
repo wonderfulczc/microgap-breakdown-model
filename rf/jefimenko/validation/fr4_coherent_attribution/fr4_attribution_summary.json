@@ -1,0 +1,107 @@
+{
+  "CWT_settings": {
+    "frequency_count": 48,
+    "function": "morlet_cwt",
+    "n_cycles": 5.0
+  },
+  "F_R3_checkpoint_commit": "6f23e99",
+  "F_R3_input_flags": {
+    "Stage4": {
+      "basis": "closure=0.0434; derivative sensitivity changes amplitudes; segmentation sensitivity changes amplitudes",
+      "current_moment_redistribution": "INTERPRET_WITH_CAUTION",
+      "head_acceleration": "INTERPRET_WITH_CAUTION",
+      "head_charge_evolution": "INTERPRET_WITH_CAUTION"
+    },
+    "Stage5": {
+      "basis": "closure=1.27 exceeds reduced-order interpretation range",
+      "current_moment_redistribution": "NOT_RESOLVED",
+      "head_acceleration": "NOT_RESOLVED",
+      "head_charge_evolution": "NOT_RESOLVED"
+    },
+    "Stage5_FULL_MAXWELL_REFERENCE_PENDING": true
+  },
+  "F_R4_STATUS": "PASS_CANDIDATE",
+  "Stage4": {
+    "F_R3_time_domain_closure": 0.043442808347067215,
+    "alternative_diagnostics": {
+      "cwt_linearity_closure": 1.4991139990851147e-15,
+      "derivative_configuration": "alternative_radius2_degree2",
+      "time_domain_rec_vs_total_L2": 0.44961421278430663,
+      "time_domain_rec_vs_total_max_abs": 0.04168986365205011,
+      "uniform_cwt_samples": 44,
+      "uniform_time_end_s": 1.0362652590905767e-09,
+      "uniform_time_start_s": 1.2977173494316962e-10,
+      "valid_input_samples": 42
+    },
+    "attribution_rows": 9,
+    "caution_rows": 0,
+    "current_moment_full_jefimenko_cross_check": {
+      "correlation": 0.9996309418161705,
+      "normalized_waveform_error": 0.026243867583957907,
+      "peak_time_difference_s": 0.0
+    },
+    "derivative_robustness": {
+      "not_robust_count": 21,
+      "total_count": 27
+    },
+    "formal_status": "ATTRIBUTION_NOT_RESOLVED",
+    "not_resolved_rows": 9,
+    "primary_diagnostics": {
+      "cwt_linearity_closure": 1.205302427692988e-15,
+      "derivative_configuration": "primary_radius5_degree2",
+      "time_domain_rec_vs_total_L2": 0.043442808347067166,
+      "time_domain_rec_vs_total_max_abs": 0.002578445601955002,
+      "uniform_cwt_samples": 31,
+      "uniform_time_end_s": 9.13034731836806e-10,
+      "uniform_time_start_s": 2.8390355158356327e-10,
+      "valid_input_samples": 30
+    },
+    "trust": {
+      "band_status": {
+        "1-3 GHz": "PARTIALLY_TRUSTED",
+        "100-200 MHz": "UNTRUSTED",
+        "200-300 MHz": "UNTRUSTED",
+        "3-10 GHz": "PARTIALLY_TRUSTED",
+        "300-500 MHz": "UNTRUSTED",
+        "500 MHz-1 GHz": "UNTRUSTED",
+        "60-90 MHz": "UNTRUSTED",
+        "SHF": "PARTIALLY_TRUSTED",
+        "UHF": "PARTIALLY_TRUSTED",
+        "VHF": "UNTRUSTED"
+      },
+      "trusted_frequency_high_Hz": 7966314711.629051,
+      "trusted_frequency_low_Hz": 2941408508.9091916
+    }
+  },
+  "Stage5": {
+    "FULL_MAXWELL_REFERENCE_PENDING": true,
+    "F_R3_closure": 1.2679225326881047,
+    "F_R3_mechanism_status": {
+      "basis": "closure=1.27 exceeds reduced-order interpretation range",
+      "current_moment_redistribution": "NOT_RESOLVED",
+      "head_acceleration": "NOT_RESOLVED",
+      "head_charge_evolution": "NOT_RESOLVED"
+    },
+    "MECHANISM_ATTRIBUTION": "NOT_RESOLVED",
+    "case_id": "F4-C-stage5-highfield-collision",
+    "current_moment_full_jefimenko_cross_check": {
+      "correlation": 0.9990575835069816,
+      "normalized_waveform_error": 0.03540884307803112,
+      "peak_time_difference_s": 0.0
+    },
+    "eta_fields": null,
+    "formal_eta_available": false,
+    "reason": "F_R3_MECHANISM_DECOMPOSITION_NOT_RESOLVED",
+    "trusted_frequency_high_Hz": 10233758844.919172,
+    "trusted_frequency_low_Hz": 3047273105.1868486
+  },
+  "new_output_bytes": 19488,
+  "observer_vector_m": [
+    0.2,
+    0.0,
+    0.0
+  ],
+  "peak_rss_kb": 117904,
+  "runtime_s": 0.1050356189989543,
+  "scope": "coherent mechanism-stage-frequency attribution relative to reduced-order current-moment field"
+}
