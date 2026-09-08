@@ -6,13 +6,41 @@ from .model import (
     coupling_error,
 )
 from .signals import ConductanceProfile, PiecewiseLinearSignal
+from .handoff import (
+    ColdThermalHandoffState,
+    HandoffCalibration,
+    PercolationConfig,
+    PercolationResult,
+    analyze_cr4_handoff_run,
+    apply_handoff_logic,
+    conductive_percolation,
+    g1_initial_state_contract,
+    percolation_persistence,
+    pi_h,
+    tau_evolution,
+    tau_sigma,
+    xi_sigma,
+)
 
 __all__ = [
     "CircuitParameters",
+    "ColdThermalHandoffState",
     "CircuitSolution",
     "ConductanceProfile",
     "GapCurrents",
+    "HandoffCalibration",
+    "PercolationConfig",
+    "PercolationResult",
     "PiecewiseLinearSignal",
     "SeriesRLCGapCircuit",
+    "analyze_cr4_handoff_run",
+    "apply_handoff_logic",
+    "conductive_percolation",
     "coupling_error",
+    "g1_initial_state_contract",
+    "percolation_persistence",
+    "pi_h",
+    "tau_evolution",
+    "tau_sigma",
+    "xi_sigma",
 ]

@@ -1,0 +1,64 @@
+{
+  "framework_status": "FRAMEWORK_VALIDATED",
+  "production_case_status": "PRODUCTION_HANDOFF_NOT_REACHED",
+  "calibration_status": "NOT_AVAILABLE",
+  "thermal_energy_reference_status": "NOT_AVAILABLE",
+  "handoff_status": "HANDOFF_CALIBRATION_PENDING",
+  "case_id": "stage-g0-500v-sp3-on",
+  "time_interval_s": [
+    6.198053824772161e-15,
+    6.198053548453266e-13
+  ],
+  "accepted_samples": 100,
+  "bridge_legacy_classification": "AXIAL_THRESHOLD_PROXY",
+  "bridge_legacy_first_time_s": NaN,
+  "bridge_legacy_samples": 0,
+  "bridge_legacy_longest_consecutive_samples": 0,
+  "percolation_first_time_s": NaN,
+  "percolation_samples_with_field_snapshots": 5,
+  "percolation_true_samples": 0,
+  "percolation_longest_consecutive_samples": 0,
+  "QJ_channel_final_J": 3.552018352174675e-18,
+  "QJ_channel_monotonic_nonnegative": true,
+  "sigma_eff_range_S_m": [
+    1.739043331205441e-05,
+    2.0187206999835718e-05
+  ],
+  "Gb_range_S": [
+    2.185962254724331e-11,
+    3.186888506987489e-11
+  ],
+  "Rb_range_ohm": [
+    31378568713.885845,
+    45746444058.61934
+  ],
+  "Xi_sigma_range": [
+    265979.7414717083,
+    308500.57561081956
+  ],
+  "G1_handoff_candidate_contract": {
+    "handoff_time_candidate": NaN,
+    "thermal_profile_status": "NOT_AVAILABLE",
+    "state_valid": false
+  },
+  "latest_cold_state_contract": {
+    "handoff_time_candidate": 6.198053548453266e-13,
+    "channel_length_m": 1.125000000000001e-05,
+    "channel_effective_radius_m": 4e-06,
+    "channel_volume_m3": 5.654866776461631e-16,
+    "sigma_eff_S_m": 1.7729140381904817e-05,
+    "QJ_channel_J": 3.552018352174675e-18,
+    "PJ_channel_W": 8.524086673808994e-06,
+    "E_channel_mean_V_m": 29522625.480737496,
+    "ne_channel_mean_m3": 3275873183037038.0,
+    "ne_channel_max_m3": 6000620331699470.0,
+    "Gb_S": 3.186888506987489e-11,
+    "Rb_ohm": 31378568713.885845,
+    "thermal_profile_status": "NOT_AVAILABLE",
+    "state_valid": true
+  },
+  "diagnostics_csv": "circuit/g0_handoff/g0_handoff_diagnostics.csv",
+  "percolation_sensitivity_csv": "circuit/g0_handoff/g0_percolation_sensitivity.csv",
+  "generator_runtime_s": 0.0522697930027789,
+  "generator_peak_rss_kb": 138128
+}
