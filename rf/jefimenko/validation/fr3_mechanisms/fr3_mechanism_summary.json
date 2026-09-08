@@ -1,0 +1,344 @@
+{
+  "F_R2_checkpoint_commit": "020729f",
+  "F_R2_overall_decision": "SELECTED_FULL_MAXWELL_REFERENCE_RECOMMENDED",
+  "F_R3_STATUS": "PASS_CANDIDATE",
+  "datasets": [
+    {
+      "J_RF_definition": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+      "alternative_derivative_metrics": {
+        "corr_charge_evolution": 0.3089185033787792,
+        "corr_head_acceleration": 0.2595733992424779,
+        "corr_redistribution": 0.6985748985763506,
+        "normalized_rms_closure": 0.44961421278441827,
+        "peak_normalized_closure": 0.8355317246988803,
+        "product_rule_normalized_rms": 0.44961421278441804,
+        "rms_D_total": 49641.49133164289,
+        "rms_closure_residual": 22319.52004652114,
+        "rms_head_acceleration": 56905.06067947234,
+        "rms_head_charge_evolution": 30262.015686523602,
+        "rms_redistribution": 76536.3035182699,
+        "sample_count": 50,
+        "status": "OK",
+        "valid_count": 42
+      },
+      "alternative_derivative_operator": {
+        "degree": 2,
+        "radius_samples": 2,
+        "type": "local polynomial derivative"
+      },
+      "case_id": "F4-P-stage4-left-isolated",
+      "common_sample_count": 50,
+      "current_moment_full_jefimenko_cross_check": {
+        "correlation": 0.9996309418161705,
+        "normalized_waveform_error": 0.026243867583957907,
+        "peak_time_difference_s": 0.0
+      },
+      "derivative_relative_changes": {
+        "normalized_rms_closure": 0.903377591028473,
+        "rms_head_acceleration": 0.7294243934583717,
+        "rms_head_charge_evolution": 0.6685728903792183,
+        "rms_redistribution": 0.39220280115102923
+      },
+      "exact_common_count": 50,
+      "full_maxwell_note": "LOW_EM_FEEDBACK_RISK",
+      "head_representation": "PRIMARY_HEAD_ONLY",
+      "head_segmentation": "C-R3 net-rho same-polarity connected component, relative threshold 0.2",
+      "head_valid_coverage": 1.0,
+      "interpolation_fraction": 0.0,
+      "mechanism_status": {
+        "basis": "closure=0.0434; derivative sensitivity changes amplitudes; segmentation sensitivity changes amplitudes",
+        "current_moment_redistribution": "INTERPRET_WITH_CAUTION",
+        "head_acceleration": "INTERPRET_WITH_CAUTION",
+        "head_charge_evolution": "INTERPRET_WITH_CAUTION"
+      },
+      "mechanism_sum_current_moment_cross_check": {
+        "correlation": 0.9987355081837629,
+        "normalized_L2_error": 0.0434428083470672,
+        "sample_count": 30
+      },
+      "output_csv": "rf/jefimenko/validation/fr3_mechanisms/F4-P-stage4-left-isolated_mechanisms.csv",
+      "primary_derivative_operator": {
+        "degree": 2,
+        "radius_samples": 5,
+        "type": "local polynomial derivative",
+        "validity": "centered stencil only; invalid across insufficient history or invalid head samples"
+      },
+      "primary_metrics": {
+        "corr_charge_evolution": 0.7736530060380544,
+        "corr_head_acceleration": 0.16987825356794045,
+        "corr_redistribution": 0.8965280355366906,
+        "normalized_rms_closure": 0.043442808347067215,
+        "peak_normalized_closure": 0.06819359439577888,
+        "product_rule_normalized_rms": 0.04344280834706698,
+        "rms_D_total": 43161.801494740976,
+        "rms_closure_residual": 1875.0698702501913,
+        "rms_head_acceleration": 15397.121308636393,
+        "rms_head_charge_evolution": 10029.652390283274,
+        "rms_redistribution": 46518.55088865907,
+        "sample_count": 50,
+        "status": "OK",
+        "valid_count": 30
+      },
+      "segmentation_relative_changes": {
+        "normalized_rms_closure": 0.3948819121526405,
+        "rms_head_acceleration": 0.24617398830501122,
+        "rms_head_charge_evolution": 0.5824777960810191,
+        "rms_redistribution": 0.34465145441714823
+      },
+      "segmentation_threshold_metrics": {
+        "0.1": {
+          "corr_charge_evolution": 0.5545632165879799,
+          "corr_head_acceleration": 0.9094175257153597,
+          "corr_redistribution": 0.9334952468480543,
+          "normalized_rms_closure": 0.038970127651618384,
+          "peak_normalized_closure": 0.07895492577874219,
+          "product_rule_normalized_rms": 0.03897012765161805,
+          "rms_D_total": 43161.801494740976,
+          "rms_closure_residual": 1682.020913923869,
+          "rms_head_acceleration": 16855.39288555326,
+          "rms_head_charge_evolution": 4187.602570532347,
+          "rms_redistribution": 30485.864667504597,
+          "sample_count": 50,
+          "status": "OK",
+          "valid_count": 30
+        },
+        "0.2": {
+          "corr_charge_evolution": 0.7736530060380544,
+          "corr_head_acceleration": 0.16987825356794045,
+          "corr_redistribution": 0.8965280355366906,
+          "normalized_rms_closure": 0.043442808347067215,
+          "peak_normalized_closure": 0.06819359439577888,
+          "product_rule_normalized_rms": 0.04344280834706698,
+          "rms_D_total": 43161.801494740976,
+          "rms_closure_residual": 1875.0698702501913,
+          "rms_head_acceleration": 15397.121308636393,
+          "rms_head_charge_evolution": 10029.652390283274,
+          "rms_redistribution": 46518.55088865907,
+          "sample_count": 50,
+          "status": "OK",
+          "valid_count": 30
+        },
+        "0.3": {
+          "corr_charge_evolution": 0.5609742237684466,
+          "corr_head_acceleration": 0.006927724717087993,
+          "corr_redistribution": 0.9399189204348002,
+          "normalized_rms_closure": 0.07179228190254598,
+          "peak_normalized_closure": 0.09913503176872432,
+          "product_rule_normalized_rms": 0.07179228190254598,
+          "rms_D_total": 43161.801494740976,
+          "rms_closure_residual": 3098.6842203321744,
+          "rms_head_acceleration": 11606.750547673299,
+          "rms_head_charge_evolution": 10369.96584110597,
+          "rms_redistribution": 47180.81481693913,
+          "sample_count": 50,
+          "status": "OK",
+          "valid_count": 30
+        }
+      },
+      "source_dir": "results/stage_f4/source_gate_recovery/F4-P-streamer-propagation",
+      "stage_labels": [
+        {
+          "dataset": "F4-P",
+          "end_time_s": 4.84003476561524e-10,
+          "evidence": "Ne or ne_max before 1.5x growth threshold",
+          "stage": "AVALANCHE",
+          "start_time_s": 2.516256903067121e-12
+        },
+        {
+          "dataset": "F4-P",
+          "end_time_s": 6.37146361358746e-10,
+          "evidence": "Ne/ne_max growth established; head displacement below 40 um",
+          "stage": "INCEPTION",
+          "start_time_s": 4.84003476561524e-10
+        },
+        {
+          "dataset": "F4-P",
+          "end_time_s": 1.117517760861587e-09,
+          "evidence": "head displacement=2.200e-04 m; peak |dM/dt|=2.766e+05 A m s^-1",
+          "stage": "PROPAGATION",
+          "start_time_s": 6.37146361358746e-10
+        }
+      ],
+      "trusted_frequency_high_Hz": 7966314711.629051,
+      "trusted_frequency_low_Hz": 2941408508.9091916,
+      "trusted_time_window_s": [
+        2.516256903067121e-12,
+        1.117517760861587e-09
+      ]
+    },
+    {
+      "J_RF_definition": "CONTINUITY_CONSISTENT_FINITE_VOLUME_FLUX",
+      "alternative_derivative_metrics": {
+        "corr_charge_evolution": 0.16792105590667208,
+        "corr_head_acceleration": -0.02864548975389587,
+        "corr_redistribution": 0.4127717096552289,
+        "normalized_rms_closure": 0.4415814870039497,
+        "peak_normalized_closure": 1.002868943608728,
+        "product_rule_normalized_rms": 0.4415814870039499,
+        "rms_D_total": 22267514.3269388,
+        "rms_closure_residual": 9832922.08837139,
+        "rms_head_acceleration": 38398132.83878162,
+        "rms_head_charge_evolution": 32602518.88518988,
+        "rms_redistribution": 42643236.425988175,
+        "sample_count": 95,
+        "status": "OK",
+        "valid_count": 87
+      },
+      "alternative_derivative_operator": {
+        "degree": 2,
+        "radius_samples": 2,
+        "type": "local polynomial derivative"
+      },
+      "case_id": "F4-C-stage5-highfield-collision",
+      "common_sample_count": 95,
+      "current_moment_full_jefimenko_cross_check": {
+        "correlation": 0.9990575835069816,
+        "normalized_waveform_error": 0.03540884307803112,
+        "peak_time_difference_s": 0.0
+      },
+      "derivative_relative_changes": {
+        "normalized_rms_closure": 0.6517283385856713,
+        "rms_head_acceleration": 0.4337907832078321,
+        "rms_head_charge_evolution": 0.4274825228996538,
+        "rms_redistribution": 0.40824955729508244
+      },
+      "exact_common_count": 95,
+      "full_maxwell_note": "FULL_MAXWELL_REFERENCE_PENDING",
+      "head_representation": "PRIMARY_HEAD_ONLY",
+      "head_segmentation": "C-R3 net-rho same-polarity connected component, relative threshold 0.2",
+      "head_valid_coverage": 1.0,
+      "interpolation_fraction": 0.0,
+      "mechanism_status": {
+        "basis": "closure=1.27 exceeds reduced-order interpretation range",
+        "current_moment_redistribution": "NOT_RESOLVED",
+        "head_acceleration": "NOT_RESOLVED",
+        "head_charge_evolution": "NOT_RESOLVED"
+      },
+      "mechanism_sum_current_moment_cross_check": {
+        "correlation": 0.6618903571190202,
+        "normalized_L2_error": 1.267922532688105,
+        "sample_count": 75
+      },
+      "output_csv": "rf/jefimenko/validation/fr3_mechanisms/F4-C-stage5-highfield-collision_mechanisms.csv",
+      "primary_derivative_operator": {
+        "degree": 2,
+        "radius_samples": 5,
+        "type": "local polynomial derivative",
+        "validity": "centered stencil only; invalid across insufficient history or invalid head samples"
+      },
+      "primary_metrics": {
+        "corr_charge_evolution": 0.21164025986548698,
+        "corr_head_acceleration": 0.2883012781857125,
+        "corr_redistribution": 0.4455938944437634,
+        "normalized_rms_closure": 1.2679225326881047,
+        "peak_normalized_closure": 5.343873615437688,
+        "product_rule_normalized_rms": 1.2679225326881052,
+        "rms_D_total": 20182029.771489248,
+        "rms_closure_residual": 25589250.30265338,
+        "rms_head_acceleration": 67816156.46655217,
+        "rms_head_charge_evolution": 18665511.8592653,
+        "rms_redistribution": 72062872.02940491,
+        "sample_count": 95,
+        "status": "OK",
+        "valid_count": 75
+      },
+      "segmentation_relative_changes": {
+        "normalized_rms_closure": 0.25378216834578476,
+        "rms_head_acceleration": 0.23200691779651877,
+        "rms_head_charge_evolution": 0.24236011110172073,
+        "rms_redistribution": 0.22185051845774764
+      },
+      "segmentation_threshold_metrics": {
+        "0.1": {
+          "corr_charge_evolution": 0.21351507701864655,
+          "corr_head_acceleration": 0.28762039594472166,
+          "corr_redistribution": 0.40280385718175793,
+          "normalized_rms_closure": 1.619150851008945,
+          "peak_normalized_closure": 6.819877151170309,
+          "product_rule_normalized_rms": 1.619150851008945,
+          "rms_D_total": 20182029.771489248,
+          "rms_closure_residual": 32677750.679594677,
+          "rms_head_acceleration": 87795229.77083673,
+          "rms_head_charge_evolution": 24049769.157635834,
+          "rms_redistribution": 92608006.22340581,
+          "sample_count": 95,
+          "status": "OK",
+          "valid_count": 75
+        },
+        "0.2": {
+          "corr_charge_evolution": 0.21164025986548698,
+          "corr_head_acceleration": 0.2883012781857125,
+          "corr_redistribution": 0.4455938944437634,
+          "normalized_rms_closure": 1.2679225326881047,
+          "peak_normalized_closure": 5.343873615437688,
+          "product_rule_normalized_rms": 1.2679225326881052,
+          "rms_D_total": 20182029.771489248,
+          "rms_closure_residual": 25589250.30265338,
+          "rms_head_acceleration": 67816156.46655217,
+          "rms_head_charge_evolution": 18665511.8592653,
+          "rms_redistribution": 72062872.02940491,
+          "sample_count": 95,
+          "status": "OK",
+          "valid_count": 75
+        },
+        "0.3": {
+          "corr_charge_evolution": 0.21435854578156505,
+          "corr_head_acceleration": 0.29086127568333603,
+          "corr_redistribution": 0.5022998871756283,
+          "normalized_rms_closure": 0.9461464030480383,
+          "peak_normalized_closure": 3.9785119829423383,
+          "product_rule_normalized_rms": 0.946146403048038,
+          "rms_D_total": 20182029.771489248,
+          "rms_closure_residual": 19095154.874502975,
+          "rms_head_acceleration": 52082339.027940944,
+          "rms_head_charge_evolution": 14141736.331283277,
+          "rms_redistribution": 56673664.645727456,
+          "sample_count": 95,
+          "status": "OK",
+          "valid_count": 75
+        }
+      },
+      "source_dir": "results/stage_f4/source_gate_recovery/F4-C-interaction-collision",
+      "stage_labels": [
+        {
+          "dataset": "F4-C",
+          "end_time_s": 7.038639999999998e-10,
+          "evidence": "before event-time minus 0.2 ns",
+          "stage": "PRE_INTERACTION",
+          "start_time_s": 2.7273982102533226e-12
+        },
+        {
+          "dataset": "F4-C",
+          "end_time_s": 8.538639999999998e-10,
+          "evidence": "heads approaching event-time window",
+          "stage": "ENCOUNTER",
+          "start_time_s": 7.038639999999998e-10
+        },
+        {
+          "dataset": "F4-C",
+          "end_time_s": 9.538639999999999e-10,
+          "evidence": "stage4_run event_time_s=9.038640e-10",
+          "stage": "COLLISION",
+          "start_time_s": 8.538639999999998e-10
+        },
+        {
+          "dataset": "F4-C",
+          "end_time_s": 1.1040907202412387e-09,
+          "evidence": "early post-event response",
+          "stage": "POST_COLLISION",
+          "start_time_s": 9.538639999999999e-10
+        }
+      ],
+      "trusted_frequency_high_Hz": 10233758844.919172,
+      "trusted_frequency_low_Hz": 3047273105.1868486,
+      "trusted_time_window_s": [
+        2.7273982102533226e-12,
+        1.1040907202412387e-09
+      ]
+    }
+  ],
+  "new_output_bytes": 64755,
+  "peak_rss_kb": 139268,
+  "runtime_s": 227.50189839300037,
+  "scope": "time-domain reduced-order current-moment mechanism decomposition; no frequency attribution"
+}
