@@ -1,0 +1,196 @@
+{
+  "reference": {
+    "author": "Debasish Nath",
+    "title": "Electromagnetic Fields Due to an Electron Avalanche",
+    "ieee_doi": "10.1109/TEMC.2021.3139115",
+    "techrxiv_doi": "10.36227/techrxiv.14339756.v1",
+    "formula_provenance": "Public full-text rendering of the TechRxiv preprint via ResearchGate; direct DOI/PDF endpoint attempts returned Cloudflare challenge HTML and were not committed.",
+    "equations_used": [
+      "Eq. 11",
+      "Eq. 12",
+      "Eq. 13",
+      "Eq. 28"
+    ]
+  },
+  "source_definition": {
+    "q0_C": 1e-15,
+    "growth_rate_s": 500000000.0,
+    "velocity_m_s": 100000.0,
+    "acceleration_m_s2": 0.0,
+    "source_width_m": 8e-06,
+    "dz_m": 2e-06,
+    "n_cells": 246,
+    "time_step_s": 1e-11
+  },
+  "observer_results": {
+    "near": {
+      "observer": {
+        "observer_id": "near_paper_anchor",
+        "position_m": [
+          0.00025,
+          0.00025,
+          0.001
+        ]
+      },
+      "valid_samples": 81,
+      "samples": 81,
+      "E_metrics": {
+        "Ex": {
+          "status": "COMPARED",
+          "normalized_L2_error": 0.00495610469880136,
+          "relative_peak_error": 0.006677062745404077,
+          "correlation": 0.9999964033729037,
+          "arrival_time_difference_s": 0.0,
+          "reference_peak": -4.080666401547052,
+          "candidate_peak": -4.107913267153244
+        },
+        "Ey": {
+          "status": "COMPARED",
+          "normalized_L2_error": 0.00495610469880136,
+          "relative_peak_error": 0.006677062745404077,
+          "correlation": 0.9999964033729037,
+          "arrival_time_difference_s": 0.0,
+          "reference_peak": -4.080666401547052,
+          "candidate_peak": -4.107913267153244
+        },
+        "Ez": {
+          "status": "COMPARED",
+          "normalized_L2_error": 0.004500355489904672,
+          "relative_peak_error": 0.006312955388892933,
+          "correlation": 0.999995223695915,
+          "arrival_time_difference_s": 0.0,
+          "reference_peak": -8.330887119886583,
+          "candidate_peak": -8.38347963862433
+        }
+      },
+      "B_metrics": {
+        "Bx": {
+          "status": "COMPARED",
+          "normalized_L2_error": 0.0004058216711204863,
+          "relative_peak_error": 0.0004405972486862267,
+          "correlation": 0.9999999998242132,
+          "arrival_time_difference_s": 0.0,
+          "reference_peak": 1.4126408313723317e-11,
+          "candidate_peak": 1.4132632370360162e-11
+        },
+        "By": {
+          "status": "COMPARED",
+          "normalized_L2_error": 0.0004058216711204863,
+          "relative_peak_error": 0.0004405972486862267,
+          "correlation": 0.9999999998242132,
+          "arrival_time_difference_s": 0.0,
+          "reference_peak": -1.4126408313723317e-11,
+          "candidate_peak": -1.4132632370360162e-11
+        },
+        "Bz": {
+          "status": "REGULARIZATION_SENSITIVE_COMPONENT",
+          "reference_peak": 0.0
+        }
+      }
+    },
+    "far": {
+      "observer": {
+        "observer_id": "far_paper_anchor",
+        "position_m": [
+          1.0,
+          1.0,
+          0.001
+        ]
+      },
+      "valid_samples": 81,
+      "samples": 81,
+      "E_metrics": {
+        "Ex": {
+          "status": "REGULARIZATION_SENSITIVE_COMPONENT",
+          "reference_peak": 1.1485222483419264e-11
+        },
+        "Ey": {
+          "status": "REGULARIZATION_SENSITIVE_COMPONENT",
+          "reference_peak": 1.1485222483419264e-11
+        },
+        "Ez": {
+          "status": "COMPARED",
+          "normalized_L2_error": 0.0011465171953049607,
+          "relative_peak_error": 0.000695857771229285,
+          "correlation": 0.9999995333447984,
+          "arrival_time_difference_s": 0.0,
+          "reference_peak": 1.8189591318316336e-08,
+          "candidate_peak": 1.820224868679067e-08
+        }
+      },
+      "B_metrics": {
+        "Bx": {
+          "status": "COMPARED",
+          "normalized_L2_error": 4.735428384902016e-06,
+          "relative_peak_error": 2.9458616263324536e-06,
+          "correlation": 0.9999999999844693,
+          "arrival_time_difference_s": 0.0,
+          "reference_peak": 3.9425182757224675e-17,
+          "candidate_peak": 3.942529889835767e-17
+        },
+        "By": {
+          "status": "COMPARED",
+          "normalized_L2_error": 4.735428384902016e-06,
+          "relative_peak_error": 2.9458616263324536e-06,
+          "correlation": 0.9999999999844693,
+          "arrival_time_difference_s": 0.0,
+          "reference_peak": -3.9425182757224675e-17,
+          "candidate_peak": -3.942529889835767e-17
+        },
+        "Bz": {
+          "status": "REGULARIZATION_SENSITIVE_COMPONENT",
+          "reference_peak": 0.0
+        }
+      }
+    }
+  },
+  "distance_scaling": {
+    "distances_m": [
+      0.02,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "B_near_slope": -1.9994397382347013,
+    "B_radiative_slope": -0.9996264921564602
+  },
+  "discretization": [
+    {
+      "dz_m": 4e-06,
+      "source_width_m": 1.6e-05,
+      "n_cells": 124,
+      "Ex_L2_error": 0.011029564130320045,
+      "Ex_peak_error": 0.01468812256130596,
+      "By_L2_error": 0.0015853579890452772,
+      "By_peak_error": 0.001711256753488231
+    },
+    {
+      "dz_m": 2e-06,
+      "source_width_m": 8e-06,
+      "n_cells": 246,
+      "Ex_L2_error": 0.00495610469880136,
+      "Ex_peak_error": 0.006677062745404077,
+      "By_L2_error": 0.0004058216711204863,
+      "By_peak_error": 0.0004405972486862267
+    },
+    {
+      "dz_m": 1e-06,
+      "source_width_m": 4e-06,
+      "n_cells": 491,
+      "Ex_L2_error": 0.0020859026513847224,
+      "Ex_peak_error": 0.0020643927574532104,
+      "By_L2_error": 0.00011868061147765469,
+      "By_peak_error": 0.00013655630563282477
+    }
+  ],
+  "source_conservation": {
+    "Q_min_C": -1.5777218104420236e-30,
+    "Q_max_C": 7.888609052210118e-31,
+    "Q_span_C": 2.3665827156630354e-30,
+    "Q_rms_C": 4.37536660864643e-31,
+    "M_peak_Am": 4.4816890703380644e-10
+  },
+  "benchmark_verdict": "PASS_CANDIDATE",
+  "runtime_s": 13.159553647000166,
+  "peak_rss_kb": 102376
+}
