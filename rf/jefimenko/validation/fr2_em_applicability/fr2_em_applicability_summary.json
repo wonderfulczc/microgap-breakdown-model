@@ -1,0 +1,214 @@
+{
+  "L_source_choice": "temporal p95 of current-weighted L95(t)",
+  "datasets": [
+    {
+      "case_id": "F4-P-stage4-left-isolated",
+      "conservative_tau_s": 4.398468854774158e-10,
+      "em_audit": {
+        "L_over_lambda": 0.0017800351538849752,
+        "L_source_m": 0.0014215544533147258,
+        "decision": "LOW_EM_FEEDBACK_RISK",
+        "decision_basis": "decision uses max(primary epsilon_EM, conservative epsilon_EM)",
+        "epsilon_EM": 0.011184290725153229,
+        "epsilon_EM_conservative": 0.07715988749274692,
+        "f_equiv_Hz": 375392664.60406154,
+        "lambda_equiv_m": 0.7986103253141628,
+        "tau_M_s": 4.239692410073092e-10,
+        "two_pi_L_over_lambda": 0.01118429072515323
+      },
+      "source_dir": "results/stage_f4/source_gate_recovery/F4-P-streamer-propagation",
+      "source_snapshot_count": 51,
+      "spatial": {
+        "all_window": {
+          "L95_max_m": 0.0014831003386197245,
+          "L95_median_m": 0.000888812494832585,
+          "L95_p95_m": 0.0014215544533147258,
+          "Lbounding_median_m": 0.010174517187562269,
+          "Lbounding_p95_m": 0.010174517187562269,
+          "sample_count": 49
+        },
+        "stages": {
+          "AVALANCHE": {
+            "L95_max_m": 0.0007303621196120553,
+            "L95_median_m": 0.0005273978084761675,
+            "L95_p95_m": 0.0007083085151134653,
+            "Lbounding_median_m": 0.010174517187562269,
+            "Lbounding_p95_m": 0.010174517187562269,
+            "sample_count": 18
+          },
+          "INCEPTION": {
+            "L95_max_m": 0.0009098574739382533,
+            "L95_median_m": 0.0008303848807286561,
+            "L95_p95_m": 0.0009024917312512693,
+            "Lbounding_median_m": 0.010174517187562269,
+            "Lbounding_p95_m": 0.010174517187562269,
+            "sample_count": 8
+          },
+          "PROPAGATION": {
+            "L95_max_m": 0.0014831003386197245,
+            "L95_median_m": 0.0012025938642780429,
+            "L95_p95_m": 0.0014560100440757673,
+            "Lbounding_median_m": 0.010174517187562269,
+            "Lbounding_p95_m": 0.010174517187562269,
+            "sample_count": 23
+          }
+        },
+        "total_scale_samples": 49,
+        "trusted_coverage": 1.0,
+        "valid_scale_samples": 49
+      },
+      "tau_M": {
+        "f_equiv_Hz": 375392664.60406154,
+        "inverse_tau_rad_s": 2358661674.6632338,
+        "omega_consistency_ratio": 0.9950302161379018,
+        "omega_rms_rad_s": 2346939635.9363427,
+        "status": "OK",
+        "tau_M_s": 4.239692410073092e-10
+      },
+      "temporal_sampling_sensitivity": {
+        "epsilon_relative_change": 0.0038696358364589552,
+        "every_second_decision": "LOW_EM_FEEDBACK_RISK",
+        "every_second_epsilon_EM": 0.0111410115929578,
+        "every_second_tau_M_s": 4.2561622078784806e-10,
+        "full_decision": "LOW_EM_FEEDBACK_RISK",
+        "full_epsilon_EM": 0.011184290725153229,
+        "full_tau_M_s": 4.239692410073092e-10,
+        "tau_relative_change": 0.003869635836458946
+      },
+      "trusted_frequency_context": {
+        "VHF_UHF_1_3GHz_interpretation": "NOT_RESOLVED remains unchanged",
+        "band_status": {
+          "1-3 GHz": "PARTIALLY_TRUSTED",
+          "100-200 MHz": "UNTRUSTED",
+          "200-300 MHz": "UNTRUSTED",
+          "3-10 GHz": "PARTIALLY_TRUSTED",
+          "300-500 MHz": "UNTRUSTED",
+          "500 MHz-1 GHz": "UNTRUSTED",
+          "60-90 MHz": "UNTRUSTED",
+          "SHF": "PARTIALLY_TRUSTED",
+          "UHF": "PARTIALLY_TRUSTED",
+          "VHF": "UNTRUSTED"
+        },
+        "trusted_frequency_high_Hz": 7966314711.629051,
+        "trusted_frequency_low_Hz": 2941408508.9091916
+      },
+      "trusted_sample_count": 860,
+      "trusted_time_end_s": 1.117517760861587e-09,
+      "trusted_time_start_s": 2.516256903067121e-12
+    },
+    {
+      "case_id": "F4-C-stage5-highfield-collision",
+      "conservative_tau_s": 1.8676471835993038e-10,
+      "em_audit": {
+        "L_over_lambda": 0.019910724301569756,
+        "L_source_m": 0.006699547062439655,
+        "decision": "REVIEW_SELECTED_FULL_MAXWELL_REFERENCE",
+        "decision_basis": "decision uses max(primary epsilon_EM, conservative epsilon_EM)",
+        "epsilon_EM": 0.1251027703869266,
+        "epsilon_EM_conservative": 0.1817181344287237,
+        "f_equiv_Hz": 890968437.6117024,
+        "lambda_equiv_m": 0.33647932445689405,
+        "tau_M_s": 1.7863140418140995e-10,
+        "two_pi_L_over_lambda": 0.12510277038692663
+      },
+      "source_dir": "results/stage_f4/source_gate_recovery/F4-C-interaction-collision",
+      "source_snapshot_count": 96,
+      "spatial": {
+        "all_window": {
+          "L95_max_m": 0.007104143764366818,
+          "L95_median_m": 0.005230802463672876,
+          "L95_p95_m": 0.006699547062439655,
+          "Lbounding_median_m": 0.010174517187562269,
+          "Lbounding_p95_m": 0.010174517187562269,
+          "sample_count": 95
+        },
+        "stages": {
+          "COLLISION": {
+            "L95_max_m": 0.0059221136744366625,
+            "L95_median_m": 0.005732495210748939,
+            "L95_p95_m": 0.005835879922613947,
+            "Lbounding_median_m": 0.010174517187562269,
+            "Lbounding_p95_m": 0.010174517187562269,
+            "sample_count": 27
+          },
+          "ENCOUNTER": {
+            "L95_max_m": 0.005449677792097192,
+            "L95_median_m": 0.0051640580642705065,
+            "L95_p95_m": 0.005420490718105445,
+            "Lbounding_median_m": 0.010174517187562269,
+            "Lbounding_p95_m": 0.010174517187562269,
+            "sample_count": 14
+          },
+          "POST_COLLISION": {
+            "L95_max_m": 0.007104143764366818,
+            "L95_median_m": 0.006514505591574718,
+            "L95_p95_m": 0.007040896217779492,
+            "Lbounding_median_m": 0.010174517187562269,
+            "Lbounding_p95_m": 0.010174517187562269,
+            "sample_count": 15
+          },
+          "PRE_INTERACTION": {
+            "L95_max_m": 0.004852036604678751,
+            "L95_median_m": 0.004193843491548529,
+            "L95_p95_m": 0.00477385857054541,
+            "Lbounding_median_m": 0.010174517187562269,
+            "Lbounding_p95_m": 0.010174517187562269,
+            "sample_count": 39
+          }
+        },
+        "total_scale_samples": 95,
+        "trusted_coverage": 1.0,
+        "valid_scale_samples": 95
+      },
+      "tau_M": {
+        "f_equiv_Hz": 890968437.6117024,
+        "inverse_tau_rad_s": 5598119796.3626,
+        "omega_consistency_ratio": 0.9997050845088883,
+        "omega_rms_rad_s": 5596468824.113554,
+        "status": "OK",
+        "tau_M_s": 1.7863140418140995e-10
+      },
+      "temporal_sampling_sensitivity": {
+        "epsilon_relative_change": 9.968837854261787e-06,
+        "every_second_decision": "REVIEW_SELECTED_FULL_MAXWELL_REFERENCE",
+        "every_second_epsilon_EM": 0.1251015232576935,
+        "every_second_tau_M_s": 1.7863318494666609e-10,
+        "full_decision": "REVIEW_SELECTED_FULL_MAXWELL_REFERENCE",
+        "full_epsilon_EM": 0.1251027703869266,
+        "full_tau_M_s": 1.7863140418140995e-10,
+        "tau_relative_change": 9.968837854317054e-06
+      },
+      "trusted_frequency_context": {
+        "VHF_UHF_1_3GHz_interpretation": "NOT_RESOLVED remains unchanged",
+        "band_status": {
+          "1-3 GHz": "UNTRUSTED",
+          "100-200 MHz": "UNTRUSTED",
+          "200-300 MHz": "UNTRUSTED",
+          "3-10 GHz": "PARTIALLY_TRUSTED",
+          "300-500 MHz": "UNTRUSTED",
+          "500 MHz-1 GHz": "UNTRUSTED",
+          "60-90 MHz": "UNTRUSTED",
+          "SHF": "PARTIALLY_TRUSTED",
+          "UHF": "UNTRUSTED",
+          "VHF": "UNTRUSTED"
+        },
+        "trusted_frequency_high_Hz": 10233758844.919172,
+        "trusted_frequency_low_Hz": 3047273105.1868486
+      },
+      "trusted_sample_count": 1119,
+      "trusted_time_end_s": 1.1040907202412387e-09,
+      "trusted_time_start_s": 2.7273982102533226e-12
+    }
+  ],
+  "engineering_bands": {
+    "0.1 < epsilon_EM <= 0.3": "REVIEW_SELECTED_FULL_MAXWELL_REFERENCE",
+    "epsilon_EM <= 0.1": "LOW_EM_FEEDBACK_RISK",
+    "epsilon_EM > 0.3": "SELECTED_FULL_MAXWELL_REFERENCE_REQUIRED",
+    "scope": "engineering audit bands, not universal physical constants"
+  },
+  "epsilon_EM_definition": "L_source/(c*tau_M)",
+  "overall_architecture_decision": "SELECTED_FULL_MAXWELL_REFERENCE_RECOMMENDED",
+  "peak_rss_kb": 160700,
+  "purpose": "quasi-static/full-Maxwell source-evolution applicability audit",
+  "runtime_s": 18.70365337200019
+}
