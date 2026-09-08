@@ -1,0 +1,168 @@
+{
+  "afivo_rerun_performed": true,
+  "afivo_rerun_required": false,
+  "case_id": "Stage E-R head-local peak-field direction versus streamer-head trajectory",
+  "cases": {
+    "misaligned_needle": {
+      "case": "misaligned_needle",
+      "case_polarity": "positive_hv_needle",
+      "delta_theta_max_deg": 90.62871802258945,
+      "delta_theta_median_deg": 90.62871802258945,
+      "delta_theta_p25_deg": 90.62871802258945,
+      "delta_theta_p75_deg": 90.62871802258945,
+      "delta_theta_p90_deg": 90.62871802258945,
+      "directional_evidence": "NOT_RESOLVED",
+      "field_sampling_method": "local_peak_Eabs_within_4_min_dx_of_primary_connected_leading_edge_head",
+      "field_valid_samples": 51,
+      "geometry": "misaligned_needle_pair_offset_10um",
+      "head_definition": "primary_connected_active_component_leading_edge_ne_ge_e2_head_threshold",
+      "head_displacement_m": 3.1961054251117074e-06,
+      "head_valid_samples": 51,
+      "input_kind": "head_local",
+      "input_prefix": "e3_misaligned_needle_pair_500V_er_headlocal",
+      "invalid_fraction": 0.9803921568627451,
+      "invalid_under_resolution_samples": 49,
+      "legacy_head_definition": "existing_stage_e_min_z_ne_ge_e2_head_threshold",
+      "legacy_min_z_outside_primary_component_samples": 0,
+      "min_dx_m": 7.8125e-07,
+      "polarity_sign": 1.0,
+      "prefix": "e3_misaligned_needle_pair_500V",
+      "reference_axis_vector": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "sampling_sensitivity": {
+        "every_second_sample_median_delta_theta_deg": 90.62871802258945,
+        "full_median_delta_theta_deg": 90.62871802258945,
+        "median_difference_deg": 0.0,
+        "status": "VALID"
+      },
+      "source_snapshots": 51,
+      "temporal_continuity": {
+        "diagnosis": "NO_ISOLATED_JUMP",
+        "isolated_jump_detected": false,
+        "large_delta_theta_jump_count": 0,
+        "max_delta_theta_jump_deg": null,
+        "max_head_step_m": 2.894191116563767e-06
+      },
+      "theta_E_range_deg": [
+        0.9205449419615218,
+        2.4011459456701
+      ],
+      "theta_head_range_deg": [
+        89.99978675462093,
+        89.99978675462093
+      ],
+      "time_interval_s": [
+        0.0,
+        5e-12
+      ],
+      "total_head_displacement_over_min_dx": 4.0910149441429855,
+      "trajectory_displacement_over_dx_median": 3.7045646292016214,
+      "trajectory_lag_median_s": 1e-13,
+      "trajectory_lag_p90_s": 1e-13,
+      "trajectory_min_displacement_dx": 1.0,
+      "trajectory_valid_samples": 1,
+      "valid_time_samples": 1
+    },
+    "triangular_foil": {
+      "case": "triangular_foil",
+      "case_polarity": "positive_hv_foil",
+      "delta_theta_max_deg": null,
+      "delta_theta_median_deg": null,
+      "delta_theta_p25_deg": null,
+      "delta_theta_p75_deg": null,
+      "delta_theta_p90_deg": null,
+      "directional_evidence": "NOT_RESOLVED",
+      "field_sampling_method": "local_peak_Eabs_within_4_min_dx_of_primary_connected_leading_edge_head",
+      "field_valid_samples": 2,
+      "geometry": "rounded_triangular_copper_foil_tip",
+      "head_definition": "primary_connected_active_component_leading_edge_ne_ge_e2_head_threshold",
+      "head_displacement_m": 4.886144110968554e-09,
+      "head_valid_samples": 2,
+      "input_kind": "source",
+      "input_prefix": "e2_case_a_pi_off_500V",
+      "invalid_fraction": 1.0,
+      "invalid_under_resolution_samples": 1,
+      "legacy_head_definition": "existing_stage_e_min_z_ne_ge_e2_head_threshold",
+      "legacy_min_z_outside_primary_component_samples": 2,
+      "min_dx_m": 9.375e-07,
+      "polarity_sign": 1.0,
+      "prefix": "e2_case_a_pi_off_500V",
+      "reference_axis_vector": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "sampling_sensitivity": {
+        "median_difference_deg": null,
+        "status": "INSUFFICIENT_VALID_ANGLES"
+      },
+      "source_snapshots": 2,
+      "temporal_continuity": {
+        "diagnosis": "NO_ISOLATED_JUMP",
+        "isolated_jump_detected": false,
+        "large_delta_theta_jump_count": 0,
+        "max_delta_theta_jump_deg": null,
+        "max_head_step_m": 4.886144110968554e-09
+      },
+      "theta_E_range_deg": [
+        1.5572901510236028,
+        1.5572901510236028
+      ],
+      "theta_head_range_deg": [
+        null,
+        null
+      ],
+      "time_interval_s": [
+        0.0,
+        5e-12
+      ],
+      "total_head_displacement_over_min_dx": 0.005211887051699791,
+      "trajectory_displacement_over_dx_median": null,
+      "trajectory_lag_median_s": null,
+      "trajectory_lag_p90_s": null,
+      "trajectory_min_displacement_dx": 1.0,
+      "trajectory_valid_samples": 0,
+      "valid_time_samples": 0
+    }
+  },
+  "coordinate_polarity_verification": {
+    "misaligned_needle": {
+      "expected_macroscopic_E_direction": "from positive upper needle toward grounded lower needle, mostly -z with lateral component",
+      "exported_local_E_direction": "head-local exported Ez is negative in existing snapshots",
+      "ground_electrode_coordinate": "lower grounded needle, tip surface z=0 m, x-offset=10e-6 m",
+      "hv_electrode_coordinate": "upper positive needle, tip surface z=70e-6 m",
+      "polarity_sign": 1.0,
+      "reference_axis_vector": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    "triangular_foil": {
+      "expected_macroscopic_E_direction": "from positive HV foil toward grounded lower electrode, approximately -z",
+      "exported_local_E_direction": "head-local exported Ez is negative in existing snapshots",
+      "ground_electrode_coordinate": "low z grounded plane at z=0 m",
+      "hv_electrode_coordinate": "high z triangular foil tip near z=70e-6 m",
+      "polarity_sign": 1.0,
+      "reference_axis_vector": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  },
+  "field_sampling_method": "local_peak_Eabs_within_4_min_dx_of_primary_connected_leading_edge_head",
+  "head_definition": "primary_connected_active_component_leading_edge_ne_ge_e2_head_threshold",
+  "legacy_head_definition": "existing_stage_e_min_z_ne_ge_e2_head_threshold",
+  "polarity_convention": "positive HV electrode field points along propagation toward ground; e_E_prop=e_E_raw",
+  "polarity_sign": 1.0,
+  "reference_axis_vector": [
+    0.0,
+    0.0,
+    -1.0
+  ],
+  "trajectory_resolution_rule": "trajectory valid only when the earliest future head displacement reaches >= 1.0 * max(current_min_dx,future_min_dx)"
+}

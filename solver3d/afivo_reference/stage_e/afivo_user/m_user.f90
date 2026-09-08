@@ -43,6 +43,11 @@ module m_user
   integer :: e2_source_export_stride = 1
   integer, save :: e2_source_export_counter = 0
   integer, save :: e2_source_call_counter = 0
+  logical :: e2_write_head_local_export = .false.
+  character(len=512) :: e2_head_local_export_prefix = "e2_head_local"
+  integer :: e2_head_local_export_stride = 1
+  integer, save :: e2_head_local_export_counter = 0
+  integer, save :: e2_head_local_call_counter = 0
   integer, save :: e2_i_neg = -1
 
 contains
@@ -85,6 +90,12 @@ contains
          "Write one Stage E2 source snapshot every this many output calls")
     call CFG_add_get(cfg, "e2%write_source_export", e2_write_source_export, &
          "Write Stage E2 rho/ne/E/J source snapshots")
+    call CFG_add_get(cfg, "e2%head_local_export_prefix", e2_head_local_export_prefix, &
+         "Stage E-R sparse active leading-edge CSV export prefix")
+    call CFG_add_get(cfg, "e2%head_local_export_stride", e2_head_local_export_stride, &
+         "Write one Stage E-R head-local snapshot every this many output calls")
+    call CFG_add_get(cfg, "e2%write_head_local_export", e2_write_head_local_export, &
+         "Write sparse Stage E-R active head-local diagnostic snapshots")
 
     user_lsf => e1_triangular_foil_lsf
     if (trim(e2_mode) == "dynamic_gaussian") then
@@ -289,6 +300,11 @@ contains
             call e2_write_source_cells(tree)
        e2_source_call_counter = e2_source_call_counter + 1
     end if
+    if (e2_write_head_local_export) then
+       if (mod(e2_head_local_call_counter, max(e2_head_local_export_stride, 1)) == 0) &
+            call e2_write_head_local_cells(tree)
+       e2_head_local_call_counter = e2_head_local_call_counter + 1
+    end if
 
     n_vars = 17
     var_names(1) = "e1_vol_Egt_0p5"
@@ -453,5 +469,55 @@ contains
        end do
     end do
   end subroutine e2_write_box_source_cells
+
+  subroutine e2_write_head_local_cells(tree)
+    type(af_t), intent(in) :: tree
+    integer :: unit, lvl, n, id
+    character(len=1024) :: path
+
+    write(path, "(A,'_head_local_',I6.6,'.csv')") &
+         trim(e2_head_local_export_prefix), e2_head_local_export_counter
+    open(newunit=unit, file=trim(path), status="replace", action="write")
+    write(unit, "(A)") "time_s,x_m,y_m,z_m,cell_volume_m3,dx_m,ne_m3," // &
+         "Ex_Vpm,Ey_Vpm,Ez_Vpm,Eabs_Vpm,lsf_m,level"
+    do lvl = 1, tree%highest_lvl
+       do n = 1, size(tree%lvls(lvl)%leaves)
+          id = tree%lvls(lvl)%leaves(n)
+          call e2_write_box_head_local_cells(unit, tree%boxes(id), lvl, &
+               product(af_lvl_dr(tree, lvl)), minval(af_lvl_dr(tree, lvl)))
+       end do
+    end do
+    close(unit)
+    e2_head_local_export_counter = e2_head_local_export_counter + 1
+  end subroutine e2_write_head_local_cells
+
+  subroutine e2_write_box_head_local_cells(unit, box, lvl, cell_vol, cell_dx)
+    integer, intent(in) :: unit, lvl
+    type(box_t), intent(in) :: box
+    real(dp), intent(in) :: cell_vol, cell_dx
+    integer :: i, j, k, nc
+    integer :: ijk(3)
+    real(dp) :: rr(3)
+    real(dp) :: evec(DTIMES(1:box%n_cell), NDIM)
+    real(dp) :: ne, lsf, eabs
+
+    nc = box%n_cell
+    evec = field_get_E_vector(box)
+    do k = 1, nc
+       do j = 1, nc
+          do i = 1, nc
+             lsf = box%cc(i, j, k, i_lsf)
+             ne = box%cc(i, j, k, i_electron)
+             if (lsf <= 0.0_dp .or. ne < e2_head_threshold) cycle
+             ijk = [i, j, k]
+             rr = af_r_cc(box, ijk)
+             eabs = box%cc(i, j, k, i_electric_fld)
+             write(unit, "(12(ES25.16E3,','),I0)") global_time, rr(1), rr(2), rr(3), &
+                  cell_vol, cell_dx, ne, evec(i, j, k, 1), evec(i, j, k, 2), &
+                  evec(i, j, k, 3), eabs, lsf, lvl
+          end do
+       end do
+    end do
+  end subroutine e2_write_box_head_local_cells
 
 end module m_user
