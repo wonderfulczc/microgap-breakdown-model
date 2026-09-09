@@ -1,0 +1,99 @@
+{
+  "contract": {
+    "source_case_id": "G2_primary_150_LAGGED",
+    "reference_plane_id": "EXTERNAL_CEXT_TO_GAP_CGAP_PARALLEL_GSP",
+    "voltage_reference": "GAP_NODE_MINUS_GROUND",
+    "positive_current_direction": "EXTERNAL_TO_GAP",
+    "dt_port_s": 1.25e-11,
+    "sample_count": 801,
+    "Nyquist_Hz": 40000000000.0,
+    "sampling_status": "BOUNDED_CIRCUIT_DENSE_OUTPUT",
+    "G0_status": "HANDOFF_CALIBRATION_PENDING",
+    "G1_status": "THERMAL_REFERENCE_SOLVER_VALIDATED",
+    "G2_status": "BIDIRECTIONAL_REFERENCE_COUPLING_VALIDATED",
+    "G2_production_status": "PRODUCTION_THERMAL_RLC_COUPLING_NOT_CALIBRATED",
+    "production_calibration_status": "PRODUCTION_PORT_TRANSIENT_NOT_CALIBRATED",
+    "interface_constraints": [
+      "H_GAP_CAPACITANCE_PARTITION_REQUIRED",
+      "FULL_WAVE_LOADING_FEEDBACK_NOT_COUPLED",
+      "LTE_APPLICABILITY_PENDING_CALIBRATION",
+      "THERMAL_RSP_GRID_SENSITIVITY_PRESENT",
+      "RADIATION_MODEL_NOT_ENABLED"
+    ],
+    "provenance": {
+      "thermal/g2/g2_primary_timeseries.csv": "213e317c2279f64de066569963ec9ce2e1bc0ef2fd715a8d28daf1acaea5c012",
+      "thermal/g2/g2_reference_summary.json": "d657c2734cc35bd0f313919ded7207d8c7badffb8e159a5e6ba1c02a39563c97"
+    },
+    "G3_status": "PHYSICS_DERIVED_PORT_MODEL_VALIDATED",
+    "energy_closure_status": "PASS",
+    "valid_time_interval_s": [
+      0.0,
+      1e-08
+    ],
+    "uniform_filename": "g3_port_uniform.csv"
+  },
+  "endpoint_recovery": {
+    "max_I_L_error_A": 9.405453846311751e-17,
+    "max_V_error_V": 1.4210854715202004e-14
+  },
+  "native_energy": {
+    "port_energy_J": 4.00128703800596e-09,
+    "conduction_energy_J": 5.0020845872708314e-09,
+    "Cgap_energy_change_J": -9.999990063737696e-10,
+    "energy_residual_J": -7.985428911018586e-13,
+    "energy_residual_relative": 0.00015964202067553373
+  },
+  "uniform_energy": {
+    "port_energy_J": 3.9993947730981675e-09,
+    "conduction_energy_J": 4.999716345962794e-09,
+    "Cgap_energy_change_J": -9.999990063737696e-10,
+    "energy_residual_J": -3.225664908571956e-13,
+    "energy_residual_relative": 6.451695827057546e-05
+  },
+  "resampling_relative_errors": {
+    "port_energy_J": 0.0004729140623551639,
+    "conduction_energy_J": 0.00047345087167533287,
+    "peak_V_port_V": 0.0,
+    "peak_I_port_A": 0.0
+  },
+  "conduction_vs_G2_relative": 0.000348827367885927,
+  "native_median_internal_dt_s": 1.2500000000000112e-11,
+  "native_rows": 1030,
+  "uniform_ranges": {
+    "V_port_V": [
+      -5.316851781106404,
+      100.0
+    ],
+    "I_port_A": [
+      -0.018037818734216327,
+      0.331831585045817
+    ],
+    "I_conduction_A": [
+      -0.01787688677608484,
+      0.4147894813072712
+    ],
+    "I_gap_displacement_A": [
+      -0.08295789626145425,
+      0.00021051388868058055
+    ],
+    "Rsp_ohm": [
+      241.08615214839827,
+      624.2893833306066
+    ],
+    "P_port_W": [
+      -0.001482425150851353,
+      33.1831585045817
+    ]
+  },
+  "impedance_valid_fraction": 1.0,
+  "impedance_p10_median_p90_ohm": [
+    301.35769018549786,
+    458.15393902976257,
+    655.1171096623359
+  ],
+  "KCL_max_A": 4.163336342344337e-17,
+  "method_status": "PHYSICS_DERIVED_PORT_MODEL_VALIDATED",
+  "energy_closure_status": "PASS",
+  "runtime_s": 0.5863813400001163,
+  "peak_RSS_KiB": 143752
+}
