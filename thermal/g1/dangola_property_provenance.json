@@ -1,0 +1,35 @@
+{
+  "doi": "10.1140/epjd/e2007-00305-4",
+  "title": "Thermodynamic and transport properties in equilibrium air plasmas in a wide pressure and temperature range",
+  "journal": "European Physical Journal D 46, 129-150 (2008)",
+  "source_type": "PUBLISHED_EQUILIBRIUM_AIR_FIT",
+  "verification_date": "2026-09-08",
+  "source_url": "https://www.researchgate.net/profile/Antonio-Dangola/publication/200702842_Thermodynamic_and_transport_properties_in_equilibrium_air_plasmas_in_a_wide_pressure_and_temperature_range/links/0fcfd509786b669986000000/Thermodynamic-and-transport-properties-in-equilibrium-air-plasmas-in-a-wide-pressure-and-temperature-range.pdf",
+  "verification_method": "Public page-numbered full-text rendering; no article copy committed",
+  "temperature_range_K": [50, 60000],
+  "pressure_range_atm": [0.01, 100],
+  "pressure_fit_input": "x = ln(p_Pa / 101325)",
+  "log_convention": "Natural logarithm; section 4.1, journal page 137, text following Eq.52",
+  "base_functions": {"gaussian": 48, "sigmoid": 49, "xi": 50, "phi": 51, "pressure_polynomial": 52},
+  "coefficient_file": "python/streamer_rf/thermal/dangola_coefficients.json",
+  "coefficient_sha256": "33273bb0d087146628dfb28b364eac1fb1d161caf103289dbf3dfa33dcc99c5c",
+  "coefficient_layout": "Each term is [a,c,Delta], each row alpha_0 upward. Empty trailing columns omitted (zero). Tables 21/22/23 rows are logarithmic; table25 amplitude modes explicit, c/Delta logarithmic; table26 first term entirely linear, remaining c/Delta logarithmic and amplitude modes explicit.",
+  "properties": {
+    "molar_mass_kg_mol": {"equation": 53, "table": 21, "pages": [137,146], "argument": "T_K", "paper_units": "kg/mol", "SI_multiplier": 1},
+    "rho_kg_m3": {"equation": 54, "table": 21, "pages": [137,146], "argument": "p_Pa*M/(R_SI*T_K)", "paper_units": "kg/m3", "SI_multiplier": 1},
+    "h_J_kg": {"equation": 55, "table": 22, "pages": [137,147], "argument": "T_K", "paper_units": "cal/g", "SI_multiplier": 4184},
+    "cp_J_kgK": {"equation": 56, "table": 23, "pages": [137,147,148], "argument": "T_K", "paper_units": "cal/(g K)", "SI_multiplier": 4184},
+    "sigma_S_m": {"equation": 58, "table": 25, "pages": [137,149], "argument": "xi uses ln(T_K); sigmoids use T_K; exponentiate result", "paper_units": "S/m", "SI_multiplier": 1},
+    "k_W_mK": {"equation": 59, "table": 26, "pages": [137,149,150], "argument": "All terms use ln(T_K); exponentiate result", "paper_units": "W/(m K)", "SI_multiplier": 1}
+  },
+  "transcription_checks": {
+    "table22": "alpha_6..alpha_9 continue log(a7), log(c7), log(Delta7), before Table23 on journal page147; log(c7) alpha9 is blank/zero. They are not Table23 coefficients.",
+    "table23": "sigmoid3 has alpha5/alpha6 continuation; Gaussian6..11 continue on page148",
+    "table25": "a7 = a3 + a4 + a5 - a1 - a2 - a6; rows marked -a3,-a4,-a5 yield negative signed amplitudes",
+    "table26": "Gaussian7..10 continue on page150; negative exponential amplitude for terms3 and8"
+  },
+  "out_of_range_status": "PROPERTY_OUT_OF_RANGE",
+  "calorie_convention": "thermochemical calorie = 4.184 J",
+  "cp_policy": "Independent published cp fit; conservative EOS uses e=h-p/rho. Do not impose cp=dh/dT for two independent fits without checking discrepancy.",
+  "LTE_status": "LTE_APPLICABILITY_PENDING_CALIBRATION"
+}

@@ -1,0 +1,216 @@
+{
+  "model_status": "LTE_REFERENCE_MODEL",
+  "LTE_applicability": "LTE_APPLICABILITY_PENDING_CALIBRATION",
+  "radiation_status": "RADIATION_MODEL_NOT_ENABLED",
+  "initial_condition_status": "NUMERICAL_REFERENCE_INITIAL_CONDITION",
+  "property_source": "PUBLISHED_EQUILIBRIUM_AIR_FIT",
+  "coefficient_sha256": "33273bb0d087146628dfb28b364eac1fb1d161caf103289dbf3dfa33dcc99c5c",
+  "reference": {
+    "ambient_pressure_Pa": 101325.0,
+    "ambient_temperature_K": 300.0,
+    "Rmax_m": 0.0005,
+    "L_channel_m": 0.001,
+    "initial_T": "300 + 9700 exp(-(r/50um)^2) K",
+    "initial_p": "101325*(1+exp(-(r/50um)^2)) Pa",
+    "current": "0.05*(1+0.5*sin(pi*t/10ns)^2) A",
+    "end_time_s": 1e-08,
+    "primary_cells": 150
+  },
+  "property_check": {
+    "all_selected_values_valid": true,
+    "max_cp_vs_dh_relative": 0.00622088070625927,
+    "max_inverse_T_relative": 4.637331585399806e-12,
+    "max_inverse_p_relative": 1.7002439082713e-11,
+    "published_figure_check": "Scale-only check against indexed Figures6/7 axes; no digitization. Image endpoint unavailable; pointwise curve comparison not claimed."
+  },
+  "g0_initialization": {
+    "valid": false,
+    "status": "G0_THERMAL_INITIALIZATION_UNRESOLVED"
+  },
+  "Q_required_status": "NOT_AVAILABLE",
+  "runs": [
+    {
+      "radial_cells": 100,
+      "accepted_steps": 45,
+      "rejected_steps": 0,
+      "runtime_s": 0.634663749999163,
+      "final": {
+        "G_length_S_m": 1.443803422284097e-06,
+        "Rsp_ohm": 692.6150641878935,
+        "Ez_V_m": 34630.75320939467,
+        "PJ_volume_W": 1.7315376604697335,
+        "PJ_circuit_W": 1.7315376604697341,
+        "joule_closure_relative": 3.8470651258857644e-16,
+        "time_s": 1e-08,
+        "accepted_steps": 45,
+        "rejected_steps": 0,
+        "T_axis_K": 7718.382418448249,
+        "T_max_K": 7718.382418448249,
+        "T_min_K": 300.0,
+        "p_axis_Pa": 138297.00674516562,
+        "p_min_Pa": 101325.0,
+        "rho_axis_kg_m3": 0.03487786182483422,
+        "rho_min_kg_m3": 0.03487786182483422,
+        "sigma_axis_S_m": 679.3471736831764,
+        "sigma_max_S_m": 679.3471736831764,
+        "channel_radius_m": 8.057116411643938e-05,
+        "outward_velocity_max_m_s": 157.6151846820841,
+        "internal_energy_J": 0.00020826885983396174,
+        "kinetic_energy_J": 8.505038047909387e-09,
+        "total_energy_J": 0.00020827736487200965,
+        "cumulative_Joule_J": 1.8715555455132082e-08,
+        "conduction_boundary_loss_J": 0.0,
+        "hydro_boundary_loss_J": -3.41578987704715e-23,
+        "radiation_loss_J": 0.0,
+        "energy_residual_J": -7.63429336690769e-21,
+        "mass_residual_kg": -1.0350966311905508e-25
+      },
+      "max_joule_closure": 4.218775004679665e-16,
+      "max_energy_residual_relative": 1.8602776296841863e-16,
+      "max_energy_residual_over_Joule": 2.070036913628413e-12,
+      "outer_shell_pressure_change_fraction": 0.0,
+      "radius_initial_m": 7.603772956620604e-05,
+      "radius_final_m": 8.057116411643938e-05,
+      "channel_radius_max_step_change_m": 1.563662803124124e-07
+    },
+    {
+      "radial_cells": 150,
+      "accepted_steps": 103,
+      "rejected_steps": 0,
+      "runtime_s": 2.2525440610006626,
+      "final": {
+        "G_length_S_m": 1.6125642005755752e-06,
+        "Rsp_ohm": 620.1303486974772,
+        "Ez_V_m": 31006.517434873862,
+        "PJ_volume_W": 1.5503258717436932,
+        "PJ_circuit_W": 1.5503258717436932,
+        "joule_closure_relative": 0.0,
+        "time_s": 1e-08,
+        "accepted_steps": 103,
+        "rejected_steps": 0,
+        "T_axis_K": 7870.204792238168,
+        "T_max_K": 7870.204792238168,
+        "T_min_K": 300.0,
+        "p_axis_Pa": 134965.04494154677,
+        "p_min_Pa": 101325.0,
+        "rho_axis_kg_m3": 0.03260691489623077,
+        "rho_min_kg_m3": 0.03260691489623077,
+        "sigma_axis_S_m": 801.0438244178481,
+        "sigma_max_S_m": 801.0438244178481,
+        "channel_radius_m": 8.016889220361392e-05,
+        "outward_velocity_max_m_s": 169.93798040774922,
+        "internal_energy_J": 0.00020826248512796397,
+        "kinetic_energy_J": 8.967869741699005e-09,
+        "total_energy_J": 0.00020827145299770567,
+        "cumulative_Joule_J": 1.7290835713937548e-08,
+        "conduction_boundary_loss_J": 0.0,
+        "hydro_boundary_loss_J": -3.460977116153556e-23,
+        "radiation_loss_J": 0.0,
+        "energy_residual_J": -3.445902617330221e-21,
+        "mass_residual_kg": 1.0328400723427815e-25
+      },
+      "max_joule_closure": 5.464735575275076e-16,
+      "max_energy_residual_relative": 3.314326275346407e-16,
+      "max_energy_residual_over_Joule": 3.991838526621223e-12,
+      "outer_shell_pressure_change_fraction": 0.0,
+      "radius_initial_m": 7.594249198798159e-05,
+      "radius_final_m": 8.016889220361392e-05,
+      "channel_radius_max_step_change_m": 5.235348308662484e-08
+    },
+    {
+      "radial_cells": 225,
+      "accepted_steps": 234,
+      "rejected_steps": 0,
+      "runtime_s": 3.1626710560012725,
+      "final": {
+        "G_length_S_m": 1.7467618376577532e-06,
+        "Rsp_ohm": 572.4878907023226,
+        "Ez_V_m": 28624.39453511613,
+        "PJ_volume_W": 1.4312197267558067,
+        "PJ_circuit_W": 1.4312197267558069,
+        "joule_closure_relative": 1.5514361685633494e-16,
+        "time_s": 1e-08,
+        "accepted_steps": 234,
+        "rejected_steps": 0,
+        "T_axis_K": 7980.877465788434,
+        "T_max_K": 7980.877465788434,
+        "T_min_K": 300.0,
+        "p_axis_Pa": 132049.9919478914,
+        "p_min_Pa": 101325.0,
+        "rho_axis_kg_m3": 0.030985041337842478,
+        "rho_min_kg_m3": 0.030985041337842478,
+        "sigma_axis_S_m": 900.1329917071023,
+        "sigma_max_S_m": 900.1329917071023,
+        "channel_radius_m": 7.991660126684032e-05,
+        "outward_velocity_max_m_s": 181.5504258360866,
+        "internal_energy_J": 0.00020825925160202914,
+        "kinetic_energy_J": 9.299290405711147e-09,
+        "total_energy_J": 0.00020826855089243487,
+        "cumulative_Joule_J": 1.6327585008937338e-08,
+        "conduction_boundary_loss_J": 0.0,
+        "hydro_boundary_loss_J": 6.520081557190423e-23,
+        "radiation_loss_J": 0.0,
+        "energy_residual_J": -5.559627349788684e-21,
+        "mass_residual_kg": 1.0361152809228757e-25
+      },
+      "max_joule_closure": 4.606837686439291e-16,
+      "max_energy_residual_relative": 2.1582166897608898e-16,
+      "max_energy_residual_over_Joule": 2.7527244462416097e-12,
+      "outer_shell_pressure_change_fraction": 0.0,
+      "radius_initial_m": 7.590607082614398e-05,
+      "radius_final_m": 7.991660126684032e-05,
+      "channel_radius_max_step_change_m": 2.2397116486796726e-08
+    }
+  ],
+  "grid_sensitivity": {
+    "T_axis_K": {
+      "values": [
+        7718.382418448249,
+        7870.204792238168,
+        7980.877465788434
+      ],
+      "relative_medium_fine": 0.0138672312693292,
+      "coarse_medium_change": 151.82237378991886,
+      "medium_fine_change": 110.67267355026615
+    },
+    "channel_radius_m": {
+      "values": [
+        8.057116411643938e-05,
+        8.016889220361392e-05,
+        7.991660126684032e-05
+      ],
+      "relative_medium_fine": 0.0031569277568649643,
+      "coarse_medium_change": 4.0227191282545406e-07,
+      "medium_fine_change": 2.52290936773598e-07
+    },
+    "Rsp_ohm": {
+      "values": [
+        692.6150641878935,
+        620.1303486974772,
+        572.4878907023226
+      ],
+      "relative_medium_fine": 0.08322002747814854,
+      "coarse_medium_change": 72.4847154904163,
+      "medium_fine_change": 47.64245799515459
+    },
+    "total_energy_J": {
+      "values": [
+        0.00020827736487200965,
+        0.00020827145299770567,
+        0.00020826855089243487
+      ],
+      "relative_medium_fine": 1.3934438293103965e-05,
+      "coarse_medium_change": 5.911874303982231e-09,
+      "medium_fine_change": 2.9021052708048164e-09
+    }
+  },
+  "source_sha256": {
+    "python/streamer_rf/thermal/properties.py": "98df17a704f9abee9d9730e53c6d294914621010d583b72217c504bfa594671c",
+    "python/streamer_rf/thermal/radial.py": "0270810ec4c3ba75645c04b113533485c7e7c296247f45083aa8335aa5f5f60c",
+    "python/streamer_rf/thermal/dangola_coefficients.json": "33273bb0d087146628dfb28b364eac1fb1d161caf103289dbf3dfa33dcc99c5c"
+  },
+  "runtime_s": 6.07856606200221,
+  "peak_RSS_KiB": 115384,
+  "reference_verdict": "PASS",
+  "output_size_bytes": 101078
+}
