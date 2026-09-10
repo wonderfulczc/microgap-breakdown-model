@@ -1,0 +1,22 @@
+{
+  "status": "VNA_MEASUREMENT_PENDING",
+  "required_files": [
+    "RX_S11.s1p",
+    "TX_S11.s1p",
+    "TX_RX_S21.s2p"
+  ],
+  "frequency_start_Hz": 200000000.0,
+  "frequency_stop_Hz": 500000000.0,
+  "frequency_points": 601,
+  "frequency_spacing_Hz": 500000.0,
+  "Z0_ohm": 50.0,
+  "parser": "streamer_rf.fullwave.receiver.read_touchstone",
+  "comparison_API_unchanged": true,
+  "replaceable_fields": [
+    "data_values",
+    "geometry_metadata",
+    "provenance",
+    "validation_status"
+  ],
+  "calibration_metadata_required": true
+}

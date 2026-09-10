@@ -1,0 +1,289 @@
+{
+  "framework_status": "SIMULATION_FRAMEWORK_VALIDATED",
+  "formal_node_status": "MINIMAL_FIX_REQUIRED",
+  "blocker": "VNA_MEASUREMENT_REQUIRED",
+  "receiver_transfer_status": "SIMULATION_ONLY",
+  "production_receiver_status": "NOT_RESOLVED",
+  "reference_results": {
+    "S11_min_frequency_Hz": 894000000.0,
+    "S11_min_dB": -14.720305901379414,
+    "S11_minus10dB_band_Hz": [
+      858000000.0,
+      940000000.0
+    ],
+    "Zin_at_1GHz_ohm": [
+      103.21701819260969,
+      66.56458687861796
+    ],
+    "S21_at_1GHz": [
+      0.08847010007754984,
+      0.02123253375027487
+    ],
+    "S21_at_1GHz_dB": -20.820861674680287,
+    "S21_phase_at_1GHz_rad": -6.047643428746114,
+    "group_delay_at_1GHz_s": 2.146799288351123e-09,
+    "near_far": {
+      "frequency_Hz": 1000000000.0,
+      "wavelength_m": 0.299792458,
+      "maximum_dimension_m": 0.15,
+      "distance_m": 0.3,
+      "reactive_near_field_limit_m": 0.06578368938462804,
+      "far_field_limit_2D2_over_lambda_m": 0.15010384283916842,
+      "status": "FAR_FIELD"
+    },
+    "nf2ff": {
+      "frequency_Hz": 1000000000.0,
+      "Prad": 1.9446135761293567e-25,
+      "Dmax": 1.387172180683544,
+      "E_norm_max": 4.0216769962411424e-12,
+      "E_norm_axis": 1.4398227694519201e-16,
+      "E_norm_broadside": 4.0216769962411424e-12,
+      "finite": true
+    }
+  },
+  "mesh_convergence": {
+    "feature_frequency_relative_change": 0.013422818791946308,
+    "S21_magnitude_relative_change_at_1GHz": 0.018954060809058766,
+    "S21_dB_absolute_change_at_1GHz": 0.16309208862966074,
+    "S21_phase_absolute_change_at_1GHz_rad": 0.04902964850088587,
+    "Dmax_relative_change": 0.0006211599581011792,
+    "status": "PASS_KEY_FEATURES_WITHIN_5_PERCENT"
+  },
+  "domain_check": {
+    "S21_magnitude_relative_change_at_1GHz": 9.169607594868206e-05,
+    "S21_dB_absolute_change_at_1GHz": 0.000796498514382904,
+    "S21_phase_absolute_change_at_1GHz_rad": 0.0050793726924966975,
+    "Dmax_relative_change": 0.005040850533362372,
+    "minimum_structure_to_PML_clearance_m": 0.15,
+    "status": "PASS"
+  },
+  "intrinsic_field_transfer_status": "RX_INTRINSIC_FIELD_TRANSFER_PENDING",
+  "VNA_quality_status": "NOT_EVALUATED_NO_MEASUREMENT_DATA",
+  "VNA_comparison_metrics": null,
+  "acceptance_targets": {
+    "major_feature_frequency_mismatch_max": 0.05,
+    "normalized_S21_spectral_correlation_min": 0.9,
+    "principal_band_absolute_S21_tolerance_dB": 3.0
+  },
+  "runtime_cases": {
+    "baseline": {
+      "case": "baseline",
+      "raw_directory": "/tmp/h2_openems_validation/baseline",
+      "spacing_mm": 5.0,
+      "domain_scale": 1.0,
+      "PML": "PML_8",
+      "cells": 1095616,
+      "min_xyz_m": [
+        0.004999999999999949,
+        0.004999999999999977,
+        0.004999999999999977
+      ],
+      "max_xyz_m": [
+        0.0050000000000000044,
+        0.0050000000000000044,
+        0.0050000000000000044
+      ],
+      "growth_max": 1.000000000000011,
+      "estimated_CFL_dt_s": 9.629166007732289e-12,
+      "target_max_frequency_Hz": 1300000000.0,
+      "frequency_start_Hz": 700000000.0,
+      "frequency_stop_Hz": 1300000000.0,
+      "frequency_samples": 301,
+      "tx_rx_distance_m": 0.3,
+      "dipole_total_length_m": 0.15,
+      "Z0_ohm": 50.0,
+      "S11_min_dB": -14.720305901379414,
+      "S11_min_frequency_Hz": 894000000.0,
+      "S11_minus10dB_band_Hz": [
+        858000000.0,
+        940000000.0
+      ],
+      "Zin_at_1GHz_ohm": [
+        103.21701819260969,
+        66.56458687861796
+      ],
+      "S21_at_1GHz": [
+        0.08847010007754984,
+        0.02123253375027487
+      ],
+      "S21_at_1GHz_dB": -20.820861674680287,
+      "S21_at_1GHz_phase_rad": -6.047643428746114,
+      "group_delay_at_1GHz_s": 2.146799288351123e-09,
+      "response_finite": true,
+      "near_far_at_1GHz": {
+        "frequency_Hz": 1000000000.0,
+        "wavelength_m": 0.299792458,
+        "maximum_dimension_m": 0.15,
+        "distance_m": 0.3,
+        "reactive_near_field_limit_m": 0.06578368938462804,
+        "far_field_limit_2D2_over_lambda_m": 0.15010384283916842,
+        "status": "FAR_FIELD"
+      },
+      "nf2ff": {
+        "frequency_Hz": 1000000000.0,
+        "Prad": 1.9446135761293567e-25,
+        "Dmax": 1.387172180683544,
+        "E_norm_max": 4.0216769962411424e-12,
+        "E_norm_axis": 1.4398227694519201e-16,
+        "E_norm_broadside": 4.0216769962411424e-12,
+        "finite": true
+      },
+      "runtime_s": 21.980240272000174,
+      "peak_RSS_KiB": 303892,
+      "raw_bytes": 2573547,
+      "script_sha256": "7b0131bea5787cc1e1e793406982feb2b9e94081e278d1feddde16c9c4b40453",
+      "actual_FDTD_cells": 1128743,
+      "actual_FDTD_timestep_s": 9.62917e-12,
+      "actual_timesteps": 1872
+    },
+    "fine": {
+      "case": "fine",
+      "raw_directory": "/tmp/h2_openems_validation/fine",
+      "spacing_mm": 3.75,
+      "domain_scale": 1.0,
+      "PML": "PML_8",
+      "cells": 2297856,
+      "min_xyz_m": [
+        0.0037499999999999756,
+        0.0037499999999999756,
+        0.0037499999999999756
+      ],
+      "max_xyz_m": [
+        0.003750000000000031,
+        0.0037500000000000033,
+        0.003750000000000031
+      ],
+      "growth_max": 1.0000000000000149,
+      "estimated_CFL_dt_s": 7.221874505799217e-12,
+      "target_max_frequency_Hz": 1300000000.0,
+      "frequency_start_Hz": 700000000.0,
+      "frequency_stop_Hz": 1300000000.0,
+      "frequency_samples": 301,
+      "tx_rx_distance_m": 0.3,
+      "dipole_total_length_m": 0.15,
+      "Z0_ohm": 50.0,
+      "S11_min_dB": -14.580953566143203,
+      "S11_min_frequency_Hz": 906000000.0,
+      "S11_minus10dB_band_Hz": [
+        872000000.0,
+        950000000.0
+      ],
+      "Zin_at_1GHz_ohm": [
+        98.95793997152289,
+        62.89510801036694
+      ],
+      "S21_at_1GHz": [
+        0.08897830664966506,
+        0.02602708099238356
+      ],
+      "S21_at_1GHz_dB": -20.657769586050627,
+      "S21_at_1GHz_phase_rad": -5.998613780245228,
+      "group_delay_at_1GHz_s": 2.2606382017063446e-09,
+      "response_finite": true,
+      "near_far_at_1GHz": {
+        "frequency_Hz": 1000000000.0,
+        "wavelength_m": 0.299792458,
+        "maximum_dimension_m": 0.15,
+        "distance_m": 0.3,
+        "reactive_near_field_limit_m": 0.06578368938462804,
+        "far_field_limit_2D2_over_lambda_m": 0.15010384283916842,
+        "status": "FAR_FIELD"
+      },
+      "nf2ff": {
+        "frequency_Hz": 1000000000.0,
+        "Prad": 1.1172689365659154e-25,
+        "Dmax": 1.3863105248699115,
+        "E_norm_max": 3.047435150062101e-12,
+        "E_norm_axis": 2.6750097761241095e-17,
+        "E_norm_broadside": 3.047435150062101e-12,
+        "finite": true
+      },
+      "runtime_s": 49.156934646999616,
+      "peak_RSS_KiB": 479152,
+      "raw_bytes": 4321532,
+      "script_sha256": "7b0131bea5787cc1e1e793406982feb2b9e94081e278d1feddde16c9c4b40453",
+      "actual_FDTD_cells": 2352153,
+      "actual_FDTD_timestep_s": 7.22187e-12,
+      "actual_timesteps": 2106
+    },
+    "expanded_domain": {
+      "case": "expanded_domain",
+      "raw_directory": "/tmp/h2_openems_validation/expanded_domain",
+      "spacing_mm": 5.0,
+      "domain_scale": 1.3333333333333333,
+      "PML": "PML_8",
+      "cells": 2297856,
+      "min_xyz_m": [
+        0.004999999999999949,
+        0.004999999999999977,
+        0.004999999999999949
+      ],
+      "max_xyz_m": [
+        0.0050000000000000044,
+        0.0050000000000000044,
+        0.0050000000000000044
+      ],
+      "growth_max": 1.000000000000011,
+      "estimated_CFL_dt_s": 9.629166007732273e-12,
+      "target_max_frequency_Hz": 1300000000.0,
+      "frequency_start_Hz": 700000000.0,
+      "frequency_stop_Hz": 1300000000.0,
+      "frequency_samples": 301,
+      "tx_rx_distance_m": 0.3,
+      "dipole_total_length_m": 0.15,
+      "Z0_ohm": 50.0,
+      "S11_min_dB": -14.701442907747474,
+      "S11_min_frequency_Hz": 894000000.0,
+      "S11_minus10dB_band_Hz": [
+        858000000.0,
+        940000000.0
+      ],
+      "Zin_at_1GHz_ohm": [
+        103.15003054243188,
+        66.45811483953693
+      ],
+      "S21_at_1GHz": [
+        0.08835300895896783,
+        0.021679642408587097
+      ],
+      "S21_at_1GHz_dB": -20.82165817319467,
+      "S21_at_1GHz_phase_rad": -6.042564056053617,
+      "group_delay_at_1GHz_s": 2.146310936008793e-09,
+      "response_finite": true,
+      "near_far_at_1GHz": {
+        "frequency_Hz": 1000000000.0,
+        "wavelength_m": 0.299792458,
+        "maximum_dimension_m": 0.15,
+        "distance_m": 0.3,
+        "reactive_near_field_limit_m": 0.06578368938462804,
+        "far_field_limit_2D2_over_lambda_m": 0.15010384283916842,
+        "status": "FAR_FIELD"
+      },
+      "nf2ff": {
+        "frequency_Hz": 1000000000.0,
+        "Prad": 1.9467214692916248e-25,
+        "Dmax": 1.394164708310408,
+        "E_norm_max": 4.03398523691194e-12,
+        "E_norm_axis": 3.189138977423734e-16,
+        "E_norm_broadside": 4.03398523691194e-12,
+        "finite": true
+      },
+      "runtime_s": 40.528043746000094,
+      "peak_RSS_KiB": 479244,
+      "raw_bytes": 4310557,
+      "script_sha256": "7b0131bea5787cc1e1e793406982feb2b9e94081e278d1feddde16c9c4b40453",
+      "actual_FDTD_cells": 2352153,
+      "actual_FDTD_timestep_s": 9.62917e-12,
+      "actual_timesteps": 1701
+    }
+  },
+  "resource": {
+    "total_runtime_s": 111.66521866499988,
+    "maximum_peak_RSS_KiB": 479244,
+    "external_raw_bytes": 11205636,
+    "generation_runtime_s": 0.009010932999899524,
+    "generation_peak_RSS_KiB": 82296
+  },
+  "G3_waveform_injected": false,
+  "later_nodes_started": false
+}

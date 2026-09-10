@@ -1,0 +1,168 @@
+{
+  "H2_DEVELOPMENT_GATE": "PASS",
+  "H2_SCIENTIFIC_VALIDATION": "VNA_MEASUREMENT_PENDING",
+  "H3_TOOL_DEVELOPMENT_ALLOWED": true,
+  "STAGE_H_EXPERIMENTAL_VALIDATION_PENDING": true,
+  "production_receiver_status": "NOT_RESOLVED",
+  "theory_input_status": "VALID_THEORETICAL_SURROGATE",
+  "theory_openems_comparison": {
+    "theory_S11_feature_frequency_Hz": 346500000.0,
+    "openems_S11_feature_frequency_Hz": 334000000.0,
+    "feature_frequency_signed_mismatch_Hz": -12500000.0,
+    "feature_frequency_absolute_mismatch_Hz": 12500000.0,
+    "feature_frequency_relative_mismatch": 0.03607503607503607,
+    "theory_minimum_S11_dB": -18.50493000562706,
+    "openems_minimum_S11_dB": -15.255856243395801,
+    "theory_S11_at_350MHz": [
+      0.1321860317311,
+      0.04397233542798
+    ],
+    "openems_S11_at_350MHz": [
+      0.28167670954027374,
+      0.17658657430923624
+    ],
+    "theory_S11_dB_at_350MHz": -17.120480107487786,
+    "openems_S11_dB_at_350MHz": -9.565410995579384,
+    "theory_Zin_ohm_at_350MHz": [
+      64.93697256044214,
+      5.8238831077886655
+    ],
+    "openems_Zin_ohm_at_350MHz": [
+      81.27944831070216,
+      32.27263874397942
+    ],
+    "Zin_complex_difference_openems_minus_theory_ohm": [
+      16.34247575026002,
+      26.448755636190754
+    ],
+    "Zin_absolute_difference_ohm": 31.09040347680887,
+    "S11_magnitude_correlation": 0.9157003431956644,
+    "S11_dB_signed_difference_openems_minus_theory_at_350MHz": 7.555069111908402,
+    "S11_dB_absolute_difference_at_350MHz": 7.555069111908402,
+    "theory_S21_at_350MHz": [
+      0.05394355539116,
+      -0.09453769164844
+    ],
+    "openems_S21_at_350MHz": [
+      0.09128850506678944,
+      -0.033209649627367104
+    ],
+    "theory_S21_dB_at_350MHz": -19.26381262559929,
+    "openems_S21_dB_at_350MHz": -20.251903450586518,
+    "S21_magnitude_correlation": 0.9436045415772157,
+    "S21_dB_signed_difference_openems_minus_theory_at_350MHz": -0.9880908249872284,
+    "S21_dB_absolute_difference_at_350MHz": 0.9880908249872284,
+    "principal_spectral_trend": "NUMERIC_MAGNITUDE_CORRELATION_REPORTED_WITHOUT_AMPLITUDE_SCALING",
+    "phase_status": "THEORY_PHASE_MODEL_LIMITED_TO_FREE_SPACE_PROPAGATION",
+    "wire_radius_status": "OPENEMS_THIN_WIRE_RADIUS_NOT_IDENTICAL_TO_THEORY"
+  },
+  "openems": {
+    "case": "H2_350MHZ_DEVELOPMENT_REFERENCE",
+    "raw_directory": "/tmp/h2_openems_validation/development_350mhz",
+    "scientific_role": "SYSTEM_FREQUENCY_TOOL_DEVELOPMENT_REFERENCE",
+    "frequency_start_Hz": 200000000.0,
+    "frequency_stop_Hz": 500000000.0,
+    "frequency_spacing_Hz": 500000.0,
+    "frequency_points": 601,
+    "center_frequency_Hz": 350000000.0,
+    "dipole_total_length_m": 0.4111439424,
+    "dipole_arm_length_m": 0.2055719712,
+    "theory_wire_radius_m": 0.001,
+    "openems_wire_model": "CURVEPORT_THIN_WIRE",
+    "wire_radius_status": "OPENEMS_THIN_WIRE_RADIUS_NOT_IDENTICAL_TO_THEORY",
+    "tx_rx_center_separation_m": 1.0,
+    "orientation": "PARALLEL_CO_POLARIZED_BROADSIDE_Z_DIPOLES_X_SEPARATION",
+    "environment": "IDEAL_FREE_SPACE",
+    "Z0_ohm": 50.0,
+    "cells": 1578368,
+    "min_xyz_m": [
+      0.009999999999999898,
+      0.009999999999999953,
+      0.009789141485714276
+    ],
+    "max_xyz_m": [
+      0.010000000000000009,
+      0.010000000000000009,
+      0.009814267626666762
+    ],
+    "growth_max": 1.0025667359072366,
+    "estimated_CFL_dt_s": 1.9120071003211286e-11,
+    "target_max_frequency_Hz": 500000000.0,
+    "S11_min_frequency_Hz": 334000000.0,
+    "S11_min_dB": -15.255856243395801,
+    "S11_at_350MHz": [
+      0.28167670954027374,
+      0.17658657430923624
+    ],
+    "S11_at_350MHz_dB": -9.565410995579384,
+    "Zin_at_350MHz_ohm": [
+      81.27944831070218,
+      32.27263874397943
+    ],
+    "S11_minus10dB_band_Hz": [
+      320000000.0,
+      348500000.0
+    ],
+    "S21_at_350MHz": [
+      0.09128850506678944,
+      -0.033209649627367104
+    ],
+    "S21_at_350MHz_dB": -20.251903450586518,
+    "S21_at_350MHz_phase_rad": -6.632090104964729,
+    "group_delay_at_350MHz_s": 8.378702740829021e-09,
+    "near_far_at_200_350_500MHz": [
+      {
+        "frequency_Hz": 200000000.0,
+        "wavelength_m": 1.49896229,
+        "maximum_dimension_m": 0.4111439424,
+        "distance_m": 1.0,
+        "reactive_near_field_limit_m": 0.13350181797642854,
+        "far_field_limit_2D2_over_lambda_m": 0.22554181983085717,
+        "status": "FAR_FIELD"
+      },
+      {
+        "frequency_Hz": 350000000.0,
+        "wavelength_m": 0.85654988,
+        "maximum_dimension_m": 0.4111439424,
+        "distance_m": 1.0,
+        "reactive_near_field_limit_m": 0.17660630497032107,
+        "far_field_limit_2D2_over_lambda_m": 0.39469818470400003,
+        "status": "FAR_FIELD"
+      },
+      {
+        "frequency_Hz": 500000000.0,
+        "wavelength_m": 0.599584916,
+        "maximum_dimension_m": 0.4111439424,
+        "distance_m": 1.0,
+        "reactive_near_field_limit_m": 0.21108490828936266,
+        "far_field_limit_2D2_over_lambda_m": 0.5638545495771429,
+        "status": "FAR_FIELD"
+      }
+    ],
+    "nf2ff": {
+      "frequency_Hz": 350000000.0,
+      "Prad": 3.647474339654146e-24,
+      "Dmax": 1.5465993703548029,
+      "E_norm_max": 1.83912137341509e-11,
+      "E_norm_axis": 2.173155654794483e-15,
+      "E_norm_broadside": 1.83912137341509e-11,
+      "finite": true
+    },
+    "response_finite": true,
+    "runtime_s": 30.939805412999704,
+    "peak_RSS_KiB": 375692,
+    "raw_bytes": 3447241,
+    "script_sha256": "d4295d820f8dc5a4500bb8eccddec9ab8845b109be804eec06ed129fe27a6943",
+    "actual_timesteps": 1950,
+    "actual_FDTD_cells": 1621851,
+    "actual_FDTD_timestep_s": 1.91201e-11
+  },
+  "resource": {
+    "runtime_s": 30.939805412999704,
+    "peak_RSS_KiB": 375692,
+    "raw_bytes": 3447241,
+    "generation_runtime_s": 0.01726618800057622,
+    "generation_peak_RSS_KiB": 81592
+  },
+  "G3_waveform_injected": false
+}

@@ -1,0 +1,70 @@
+{
+  "status": "VALID_THEORETICAL_SURROGATE",
+  "required_files": [
+    "H2_THEORY_350MHz_RX_S11.s1p",
+    "H2_THEORY_350MHz_TX_S11.s1p",
+    "H2_THEORY_350MHz_TX_RX_S21.s2p",
+    "H2_THEORY_350MHz_reference.csv",
+    "H2_THEORY_350MHz_metadata.json"
+  ],
+  "missing_files": [],
+  "required_provenance": "THEORETICAL_SURROGATE_ONLY",
+  "VNA_gate_satisfied": false,
+  "metadata": {
+    "status": "THEORETICAL_SURROGATE_ONLY",
+    "purpose": "Stage-H software/tool-chain development only; must be replaced by real VNA data for scientific validation.",
+    "prohibited_labels": [
+      "VNA_MEASUREMENT",
+      "MEASURED",
+      "VALIDATED_WITH_VNA"
+    ],
+    "frequency_start_Hz": 200000000.0,
+    "frequency_stop_Hz": 500000000.0,
+    "points": 601,
+    "frequency_step_Hz": 500000.0,
+    "center_frequency_Hz": 350000000.0,
+    "reference_impedance_ohm": 50.0,
+    "dipole_total_length_m": 0.41114394239999996,
+    "dipole_arm_length_m": 0.20557197119999998,
+    "length_rule": "0.48 lambda at 350 MHz",
+    "assumed_wire_radius_m": 0.001,
+    "separation_m": 1.0,
+    "far_field_boundary_2D2_over_lambda_m": {
+      "at_200MHz": 0.2255418198308571,
+      "at_350MHz": 0.3946981847039999,
+      "at_500MHz": 0.5638545495771428
+    },
+    "polarization": "parallel_copolarized_broadside",
+    "environment": "ideal_free_space",
+    "models": {
+      "S11": "thin-wire center-fed finite-dipole induced-EMF approximation with sinusoidal current",
+      "S21_magnitude": "Friis far-field transmission with broadside dipole directivity and 50-ohm mismatch at both ports",
+      "S21_phase": "-kR free-space propagation only"
+    },
+    "reference_resonance_approx": {
+      "frequency_Hz": 347500000.0,
+      "Zin_ohm": [
+        63.63029033103801,
+        -0.438766948364665
+      ],
+      "S11_dB": -18.415346973215676,
+      "S21_dB": -19.16833134008231
+    },
+    "at_350MHz": {
+      "Zin_ohm": [
+        64.93697256044057,
+        5.823883107788508
+      ],
+      "S11_dB": -17.120480107488493,
+      "S21_dB": -19.263812625599616,
+      "directivity_dBi": 2.117776584800254
+    },
+    "limitations": [
+      "No cable, connector, balun/common-mode current, chamber reflection, manufacturing tolerance, conductor loss, or VNA calibration uncertainty.",
+      "Wire radius is an explicit surrogate assumption because production receiver geometry is not yet available.",
+      "Friis model is used only because 1.0 m exceeds the 2D^2/lambda far-field estimate over the full 200-500 MHz band.",
+      "Must not be used as experimental evidence or to close the VNA scientific-validation gate."
+    ]
+  },
+  "validation_status": "SIMULATION_ONLY"
+}

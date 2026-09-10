@@ -1,0 +1,69 @@
+{
+  "geometry_kind": "H2_CANONICAL_REFERENCE_RX",
+  "geometry_role": "NUMERICAL_REFERENCE_FIXTURE_NOT_PRODUCTION_HARDWARE",
+  "receiver_id": "H2_CANONICAL_DIPOLE_RX",
+  "transmitter_id": "H2_REFERENCE_TX",
+  "hardware_status": "GEOMETRY_AVAILABLE_ONLY",
+  "microgap_geometry_included": false,
+  "dipole_axis": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "total_length_m": 0.15,
+  "arm_length_m": 0.075,
+  "tx_position_m": [
+    -0.15,
+    0.0,
+    0.0
+  ],
+  "rx_position_m": [
+    0.15,
+    0.0,
+    0.0
+  ],
+  "tx_rx_distance_m": 0.3,
+  "relative_orientation": "PARALLEL_CO_POLARIZED_Z",
+  "environment": "FREE_SPACE_REFERENCE",
+  "support": "NONE",
+  "Z0_ohm": 50.0,
+  "port_reference": "CURVEPORT_CENTER_GAP_CONNECTOR_EQUIVALENT",
+  "connector_equivalent": "IDEAL_CENTER_GAP_CURVEPORT_NO_CABLE",
+  "voltage_reference": "POSITIVE_Z_ARM_MINUS_NEGATIVE_Z_ARM",
+  "positive_current_direction": "PORT_INTO_RECEIVER",
+  "frequency_band_Hz": [
+    700000000.0,
+    1300000000.0
+  ],
+  "geometry_provenance": "PROJECT_OWNED_CANONICAL_HALF_WAVE_DIPOLE_DERIVED_FROM_PINNED_OPENEMS_TEST_SEMANTICS",
+  "near_far_samples": [
+    {
+      "frequency_Hz": 700000000.0,
+      "wavelength_m": 0.42827494,
+      "maximum_dimension_m": 0.15,
+      "distance_m": 0.3,
+      "reactive_near_field_limit_m": 0.05503858330605229,
+      "far_field_limit_2D2_over_lambda_m": 0.1050726899874179,
+      "status": "FAR_FIELD"
+    },
+    {
+      "frequency_Hz": 1000000000.0,
+      "wavelength_m": 0.299792458,
+      "maximum_dimension_m": 0.15,
+      "distance_m": 0.3,
+      "reactive_near_field_limit_m": 0.06578368938462804,
+      "far_field_limit_2D2_over_lambda_m": 0.15010384283916842,
+      "status": "FAR_FIELD"
+    },
+    {
+      "frequency_Hz": 1300000000.0,
+      "wavelength_m": 0.23060958307692309,
+      "maximum_dimension_m": 0.15,
+      "distance_m": 0.3,
+      "reactive_near_field_limit_m": 0.07500494600870794,
+      "far_field_limit_2D2_over_lambda_m": 0.19513499569091894,
+      "status": "FAR_FIELD"
+    }
+  ],
+  "geometry_hash": "3a8d4459217a713f40737c9e17ceff8338bbaaab024e3396b700eacd7d84b42c"
+}

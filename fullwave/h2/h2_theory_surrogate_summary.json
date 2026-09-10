@@ -1,0 +1,61 @@
+{
+  "data_provenance": "THEORETICAL_SURROGATE_ONLY",
+  "theory_input_status": "VALID_THEORETICAL_SURROGATE",
+  "VNA_gate_satisfied": false,
+  "comparison": {
+    "theory_S11_feature_frequency_Hz": 346500000.0,
+    "openems_S11_feature_frequency_Hz": 334000000.0,
+    "feature_frequency_signed_mismatch_Hz": -12500000.0,
+    "feature_frequency_absolute_mismatch_Hz": 12500000.0,
+    "feature_frequency_relative_mismatch": 0.03607503607503607,
+    "theory_minimum_S11_dB": -18.50493000562706,
+    "openems_minimum_S11_dB": -15.255856243395801,
+    "theory_S11_at_350MHz": [
+      0.1321860317311,
+      0.04397233542798
+    ],
+    "openems_S11_at_350MHz": [
+      0.28167670954027374,
+      0.17658657430923624
+    ],
+    "theory_S11_dB_at_350MHz": -17.120480107487786,
+    "openems_S11_dB_at_350MHz": -9.565410995579384,
+    "theory_Zin_ohm_at_350MHz": [
+      64.93697256044214,
+      5.8238831077886655
+    ],
+    "openems_Zin_ohm_at_350MHz": [
+      81.27944831070216,
+      32.27263874397942
+    ],
+    "Zin_complex_difference_openems_minus_theory_ohm": [
+      16.34247575026002,
+      26.448755636190754
+    ],
+    "Zin_absolute_difference_ohm": 31.09040347680887,
+    "S11_magnitude_correlation": 0.9157003431956644,
+    "S11_dB_signed_difference_openems_minus_theory_at_350MHz": 7.555069111908402,
+    "S11_dB_absolute_difference_at_350MHz": 7.555069111908402,
+    "theory_S21_at_350MHz": [
+      0.05394355539116,
+      -0.09453769164844
+    ],
+    "openems_S21_at_350MHz": [
+      0.09128850506678944,
+      -0.033209649627367104
+    ],
+    "theory_S21_dB_at_350MHz": -19.26381262559929,
+    "openems_S21_dB_at_350MHz": -20.251903450586518,
+    "S21_magnitude_correlation": 0.9436045415772157,
+    "S21_dB_signed_difference_openems_minus_theory_at_350MHz": -0.9880908249872284,
+    "S21_dB_absolute_difference_at_350MHz": 0.9880908249872284,
+    "principal_spectral_trend": "NUMERIC_MAGNITUDE_CORRELATION_REPORTED_WITHOUT_AMPLITUDE_SCALING",
+    "phase_status": "THEORY_PHASE_MODEL_LIMITED_TO_FREE_SPACE_PROPAGATION",
+    "wire_radius_status": "OPENEMS_THIN_WIRE_RADIUS_NOT_IDENTICAL_TO_THEORY"
+  },
+  "H2_DEVELOPMENT_GATE": "PASS",
+  "H2_SCIENTIFIC_VALIDATION": "VNA_MEASUREMENT_PENDING",
+  "H3_TOOL_DEVELOPMENT_ALLOWED": true,
+  "STAGE_H_EXPERIMENTAL_VALIDATION_PENDING": true,
+  "production_receiver_status": "NOT_RESOLVED"
+}

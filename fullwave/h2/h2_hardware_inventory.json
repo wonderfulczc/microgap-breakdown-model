@@ -1,0 +1,28 @@
+{
+  "search_scope": [
+    "/home/helianthusczc/projects/streamer-rf-replica",
+    "/home/helianthusczc/projects (depth <= 5)"
+  ],
+  "search_result": "NO_RECEIVER_GEOMETRY_OR_VNA_DATA_FOUND",
+  "candidates": [
+    {
+      "receiver_id": "SINGLE_TURN_COIL",
+      "status": "PLANNED_NOT_AVAILABLE"
+    },
+    {
+      "receiver_id": "COMMERCIAL_350_450_MHZ_ANTENNA",
+      "status": "PLANNED_NOT_AVAILABLE"
+    },
+    {
+      "receiver_id": "VIVALDI_UWB_ANTENNA",
+      "status": "PLANNED_NOT_AVAILABLE"
+    },
+    {
+      "receiver_id": "H2_CANONICAL_DIPOLE_RX",
+      "status": "GEOMETRY_AVAILABLE_ONLY"
+    }
+  ],
+  "touchstone_files": [],
+  "calibration_records": [],
+  "production_receiver_selected": false
+}

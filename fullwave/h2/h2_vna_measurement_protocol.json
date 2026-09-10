@@ -1,0 +1,120 @@
+{
+  "status": "VNA_MEASUREMENT_REQUIRED",
+  "instrument": "EXISTING_500_HZ_TO_67_GHZ_VNA",
+  "measurement_fixture": {
+    "geometry_kind": "H2_CANONICAL_REFERENCE_RX",
+    "geometry_role": "NUMERICAL_REFERENCE_FIXTURE_NOT_PRODUCTION_HARDWARE",
+    "receiver_id": "H2_CANONICAL_DIPOLE_RX",
+    "transmitter_id": "H2_REFERENCE_TX",
+    "hardware_status": "GEOMETRY_AVAILABLE_ONLY",
+    "microgap_geometry_included": false,
+    "dipole_axis": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "total_length_m": 0.15,
+    "arm_length_m": 0.075,
+    "tx_position_m": [
+      -0.15,
+      0.0,
+      0.0
+    ],
+    "rx_position_m": [
+      0.15,
+      0.0,
+      0.0
+    ],
+    "tx_rx_distance_m": 0.3,
+    "relative_orientation": "PARALLEL_CO_POLARIZED_Z",
+    "environment": "FREE_SPACE_REFERENCE",
+    "support": "NONE",
+    "Z0_ohm": 50.0,
+    "port_reference": "CURVEPORT_CENTER_GAP_CONNECTOR_EQUIVALENT",
+    "connector_equivalent": "IDEAL_CENTER_GAP_CURVEPORT_NO_CABLE",
+    "voltage_reference": "POSITIVE_Z_ARM_MINUS_NEGATIVE_Z_ARM",
+    "positive_current_direction": "PORT_INTO_RECEIVER",
+    "frequency_band_Hz": [
+      700000000.0,
+      1300000000.0
+    ],
+    "geometry_provenance": "PROJECT_OWNED_CANONICAL_HALF_WAVE_DIPOLE_DERIVED_FROM_PINNED_OPENEMS_TEST_SEMANTICS",
+    "near_far_samples": [
+      {
+        "frequency_Hz": 700000000.0,
+        "wavelength_m": 0.42827494,
+        "maximum_dimension_m": 0.15,
+        "distance_m": 0.3,
+        "reactive_near_field_limit_m": 0.05503858330605229,
+        "far_field_limit_2D2_over_lambda_m": 0.1050726899874179,
+        "status": "FAR_FIELD"
+      },
+      {
+        "frequency_Hz": 1000000000.0,
+        "wavelength_m": 0.299792458,
+        "maximum_dimension_m": 0.15,
+        "distance_m": 0.3,
+        "reactive_near_field_limit_m": 0.06578368938462804,
+        "far_field_limit_2D2_over_lambda_m": 0.15010384283916842,
+        "status": "FAR_FIELD"
+      },
+      {
+        "frequency_Hz": 1300000000.0,
+        "wavelength_m": 0.23060958307692309,
+        "maximum_dimension_m": 0.15,
+        "distance_m": 0.3,
+        "reactive_near_field_limit_m": 0.07500494600870794,
+        "far_field_limit_2D2_over_lambda_m": 0.19513499569091894,
+        "status": "FAR_FIELD"
+      }
+    ],
+    "geometry_hash": "3a8d4459217a713f40737c9e17ceff8338bbaaab024e3396b700eacd7d84b42c"
+  },
+  "calibration": "FULL_TWO_PORT_SOLT_APPROPRIATE_TO_ACTUAL_CONNECTORS",
+  "calibration_reference_plane": "AT_TX_AND_RX_FEED_CABLE_ENDS",
+  "measurements": [
+    "S11_RECEIVER",
+    "S11_REFERENCE_TX",
+    "S21_TX_TO_RX"
+  ],
+  "frequency_ranges": [
+    {
+      "low_Hz": 700000000.0,
+      "high_Hz": 1300000000.0,
+      "points": 601
+    }
+  ],
+  "frequency_resolution_Hz": 1000000.0,
+  "IF_bandwidth_Hz": "RECORD_ACTUAL_SETTING_CHOSEN_FOR_NOISE_AND_ACQUISITION_TIME",
+  "source_power_dBm": "RECORD_ACTUAL_PASSIVE_LINEAR_SAFE_SETTING",
+  "linearity_check": "REPEAT_ONE_TRACE_AT_REDUCED_POWER_AND_CONFIRM_UNCHANGED_S_PARAMETERS",
+  "averaging": "RECORD_COUNT; USE_ONLY_IF IDENTICAL_FOR_BACKGROUND_AND_FIXTURE",
+  "distance_m": 0.3,
+  "orientation": "PARALLEL_CO_POLARIZED_Z",
+  "antenna_centers_height_m": "RECORD_ACTUAL",
+  "environment": "MICROWAVE_ANECHOIC_CHAMBER_WHERE_AVAILABLE",
+  "cables_and_adapters": "RECORD_IDS_LENGTHS_CONNECTOR_TYPES_AND_ORIENTATION",
+  "background_measurement": "RECORD_TX_RX_REMOVED_OR_TERMINATED_BACKGROUND_IF_DYNAMIC_RANGE_REQUIRES",
+  "required_outputs": [
+    "h2_reference_tx.s1p",
+    "h2_receiver.s1p",
+    "h2_tx_rx.s2p",
+    "h2_vna_metadata.json"
+  ],
+  "metadata_required": [
+    "instrument_model",
+    "instrument_serial",
+    "calibration_kit",
+    "calibration_timestamp",
+    "IF_bandwidth_Hz",
+    "source_power_dBm",
+    "averaging_count",
+    "cable_ids",
+    "adapter_ids",
+    "distance_m",
+    "orientation",
+    "height_m",
+    "environment"
+  ],
+  "primary_comparison_policy": "RAW_UNSMOOTHED_COMPLEX_DATA_NO_FREQUENCY_SHIFT_NO_PEAK_SCALING"
+}

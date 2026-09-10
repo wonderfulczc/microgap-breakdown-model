@@ -1,0 +1,31 @@
+{
+  "SYSTEM_TRANSMISSION_TARGET_CENTER_Hz": 350000000.0,
+  "SYSTEM_TRANSMISSION_MAX_Hz": 500000000.0,
+  "H3_SYSTEM_FULLWAVE_DEVELOPMENT_BAND": {
+    "low_Hz": 200000000.0,
+    "high_Hz": 500000000.0,
+    "status": "PROJECT_TARGET_BAND_FOR_TOOL_DEVELOPMENT"
+  },
+  "legacy_reference": {
+    "role": "H2_LEGACY_INFRASTRUCTURE_REFERENCE",
+    "frequency_Hz": [
+      700000000.0,
+      1300000000.0
+    ],
+    "dipole_length_m": 0.15,
+    "runner_sha256": "7b0131bea5787cc1e1e793406982feb2b9e94081e278d1feddde16c9c4b40453",
+    "raw_results_modified": false
+  },
+  "Stage_F_native_bands": {
+    "Stage4": [
+      2941408508.9091916,
+      7966314711.629051
+    ],
+    "Stage5": [
+      3047273105.1868486,
+      10233758844.919172
+    ],
+    "role": "H4_NATIVE_RF_PHYSICS"
+  },
+  "G3_spectrum_policy": "FROZEN_NOT_REINTERPRETED_BY_500_MHZ_SYSTEM_TARGET"
+}

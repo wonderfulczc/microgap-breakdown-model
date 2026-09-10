@@ -1,0 +1,57 @@
+{
+  "spectrum_method": "MEAN_REMOVED_HANN_WINDOW_RFFT_POWER_PLANNING_ONLY",
+  "G3_source": {
+    "dt_s": 1.2500000000000112e-11,
+    "df_Hz": 99875156.05493043,
+    "nyquist_Hz": 39950062421.972176,
+    "V_peak_frequency_Hz": 99875156.05493043,
+    "V_99p9_upper_Hz": 499375780.2746522,
+    "I_peak_frequency_Hz": 99875156.05493043,
+    "I_99p9_upper_Hz": 599250936.3295826,
+    "low_frequency_limit": "BELOW_DF_NOT_RESOLVED_BY_10_NS_RECORD"
+  },
+  "H3_CIRCUIT_STRUCTURE_BANDS": [
+    {
+      "name": "G3_RESOLVED_99P9_CONTENT",
+      "low_Hz": 99875156.05493043,
+      "high_Hz": 599250936.3295826,
+      "provenance": [
+        "G3_SOURCE_CONTENT"
+      ],
+      "status": "PLANNING_BAND_PENDING_H3_STRUCTURE_GEOMETRY"
+    }
+  ],
+  "H4_NATIVE_RF_TRUSTED_BANDS": [
+    {
+      "name": "Stage4",
+      "low_Hz": 2941408508.9091916,
+      "high_Hz": 7966314711.629051,
+      "source": "rf/production/f4_attribution/F4-P-stage4-left-isolated_rf_trust_report.json",
+      "provenance": [
+        "STAGE_F_TRUSTED_NATIVE"
+      ]
+    },
+    {
+      "name": "Stage5",
+      "low_Hz": 3047273105.1868486,
+      "high_Hz": 10233758844.919172,
+      "source": "rf/production/f4_attribution/F4-C-stage5-highfield-collision_rf_trust_report.json",
+      "provenance": [
+        "STAGE_F_TRUSTED_NATIVE"
+      ]
+    }
+  ],
+  "H2_RECEIVER_VALIDATED_BANDS": [],
+  "H2_SIMULATION_ONLY_BANDS": [
+    {
+      "name": "H2_CANONICAL_DIPOLE_FIXTURE",
+      "low_Hz": 700000000.0,
+      "high_Hz": 1300000000.0,
+      "provenance": [
+        "RECEIVER_HARDWARE_CANONICAL_GEOMETRY_ONLY"
+      ],
+      "status": "SIMULATION_ONLY"
+    }
+  ],
+  "frozen_native_low_band_policy": "VHF_UHF_1_TO_3_GHZ_NOT_PROMOTED_BEYOND_STORED_STAGE_F_TRUST_STATUS"
+}

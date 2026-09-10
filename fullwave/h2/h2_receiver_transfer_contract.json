@@ -1,0 +1,33 @@
+{
+  "receiver_id": "H2_CANONICAL_DIPOLE_RX",
+  "hardware_status": "GEOMETRY_AVAILABLE_ONLY",
+  "geometry_hash": "3a8d4459217a713f40737c9e17ceff8338bbaaab024e3396b700eacd7d84b42c",
+  "measurement_id": null,
+  "port_reference": "CURVEPORT_CENTER_GAP_CONNECTOR_EQUIVALENT",
+  "voltage_reference": "POSITIVE_Z_ARM_MINUS_NEGATIVE_Z_ARM",
+  "positive_current_direction": "PORT_INTO_RECEIVER",
+  "Z0_ohm": 50.0,
+  "frequency_data_file": "h2_reference_sparameters.csv",
+  "frequency_data_sha256": "6093a984dcad4cb53c527cc67484ad2e40a2eaa7bf03be5b8349ef47ade936da",
+  "complex_fields": [
+    "S11",
+    "S21",
+    "Vrx_50ohm_per_tx_inc",
+    "Vrx_open_circuit_equivalent_per_tx_inc"
+  ],
+  "H_rx_E_complex": null,
+  "H_rx_E_status": "RX_INTRINSIC_FIELD_TRANSFER_PENDING",
+  "near_far_field_status": "FAR_FIELD_ACROSS_0P7_TO_1P3_GHZ_BY_2D2_OVER_LAMBDA",
+  "mesh_status": "BASELINE_TO_FINE_KEY_FEATURES_WITHIN_5_PERCENT",
+  "VNA_validation_status": "SIMULATION_ONLY",
+  "valid_frequency_mask": {
+    "low_Hz": 700000000.0,
+    "high_Hz": 1300000000.0
+  },
+  "source_provenance": "H2_REFERENCE_TX_CANONICAL_DIPOLE",
+  "load_semantics": {
+    "Vrx_50ohm": "LOADED_RECEIVER_TERMINAL_VOLTAGE_TRANSFER",
+    "Vrx_open_circuit_equivalent": "THEVENIN_CONVERSION_USING_SYMMETRIC_RECEIVER_ZIN",
+    "not_equivalent": true
+  }
+}
