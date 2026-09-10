@@ -1,0 +1,296 @@
+{
+  "status": "PASS",
+  "backend_smoke": "PASS_CANONICAL_FIXTURE_FIRST_RUNTIME",
+  "canonical_port": {
+    "status": "PASS",
+    "load_ohm": 100.0,
+    "reference_frequency_Hz": 200000000.0,
+    "Z_real_ohm": 100.00711034280943,
+    "Z_imag_ohm": 0.46896079534630714,
+    "Z_relative_error": 0.004690146954485632,
+    "S11_abs": 0.3333779627443312,
+    "ideal_50_to_100ohm_S11_abs": 0.3333333333333333
+  },
+  "mesh_convergence": {
+    "status": "PASS_BASELINE_TO_FINE_WITHIN_5_PERCENT",
+    "complex_Z_relative_change": 0.006346738042381745,
+    "S11_relative_change": 0.0003334459573022525
+  },
+  "PML_sensitivity": {
+    "status": "PASS_PML8_TO_PML10_STABLE",
+    "complex_Z_relative_change": 5.894482871418889e-07,
+    "S11_relative_change": 7.105418667171371e-07
+  },
+  "port_energy": {
+    "incident_J": 1.1445317607243636e-18,
+    "reflected_J": 1.2832940542226144e-19,
+    "accepted_J": 1.0162023553021022e-18,
+    "absolute_balance_residual_J": 0.0,
+    "normalized_balance_residual": 0.0,
+    "spectral_power_balance_relative_max": 1.9937571761200137e-16,
+    "minimum_accepted_spectral_diagnostic": 6.227073560131982e-29,
+    "spectral_semantics": "PULSE_FOURIER_AMPLITUDE_SQUARED_DIAGNOSTIC_NOT_CW_WATTS"
+  },
+  "field_pipeline": {
+    "status": "PASS_FREQUENCY_DOMAIN_FIELD_DUMP",
+    "NF2FF": "NOT_APPLICABLE_TO_PREDOMINANTLY_LUMPED_CANONICAL_FIXTURE",
+    "datasets": {
+      "FieldData/FD/f0": {
+        "shape": [
+          3,
+          25,
+          1,
+          17
+        ],
+        "maximum_abs": 1.3551693101021556e-10,
+        "finite": true
+      }
+    }
+  },
+  "G3_contract_readable": true,
+  "G3_waveform_samples": 801,
+  "G3_excitation_used": false,
+  "source_handoff_strategy": "LINEAR_TRANSFER_RESPONSE_THEN_G3_POSTPROCESSING",
+  "runtime": {
+    "four_FDTD_runs_total_s": 42.437111810000715,
+    "baseline_s": 8.450517293000303,
+    "maximum_peak_RSS_KiB": 185152,
+    "raw_external_bytes": 844923,
+    "audit_generation_s": 0.2067947570000115,
+    "audit_generation_peak_RSS_KiB": 81124
+  },
+  "runtime_cases": {
+    "coarse": {
+      "case": "coarse",
+      "spacing_mm": 0.75,
+      "pml": 8,
+      "raw_directory": "/tmp/h1_openems_validation/coarse",
+      "cells": 156832,
+      "min_xyz_m": [
+        0.0005,
+        0.0005,
+        0.0005
+      ],
+      "max_xyz_m": [
+        0.0019152522554640589,
+        0.001953984044026899,
+        0.001953984044026899
+      ],
+      "growth_max": 1.319507910772896,
+      "estimated_CFL_dt_s": 9.629166007732353e-13,
+      "target_max_frequency_Hz": 2000000000.0,
+      "reference_frequency_Hz": 200000000.0,
+      "reference_load_ohm": 100.0,
+      "Z_real_ohm": 100.0073556970952,
+      "Z_imag_ohm": 0.4744556807415039,
+      "S11_abs": 0.33337936011872893,
+      "Z_relative_error": 0.0047451269663481115,
+      "response_finite": true,
+      "max_power_balance_relative": 1.8757743742202174e-16,
+      "max_S11_abs": 0.3336114097161983,
+      "min_accepted_power": 6.619337230754838e-29,
+      "time_domain_energies": {
+        "incident_J": 1.2165274951953347e-18,
+        "reflected_J": 1.3639693873877998e-19,
+        "accepted_J": 1.0801305564565547e-18
+      },
+      "voltage_probe_samples": 61,
+      "current_probe_samples": 61,
+      "simulated_time_s": 3.74310066957e-09,
+      "spectral_power_semantics": "PULSE_FOURIER_AMPLITUDE_SQUARED_DIAGNOSTIC_NOT_CW_WATTS",
+      "field_datasets": {
+        "FieldData/FD/f0": {
+          "shape": [
+            3,
+            23,
+            1,
+            17
+          ],
+          "maximum_abs": 1.397143511994159e-10,
+          "finite": true
+        }
+      },
+      "runtime_s": 8.410492547000104,
+      "peak_RSS_KiB": 169736,
+      "raw_bytes": 173467,
+      "script_sha256": "ace77b8f3ea2c6bce65ff723ebccf9108e34de04f77fdf6330fb49ded6d0f36f",
+      "actual_FDTD_cells": 165731,
+      "actual_FDTD_timestep_s": 9.90238e-13,
+      "actual_timesteps": 3780
+    },
+    "baseline": {
+      "case": "baseline",
+      "spacing_mm": 0.5,
+      "pml": 8,
+      "raw_directory": "/tmp/h1_openems_validation/baseline",
+      "cells": 162240,
+      "min_xyz_m": [
+        0.0005,
+        0.0005,
+        0.0005
+      ],
+      "max_xyz_m": [
+        0.0019152522554640589,
+        0.001953984044026899,
+        0.001953984044026899
+      ],
+      "growth_max": 1.319507910772896,
+      "estimated_CFL_dt_s": 9.629166007732353e-13,
+      "target_max_frequency_Hz": 2000000000.0,
+      "reference_frequency_Hz": 200000000.0,
+      "reference_load_ohm": 100.0,
+      "Z_real_ohm": 100.00711034280943,
+      "Z_imag_ohm": 0.46896079534630714,
+      "S11_abs": 0.3333779627443312,
+      "Z_relative_error": 0.004690146954485632,
+      "response_finite": true,
+      "max_power_balance_relative": 1.9937571761200137e-16,
+      "max_S11_abs": 0.3336126254823882,
+      "min_accepted_power": 6.227073560131982e-29,
+      "time_domain_energies": {
+        "incident_J": 1.1445317607243636e-18,
+        "reflected_J": 1.2832940542226144e-19,
+        "accepted_J": 1.0162023553021022e-18
+      },
+      "voltage_probe_samples": 61,
+      "current_probe_samples": 61,
+      "simulated_time_s": 3.71895863069e-09,
+      "spectral_power_semantics": "PULSE_FOURIER_AMPLITUDE_SQUARED_DIAGNOSTIC_NOT_CW_WATTS",
+      "field_datasets": {
+        "FieldData/FD/f0": {
+          "shape": [
+            3,
+            25,
+            1,
+            17
+          ],
+          "maximum_abs": 1.3551693101021556e-10,
+          "finite": true
+        }
+      },
+      "runtime_s": 8.450517293000303,
+      "peak_RSS_KiB": 170332,
+      "raw_bytes": 175077,
+      "script_sha256": "ace77b8f3ea2c6bce65ff723ebccf9108e34de04f77fdf6330fb49ded6d0f36f",
+      "actual_FDTD_cells": 171349,
+      "actual_FDTD_timestep_s": 9.83851e-13,
+      "actual_timesteps": 3810
+    },
+    "fine": {
+      "case": "fine",
+      "spacing_mm": 0.25,
+      "pml": 8,
+      "raw_directory": "/tmp/h1_openems_validation/fine",
+      "cells": 255664,
+      "min_xyz_m": [
+        0.0002499999999999998,
+        0.00025,
+        0.00025
+      ],
+      "max_xyz_m": [
+        0.0018743971427097814,
+        0.0019150084913166499,
+        0.0019150084913166499
+      ],
+      "growth_max": 1.345900192632357,
+      "estimated_CFL_dt_s": 4.814583003866175e-13,
+      "target_max_frequency_Hz": 2000000000.0,
+      "reference_frequency_Hz": 200000000.0,
+      "reference_load_ohm": 100.0,
+      "Z_real_ohm": 100.0188291039543,
+      "Z_imag_ohm": 1.1035785162689045,
+      "S11_abs": 0.33348912627826194,
+      "Z_relative_error": 0.01103739134363731,
+      "response_finite": true,
+      "max_power_balance_relative": 1.1675062153921727e-16,
+      "max_S11_abs": 0.33430172903728494,
+      "min_accepted_power": 5.318458726308544e-29,
+      "time_domain_energies": {
+        "incident_J": 9.775738281212317e-19,
+        "reflected_J": 1.114740689252059e-19,
+        "accepted_J": 8.660997591960257e-19
+      },
+      "voltage_probe_samples": 45,
+      "current_probe_samples": 45,
+      "simulated_time_s": 2.73275730332e-09,
+      "spectral_power_semantics": "PULSE_FOURIER_AMPLITUDE_SQUARED_DIAGNOSTIC_NOT_CW_WATTS",
+      "field_datasets": {
+        "FieldData/FD/f0": {
+          "shape": [
+            3,
+            41,
+            1,
+            23
+          ],
+          "maximum_abs": 1.4062857822683128e-10,
+          "finite": true
+        }
+      },
+      "runtime_s": 17.060220712000955,
+      "peak_RSS_KiB": 185152,
+      "raw_bytes": 321961,
+      "script_sha256": "ace77b8f3ea2c6bce65ff723ebccf9108e34de04f77fdf6330fb49ded6d0f36f",
+      "actual_FDTD_cells": 268037,
+      "actual_FDTD_timestep_s": 4.81458e-13,
+      "actual_timesteps": 5676
+    },
+    "pml10": {
+      "case": "pml10",
+      "spacing_mm": 0.5,
+      "pml": 10,
+      "raw_directory": "/tmp/h1_openems_validation/pml10",
+      "cells": 200704,
+      "min_xyz_m": [
+        0.0005,
+        0.0005,
+        0.0005
+      ],
+      "max_xyz_m": [
+        0.0019152522554640589,
+        0.001953984044026899,
+        0.001953984044026899
+      ],
+      "growth_max": 1.319507910772896,
+      "estimated_CFL_dt_s": 9.629166007732353e-13,
+      "target_max_frequency_Hz": 2000000000.0,
+      "reference_frequency_Hz": 200000000.0,
+      "reference_load_ohm": 100.0,
+      "Z_real_ohm": 100.0070567288525,
+      "Z_imag_ohm": 0.46898530263057303,
+      "S11_abs": 0.3333777258653312,
+      "Z_relative_error": 0.004690383902257766,
+      "response_finite": true,
+      "max_power_balance_relative": 1.993756956258419e-16,
+      "max_S11_abs": 0.333612513229756,
+      "min_accepted_power": 6.227074116574262e-29,
+      "time_domain_energies": {
+        "incident_J": 1.1445317945472317e-18,
+        "reflected_J": 1.283293795141614e-19,
+        "accepted_J": 1.0162024150330705e-18
+      },
+      "voltage_probe_samples": 52,
+      "current_probe_samples": 52,
+      "simulated_time_s": 3.16111483609e-09,
+      "spectral_power_semantics": "PULSE_FOURIER_AMPLITUDE_SQUARED_DIAGNOSTIC_NOT_CW_WATTS",
+      "field_datasets": {
+        "FieldData/FD/f0": {
+          "shape": [
+            3,
+            25,
+            1,
+            17
+          ],
+          "maximum_abs": 1.3551697264357898e-10,
+          "finite": true
+        }
+      },
+      "runtime_s": 8.515881257999354,
+      "peak_RSS_KiB": 178316,
+      "raw_bytes": 174418,
+      "script_sha256": "ace77b8f3ea2c6bce65ff723ebccf9108e34de04f77fdf6330fb49ded6d0f36f",
+      "actual_FDTD_cells": 211185,
+      "actual_FDTD_timestep_s": 9.83851e-13,
+      "actual_timesteps": 3213
+    }
+  }
+}

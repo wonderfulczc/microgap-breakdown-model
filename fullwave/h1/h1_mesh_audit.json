@@ -1,0 +1,40 @@
+{
+  "status": "POLICY_AND_CANONICAL_RUNTIME_VALIDATED",
+  "target_max_frequency_Hz": 10233758844.919172,
+  "policy_example": {
+    "cells": 110592,
+    "min_xyz_m": [
+      0.0012499999999999942,
+      0.0012499999999999942,
+      0.0012499999999999942
+    ],
+    "max_xyz_m": [
+      0.0012500000000000011,
+      0.0012500000000000011,
+      0.0012500000000000011
+    ]
+  },
+  "canonical_runtime": {
+    "cells": 162240,
+    "actual_FDTD_cells": 171349,
+    "min_xyz_m": [
+      0.0005,
+      0.0005,
+      0.0005
+    ],
+    "max_xyz_m": [
+      0.0019152522554640589,
+      0.001953984044026899,
+      0.001953984044026899
+    ],
+    "growth_max": 1.319507910772896,
+    "estimated_CFL_dt_s": 9.629166007732353e-13,
+    "actual_FDTD_timestep_s": 9.83851e-13,
+    "target_max_frequency_Hz": 2000000000.0,
+    "actual_timesteps": 3810
+  },
+  "growth_limit": 1.4,
+  "PML_policy": "PML_8",
+  "PML_sensitivity": "PML_10_COMPLETED",
+  "convergence_status": "BASELINE_TO_FINE_WITHIN_5_PERCENT"
+}

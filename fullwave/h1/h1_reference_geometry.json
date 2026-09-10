@@ -1,0 +1,33 @@
+{
+  "kind": "H1_REFERENCE_GEOMETRY",
+  "production_status": "PRODUCTION_ELECTRODE_GEOMETRY_PENDING_STAGE_B",
+  "domain_extent_m": [
+    0.06,
+    0.06,
+    0.06
+  ],
+  "reference_plane_id": "EXTERNAL_CEXT_TO_GAP_CGAP_PARALLEL_GSP",
+  "voltage_reference": "GAP_NODE_MINUS_GROUND",
+  "positive_current_direction": "EXTERNAL_TO_GAP",
+  "microgap_representation": "PORT_EQUIVALENT_MICROGAP",
+  "cgap_partition": "UPSTREAM_LUMPED_CGAP",
+  "add_duplicate_lumped_cgap": false,
+  "canonical_fixture": {
+    "purpose": "NUMERICAL_PORT_VALIDATION_ONLY",
+    "source_reference_ohm": 50.0,
+    "independent_load_ohm": 100.0,
+    "conductors": "PEC_TERMINAL_STRIPS",
+    "excitation": "GAUSSIAN_1_GHZ_CENTER_1_GHZ_BANDWIDTH"
+  },
+  "electrode_geometry": null,
+  "lead_geometry": null,
+  "antenna_geometry": null,
+  "receiver_geometry": null,
+  "materials": [
+    {
+      "name": "vacuum",
+      "eps_r": 1
+    }
+  ],
+  "geometry_status": "H1_CANONICAL_REFERENCE_RUNTIME_VALIDATED"
+}

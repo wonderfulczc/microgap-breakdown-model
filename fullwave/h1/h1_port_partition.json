@@ -1,0 +1,13 @@
+{
+  "reference_plane_id": "EXTERNAL_CEXT_TO_GAP_CGAP_PARALLEL_GSP",
+  "microgap_representation": "PORT_EQUIVALENT_MICROGAP",
+  "cgap_partition": "UPSTREAM_LUMPED_CGAP",
+  "add_identical_openems_Cgap": false,
+  "G3_original_constraint": "H_GAP_CAPACITANCE_PARTITION_REQUIRED",
+  "H1_partition_decision": "UPSTREAM_LUMPED_CGAP",
+  "partition_status": "RESOLVED_NO_DOUBLE_COUNTING",
+  "upstream_files_modified": false,
+  "loading_status": "FULL_WAVE_LOADING_FEEDBACK_NOT_COUPLED",
+  "handoff_strategy": "LINEAR_TRANSFER_RESPONSE_THEN_G3_POSTPROCESSING",
+  "API_inspection": "SetCustomExcite(_str,f0,fmax) accepts an fparser expression, not a sampled CSV; use passive transfer response for the H3 G3-waveform handoff"
+}

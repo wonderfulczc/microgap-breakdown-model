@@ -1,0 +1,84 @@
+{
+  "assumptions": {
+    "domain_extent_m": [
+      0.3,
+      0.3,
+      0.3
+    ],
+    "gap_m": 7e-05,
+    "gap_cells": 4,
+    "GHz_max_cell_m": 0.0014647230921844524,
+    "PML_cells_per_side": 8,
+    "growth_limit": 1.4,
+    "windows_s": {
+      "illustrative_low_frequency_decay": 1e-06,
+      "illustrative_GHz_window": 2e-08
+    },
+    "memory_note": "256 bytes/cell nominal; plausible 128--512 plus solver/PML overhead",
+    "windows_note": "engineering windows only; H2/H3 freeze exact bands and decay"
+  },
+  "EXPLICIT_MICROGAP_UNIFORM_UPPER": {
+    "cells": 5052146350679,
+    "estimated_CFL_dt_s": 3.370208102706323e-14,
+    "estimated_memory_bytes": 1293349465773824,
+    "bytes_per_cell_assumption": 256,
+    "steps": {
+      "illustrative_low_frequency_decay": 29671759,
+      "illustrative_GHz_window": 593436
+    },
+    "cell_updates": {
+      "illustrative_low_frequency_decay": 149906068950076774361,
+      "illustrative_GHz_window": 2998125521761543044
+    },
+    "status": "ENGINEERING_ESTIMATE_NOT_MEASURED_RENNIGS_TIMESTEP"
+  },
+  "EXPLICIT_MICROGAP_OPTIMISTIC_GRADED": {
+    "cells": 15252992,
+    "estimated_CFL_dt_s": 3.370208102706323e-14,
+    "estimated_memory_bytes": 3904765952,
+    "bytes_per_cell_assumption": 256,
+    "steps": {
+      "illustrative_low_frequency_decay": 29671759,
+      "illustrative_GHz_window": 593436
+    },
+    "cell_updates": {
+      "illustrative_low_frequency_decay": 452583102652928,
+      "illustrative_GHz_window": 9051674560512
+    },
+    "status": "ENGINEERING_ESTIMATE_NOT_MEASURED_RENNIGS_TIMESTEP"
+  },
+  "PORT_EQUIVALENT_MICROGAP": {
+    "cells": 12008989,
+    "estimated_CFL_dt_s": 9.629166007732353e-13,
+    "estimated_memory_bytes": 3074301184,
+    "bytes_per_cell_assumption": 256,
+    "steps": {
+      "illustrative_low_frequency_decay": 1038512,
+      "illustrative_GHz_window": 20771
+    },
+    "cell_updates": {
+      "illustrative_low_frequency_decay": 12471479184368,
+      "illustrative_GHz_window": 249438710519
+    },
+    "status": "ENGINEERING_ESTIMATE_NOT_MEASURED_RENNIGS_TIMESTEP"
+  },
+  "selected_strategy": "PORT_EQUIVALENT_MICROGAP",
+  "trusted_native_intervals": {
+    "Stage4": {
+      "source": "rf/production/f4_attribution/F4-P-stage4-left-isolated_rf_trust_report.json",
+      "low_Hz": 2941408508.9091916,
+      "high_Hz": 7966314711.629051
+    },
+    "Stage5": {
+      "source": "rf/production/f4_attribution/F4-C-stage5-highfield-collision_rf_trust_report.json",
+      "low_Hz": 3047273105.1868486,
+      "high_Hz": 10233758844.919172
+    }
+  },
+  "multiband": {
+    "window_cost_ratio": 50.0,
+    "decision": "MULTIBAND_FULLWAVE_RUNS_REQUIRED",
+    "rule": "ENGINEERING_COST_RATIO_10_NOT_A_PHYSICAL_THRESHOLD",
+    "final_bands": "PENDING_H2_H3"
+  }
+}

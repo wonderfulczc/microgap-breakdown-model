@@ -1,0 +1,45 @@
+{
+  "backend": "openEMS",
+  "upstream_url": "https://github.com/thliebig/openEMS-Project.git",
+  "commits": {
+    "project": "ea3c012c688c9110973b2fdbf77b7b8aa09a099b",
+    "openEMS": "8f480d04e0e17a780df28e0ac12e2086be041f9e",
+    "CSXCAD": "0458ee11ad711909cb32390b195079c3cff0606e",
+    "fparser": "4b9c845b449b520c4b8c5f23c74cd04820084f81",
+    "AppCSXCAD": "9249ab7f084c376822cea30ac9a361c47ed18131"
+  },
+  "source_tree_clean": true,
+  "installation_status": "WORKING_RUNTIME_VERIFIED",
+  "source_versions": {
+    "openEMS": "v0.37.0-rc2",
+    "CSXCAD": "v0.7.0-rc2"
+  },
+  "install_prefix": "/home/helianthusczc/opt/openems",
+  "python_environment": "/home/helianthusczc/opt/openems/venv",
+  "python_version": "3.14.4",
+  "python_modules": {
+    "openEMS": "/home/helianthusczc/opt/openems/venv/lib/python3.14/site-packages/openEMS/__init__.py",
+    "CSXCAD": "/home/helianthusczc/opt/openems/venv/lib/python3.14/site-packages/CSXCAD/__init__.py"
+  },
+  "binary": "/home/helianthusczc/opt/openems/bin/openEMS",
+  "AppCSXCAD_installed": false,
+  "build_options": [
+    "--python",
+    "--disable-GUI",
+    "WITH_MPI=OFF",
+    "--njobs=2"
+  ],
+  "dependency_policy": "ISOLATED_UNPACKED_UBUNTU_PACKAGES_NO_SYSTEM_INSTALL",
+  "dependency_prefix": "/home/helianthusczc/opt/openems-deps",
+  "runtime_environment": {
+    "PATH_prepend": "/home/helianthusczc/opt/openems/bin",
+    "LD_LIBRARY_PATH_prepend": [
+      "/home/helianthusczc/opt/openems/lib",
+      "/home/helianthusczc/opt/openems-deps/usr/lib/x86_64-linux-gnu",
+      "/home/helianthusczc/opt/openems-deps/usr/lib/x86_64-linux-gnu/hdf5/serial"
+    ]
+  },
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "date": "2026-09-09",
+  "runtime_validation_case": "baseline"
+}
