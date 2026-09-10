@@ -1,0 +1,119 @@
+{
+  "source_contracts": {
+    "Stage4": {
+      "source_case_id": "F4-P-stage4-left-isolated",
+      "source_path": "rf/production/f4_attribution/F4-P-stage4-left-isolated_jefimenko_waveform.csv",
+      "source_hash": "a40eb67deaebb3164d527b453b9b4ef4b4d65fef3ea26b19623215ddfe631ed8",
+      "observer_id": "F4_far_field_reference",
+      "observer_position_m": [
+        0.2,
+        0.0,
+        0.005
+      ],
+      "observer_distance_m": 0.2,
+      "time_grid": {
+        "start_s": 7.216370939056355e-10,
+        "end_s": 1.7415566293640193e-09,
+        "dt_s": 4.07967814183354e-11,
+        "samples": 26
+      },
+      "field_components": [
+        "Ex_total",
+        "Ey_total",
+        "Ez_total"
+      ],
+      "polarization_metadata": {
+        "basis": "CARTESIAN_XYZ",
+        "dominant_trusted_component": "Ez_total",
+        "receiver_axis_policy": "FIXED_ALONG_DOMINANT_TRUSTED_E_COMPONENT"
+      },
+      "receiver_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "trusted_frequency_mask_Hz": [
+        2941408508.9091916,
+        7966314711.629051
+      ],
+      "rf_trust_report_path": "rf/production/f4_attribution/F4-P-stage4-left-isolated_rf_trust_report.json",
+      "rf_trust_report_hash": "517b1b6e2253c240b50f080c09bc60e4c52c52dddca272abadc4a0ed83c5b2e5",
+      "NATIVE_PROPAGATION_ALREADY_INCLUDED": true
+    },
+    "Stage5": {
+      "source_case_id": "F4-C-stage5-highfield-collision",
+      "source_path": "rf/production/f4_attribution/F4-C-stage5-highfield-collision_jefimenko_waveform.csv",
+      "source_hash": "1511975749e903718a65223edf6c17272293fab36b88cd75b6f7b07d96a02615",
+      "observer_id": "F4_far_field_reference",
+      "observer_position_m": [
+        0.2,
+        0.0,
+        0.005
+      ],
+      "observer_distance_m": 0.2,
+      "time_grid": {
+        "start_s": 7.486683071261188e-10,
+        "end_s": 1.7331550585412171e-09,
+        "dt_s": 3.175763714242251e-11,
+        "samples": 32
+      },
+      "field_components": [
+        "Ex_total",
+        "Ey_total",
+        "Ez_total"
+      ],
+      "polarization_metadata": {
+        "basis": "CARTESIAN_XYZ",
+        "dominant_trusted_component": "Ez_total",
+        "receiver_axis_policy": "FIXED_ALONG_DOMINANT_TRUSTED_E_COMPONENT"
+      },
+      "receiver_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "trusted_frequency_mask_Hz": [
+        3047273105.1868486,
+        10233758844.919172
+      ],
+      "rf_trust_report_path": "rf/production/f4_attribution/F4-C-stage5-highfield-collision_rf_trust_report.json",
+      "rf_trust_report_hash": "9026b066102b10331aa32eb3ba7a9b904a482fbedfdc25ed6afff289b71392be",
+      "NATIVE_PROPAGATION_ALREADY_INCLUDED": true
+    }
+  },
+  "receiver_id": "H4_CANONICAL_SHORT_DIPOLE_FIELD_SENSOR",
+  "receiver_axis": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "receiver_transfer_path": "fullwave/h4/h4_receiver_transfer.csv",
+  "receiver_transfer_hash": "dbfe52d59367877d5b5d9575bb431b6a1744ccaabe5c276ea7f02bc9c7fa3db6",
+  "trusted_frequency_masks_Hz": {
+    "Stage4": [
+      2941408508.9091916,
+      7966314711.629051
+    ],
+    "Stage5": [
+      3047273105.1868486,
+      10233758844.919172
+    ]
+  },
+  "native_received_spectrum_paths": {
+    "Stage4": "fullwave/h4/h4_stage4_native_received_spectrum.csv",
+    "Stage5": "fullwave/h4/h4_stage5_native_received_spectrum.csv"
+  },
+  "native_received_time_paths": {
+    "Stage4": "fullwave/h4/h4_stage4_native_received_timeseries.csv",
+    "Stage5": "fullwave/h4/h4_stage5_native_received_timeseries.csv"
+  },
+  "native_path_status": "TRUSTED_BAND_DEVELOPMENT_VERIFIED",
+  "native_350MHz_status": "NOT_RESOLVED",
+  "experimental_validation_status": "STAGE_H_EXPERIMENTAL_VALIDATION_PENDING",
+  "production_receiver_status": "NOT_RESOLVED",
+  "RECEIVER_TRANSFER_MESH_SENSITIVITY_PRESENT": true,
+  "H4_ABSOLUTE_AMPLITUDE_STATUS": "NUMERICAL_REFERENCE_ONLY",
+  "Stage5_full_maxwell_status": "FULL_MAXWELL_REFERENCE_PENDING",
+  "mechanism_attribution_consumed": false,
+  "h2_h3_numerical_inputs_consumed": false
+}

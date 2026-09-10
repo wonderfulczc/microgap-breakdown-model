@@ -1,0 +1,10 @@
+{
+  "frequency_Hz": 350000000.0,
+  "system_band_Hz": [
+    200000000.0,
+    500000000.0
+  ],
+  "STAGE_F_NATIVE_RF_TRUST": "NOT_RESOLVED",
+  "H4_NATIVE_RECEIVED_VOLTAGE": "NOT_RESOLVED",
+  "interpretation": "NOT_RESOLVED_IS_NOT_ZERO_RADIATION"
+}

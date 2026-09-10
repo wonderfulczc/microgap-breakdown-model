@@ -1,0 +1,420 @@
+{
+  "H4_DEVELOPMENT_GATE": "PASS",
+  "H4_NATIVE_RF_PATHWAY": "TRUSTED_BAND_DEVELOPMENT_VERIFIED",
+  "PRODUCTION_NATIVE_RF_RECEIVER": "NOT_RESOLVED",
+  "H2_SCIENTIFIC_VALIDATION": "VNA_MEASUREMENT_PENDING",
+  "STAGE_H_EXPERIMENTAL_VALIDATION_PENDING": true,
+  "NATIVE_PROPAGATION_ALREADY_INCLUDED": true,
+  "RECEIVER_TRANSFER_MESH_SENSITIVITY_PRESENT": true,
+  "H4_ABSOLUTE_AMPLITUDE_STATUS": "NUMERICAL_REFERENCE_ONLY",
+  "receiver": {
+    "receiver_transfer_hash": "dbfe52d59367877d5b5d9575bb431b6a1744ccaabe5c276ea7f02bc9c7fa3db6",
+    "key_frequency_metrics": [
+      {
+        "frequency_Hz": 3500000000.0,
+        "H_fine_magnitude_m": 2.0844609457672957e-05,
+        "H_baseline_magnitude_m": 2.4030987452469776e-05,
+        "H_magnitude_relative_change": 0.15286340582523625,
+        "H_phase_change_rad": -0.04924100737813355,
+        "Zin_fine_ohm": [
+          0.2731080553073213,
+          -3218.5887338483967
+        ],
+        "S11_fine_dB": -2.2893544888879957e-05,
+        "orthogonal_to_parallel_ratio": 2.2277105646879945e-06,
+        "orthogonal_rejection_dB": -113.04282471093849
+      },
+      {
+        "frequency_Hz": 6000000000.0,
+        "H_fine_magnitude_m": 3.609080228590802e-05,
+        "H_baseline_magnitude_m": 4.164857116333371e-05,
+        "H_magnitude_relative_change": 0.15399405181956213,
+        "H_phase_change_rad": -0.08555392846477047,
+        "Zin_fine_ohm": [
+          0.5908175035452368,
+          -1864.4235581706098
+        ],
+        "S11_fine_dB": -0.000147525202596372,
+        "orthogonal_to_parallel_ratio": 3.1612772444543114e-07,
+        "orthogonal_rejection_dB": -130.00274829607338
+      },
+      {
+        "frequency_Hz": 9500000000.0,
+        "H_fine_magnitude_m": 5.852578941635588e-05,
+        "H_baseline_magnitude_m": 6.766700591702871e-05,
+        "H_magnitude_relative_change": 0.1561912550318921,
+        "H_phase_change_rad": -0.13840346660548933,
+        "Zin_fine_ohm": [
+          1.4152300651470349,
+          -1156.8110497862995
+        ],
+        "S11_fine_dB": -0.0009168647426954343,
+        "orthogonal_to_parallel_ratio": 9.558537177691673e-07,
+        "orthogonal_rejection_dB": -120.39217132658325
+      }
+    ],
+    "mesh_status": "RECEIVER_TRANSFER_MESH_SENSITIVITY_PRESENT",
+    "baseline_to_fine_max_H_magnitude_change_key_frequencies": 0.1561912550318921,
+    "short_dipole_open_circuit_effective_height_scale_m": 0.00125,
+    "loaded_transfer_to_open_circuit_scale_ratio_at_key_frequencies": [
+      0.016675687566138363,
+      0.028872641828726415,
+      0.0468206315330847
+    ],
+    "wire_status": "OPENEMS_CURVEPORT_PHYSICAL_WIRE_RADIUS_UNDEFINED",
+    "calibration": "OPENEMS_TFSF_PLANE_WAVE_E_INCIDENT_1_V_PER_M",
+    "raw_case_hashes": {
+      "baseline_port": "f2a62b8ef977af9f4e8ee95967e4ae6014dfe715422098415a4ff51fe4a0848a",
+      "baseline_plane_parallel": "38584fb06e2f7c3912503ad439d0b37b28065a40acd60c4bd9dde76b3cec1df9",
+      "fine_port": "1e1503865f461da3d67c31de9e006a9084f9b8d1e0fd927c157523f5ba3cca72",
+      "fine_plane_parallel": "d75512b3957280c64649741f322aff8bc03e7ebc65d3752aacba7d23e7756e12",
+      "baseline_plane_orthogonal": "ae6227f59950b90229e98e49ec352c9699c019122b798435fa3e55c22024ca0c"
+    }
+  },
+  "stages": {
+    "Stage4": {
+      "stage": "Stage4",
+      "case_id": "F4-P-stage4-left-isolated",
+      "source_summary_hash": "a5bae8997ba92e9e23d04f46c3201958a3188bf3fcf393422112f36d35932a91",
+      "trusted_frequency_Hz": [
+        2941408508.9091916,
+        7966314711.629051
+      ],
+      "trusted_fft_frequency_Hz": [
+        3771036549.883574,
+        4713795687.354467,
+        5656554824.825361,
+        6599313962.296254,
+        7542073099.767148
+      ],
+      "trusted_bin_count": 5,
+      "component_spectral_energy_metric": [
+        1.195032702841826e-18,
+        1.5513760187036077e-44,
+        3.5607793551452963e-16
+      ],
+      "dominant_component": "Ez_total",
+      "spectral_metrics": {
+        "normalized_shape_correlation": 0.9535114145897118,
+        "incident_peak_frequency_Hz": 3771036549.883574,
+        "received_peak_frequency_Hz": 3771036549.883574,
+        "peak_shift_Hz": 0.0,
+        "incident_centroid_frequency_Hz": 4336336177.688175,
+        "received_centroid_frequency_Hz": 4967862340.968733,
+        "centroid_shift_Hz": 631526163.2805576,
+        "incident_band_integrated_metric": 3.9955058144077654e-17,
+        "received_band_integrated_metric": 3.1240512173798606e-26
+      },
+      "received_time_semantics": "TRUSTED_BAND_LIMITED_NATIVE_RESPONSE",
+      "received_time_dt_s": 4.07967814183354e-11,
+      "received_time_window_s": 1.0199195354583838e-09,
+      "received_peak_abs_V": 2.43654005899945e-08,
+      "received_RMS_V": 9.308453108762402e-09,
+      "principal_envelope_time_s": 7.216370939056355e-10,
+      "full_maxwell_status": null
+    },
+    "Stage5": {
+      "stage": "Stage5",
+      "case_id": "F4-C-stage5-highfield-collision",
+      "source_summary_hash": "cf3206834132f51b00dc59bf88b4b2206543dc7043fa1e0086d97523c3dae388",
+      "trusted_frequency_Hz": [
+        3047273105.1868486,
+        10233758844.919172
+      ],
+      "trusted_fft_frequency_Hz": [
+        3936061094.1996818,
+        4920076367.749602,
+        5904091641.299522,
+        6888106914.849443,
+        7872122188.3993635,
+        8856137461.949284,
+        9840152735.499205
+      ],
+      "trusted_bin_count": 7,
+      "component_spectral_energy_metric": [
+        1.6668967009233178e-11,
+        9.096930698500271e-42,
+        1.845951620020096e-10
+      ],
+      "dominant_component": "Ez_total",
+      "spectral_metrics": {
+        "normalized_shape_correlation": 0.9780767159974955,
+        "incident_peak_frequency_Hz": 3936061094.1996818,
+        "received_peak_frequency_Hz": 3936061094.1996818,
+        "peak_shift_Hz": 0.0,
+        "incident_centroid_frequency_Hz": 4848813305.337166,
+        "received_centroid_frequency_Hz": 5849883296.531352,
+        "centroid_shift_Hz": 1001069991.1941862,
+        "incident_band_integrated_metric": 2.3345927779331074e-11,
+        "received_band_integrated_metric": 2.4827978176220098e-20
+      },
+      "received_time_semantics": "TRUSTED_BAND_LIMITED_NATIVE_RESPONSE",
+      "received_time_dt_s": 3.175763714242251e-11,
+      "received_time_window_s": 9.844867514150984e-10,
+      "received_peak_abs_V": 2.3990360758143677e-05,
+      "received_RMS_V": 7.816150011396506e-06,
+      "principal_envelope_time_s": 1.5743668728291047e-09,
+      "full_maxwell_status": "FULL_MAXWELL_REFERENCE_PENDING"
+    }
+  },
+  "native_350MHz": {
+    "frequency_Hz": 350000000.0,
+    "system_band_Hz": [
+      200000000.0,
+      500000000.0
+    ],
+    "STAGE_F_NATIVE_RF_TRUST": "NOT_RESOLVED",
+    "H4_NATIVE_RECEIVED_VOLTAGE": "NOT_RESOLVED",
+    "interpretation": "NOT_RESOLVED_IS_NOT_ZERO_RADIATION"
+  },
+  "pathway_isolation": {
+    "G3_waveform_consumed": false,
+    "H3_transfer_consumed": false,
+    "F_R4_mechanism_eta_consumed": false,
+    "total_Stage_F_field_used": true
+  },
+  "plane_wave_api": {
+    "type": "OPENEMS_TFSF_PLANE_WAVE",
+    "exc_type": 10,
+    "incident_field_amplitude_V_m": 1.0,
+    "normalization": "VPORT_SPECTRUM_DIVIDED_BY_OPENEMS_ET_EXCITATION_SPECTRUM",
+    "official_example": "/home/helianthusczc/opt/openems/share/openEMS/python/Tutorials/RCS_Sphere.py"
+  },
+  "boundary": "PML_8_ALL_SIDES",
+  "domain_geometry": {
+    "inner_domain_half_extent_m": 0.018,
+    "plane_wave_box_half_extent_m": 0.012,
+    "receiver_center_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "receiver_to_inner_boundary_minimum_m": 0.01675,
+    "domain_sanity_status": "FINITE_DECAY_NO_LATE_TIME_GROWTH"
+  },
+  "radiation_model_scope": "LOCAL_RECEIVER_ONLY_NATIVE_PROPAGATION_NOT_REPEATED",
+  "raw_openEMS_cases": {
+    "baseline_port": {
+      "case": "H4_BASELINE_PORT",
+      "resolution": "baseline",
+      "excitation": "port",
+      "frequency_start_Hz": 2800000000.0,
+      "frequency_stop_Hz": 10500000000.0,
+      "frequency_points": 771,
+      "receiver_id": "H4_CANONICAL_SHORT_DIPOLE_FIELD_SENSOR",
+      "receiver_length_m": 0.0025,
+      "receiver_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "receiver_load_ohm": 50.0,
+      "wire_status": "OPENEMS_CURVEPORT_PHYSICAL_WIRE_RADIUS_UNDEFINED",
+      "propagation_direction": null,
+      "incident_E_V_m": null,
+      "cells": 156832,
+      "min_xyz_m": [
+        0.00025,
+        0.00025,
+        0.00025
+      ],
+      "max_xyz_m": [
+        0.0011907347863992224,
+        0.0011907347863992224,
+        0.0012044500414067592
+      ],
+      "growth_max": 1.379729661461216,
+      "estimated_CFL_dt_s": 4.814583003866177e-13,
+      "target_max_frequency_Hz": 10500000000.0,
+      "runtime_s": 8.423295877000783,
+      "peak_RSS_KiB": 155056,
+      "raw_bytes": 250361,
+      "response_finite": true,
+      "observed_FDTD_timesteps": 1872,
+      "openEMS_reported_cell_count": 165731
+    },
+    "baseline_plane_parallel": {
+      "case": "H4_BASELINE_PLANE_PARALLEL",
+      "resolution": "baseline",
+      "excitation": "plane_parallel",
+      "frequency_start_Hz": 2800000000.0,
+      "frequency_stop_Hz": 10500000000.0,
+      "frequency_points": 771,
+      "receiver_id": "H4_CANONICAL_SHORT_DIPOLE_FIELD_SENSOR",
+      "receiver_length_m": 0.0025,
+      "receiver_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "receiver_load_ohm": 50.0,
+      "wire_status": "OPENEMS_CURVEPORT_PHYSICAL_WIRE_RADIUS_UNDEFINED",
+      "propagation_direction": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "incident_E_V_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "cells": 156832,
+      "min_xyz_m": [
+        0.00025,
+        0.00025,
+        0.00025
+      ],
+      "max_xyz_m": [
+        0.0011907347863992224,
+        0.0011907347863992224,
+        0.0012044500414067592
+      ],
+      "growth_max": 1.379729661461216,
+      "estimated_CFL_dt_s": 4.814583003866177e-13,
+      "target_max_frequency_Hz": 10500000000.0,
+      "runtime_s": 12.377284136000526,
+      "peak_RSS_KiB": 155040,
+      "raw_bytes": 251608,
+      "response_finite": true,
+      "observed_FDTD_timesteps": 2208,
+      "openEMS_reported_cell_count": 165731
+    },
+    "fine_port": {
+      "case": "H4_FINE_PORT",
+      "resolution": "fine",
+      "excitation": "port",
+      "frequency_start_Hz": 2800000000.0,
+      "frequency_stop_Hz": 10500000000.0,
+      "frequency_points": 771,
+      "receiver_id": "H4_CANONICAL_SHORT_DIPOLE_FIELD_SENSOR",
+      "receiver_length_m": 0.0025,
+      "receiver_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "receiver_load_ohm": 50.0,
+      "wire_status": "OPENEMS_CURVEPORT_PHYSICAL_WIRE_RADIUS_UNDEFINED",
+      "propagation_direction": null,
+      "incident_E_V_m": null,
+      "cells": 269080,
+      "min_xyz_m": [
+        0.0001875,
+        0.0001875,
+        0.00017857142857142833
+      ],
+      "max_xyz_m": [
+        0.0008947964540680815,
+        0.0008947964540680815,
+        0.0009374287754281042
+      ],
+      "growth_max": 1.3932590113656118,
+      "estimated_CFL_dt_s": 3.5507874321903766e-13,
+      "target_max_frequency_Hz": 10500000000.0,
+      "runtime_s": 12.606124386999,
+      "peak_RSS_KiB": 170792,
+      "raw_bytes": 274419,
+      "response_finite": true,
+      "observed_FDTD_timesteps": 2528,
+      "openEMS_reported_cell_count": 281799
+    },
+    "fine_plane_parallel": {
+      "case": "H4_FINE_PLANE_PARALLEL",
+      "resolution": "fine",
+      "excitation": "plane_parallel",
+      "frequency_start_Hz": 2800000000.0,
+      "frequency_stop_Hz": 10500000000.0,
+      "frequency_points": 771,
+      "receiver_id": "H4_CANONICAL_SHORT_DIPOLE_FIELD_SENSOR",
+      "receiver_length_m": 0.0025,
+      "receiver_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "receiver_load_ohm": 50.0,
+      "wire_status": "OPENEMS_CURVEPORT_PHYSICAL_WIRE_RADIUS_UNDEFINED",
+      "propagation_direction": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "incident_E_V_m": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "cells": 269080,
+      "min_xyz_m": [
+        0.0001875,
+        0.0001875,
+        0.00017857142857142833
+      ],
+      "max_xyz_m": [
+        0.0008947964540680815,
+        0.0008947964540680815,
+        0.0009374287754281042
+      ],
+      "growth_max": 1.3932590113656118,
+      "estimated_CFL_dt_s": 3.5507874321903766e-13,
+      "target_max_frequency_Hz": 10500000000.0,
+      "runtime_s": 12.864899140000489,
+      "peak_RSS_KiB": 171408,
+      "raw_bytes": 274279,
+      "response_finite": true,
+      "observed_FDTD_timesteps": 2304,
+      "openEMS_reported_cell_count": 281799
+    },
+    "baseline_plane_orthogonal": {
+      "case": "H4_BASELINE_PLANE_ORTHOGONAL",
+      "resolution": "baseline",
+      "excitation": "plane_orthogonal",
+      "frequency_start_Hz": 2800000000.0,
+      "frequency_stop_Hz": 10500000000.0,
+      "frequency_points": 771,
+      "receiver_id": "H4_CANONICAL_SHORT_DIPOLE_FIELD_SENSOR",
+      "receiver_length_m": 0.0025,
+      "receiver_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "receiver_load_ohm": 50.0,
+      "wire_status": "OPENEMS_CURVEPORT_PHYSICAL_WIRE_RADIUS_UNDEFINED",
+      "propagation_direction": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "incident_E_V_m": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "cells": 156832,
+      "min_xyz_m": [
+        0.00025,
+        0.00025,
+        0.00025
+      ],
+      "max_xyz_m": [
+        0.0011907347863992224,
+        0.0011907347863992224,
+        0.0012044500414067592
+      ],
+      "growth_max": 1.379729661461216,
+      "estimated_CFL_dt_s": 4.814583003866177e-13,
+      "target_max_frequency_Hz": 10500000000.0,
+      "runtime_s": 8.364757426999859,
+      "peak_RSS_KiB": 155756,
+      "raw_bytes": 249428,
+      "response_finite": true,
+      "observed_FDTD_timesteps": 1584,
+      "openEMS_reported_cell_count": 165731
+    }
+  },
+  "raw_openEMS_total_bytes": 1300095,
+  "runtime_generate_results_s": 0.04299092699875473,
+  "peak_RSS_KiB_generate_results": 82892
+}
