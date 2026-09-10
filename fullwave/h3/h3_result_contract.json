@@ -1,0 +1,21 @@
+{
+  "source_case_id": "G2_primary_150_LAGGED",
+  "G3_input_hash": "f402fa2951fc162fd557070b3511bc754e6ddf31476a33fb6a0a6d4277388365",
+  "H2_transfer_hash": "0fe46aefb531e75c2d9b4f6e68df9a244c2bb73f059690654192c03df85d593c",
+  "reference_structure_id": "H3_350MHZ_REFERENCE_RADIATING_STRUCTURE",
+  "receiver_id": "H2_350MHZ_DEVELOPMENT_REFERENCE_RX",
+  "frequency_band_Hz": [
+    200000000.0,
+    500000000.0
+  ],
+  "V_source_file": "h3_g3_source_spectrum.csv",
+  "V_received_time_file": "h3_received_timeseries.csv",
+  "V_received_spectrum_file": "h3_received_spectrum.csv",
+  "H_V_file": "h3_transfer_function.csv",
+  "Z_in_file": "h3_transfer_function.csv",
+  "loading_status": "FULL_WAVE_LOADING_MISMATCH_HIGH",
+  "receiver_status": "THEORY_AND_FULLWAVE_DEVELOPMENT_VERIFIED",
+  "experimental_validation_status": "STAGE_H_EXPERIMENTAL_VALIDATION_PENDING",
+  "full_wave_feedback_status": "FULL_WAVE_LOADING_FEEDBACK_NOT_COUPLED",
+  "result_voltage_semantics": "REFERENCE_RECEIVED_VOLTAGE"
+}

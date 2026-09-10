@@ -1,0 +1,142 @@
+{
+  "method_status": "PHYSICS_DERIVED_G3_TO_FULLWAVE_RECEIVER_PATH_VALIDATED",
+  "source_case_id": "G2_primary_150_LAGGED",
+  "reference_structure_id": "H3_350MHZ_REFERENCE_RADIATING_STRUCTURE",
+  "PRODUCTION_TX_STRUCTURE": "PENDING_ACTUAL_GEOMETRY",
+  "receiver_id": "H2_350MHZ_DEVELOPMENT_REFERENCE_RX",
+  "receiver_status": "THEORY_AND_FULLWAVE_DEVELOPMENT_VERIFIED",
+  "H2_SCIENTIFIC_VALIDATION": "VNA_MEASUREMENT_PENDING",
+  "experimental_validation_status": "STAGE_H_EXPERIMENTAL_VALIDATION_PENDING",
+  "full_wave_feedback_status": "FULL_WAVE_LOADING_FEEDBACK_NOT_COUPLED",
+  "openEMS_rerun": false,
+  "transfer_definition": "H_V=S21/(1+S11)=V_rx_50ohm/V_tx_total_port",
+  "transfer_source": "FROZEN_H2_50_OHM_S_PARAMETERS",
+  "time_transform": {
+    "normalization": "COMPLEX_SINGLE_SIDED_PEAK_AMPLITUDE_2_OVER_N",
+    "original_samples": 801,
+    "original_dt_s": 1.2500000000000112e-11,
+    "original_duration_s": 1e-08,
+    "intrinsic_Fourier_scale_Hz": 100000000.0,
+    "nfft": 12816,
+    "zero_padding_status": "ZERO_PADDING_FOR_LINEAR_CONVOLUTION_ONLY",
+    "frequency_spacing_Hz": 6242197.253433152
+  },
+  "band": {
+    "low_Hz": 200000000.0,
+    "high_Hz": 500000000.0,
+    "frequency_samples": 48,
+    "retained_source_spectral_fraction": 0.2474547778062837
+  },
+  "source_representations": {
+    "FULL_G3_WAVEFORM": "thermal/g3_port/g3_port_uniform.csv",
+    "H3_BANDLIMITED_G3_WAVEFORM": "h3_g3_source_spectrum.csv",
+    "frozen_G3_modified": false
+  },
+  "source_spectrum": {
+    "peak_frequency_Hz": 205992509.363294,
+    "centroid_frequency_Hz": 341310591.83360344,
+    "integrated_spectral_metric": 6295746983.680741
+  },
+  "received_spectrum": {
+    "peak_frequency_Hz": 330836454.43195707,
+    "centroid_frequency_Hz": 337571508.24744254,
+    "integrated_spectral_metric": 11330722.836742228
+  },
+  "received_waveform": {
+    "peak_V": 0.3813803386692975,
+    "RMS_V": 0.12338869192675224,
+    "absolute_peak_time_s": 7.300000000000065e-09,
+    "principal_envelope_peak_V": 0.38478517457278777,
+    "principal_envelope_peak_time_s": 7.81250000000007e-09,
+    "one_percent_onset_time_s": 3.33750000000003e-09,
+    "dt_output_s": 1.2500000000000112e-11,
+    "sample_count": 2951,
+    "duration_s": 3.687500000000033e-08,
+    "causal_impulse_samples": 2151
+  },
+  "propagation_delay": {
+    "R_m": 1.0,
+    "R_over_c_s": 3.3356409519815204e-09,
+    "onset_minus_R_over_c_s": 1.859048018509459e-12
+  },
+  "at_nearest_350MHz": {
+    "frequency_Hz": 349563046.1922565,
+    "V_G3_magnitude_V": 4.629491259411736,
+    "H_V_magnitude": 0.0757321678465589,
+    "H_V_phase_rad": -0.46001481378591524,
+    "V_rx_magnitude_V": 0.3506014091019469,
+    "Zin_ohm": [
+      80.93180075422727,
+      31.253066245644934
+    ],
+    "Yin_S": [
+      0.010752612380414181,
+      -0.004152287529834475
+    ],
+    "H2_grid_350MHz_H_V": [
+      0.06639550321617886,
+      -0.03505892223474009
+    ]
+  },
+  "loading": {
+    "normalized_L2_current_mismatch": 1.953619816654983,
+    "complex_correlation": [
+      0.5547826924659586,
+      0.15146644475238946
+    ],
+    "complex_correlation_magnitude": 0.5750877496049686,
+    "complex_correlation_phase_rad": 0.2665239436759587,
+    "magnitude_ratio_median": 1.54483113795526,
+    "magnitude_ratio_p10": 0.7217525254112257,
+    "magnitude_ratio_p90": 3.965350107919135,
+    "stable_ratio_fraction": 1.0,
+    "thresholds": {
+      "low_max": 0.25,
+      "moderate_max": 0.75
+    },
+    "status": "FULL_WAVE_LOADING_MISMATCH_HIGH",
+    "feedback_applied": false
+  },
+  "baseline": {
+    "provenance": "NUMERICAL_SOURCE_SHAPE_BASELINE_ONLY",
+    "Ryu_equation_available": false,
+    "construction": "CUBIC_SMOOTH_STEP_WITH_G3_90_TO_10_PERCENT_TRANSITION_DURATION",
+    "peak_voltage_V": 100.0,
+    "derived_rise_duration_s": 4.625e-10,
+    "received": {
+      "peak_V": 0.9544478069033151,
+      "RMS_V": 0.34813569958436774,
+      "absolute_peak_time_s": 8.075000000000072e-09,
+      "principal_envelope_peak_V": 0.9555312798247447,
+      "principal_envelope_peak_time_s": 8.025000000000072e-09,
+      "one_percent_onset_time_s": 3.5375000000000317e-09
+    },
+    "received_spectrum": {
+      "peak_frequency_Hz": 343320848.93882334,
+      "centroid_frequency_Hz": 342429153.3158785,
+      "integrated_spectral_metric": 84709398.55686872
+    },
+    "received_350MHz_magnitude_V": 1.3139335970011838
+  },
+  "G3_vs_baseline": {
+    "received_peak_ratio_baseline_over_G3": 2.5026140839707414,
+    "received_RMS_ratio_baseline_over_G3": 2.8214554684722084,
+    "received_spectral_centroid_difference_Hz": 4857645.068435967,
+    "received_350MHz_magnitude_ratio_baseline_over_G3": 3.747656349604464,
+    "time_domain_waveform_correlation": 0.16248265292791914
+  },
+  "nf2ff_reused": {
+    "frequency_Hz": 350000000.0,
+    "Prad": 3.647474339654146e-24,
+    "Dmax": 1.5465993703548029,
+    "E_norm_max": 1.83912137341509e-11,
+    "E_norm_axis": 2.173155654794483e-15,
+    "E_norm_broadside": 1.83912137341509e-11,
+    "finite": true,
+    "source": "FROZEN_H2_350MHZ_OPENEMS_RESULT",
+    "principal_polarization": "Z_DIRECTED_DIPOLE_BROADSIDE"
+  },
+  "energy_interpretation": "ONE_WAY_VOLTAGE_SOURCE_HANDOFF_NOT_G3_PORT_ENERGY_PRESERVATION",
+  "runtime_s": 0.029387209000560688,
+  "peak_RSS_KiB": 84480
+}
