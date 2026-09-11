@@ -1,0 +1,207 @@
+{
+  "bundle_status": "SYNTHETIC_DEVELOPMENT_INPUT",
+  "scientific_validation_allowed": false,
+  "file_count": 40,
+  "files": [
+    {
+      "path": "calibration_metadata.json",
+      "sha256": "8d4f713e2ac683e74263270c66005e89b41f05b9ef8763b7ebaff36c45e45f41",
+      "bytes": 403
+    },
+    {
+      "path": "derived_event_summary.csv",
+      "sha256": "df8ae15a4ea09221aab6a06e2664e3b0fe5b003c8fd8f9e4995707238a642807",
+      "bytes": 1963
+    },
+    {
+      "path": "geometry_contract.json",
+      "sha256": "8aea5cd05f72fa1eb0e735acdc202f16d4de6a01b06a4a0f0fd30816c5cbd8ee",
+      "bytes": 1346
+    },
+    {
+      "path": "measurement_metadata.json",
+      "sha256": "d9ad73ec209d136587d9cb8520ed5c60e58117af214a6dc05fb83819f690ca96",
+      "bytes": 13082
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep01.csv",
+      "sha256": "64ef1affb7d7b275e01467a0513d97afb16da2a508c1876e124fdd8331069515",
+      "bytes": 384983
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep02.csv",
+      "sha256": "55c0a51115fcd67de59668342ca97f4228da114bec9e633339238e525d3c4ab0",
+      "bytes": 385000
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep03.csv",
+      "sha256": "2bdb09e8a3df850e198b60722ce67a17099875e81cc949370741c7a343f4b18f",
+      "bytes": 384863
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep04.csv",
+      "sha256": "d28bc1288447d74867e3cff1b49ae10d2031c44fdd466c9863bed497356cbfa4",
+      "bytes": 385004
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep05.csv",
+      "sha256": "40cb2a7b97efc6f1cc4ada98caf3a50dad8640b1278c70f4a54b8f40f2b14cc2",
+      "bytes": 385022
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep06.csv",
+      "sha256": "2dcae958d03e3002e8bb38b73762da1096160871eebb038d698e987f0f2ec0d7",
+      "bytes": 385116
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep07.csv",
+      "sha256": "b460e0580668d9ef1a93bcc8f687d008f608e48965ad0e2dcf3cdd62e363c3bc",
+      "bytes": 385070
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep08.csv",
+      "sha256": "5d139868a4c0ca9908604d189f12217344b463418346d9f2d52bb16194a17304",
+      "bytes": 385033
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep09.csv",
+      "sha256": "1aaba637b94b3e3ad11423514e013892a128ae359721705cd2e3199a251ed0a7",
+      "bytes": 385073
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep10.csv",
+      "sha256": "cd086d2ee91b0449e4ace61dbd7465876a20efa3ffdc46c04073bf39db84f453",
+      "bytes": 385094
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep11.csv",
+      "sha256": "b45c9cf64df419cb302bbeda3fb85fa82b1bbdeae2a434e330fa11181badd750",
+      "bytes": 384988
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep12.csv",
+      "sha256": "314e72640b1745fbde4f2fa73c17804ecdbfab2230c89c2d4a85faaf3ee510c2",
+      "bytes": 385097
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep13.csv",
+      "sha256": "0c760c8948407879dde32687595807d5f25e9800975fbd4f8b59f5e51822ff26",
+      "bytes": 385058
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep14.csv",
+      "sha256": "4e60b161a6886b8ef7f843d939dea25d3a54781eb9892ea81c2d9c0875c90e45",
+      "bytes": 384965
+    },
+    {
+      "path": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep15.csv",
+      "sha256": "c7096f368a04911c41cff070e4f7076e17e094502e9f36702c496b1d50b33cb0",
+      "bytes": 385011
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep01.csv",
+      "sha256": "8a9548fe5abdf4360c97fe7c5e01514a3e8ba4d2a9f57e9464f171dfb2cecd3f",
+      "bytes": 385098
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep02.csv",
+      "sha256": "18ec2f9a2bb7fc8a68e7686f289862ef156894fb1e0a882899b8d4a39986d595",
+      "bytes": 384920
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep03.csv",
+      "sha256": "fe6506d1e1339f3ccd394eb473f63a95e1ac03205765ffa62f378c8a64420237",
+      "bytes": 385059
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep04.csv",
+      "sha256": "7052bc3897cce431069a0a4ef2476393fa19c879e5fbf47317de5520e8300124",
+      "bytes": 385106
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep05.csv",
+      "sha256": "bfc16a5213d57468a0de68041af1a697ffc9d3d32918afe69b53b7391109772f",
+      "bytes": 385029
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep06.csv",
+      "sha256": "1d81e3f81ef64b0ade593fa0442626aa75b4ddda13e5e2f9e15e3b28d3e07d13",
+      "bytes": 385031
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep07.csv",
+      "sha256": "ddaed62cc80f182d044e05512938060d878ec9a77dc675f55d39f17e3dae351f",
+      "bytes": 385016
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep08.csv",
+      "sha256": "445931e314c5da3fcb02225a488fbed22b4fb9f57a9d38bf7b7e5302636d754e",
+      "bytes": 385055
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep09.csv",
+      "sha256": "36b4584daabf6058994eb811f780548a1c51a43704e65619fcb254b4c5364263",
+      "bytes": 385054
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep10.csv",
+      "sha256": "1ef13c16cbe531cfd3a003d592e53f5fe27f589cf60540a91249a445793ce7ad",
+      "bytes": 385078
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep11.csv",
+      "sha256": "c721a450b2215e8c4cf170f0580693d5d2924d9a5068d75e688b6c6ccab940c0",
+      "bytes": 384959
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep12.csv",
+      "sha256": "d1c0778a01c7bcca17c9f31e25a3a019af42dadebf192a61f9f3a0a6c11cd2cd",
+      "bytes": 385008
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep13.csv",
+      "sha256": "a76be91a548e35e5e168f983715f0a6b23a13ba341ada5005537cdbb34a45022",
+      "bytes": 384978
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep14.csv",
+      "sha256": "ecf0bfbfebac6de7d179c33cb5e12cd0127fa7b8ea4c3fb136f912c571d3aa8e",
+      "bytes": 384895
+    },
+    {
+      "path": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep15.csv",
+      "sha256": "39599584e633c61773d3a8067aaf273ce0862d52241cdef978ebf9746f861bfd",
+      "bytes": 384910
+    },
+    {
+      "path": "scope_raw/BACKGROUND_NO_TRIGGER.csv",
+      "sha256": "a9f649e1310efa4b0fa5a93af686b3c0c1047a169340939ac651c15c1fdbfa2b",
+      "bytes": 385032
+    },
+    {
+      "path": "vna/RX_S11.s1p",
+      "sha256": "b683483822291f4954d02be21a10d25a3dc0957bae0a5aad90f265ad15beed90",
+      "bytes": 43929
+    },
+    {
+      "path": "vna/TX_RX_S21.s2p",
+      "sha256": "e644418f97a3860c12496560e64d6e5f114d360997272511b67097ac8d51bc79",
+      "bytes": 149344
+    },
+    {
+      "path": "vna/TX_RX_S21_0p6m.s2p",
+      "sha256": "ea141df07cc145946de705433be7f37b4bedab2201f8b256e774673d42cb7511",
+      "bytes": 149044
+    },
+    {
+      "path": "vna/TX_RX_S21_1p0m.s2p",
+      "sha256": "e644418f97a3860c12496560e64d6e5f114d360997272511b67097ac8d51bc79",
+      "bytes": 149344
+    },
+    {
+      "path": "vna/TX_S11.s1p",
+      "sha256": "b683483822291f4954d02be21a10d25a3dc0957bae0a5aad90f265ad15beed90",
+      "bytes": 43929
+    }
+  ]
+}

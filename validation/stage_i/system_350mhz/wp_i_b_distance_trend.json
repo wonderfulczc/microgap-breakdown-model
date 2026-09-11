@@ -1,0 +1,17 @@
+{
+  "evidence_type": "SYNTHETIC_DRY_RUN",
+  "distances_m": [
+    0.6,
+    1.0
+  ],
+  "peak_voltage_ratio_1p0m_over_0p6m": 0.6263831728428924,
+  "RMS_voltage_ratio_1p0m_over_0p6m": 0.6633735914628476,
+  "peak_frequency_shift_1p0m_minus_0p6m_Hz": 66666.66666668653,
+  "spectral_centroid_shift_1p0m_minus_0p6m_Hz": -523550.43859279156,
+  "ensemble_spectral_shape_correlation_50_500MHz": 0.9982988509416597,
+  "development_trend": {
+    "frequency_relatively_stable": true,
+    "amplitude_reduced_at_1p0m": true,
+    "scientific_evidence": false
+  }
+}

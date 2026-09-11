@@ -1,0 +1,37 @@
+{
+  "data_origin": "SYNTHETIC_DEVELOPMENT_INPUT",
+  "purpose": "Stage-I end-to-end dry run only; replace with real hardware geometry later.",
+  "source_electrode": {
+    "type": "CURVED_NEEDLE",
+    "gap_m": 7e-05,
+    "tip_radius_m": "NOT_PROVIDED",
+    "material": "Cu_assumed_for_development_only",
+    "basis_from_previous_project_work": [
+      "needle/curved-needle geometry selected because prior project work emphasized better stability/readability than foil",
+      "1.0 m retained as a readable/stable development distance",
+      "historical stable readout was concentrated around tens of MHz; current RF structure intentionally selects ~350 MHz"
+    ]
+  },
+  "radiating_structure": {
+    "type": "REFERENCE_CENTER_FED_DIPOLE",
+    "total_length_m": 0.41114394239999996,
+    "arm_length_m": 0.20557197119999998,
+    "wire_radius_m": 0.001,
+    "target_center_frequency_Hz": 350000000.0,
+    "status": "DEVELOPMENT_FIXTURE_ONLY"
+  },
+  "receiver_structure": {
+    "type": "REFERENCE_CENTER_FED_DIPOLE",
+    "total_length_m": 0.41114394239999996,
+    "arm_length_m": 0.20557197119999998,
+    "wire_radius_m": 0.001,
+    "load_ohm": 50.0,
+    "status": "DEVELOPMENT_FIXTURE_ONLY"
+  },
+  "distances_m": [
+    0.6,
+    1.0
+  ],
+  "orientation": "parallel_copolarized_broadside",
+  "environment": "idealized_free_space_development_fixture"
+}

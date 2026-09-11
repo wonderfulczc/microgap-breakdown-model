@@ -1,0 +1,51 @@
+{
+  "ledger_type": "StageIModelDiscrepancyLedger",
+  "dataset_provenance": "SYNTHETIC_DEVELOPMENT_INPUT",
+  "scientific_interpretation_allowed": false,
+  "entries": [
+    {
+      "quantity": "H3_OVERLAP_SPECTRAL_PEAK_FREQUENCY_Hz",
+      "simulation_value": 330836454.432,
+      "measurement_value": 349563046.1923,
+      "difference": -18726591.76030004,
+      "uncertainty": "SYNTHETIC_REPEATABILITY_ONLY",
+      "possible_source": "SOURCE_MODEL",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPEAT_WITH_REAL_MEASUREMENT",
+      "evidence_type": "SYNTHETIC_DRY_RUN"
+    },
+    {
+      "quantity": "H3_OVERLAP_SPECTRAL_CENTROID_Hz",
+      "simulation_value": 337571508.2474526,
+      "measurement_value": 346264082.5021826,
+      "difference": -8692574.254729986,
+      "uncertainty": "SYNTHETIC_REPEATABILITY_ONLY",
+      "possible_source": "SOURCE_MODEL",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPEAT_WITH_REAL_MEASUREMENT",
+      "evidence_type": "SYNTHETIC_DRY_RUN"
+    },
+    {
+      "quantity": "H3_OVERLAP_NORMALIZED_SHAPE_CORRELATION",
+      "simulation_value": 1.0,
+      "measurement_value": 0.6839742137192734,
+      "difference": 0.31602578628072664,
+      "uncertainty": "SYNTHETIC_REPEATABILITY_ONLY",
+      "possible_source": "RX_GEOMETRY",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPEAT_WITH_REAL_MEASUREMENT",
+      "evidence_type": "SYNTHETIC_DRY_RUN"
+    },
+    {
+      "quantity": "FULL_WAVE_LOADING_CURRENT_NORMALIZED_L2",
+      "simulation_value": 0.0,
+      "measurement_value": 2.0521087993569855,
+      "difference": 2.0521087993569855,
+      "uncertainty": "SYNTHETIC_VNA_ONLY",
+      "possible_source": "FULL_WAVE_LOADING",
+      "classification": "FULL_WAVE_LOADING_MISMATCH_HIGH",
+      "action_required": "RETAIN_FEEDBACK_NOT_COUPLED_DEBT",
+      "evidence_type": "SYNTHETIC_DRY_RUN"
+    }
+  ]
+}

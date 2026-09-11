@@ -1,0 +1,11 @@
+{
+  "data_origin": "SYNTHETIC_DEVELOPMENT_INPUT",
+  "vna_calibration_status": "SYNTHETIC_IDEAL_REFERENCE_PLANE",
+  "scope_calibration_status": "SYNTHETIC_IDEAL_50OHM_INPUT",
+  "cable_connector_status": "CALIBRATED_OUT_SYNTHETICALLY_FOR_DRY_RUN",
+  "absolute_amplitude_scientific_validation": "NOT_PERMITTED",
+  "reference_planes": {
+    "vna": "TX_FEED_to_RX_FEED",
+    "scope": "INSTRUMENT_INPUT"
+  }
+}

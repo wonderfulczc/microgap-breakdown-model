@@ -1,0 +1,645 @@
+{
+  "WP_I_B_INPUT_TYPE": "SYNTHETIC_DEVELOPMENT_INPUT",
+  "SCIENTIFIC_VALIDATION_ALLOWED": false,
+  "allowed_use": "SOFTWARE_PIPELINE_DRY_RUN_ONLY",
+  "raw_data_preserved": true,
+  "raw_input_manifest_hash": "b6aa6402d07063891873d3fbf7c10b9a6899a602d4a344b0b70c4df29f0de335",
+  "output_data_layer": "DERIVED",
+  "derived_parent_hash": "b6aa6402d07063891873d3fbf7c10b9a6899a602d4a344b0b70c4df29f0de335",
+  "processing_policy_path": "validation/stage_i/stage_i_processing_policy.json",
+  "processing_policy_hash": "05613e012bf401037cd013829c3eba93550c80b46e9ef953a58e75a77fcb0463",
+  "frequency_policy": {
+    "raw_and_descriptive_support_Hz": [
+      50000000.0,
+      500000000.0
+    ],
+    "separate_descriptive_bands_Hz": {
+      "FULL_50_500MHZ": [
+        50000000.0,
+        500000000.0
+      ],
+      "LOW_50_100MHZ": [
+        50000000.0,
+        100000000.0
+      ],
+      "H3_OVERLAP_200_500MHZ": [
+        200000000.0,
+        500000000.0
+      ]
+    },
+    "H3_COMPARISON_BAND_Hz": [
+      200000000.0,
+      500000000.0
+    ],
+    "50_TO_200MHZ_H3_STATUS": "OUTSIDE_H3_COMPARISON_SUPPORT",
+    "weak_56MHz_component_preserved": true
+  },
+  "vna_ingestion": {
+    "parser": "streamer_rf.fullwave.receiver.read_touchstone",
+    "raw_smoothing": false,
+    "files": {
+      "vna/TX_S11.s1p": {
+        "sha256": "b683483822291f4954d02be21a10d25a3dc0957bae0a5aad90f265ad15beed90",
+        "frequency_min_Hz": 50000000.0,
+        "frequency_max_Hz": 500000000.0,
+        "points": 901,
+        "frequency_step_Hz": 500000.0,
+        "Z0_ohm": 50.0,
+        "parameters": [
+          "S11"
+        ]
+      },
+      "vna/RX_S11.s1p": {
+        "sha256": "b683483822291f4954d02be21a10d25a3dc0957bae0a5aad90f265ad15beed90",
+        "frequency_min_Hz": 50000000.0,
+        "frequency_max_Hz": 500000000.0,
+        "points": 901,
+        "frequency_step_Hz": 500000.0,
+        "Z0_ohm": 50.0,
+        "parameters": [
+          "S11"
+        ]
+      },
+      "vna/TX_RX_S21.s2p": {
+        "sha256": "e644418f97a3860c12496560e64d6e5f114d360997272511b67097ac8d51bc79",
+        "frequency_min_Hz": 50000000.0,
+        "frequency_max_Hz": 500000000.0,
+        "points": 901,
+        "frequency_step_Hz": 500000.0,
+        "Z0_ohm": 50.0,
+        "parameters": [
+          "S11",
+          "S12",
+          "S21",
+          "S22"
+        ]
+      },
+      "vna/TX_RX_S21_0p6m.s2p": {
+        "sha256": "ea141df07cc145946de705433be7f37b4bedab2201f8b256e774673d42cb7511",
+        "frequency_min_Hz": 50000000.0,
+        "frequency_max_Hz": 500000000.0,
+        "points": 901,
+        "frequency_step_Hz": 500000.0,
+        "Z0_ohm": 50.0,
+        "parameters": [
+          "S11",
+          "S12",
+          "S21",
+          "S22"
+        ]
+      },
+      "vna/TX_RX_S21_1p0m.s2p": {
+        "sha256": "e644418f97a3860c12496560e64d6e5f114d360997272511b67097ac8d51bc79",
+        "frequency_min_Hz": 50000000.0,
+        "frequency_max_Hz": 500000000.0,
+        "points": 901,
+        "frequency_step_Hz": 500000.0,
+        "Z0_ohm": 50.0,
+        "parameters": [
+          "S11",
+          "S12",
+          "S21",
+          "S22"
+        ]
+      }
+    }
+  },
+  "scope_ingestion": {
+    "distances_m": [
+      0.6,
+      1.0
+    ],
+    "events_per_distance": 15,
+    "total_events": 30,
+    "individual_raw_events_preserved": true
+  },
+  "quality_gate": {
+    "status": "PASS",
+    "input_provenance": "SYNTHETIC_DEVELOPMENT_INPUT",
+    "verified_manifest_files": 40,
+    "event_count": 30,
+    "events_per_distance": 15,
+    "sample_rate_Hz": 5000000000.0,
+    "sample_interval_s": 2e-10,
+    "record_length_samples": 10000,
+    "record_duration_s": 2e-06,
+    "background_noise_rms_V": 0.001370604963663976,
+    "all_scope_events_passed": true,
+    "clipping_test": "NO_REPEATED_EXTREMA_DETECTED",
+    "frequency_coverage_Hz": [
+      50000000.0,
+      500000000.0
+    ],
+    "reference_plane_status": "SYNTHETIC_IDEAL_REFERENCE_PLANE",
+    "event_results": [
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep01.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep02.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep03.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep04.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep05.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep06.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep07.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep08.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep09.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep10.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep11.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep12.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep13.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep14.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep15.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep01.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep02.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep03.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep04.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep05.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep06.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep07.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep08.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep09.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep10.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep11.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep12.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep13.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep14.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      },
+      {
+        "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep15.csv",
+        "finite": true,
+        "monotonic_time": true,
+        "sample_interval_s": 2.0000000000001503e-10,
+        "sample_interval_valid": true,
+        "record_length_samples": 10000,
+        "record_length_valid": true,
+        "clipping_status": "NO_REPEATED_EXTREMA_DETECTED",
+        "baseline_available": true,
+        "passed": true
+      }
+    ],
+    "vna": {
+      "parser": "streamer_rf.fullwave.receiver.read_touchstone",
+      "raw_smoothing": false,
+      "files": {
+        "vna/TX_S11.s1p": {
+          "sha256": "b683483822291f4954d02be21a10d25a3dc0957bae0a5aad90f265ad15beed90",
+          "frequency_min_Hz": 50000000.0,
+          "frequency_max_Hz": 500000000.0,
+          "points": 901,
+          "frequency_step_Hz": 500000.0,
+          "Z0_ohm": 50.0,
+          "parameters": [
+            "S11"
+          ]
+        },
+        "vna/RX_S11.s1p": {
+          "sha256": "b683483822291f4954d02be21a10d25a3dc0957bae0a5aad90f265ad15beed90",
+          "frequency_min_Hz": 50000000.0,
+          "frequency_max_Hz": 500000000.0,
+          "points": 901,
+          "frequency_step_Hz": 500000.0,
+          "Z0_ohm": 50.0,
+          "parameters": [
+            "S11"
+          ]
+        },
+        "vna/TX_RX_S21.s2p": {
+          "sha256": "e644418f97a3860c12496560e64d6e5f114d360997272511b67097ac8d51bc79",
+          "frequency_min_Hz": 50000000.0,
+          "frequency_max_Hz": 500000000.0,
+          "points": 901,
+          "frequency_step_Hz": 500000.0,
+          "Z0_ohm": 50.0,
+          "parameters": [
+            "S11",
+            "S12",
+            "S21",
+            "S22"
+          ]
+        },
+        "vna/TX_RX_S21_0p6m.s2p": {
+          "sha256": "ea141df07cc145946de705433be7f37b4bedab2201f8b256e774673d42cb7511",
+          "frequency_min_Hz": 50000000.0,
+          "frequency_max_Hz": 500000000.0,
+          "points": 901,
+          "frequency_step_Hz": 500000.0,
+          "Z0_ohm": 50.0,
+          "parameters": [
+            "S11",
+            "S12",
+            "S21",
+            "S22"
+          ]
+        },
+        "vna/TX_RX_S21_1p0m.s2p": {
+          "sha256": "e644418f97a3860c12496560e64d6e5f114d360997272511b67097ac8d51bc79",
+          "frequency_min_Hz": 50000000.0,
+          "frequency_max_Hz": 500000000.0,
+          "points": 901,
+          "frequency_step_Hz": 500000.0,
+          "Z0_ohm": 50.0,
+          "parameters": [
+            "S11",
+            "S12",
+            "S21",
+            "S22"
+          ]
+        }
+      }
+    }
+  },
+  "distance_trend": {
+    "evidence_type": "SYNTHETIC_DRY_RUN",
+    "distances_m": [
+      0.6,
+      1.0
+    ],
+    "peak_voltage_ratio_1p0m_over_0p6m": 0.6263831728428924,
+    "RMS_voltage_ratio_1p0m_over_0p6m": 0.6633735914628476,
+    "peak_frequency_shift_1p0m_minus_0p6m_Hz": 66666.66666668653,
+    "spectral_centroid_shift_1p0m_minus_0p6m_Hz": -523550.43859279156,
+    "ensemble_spectral_shape_correlation_50_500MHz": 0.9982988509416597,
+    "development_trend": {
+      "frequency_relatively_stable": true,
+      "amplitude_reduced_at_1p0m": true,
+      "scientific_evidence": false
+    }
+  },
+  "H3_comparison": {
+    "simulation_peak_frequency_Hz": 330836454.432,
+    "synthetic_peak_frequency_Hz": 349563046.1923,
+    "simulation_centroid_Hz": 337571508.2474526,
+    "synthetic_centroid_Hz": 346264082.5021826,
+    "normalized_shape_correlation": 0.6839742137192734,
+    "normalized_shape_L2": 0.6220733191915544,
+    "H3_COMPARISON_BAND_Hz": [
+      200000000.0,
+      500000000.0
+    ],
+    "evaluated_frequency_support_Hz": [
+      205992509.3633,
+      499375780.2747
+    ],
+    "50_TO_200MHZ_H3_STATUS": "OUTSIDE_H3_COMPARISON_SUPPORT",
+    "amplitude_comparison_status": "DEVELOPMENT_ABSOLUTE_DIAGNOSTIC_ONLY",
+    "synthetic_to_H3_peak_amplitude_ratio": 0.0017537825733431563,
+    "scientific_amplitude_validation_allowed": false
+  },
+  "loading_diagnostic": {
+    "normalized_L2_current_mismatch": 2.0521087993569855,
+    "complex_correlation": [
+      0.49048097924286077,
+      0.11588465595801531
+    ],
+    "complex_correlation_magnitude": 0.5039849645431331,
+    "complex_correlation_phase_rad": 0.2320126729374392,
+    "magnitude_ratio_median": 1.460761762039116,
+    "magnitude_ratio_p10": 0.7687466573607374,
+    "magnitude_ratio_p90": 4.07727603449503,
+    "stable_ratio_fraction": 1.0,
+    "status": "FULL_WAVE_LOADING_MISMATCH_HIGH",
+    "input_provenance": "SYNTHETIC_DEVELOPMENT_INPUT",
+    "evidence_type": "SYNTHETIC_DRY_RUN",
+    "FULL_WAVE_LOADING_FEEDBACK_NOT_COUPLED": true,
+    "G2_G3_modified": false
+  },
+  "discrepancy_ledger": "wp_i_b_discrepancy_ledger.json",
+  "future_real_data_replacement": {
+    "status": "ARCHITECTURE_READY",
+    "core_parser_redesign_required": false,
+    "core_comparison_API_redesign_required": false,
+    "replace_only": [
+      "DATA_FILES",
+      "GEOMETRY_METADATA",
+      "CALIBRATION_METADATA",
+      "PROVENANCE",
+      "UNCERTAINTY",
+      "VALIDATION_STATUS"
+    ]
+  },
+  "WP_I_B_PIPELINE_DRY_RUN": "PASS",
+  "STAGE_I_END_TO_END_DRY_RUN": "PASS",
+  "STAGE_I_EXPERIMENTAL_DATA": "NOT_PROVIDED",
+  "SYSTEM_350MHZ_VALIDATION": "NOT_MEASURED",
+  "H2_SCIENTIFIC_VALIDATION": "VNA_MEASUREMENT_PENDING",
+  "STAGE_H_EXPERIMENTAL_VALIDATION_PENDING": true,
+  "FULL_WAVE_LOADING_FEEDBACK_NOT_COUPLED": true,
+  "runtime_s": 0.10912584600009723,
+  "peak_RSS_KiB": 87760
+}

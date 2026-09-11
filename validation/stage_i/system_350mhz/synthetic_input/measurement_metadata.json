@@ -1,0 +1,356 @@
+{
+  "data_origin": "SYNTHETIC_DEVELOPMENT_INPUT",
+  "scientific_validation_allowed": false,
+  "allowed_use": "SOFTWARE_PIPELINE_DRY_RUN_ONLY",
+  "forbidden_statuses": [
+    "MEASURED",
+    "VALIDATED",
+    "VALIDATED_WITH_VNA",
+    "SYSTEM_350MHZ_VALIDATED"
+  ],
+  "frequency_coverage_Hz": [
+    50000000.0,
+    500000000.0
+  ],
+  "vna": {
+    "points": 901,
+    "frequency_step_Hz": 500000.0,
+    "reference_impedance_ohm": 50.0,
+    "calibration": "SYNTHETIC_IDEAL_REFERENCE_PLANE",
+    "reference_plane": "TX_FEED/RX_FEED",
+    "files": [
+      "vna/TX_S11.s1p",
+      "vna/RX_S11.s1p",
+      "vna/TX_RX_S21.s2p",
+      "vna/TX_RX_S21_0p6m.s2p",
+      "vna/TX_RX_S21_1p0m.s2p"
+    ]
+  },
+  "oscilloscope": {
+    "sample_rate_Hz": 5000000000.0,
+    "sample_interval_s": 2e-10,
+    "record_length_samples": 10000,
+    "record_duration_s": 2e-06,
+    "input_impedance_ohm": 50.0,
+    "bandwidth_limit_Hz": 1000000000.0,
+    "trigger_time_s": 4e-07,
+    "pretrigger_fraction": 0.2,
+    "channel_id": "CH1",
+    "repetitions_per_distance": 15,
+    "distances_m": [
+      0.6,
+      1.0
+    ],
+    "background_file": "scope_raw/BACKGROUND_NO_TRIGGER.csv"
+  },
+  "synthetic_generator_notes": {
+    "main_selected_component_Hz": "~347 MHz",
+    "weak_low_band_component_Hz": "~56 MHz",
+    "amplitude_repeatability_sigma_fraction": 0.065,
+    "main_frequency_sigma_fraction": 0.0045,
+    "noise_rms_V": 0.00135,
+    "important": "These are development assumptions, not recovered values from the outsourced needle test."
+  },
+  "event_metadata": [
+    {
+      "distance_m": 0.6,
+      "repetition_index": 1,
+      "generator_true_main_frequency_Hz": 348273633.787958,
+      "generator_true_low_frequency_Hz": 55763428.43211564,
+      "generator_true_peak_scale_V": 0.06907335947524362,
+      "arrival_time_s": 4.0197228407027363e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep01.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 2,
+      "generator_true_main_frequency_Hz": 347108326.54249054,
+      "generator_true_low_frequency_Hz": 55961511.72623678,
+      "generator_true_peak_scale_V": 0.06576232621533308,
+      "arrival_time_s": 4.018138728473969e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep02.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 3,
+      "generator_true_main_frequency_Hz": 348540012.9219608,
+      "generator_true_low_frequency_Hz": 56199418.28979589,
+      "generator_true_peak_scale_V": 0.07351326808727993,
+      "arrival_time_s": 4.0205313416708065e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep03.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 4,
+      "generator_true_main_frequency_Hz": 345782845.56591314,
+      "generator_true_low_frequency_Hz": 55427664.07910824,
+      "generator_true_peak_scale_V": 0.07314765592772522,
+      "arrival_time_s": 4.0194803801554427e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep04.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 5,
+      "generator_true_main_frequency_Hz": 343919911.02039266,
+      "generator_true_low_frequency_Hz": 55178576.86532306,
+      "generator_true_peak_scale_V": 0.06662035798282728,
+      "arrival_time_s": 4.0141508605787704e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep05.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 6,
+      "generator_true_main_frequency_Hz": 348506879.66071373,
+      "generator_true_low_frequency_Hz": 56229842.73313004,
+      "generator_true_peak_scale_V": 0.07079696119727769,
+      "arrival_time_s": 4.0230559246681193e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep06.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 7,
+      "generator_true_main_frequency_Hz": 345958074.09067667,
+      "generator_true_low_frequency_Hz": 55948615.228178695,
+      "generator_true_peak_scale_V": 0.07326852796161132,
+      "arrival_time_s": 4.0163987497031267e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep07.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 8,
+      "generator_true_main_frequency_Hz": 346799696.5562459,
+      "generator_true_low_frequency_Hz": 56371549.39176999,
+      "generator_true_peak_scale_V": 0.07080108586688345,
+      "arrival_time_s": 4.020485426074111e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep08.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 9,
+      "generator_true_main_frequency_Hz": 349401047.3431883,
+      "generator_true_low_frequency_Hz": 55787265.28834964,
+      "generator_true_peak_scale_V": 0.07300356395494417,
+      "arrival_time_s": 4.016732650034129e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep09.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 10,
+      "generator_true_main_frequency_Hz": 345196359.8420012,
+      "generator_true_low_frequency_Hz": 55936999.199665114,
+      "generator_true_peak_scale_V": 0.07938949356447185,
+      "arrival_time_s": 4.0234936414337687e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep10.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 11,
+      "generator_true_main_frequency_Hz": 348705435.774081,
+      "generator_true_low_frequency_Hz": 56065443.815032944,
+      "generator_true_peak_scale_V": 0.07040476063938737,
+      "arrival_time_s": 4.0237139925284364e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep11.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 12,
+      "generator_true_main_frequency_Hz": 345708856.9823151,
+      "generator_true_low_frequency_Hz": 55771019.738479204,
+      "generator_true_peak_scale_V": 0.07680969912098964,
+      "arrival_time_s": 4.0217080814321064e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep12.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 13,
+      "generator_true_main_frequency_Hz": 344282150.1385265,
+      "generator_true_low_frequency_Hz": 56139170.867723756,
+      "generator_true_peak_scale_V": 0.06989236270316256,
+      "arrival_time_s": 4.021339114502726e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep13.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 14,
+      "generator_true_main_frequency_Hz": 341130871.37339836,
+      "generator_true_low_frequency_Hz": 56129357.48341319,
+      "generator_true_peak_scale_V": 0.07367721629934977,
+      "arrival_time_s": 4.02216735212576e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep14.csv"
+    },
+    {
+      "distance_m": 0.6,
+      "repetition_index": 15,
+      "generator_true_main_frequency_Hz": 346850513.64884293,
+      "generator_true_low_frequency_Hz": 56288113.49927816,
+      "generator_true_peak_scale_V": 0.07444101910886922,
+      "arrival_time_s": 4.0217936096444153e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/0.6m/CURVED_NEEDLE_0.6m_rep15.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 1,
+      "generator_true_main_frequency_Hz": 346748677.5008333,
+      "generator_true_low_frequency_Hz": 55779516.12870445,
+      "generator_true_peak_scale_V": 0.04875217294128233,
+      "arrival_time_s": 4.036296838668081e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep01.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 2,
+      "generator_true_main_frequency_Hz": 348160472.36225,
+      "generator_true_low_frequency_Hz": 54988346.312824644,
+      "generator_true_peak_scale_V": 0.04361059340220938,
+      "arrival_time_s": 4.0328833666583286e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep02.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 3,
+      "generator_true_main_frequency_Hz": 346526974.2639327,
+      "generator_true_low_frequency_Hz": 56296951.316662595,
+      "generator_true_peak_scale_V": 0.04069830869805641,
+      "arrival_time_s": 4.03720414030349e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep03.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 4,
+      "generator_true_main_frequency_Hz": 346860055.5132947,
+      "generator_true_low_frequency_Hz": 56158479.612296976,
+      "generator_true_peak_scale_V": 0.044035466298145566,
+      "arrival_time_s": 4.0300328434183105e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep04.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 5,
+      "generator_true_main_frequency_Hz": 346486998.66889346,
+      "generator_true_low_frequency_Hz": 55695643.41741007,
+      "generator_true_peak_scale_V": 0.04451261165182272,
+      "arrival_time_s": 4.036270790670522e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep05.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 6,
+      "generator_true_main_frequency_Hz": 345863847.0016646,
+      "generator_true_low_frequency_Hz": 55952286.45761533,
+      "generator_true_peak_scale_V": 0.045058902737859,
+      "arrival_time_s": 4.0386020903493453e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep06.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 7,
+      "generator_true_main_frequency_Hz": 348731046.7107197,
+      "generator_true_low_frequency_Hz": 55930759.671626486,
+      "generator_true_peak_scale_V": 0.04907136279749273,
+      "arrival_time_s": 4.038090055550428e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep07.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 8,
+      "generator_true_main_frequency_Hz": 345593427.6117858,
+      "generator_true_low_frequency_Hz": 55885426.51025239,
+      "generator_true_peak_scale_V": 0.0420737296428379,
+      "arrival_time_s": 4.0370538112844363e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep08.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 9,
+      "generator_true_main_frequency_Hz": 349506112.90242285,
+      "generator_true_low_frequency_Hz": 56388377.07726534,
+      "generator_true_peak_scale_V": 0.047593811208950586,
+      "arrival_time_s": 4.038812336021557e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep09.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 10,
+      "generator_true_main_frequency_Hz": 344884868.9834706,
+      "generator_true_low_frequency_Hz": 56210082.358962886,
+      "generator_true_peak_scale_V": 0.04304227645723928,
+      "arrival_time_s": 4.0321201304372534e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep10.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 11,
+      "generator_true_main_frequency_Hz": 344454226.4801646,
+      "generator_true_low_frequency_Hz": 55604631.67400699,
+      "generator_true_peak_scale_V": 0.039987036001283685,
+      "arrival_time_s": 4.0309017788017666e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep11.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 12,
+      "generator_true_main_frequency_Hz": 343949256.1113462,
+      "generator_true_low_frequency_Hz": 55306602.71538892,
+      "generator_true_peak_scale_V": 0.04918019416493558,
+      "arrival_time_s": 4.0227706368617426e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep12.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 13,
+      "generator_true_main_frequency_Hz": 349456922.49324375,
+      "generator_true_low_frequency_Hz": 56435184.0621108,
+      "generator_true_peak_scale_V": 0.044242253905377636,
+      "arrival_time_s": 4.0327903891275487e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep13.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 14,
+      "generator_true_main_frequency_Hz": 347770120.0386247,
+      "generator_true_low_frequency_Hz": 55636360.20434783,
+      "generator_true_peak_scale_V": 0.050732869208003975,
+      "arrival_time_s": 4.033859284961756e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep14.csv"
+    },
+    {
+      "distance_m": 1.0,
+      "repetition_index": 15,
+      "generator_true_main_frequency_Hz": 345237384.34912455,
+      "generator_true_low_frequency_Hz": 56163957.40778773,
+      "generator_true_peak_scale_V": 0.046402025529454556,
+      "arrival_time_s": 4.03601462779912e-07,
+      "noise_rms_V": 0.00135,
+      "file": "scope_raw/1.0m/CURVED_NEEDLE_1.0m_rep15.csv"
+    }
+  ]
+}
