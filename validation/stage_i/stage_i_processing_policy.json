@@ -1,0 +1,41 @@
+{
+  "contract_type": "StageISpectralProcessingPolicy",
+  "raw_data_modified": false,
+  "time_window": "PRESERVE_ACQUIRED_INTERVAL_AND_RECORD_ANY_DERIVED_SUBWINDOW",
+  "DC_policy": "RAW_RETAINED;MEAN_REMOVAL_ONLY_AS_RECORDED_DERIVED_OPERATION",
+  "pairwise_policy": "SIMULATION_AND_MEASUREMENT_USE_IDENTICAL_PROCESSING_FOR_COMPARISON",
+  "frequency_unit": "Hz",
+  "profiles": {
+    "SYSTEM_350MHZ": {
+      "normalization": "H3_COMPLEX_SINGLE_SIDED_PEAK_AMPLITUDE_2_OVER_N",
+      "window": "RECTANGULAR_UNLESS_A_RECORDED_COMMON_ALTERNATIVE_IS_USED",
+      "zero_padding": "LINEAR_CONVOLUTION_OR_INTERPOLATION_ONLY_NO_NEW_INFORMATION"
+    },
+    "NATIVE_GHZ": {
+      "normalization": "STAGE_F_DT_TIMES_RFFT_WITH_ABSOLUTE_TIME_PHASE",
+      "window": "HANN",
+      "sidedness": "ONE_SIDED",
+      "ESD_policy": "STAGE_F_ONE_SIDED_ESD_WITH_WINDOW_ENERGY_CORRECTION"
+    }
+  },
+  "arbitrary_filtering": "FORBIDDEN",
+  "bandpass_metadata_required": [
+    "filter_type",
+    "pass_band_Hz",
+    "order",
+    "phase_behavior"
+  ],
+  "alignment_modes": {
+    "ABSOLUTE_TRIGGER_TIME": "ABSOLUTE_TIME_ELIGIBLE",
+    "PROPAGATION_CORRECTED_TIME": "ABSOLUTE_TIME_ELIGIBLE_WITH_RECORDED_DELAY",
+    "FEATURE_ALIGNED_FOR_SHAPE_ONLY": "SHAPE_COMPARISON_ONLY"
+  },
+  "arbitrary_time_shift": "FORBIDDEN",
+  "amplitude_classes": {
+    "ABSOLUTE_AMPLITUDE_VALID": "MATCHED_PLANE_LOAD_GEOMETRY_AND_TRACEABLE_CABLE_CALIBRATION",
+    "RELATIVE_AMPLITUDE_ONLY": "REFERENCE_PLANE_MATCHED_BUT_CABLE_OR_SCALE_NOT_FULLY_CALIBRATED",
+    "NORMALIZED_SHAPE_ONLY": "HARDWARE_OR_LOAD_CONFIGURATION_DIFFERS",
+    "NOT_COMPARABLE": "REFERENCE_PLANES_INCOMPATIBLE_OR_PROVENANCE_INSUFFICIENT"
+  },
+  "universal_acceptance_thresholds": null
+}

@@ -1,0 +1,20 @@
+{
+  "VALIDATION_PROFILE": "NATIVE_GHZ",
+  "status": "NOT_MEASURED",
+  "Stage4_trusted_frequency_mask_Hz": [
+    2941408508.9091916,
+    7966314711.629051
+  ],
+  "Stage5_trusted_frequency_mask_Hz": [
+    3047273105.1868486,
+    10233758844.919172
+  ],
+  "Stage5_status": "FULL_MAXWELL_REFERENCE_PENDING",
+  "native_350MHz_status": "NOT_RESOLVED",
+  "trust_interpolation": "FORBIDDEN",
+  "simulation_targets": [
+    "fullwave/h4/h4_stage4_native_received_spectrum.csv",
+    "fullwave/h4/h4_stage5_native_received_spectrum.csv"
+  ],
+  "provided_values": "NOT_PROVIDED"
+}

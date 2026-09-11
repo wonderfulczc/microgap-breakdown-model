@@ -1,0 +1,18 @@
+{
+  "ledger_type": "StageIModelDiscrepancyLedger",
+  "status": "EMPTY_NO_EXPERIMENTAL_COMPARISON",
+  "possible_source_categories": [
+    "SOURCE_MODEL",
+    "FULL_WAVE_LOADING",
+    "TX_GEOMETRY",
+    "RX_GEOMETRY",
+    "CABLE_CONNECTOR",
+    "REFERENCE_PLANE",
+    "MESH_NUMERICS",
+    "INSTRUMENT",
+    "ENVIRONMENT",
+    "UNRESOLVED"
+  ],
+  "automatic_blame_assignment": false,
+  "entries": []
+}

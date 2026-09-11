@@ -1,0 +1,22 @@
+{
+  "VALIDATION_PROFILE": "SYSTEM_350MHZ",
+  "status": "NOT_MEASURED",
+  "analysis_band_Hz": [
+    200000000.0,
+    500000000.0
+  ],
+  "target_center_Hz": 350000000.0,
+  "simulation_target": "H3_REFERENCE_RECEIVED_SPECTRUM",
+  "native_350MHz_status": "NOT_RESOLVED",
+  "required_future_measurements": [
+    "ACTUAL_TX_GEOMETRY",
+    "ACTUAL_RX_GEOMETRY",
+    "VNA_S11_S21",
+    "RECEIVED_OSCILLOSCOPE_WAVEFORM",
+    "DISTANCE",
+    "ORIENTATION",
+    "REPETITION_COUNT",
+    "MEASUREMENT_METADATA"
+  ],
+  "provided_values": "NOT_PROVIDED"
+}

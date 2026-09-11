@@ -1,0 +1,15 @@
+{
+  "contract_type": "StageISpectrumAnalyzerContract",
+  "instrument_type": "SPECTRUM_ANALYZER",
+  "measurement_status": "NOT_MEASURED",
+  "capability_frequency_Hz": [
+    2.0,
+    67000000000.0
+  ],
+  "capability_only_not_measurement": true,
+  "trace_format": "NOT_PROVIDED",
+  "resolution_bandwidth_Hz": "NOT_PROVIDED",
+  "video_bandwidth_Hz": "NOT_PROVIDED",
+  "detector": "NOT_PROVIDED",
+  "reference_level": "NOT_PROVIDED"
+}

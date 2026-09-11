@@ -1,0 +1,26 @@
+{
+  "contract_type": "StageIDataLayerContract",
+  "layers": {
+    "RAW": {
+      "immutable": true,
+      "parent_hash": null,
+      "operations": [],
+      "meaning": "INSTRUMENT_EXPORT_EXACTLY_AS_RECORDED"
+    },
+    "CALIBRATED": {
+      "immutable_parent_required": true,
+      "parent_hash": "REQUIRED_SHA256",
+      "operations": [
+        "TRACEABLE_CALIBRATION_OR_DEEMBEDDING_ONLY"
+      ]
+    },
+    "DERIVED": {
+      "parent_hash": "REQUIRED_SHA256",
+      "operations": [
+        "FFT_PSD_ESD_BAND_ENERGY_FEATURE_METRICS"
+      ]
+    }
+  },
+  "raw_overwrite_policy": "FORBIDDEN",
+  "derived_parent_hash_required": true
+}

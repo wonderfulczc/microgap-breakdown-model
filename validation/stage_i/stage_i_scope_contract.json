@@ -1,0 +1,29 @@
+{
+  "contract_type": "StageIOscilloscopeContract",
+  "instrument_type": "OSCILLOSCOPE",
+  "measurement_status": "NOT_MEASURED",
+  "capability_bandwidth_Hz": 8000000000.0,
+  "capability_sample_rate_Hz": 80000000000.0,
+  "capability_vertical_bits": 12,
+  "capability_only_not_measurement": true,
+  "raw_waveform_columns": [
+    "time_s",
+    "voltage_V",
+    "channel_id"
+  ],
+  "required_waveform_metadata": [
+    "sample_interval_s",
+    "sample_rate_Hz",
+    "vertical_scale_V_per_div",
+    "input_impedance_ohm",
+    "bandwidth_limit_Hz",
+    "trigger_mode",
+    "trigger_source",
+    "pretrigger_fraction",
+    "probe_attenuator_metadata",
+    "record_length",
+    "experiment_repetition_index"
+  ],
+  "primary_values_normalized": false,
+  "raw_waveform_path": "NOT_PROVIDED"
+}

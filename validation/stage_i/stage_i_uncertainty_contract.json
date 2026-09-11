@@ -1,0 +1,21 @@
+{
+  "contract_type": "StageIUncertaintyContract",
+  "components": {
+    "repeatability": "NOT_PROVIDED",
+    "instrument_uncertainty": "NOT_PROVIDED",
+    "geometry_tolerance": "NOT_PROVIDED",
+    "distance_uncertainty": "NOT_PROVIDED",
+    "orientation_uncertainty": "NOT_PROVIDED",
+    "calibration_uncertainty": "NOT_PROVIDED",
+    "sampling_uncertainty": "NOT_PROVIDED"
+  },
+  "supported_ensemble_statistics": [
+    "MEAN",
+    "MEDIAN",
+    "STANDARD_DEVIATION",
+    "CONFIDENCE_INTERVAL",
+    "COEFFICIENT_OF_VARIATION"
+  ],
+  "raw_repetitions_averaged_before_storage": false,
+  "individual_event_hash_required": true
+}

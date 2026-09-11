@@ -1,0 +1,29 @@
+{
+  "contract_type": "StageIVNAContract",
+  "instrument_type": "VNA",
+  "measurement_status": "NOT_MEASURED",
+  "capability_frequency_Hz": [
+    500.0,
+    67000000000.0
+  ],
+  "capability_only_not_measurement": true,
+  "expected_files": [
+    "RX_S11.s1p",
+    "TX_S11.s1p",
+    "TX_RX_S21.s2p"
+  ],
+  "parser": "streamer_rf.fullwave.receiver.read_touchstone",
+  "frequency_unit": "READ_FROM_TOUCHSTONE_AND_CONVERTED_TO_Hz",
+  "reference_impedance_ohm": "NOT_PROVIDED",
+  "complex_parameters": [
+    "S11",
+    "S21"
+  ],
+  "calibration_type": "NOT_PROVIDED",
+  "calibration_reference_plane": "NOT_PROVIDED",
+  "IF_bandwidth_Hz": "NOT_PROVIDED",
+  "source_power_dBm": "NOT_PROVIDED",
+  "averaging": "NOT_PROVIDED",
+  "cable_adapter_identifiers": "NOT_PROVIDED",
+  "raw_smoothing": false
+}

@@ -1,0 +1,34 @@
+{
+  "contract_type": "StageIReferencePlaneContract",
+  "planes": {
+    "SOURCE_PORT": "PHYSICS_DERIVED_SOURCE_TERMINAL",
+    "TX_FEED": "TRANSMITTER_FEED_OR_CALIBRATED_CABLE_END",
+    "FREE_SPACE_REFERENCE": "DECLARED_FIELD_LOCATION_AND_POLARIZATION",
+    "RX_FEED": "RECEIVER_FEED_OR_CALIBRATED_CABLE_END",
+    "INSTRUMENT_INPUT": "VNA_SCOPE_OR_ANALYZER_CONNECTOR_PLANE"
+  },
+  "ordered_plane_ids": [
+    "SOURCE_PORT",
+    "TX_FEED",
+    "FREE_SPACE_REFERENCE",
+    "RX_FEED",
+    "INSTRUMENT_INPUT"
+  ],
+  "direct_absolute_comparison_requires_same_plane": true,
+  "cross_plane_comparison_requires_traceable_transfer": true,
+  "incompatible_absolute_comparison": "REJECT",
+  "cable_connector_states": [
+    "CALIBRATED_OUT",
+    "MEASURED_TRANSFER_AVAILABLE",
+    "MODELED",
+    "UNRESOLVED"
+  ],
+  "automatic_cable_loss_removal": false,
+  "deembedding_requirements": [
+    "PARENT_RAW_HASH",
+    "COMPLEX_TRANSFER_FILE_HASH",
+    "OPERATION_PARAMETERS",
+    "INPUT_OUTPUT_REFERENCE_PLANES",
+    "REVERSIBLE_OPERATION_RECORD"
+  ]
+}

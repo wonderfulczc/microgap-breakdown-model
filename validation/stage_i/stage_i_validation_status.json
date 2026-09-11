@@ -1,0 +1,97 @@
+{
+  "STAGE_I_VALIDATION_FRAMEWORK": "PASS",
+  "STAGE_I_EXPERIMENTAL_DATA": "NOT_PROVIDED",
+  "SYSTEM_350MHZ": "NOT_MEASURED",
+  "NATIVE_GHZ": "NOT_MEASURED",
+  "H2_SCIENTIFIC_VALIDATION": "VNA_MEASUREMENT_PENDING",
+  "STAGE_H_SCIENTIFIC_VALIDATION": "PENDING_STAGE_I",
+  "inherited_debts": [
+    "FULL_WAVE_LOADING_MISMATCH_HIGH",
+    "FULL_WAVE_LOADING_FEEDBACK_NOT_COUPLED",
+    "RECEIVER_TRANSFER_MESH_SENSITIVITY_PRESENT",
+    "H4_ABSOLUTE_AMPLITUDE_STATUS_NUMERICAL_REFERENCE_ONLY",
+    "FULL_MAXWELL_REFERENCE_PENDING"
+  ],
+  "validation_status_vocabulary": [
+    "NOT_MEASURED",
+    "DATA_AVAILABLE",
+    "CALIBRATION_PENDING",
+    "COMPARISON_READY",
+    "PARTIALLY_VALIDATED",
+    "VALIDATED",
+    "NOT_RESOLVED",
+    "MODEL_DISCREPANCY"
+  ],
+  "infrastructure_inventory": {
+    "streamer_rf.fullwave.receiver.read_touchstone": "REUSABLE",
+    "fullwave/h2/h2_350mhz_future_vna_contract.json": "PARTIAL",
+    "fullwave/h2/h2_vna_measurement_protocol.json": "PARTIAL",
+    "fullwave/h2/theory_inputs": "PARTIAL",
+    "fullwave/h2/h2_reference_sparameters.csv": "LEGACY",
+    "fullwave/h3_h4_simulation_waveforms": "REUSABLE",
+    "physical_VNA_measurements": "NOT_APPLICABLE",
+    "physical_oscilloscope_waveforms": "NOT_APPLICABLE",
+    "calibration_records": "NOT_APPLICABLE"
+  },
+  "upstream_all_inputs_available": false,
+  "dry_run": {
+    "status": "SOFTWARE_DRY_RUN_PASS",
+    "input_provenance": "THEORETICAL_SURROGATE_ONLY",
+    "experimental_evidence": false,
+    "VNA_gate_satisfied": false,
+    "parser_reused": "streamer_rf.fullwave.receiver.read_touchstone",
+    "files": {
+      "H2_THEORY_350MHz_RX_S11.s1p": {
+        "sha256": "98c70509763877b2188f9b4f5cd414c9ddc66ef544c78b8ee584f128336e8223",
+        "samples": 601,
+        "Z0_ohm": 50.0
+      },
+      "H2_THEORY_350MHz_TX_S11.s1p": {
+        "sha256": "98c70509763877b2188f9b4f5cd414c9ddc66ef544c78b8ee584f128336e8223",
+        "samples": 601,
+        "Z0_ohm": 50.0
+      },
+      "H2_THEORY_350MHz_TX_RX_S21.s2p": {
+        "sha256": "9d3f9e0b1f93c17f6fa6632ad9d90b86c62e2e23fa55b81474d1134ab79213c9",
+        "samples": 601,
+        "Z0_ohm": 50.0
+      }
+    },
+    "frequency_support_Hz": [
+      200000000.0,
+      500000000.0
+    ],
+    "S11_metric_API": {
+      "feature_frequency": {
+        "signed_error_Hz": 0.0,
+        "absolute_error_Hz": 0.0,
+        "relative_error": 0.0
+      },
+      "spectral_centroid_signed_error_Hz": 1059915.987249434,
+      "normalized_spectral_correlation": 0.9157003431956645,
+      "complex_normalized_RMSE": 0.17945874729152542,
+      "peak_amplitude_ratio": 0.9954487498459129,
+      "peak_amplitude_error_dB": -0.0396218896690281
+    },
+    "S21_metric_API": {
+      "feature_frequency": {
+        "signed_error_Hz": -13000000.0,
+        "absolute_error_Hz": 13000000.0,
+        "relative_error": 0.03773584905660377
+      },
+      "spectral_centroid_signed_error_Hz": -8706389.204150617,
+      "normalized_spectral_correlation": 0.9436045415772156,
+      "complex_normalized_RMSE": 1.1716068292108508,
+      "peak_amplitude_ratio": 0.9833082110991986,
+      "peak_amplitude_error_dB": -0.14620668507467496
+    },
+    "reference_plane_logic": {
+      "same_plane_example": "TX_FEED",
+      "compatible": true,
+      "provenance_limited_comparison_class": "NORMALIZED_SHAPE_ONLY"
+    }
+  },
+  "physical_comparison_campaign_started": false,
+  "runtime_s": 0.011247370999967643,
+  "peak_RSS_KiB": 81260
+}
