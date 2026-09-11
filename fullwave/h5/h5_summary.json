@@ -1,0 +1,67 @@
+{
+  "STAGE_H_TOOL_DEVELOPMENT": "PASS",
+  "STAGE_H_SCIENTIFIC_VALIDATION": "PENDING_STAGE_I",
+  "CROSS_PATH_COHERENT_SUMMATION": "NOT_PERMITTED_CURRENT_CONFIGURATION",
+  "CROSS_MECHANISM_ABSOLUTE_CONTRIBUTION": "NOT_RESOLVED",
+  "system_350MHz_interpretation": "SUPPORTED_BY_G3_H3_POST_BREAKDOWN_REFERENCE_PATH_NATIVE_STAGE_F_CONTRIBUTION_NOT_RESOLVED",
+  "native_GHz_interpretation": "RECEIVER_SELECTION_ALTERS_SHAPE_AND_CENTROID_WITHOUT_CHANGING_STAGE_F_TRUST_MASKS",
+  "common_spectral_metrics": {
+    "POST_BREAKDOWN_G3": {
+      "valid_frequency_band_Hz": [
+        205992509.3633,
+        499375780.2747
+      ],
+      "frequency_samples": 48,
+      "source_unit": "V",
+      "receiver_unit": "V",
+      "source_peak_frequency_Hz": 205992509.3633,
+      "receiver_peak_frequency_Hz": 330836454.432,
+      "receiver_induced_peak_shift_Hz": 124843945.06869999,
+      "source_centroid_frequency_Hz": 341310591.83361584,
+      "receiver_centroid_frequency_Hz": 337571508.2474526,
+      "receiver_induced_centroid_shift_Hz": -3739083.586163223,
+      "source_band_integrated_metric": 6295746983.681331,
+      "receiver_band_integrated_metric": 11330722.836742695,
+      "normalized_shape_correlation": 0.0839209974747504
+    },
+    "NATIVE_STAGE4": {
+      "valid_frequency_band_Hz": [
+        3771036549.883574,
+        7542073099.767148
+      ],
+      "frequency_samples": 5,
+      "source_unit": "V_s_per_m",
+      "receiver_unit": "V_s",
+      "source_peak_frequency_Hz": 3771036549.883574,
+      "receiver_peak_frequency_Hz": 3771036549.883574,
+      "receiver_induced_peak_shift_Hz": 0.0,
+      "source_centroid_frequency_Hz": 4336336177.688175,
+      "receiver_centroid_frequency_Hz": 4967862340.968733,
+      "receiver_induced_centroid_shift_Hz": 631526163.2805576,
+      "source_band_integrated_metric": 3.9955058144077654e-17,
+      "receiver_band_integrated_metric": 3.1240512173798606e-26,
+      "normalized_shape_correlation": 0.9535114145897118
+    },
+    "NATIVE_STAGE5": {
+      "valid_frequency_band_Hz": [
+        3936061094.1996818,
+        9840152735.499205
+      ],
+      "frequency_samples": 7,
+      "source_unit": "V_s_per_m",
+      "receiver_unit": "V_s",
+      "source_peak_frequency_Hz": 3936061094.1996818,
+      "receiver_peak_frequency_Hz": 3936061094.1996818,
+      "receiver_induced_peak_shift_Hz": 0.0,
+      "source_centroid_frequency_Hz": 4848813305.337166,
+      "receiver_centroid_frequency_Hz": 5849883296.531352,
+      "receiver_induced_centroid_shift_Hz": 1001069991.1941862,
+      "source_band_integrated_metric": 2.3345927779331074e-11,
+      "receiver_band_integrated_metric": 2.4827978176220098e-20,
+      "normalized_shape_correlation": 0.9780767159974955
+    }
+  },
+  "simulation_rerun": false,
+  "runtime_s": 0.008750937999138841,
+  "peak_RSS_KiB": 80344
+}

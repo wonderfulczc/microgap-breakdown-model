@@ -1,0 +1,200 @@
+{
+  "contract_type": "StageHTransferContract",
+  "signal_level_definition": {
+    "SIGNAL_0": "SOURCE_LEVEL_PHYSICS",
+    "SIGNAL_0_NATIVE": "STAGE_F_TRUSTED_NATIVE_E_B_FIELD_OR_SPECTRUM",
+    "SIGNAL_0_PORT": "G3_PHYSICS_DERIVED_V_PORT_I_PORT_TRANSIENT",
+    "SIGNAL_1": "PROPAGATION_STRUCTURE_LEVEL",
+    "SIGNAL_2": "RECEIVER_TERMINAL_LEVEL"
+  },
+  "native_paths": {
+    "Stage4": {
+      "source_contract": {
+        "source_case_id": "F4-P-stage4-left-isolated",
+        "source_path": "rf/production/f4_attribution/F4-P-stage4-left-isolated_jefimenko_waveform.csv",
+        "source_hash": "a40eb67deaebb3164d527b453b9b4ef4b4d65fef3ea26b19623215ddfe631ed8",
+        "observer_id": "F4_far_field_reference",
+        "observer_position_m": [
+          0.2,
+          0.0,
+          0.005
+        ],
+        "observer_distance_m": 0.2,
+        "time_grid": {
+          "start_s": 7.216370939056355e-10,
+          "end_s": 1.7415566293640193e-09,
+          "dt_s": 4.07967814183354e-11,
+          "samples": 26
+        },
+        "field_components": [
+          "Ex_total",
+          "Ey_total",
+          "Ez_total"
+        ],
+        "polarization_metadata": {
+          "basis": "CARTESIAN_XYZ",
+          "dominant_trusted_component": "Ez_total",
+          "receiver_axis_policy": "FIXED_ALONG_DOMINANT_TRUSTED_E_COMPONENT"
+        },
+        "receiver_axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "trusted_frequency_mask_Hz": [
+          2941408508.9091916,
+          7966314711.629051
+        ],
+        "rf_trust_report_path": "rf/production/f4_attribution/F4-P-stage4-left-isolated_rf_trust_report.json",
+        "rf_trust_report_hash": "517b1b6e2253c240b50f080c09bc60e4c52c52dddca272abadc4a0ed83c5b2e5",
+        "NATIVE_PROPAGATION_ALREADY_INCLUDED": true
+      },
+      "source_file_hash": "a40eb67deaebb3164d527b453b9b4ef4b4d65fef3ea26b19623215ddfe631ed8",
+      "propagation_model": "STAGE_F_RETARDED_JEFIMENKO_TO_OBSERVER",
+      "NATIVE_PROPAGATION_ALREADY_INCLUDED": true,
+      "structure_action": "NO_SECOND_PROPAGATION",
+      "receiver_model": "H4_CANONICAL_SHORT_DIPOLE_FIELD_SENSOR",
+      "transfer_function": "H_rx_E_COMPLEX",
+      "receiver_output": "fullwave/h4/h4_stage4_native_received_spectrum.csv",
+      "frequency_domain_role": "PRIMARY_NATIVE_RF_OUTPUT",
+      "time_domain_role": "SECONDARY_RECONSTRUCTION_ONLY",
+      "trusted_bin_count": 5,
+      "absolute_amplitude_status": "NUMERICAL_REFERENCE_ONLY"
+    },
+    "Stage5": {
+      "source_contract": {
+        "source_case_id": "F4-C-stage5-highfield-collision",
+        "source_path": "rf/production/f4_attribution/F4-C-stage5-highfield-collision_jefimenko_waveform.csv",
+        "source_hash": "1511975749e903718a65223edf6c17272293fab36b88cd75b6f7b07d96a02615",
+        "observer_id": "F4_far_field_reference",
+        "observer_position_m": [
+          0.2,
+          0.0,
+          0.005
+        ],
+        "observer_distance_m": 0.2,
+        "time_grid": {
+          "start_s": 7.486683071261188e-10,
+          "end_s": 1.7331550585412171e-09,
+          "dt_s": 3.175763714242251e-11,
+          "samples": 32
+        },
+        "field_components": [
+          "Ex_total",
+          "Ey_total",
+          "Ez_total"
+        ],
+        "polarization_metadata": {
+          "basis": "CARTESIAN_XYZ",
+          "dominant_trusted_component": "Ez_total",
+          "receiver_axis_policy": "FIXED_ALONG_DOMINANT_TRUSTED_E_COMPONENT"
+        },
+        "receiver_axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "trusted_frequency_mask_Hz": [
+          3047273105.1868486,
+          10233758844.919172
+        ],
+        "rf_trust_report_path": "rf/production/f4_attribution/F4-C-stage5-highfield-collision_rf_trust_report.json",
+        "rf_trust_report_hash": "9026b066102b10331aa32eb3ba7a9b904a482fbedfdc25ed6afff289b71392be",
+        "NATIVE_PROPAGATION_ALREADY_INCLUDED": true
+      },
+      "source_file_hash": "1511975749e903718a65223edf6c17272293fab36b88cd75b6f7b07d96a02615",
+      "propagation_model": "STAGE_F_RETARDED_JEFIMENKO_TO_OBSERVER",
+      "NATIVE_PROPAGATION_ALREADY_INCLUDED": true,
+      "structure_action": "NO_SECOND_PROPAGATION",
+      "receiver_model": "H4_CANONICAL_SHORT_DIPOLE_FIELD_SENSOR",
+      "transfer_function": "H_rx_E_COMPLEX",
+      "receiver_output": "fullwave/h4/h4_stage5_native_received_spectrum.csv",
+      "frequency_domain_role": "PRIMARY_NATIVE_RF_OUTPUT",
+      "time_domain_role": "SECONDARY_RECONSTRUCTION_ONLY",
+      "trusted_bin_count": 7,
+      "absolute_amplitude_status": "NUMERICAL_REFERENCE_ONLY"
+    }
+  },
+  "post_breakdown_path": {
+    "source_case_id": "G2_primary_150_LAGGED",
+    "G3_input_hash": "f402fa2951fc162fd557070b3511bc754e6ddf31476a33fb6a0a6d4277388365",
+    "source_file": "thermal/g3_port/g3_port_uniform.csv",
+    "source_quantity": "V_G3_COMPLEX_WITH_I_G3_LOADING_DIAGNOSTIC_ONLY",
+    "propagation_structure_model": "H3_350MHZ_REFERENCE_RADIATING_STRUCTURE",
+    "receiver_model": "H2_350MHZ_DEVELOPMENT_REFERENCE_RX",
+    "transfer_function": "H_V_COMPLEX_TOTAL_PORT_VOLTAGE_TO_50OHM_RECEIVER",
+    "receiver_output": "fullwave/h3/h3_received_spectrum.csv",
+    "trust_status": "DEVELOPMENT_VERIFIED",
+    "time_window_s": 1e-08,
+    "intrinsic_Fourier_scale_Hz": 100000000.0,
+    "zero_padding_status": "ZERO_PADDING_FOR_LINEAR_CONVOLUTION_ONLY"
+  },
+  "frequency_support": {
+    "POST_BREAKDOWN_G3_Hz": [
+      200000000.0,
+      500000000.0
+    ],
+    "SYSTEM_TARGET_CENTER_Hz": 350000000.0,
+    "SYSTEM_MAXIMUM_Hz": 500000000.0,
+    "NATIVE_STAGE4_Hz": [
+      2941408508.9091916,
+      7966314711.629051
+    ],
+    "NATIVE_STAGE5_Hz": [
+      3047273105.1868486,
+      10233758844.919172
+    ],
+    "NATIVE_200_500MHz": "NOT_RESOLVED",
+    "UNSUPPORTED_500MHz_TO_STAGE4_LOW": "NO_TRUST_INTERPOLATION"
+  },
+  "trust_hierarchy": [
+    "TRUSTED_PHYSICS",
+    "DEVELOPMENT_VERIFIED",
+    "NUMERICAL_REFERENCE_ONLY",
+    "NOT_RESOLVED",
+    "EXPERIMENTAL_VALIDATION_PENDING"
+  ],
+  "trust_mapping": {
+    "Stage_F_native_within_mask": "TRUSTED_PHYSICS",
+    "H3_reference_pathway": "DEVELOPMENT_VERIFIED",
+    "H4_absolute_receiver_voltage": "NUMERICAL_REFERENCE_ONLY",
+    "native_350MHz": "NOT_RESOLVED",
+    "experimental_receiver_output": "EXPERIMENTAL_VALIDATION_PENDING"
+  },
+  "CROSS_PATH_COHERENT_SUMMATION": "NOT_PERMITTED_CURRENT_CONFIGURATION",
+  "coherent_summation_requirements": [
+    "SAME_PHYSICAL_TX_RX_GEOMETRY",
+    "SAME_RECEIVER",
+    "SAME_REFERENCE_PLANE",
+    "COMPATIBLE_TIME_ORIGIN",
+    "COMPATIBLE_FREQUENCY_COVERAGE",
+    "COMPATIBLE_PHASE_CONVENTION",
+    "VALIDATED_TRANSFER_FUNCTIONS"
+  ],
+  "CROSS_MECHANISM_ABSOLUTE_CONTRIBUTION": "NOT_RESOLVED",
+  "native_350MHz_status": "NOT_RESOLVED",
+  "known_debts": [
+    "FULL_WAVE_LOADING_MISMATCH_HIGH",
+    "FULL_WAVE_LOADING_FEEDBACK_NOT_COUPLED",
+    "RECEIVER_TRANSFER_MESH_SENSITIVITY_PRESENT",
+    "FULL_MAXWELL_REFERENCE_PENDING",
+    "SPARSE_STAGE4_5_AND_STAGE5_7_TRUSTED_FFT_BINS",
+    "VNA_MEASUREMENT_PENDING",
+    "PRODUCTION_TX_RX_GEOMETRY_PENDING"
+  ],
+  "upstream_hashes": {
+    "H3_contract": "4514850dce4c847ffc4aceda3a4d47f4ae1c7a3d88500e61f7095343f6fa1e39",
+    "H3_summary": "7376dc93054c2c6364a77b0085767a3f216ae949ec8748d9909c1bcb09d307f5",
+    "H3_received_spectrum": "29a404977302ad3d0e407df3f00e257c79b31913f29fc4425e2e0d0e01ff44a5",
+    "H4_contract": "9e789507a48caf222a8de652ddaf1f40398b21ca105e759f593f35204ba154c7",
+    "H4_summary": "344702ff72ef2b5b6fb1a9db5297b3ab31f0e543a68bcee1a2e435ac43eaa347",
+    "H4_receiver_transfer": "dbfe52d59367877d5b5d9575bb431b6a1744ccaabe5c276ea7f02bc9c7fa3db6"
+  },
+  "stage_i_required_inputs_file": "fullwave/h5/h5_stage_i_required_inputs.json",
+  "STAGE_H_TOOL_DEVELOPMENT": "PASS",
+  "STAGE_H_SCIENTIFIC_VALIDATION": "PENDING_STAGE_I",
+  "STAGE_H_EXPERIMENTAL_VALIDATION_PENDING": true,
+  "STAGE_H_PRODUCTION_GEOMETRY_PENDING": true,
+  "FULL_WAVE_LOADING_FEEDBACK_NOT_COUPLED": true,
+  "H2_SCIENTIFIC_VALIDATION": "VNA_MEASUREMENT_PENDING"
+}

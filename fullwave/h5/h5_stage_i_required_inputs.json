@@ -1,0 +1,63 @@
+{
+  "status": "PENDING_STAGE_I",
+  "fabricated_inputs": false,
+  "required_inputs": [
+    {
+      "input_id": "ACTUAL_TRANSMITTER_GEOMETRY",
+      "available": false,
+      "required_provenance": "MEASURED_OR_PHYSICALLY_SURVEYED_WITH_TRACEABLE_METADATA"
+    },
+    {
+      "input_id": "ACTUAL_RECEIVER_GEOMETRY",
+      "available": false,
+      "required_provenance": "MEASURED_OR_PHYSICALLY_SURVEYED_WITH_TRACEABLE_METADATA"
+    },
+    {
+      "input_id": "VNA_S11_S21_TOUCHSTONE",
+      "available": false,
+      "required_provenance": "MEASURED_OR_PHYSICALLY_SURVEYED_WITH_TRACEABLE_METADATA"
+    },
+    {
+      "input_id": "CABLE_CONNECTOR_REFERENCE_PLANE_METADATA",
+      "available": false,
+      "required_provenance": "MEASURED_OR_PHYSICALLY_SURVEYED_WITH_TRACEABLE_METADATA"
+    },
+    {
+      "input_id": "SOURCE_RECEIVER_DISTANCE_ORIENTATION",
+      "available": false,
+      "required_provenance": "MEASURED_OR_PHYSICALLY_SURVEYED_WITH_TRACEABLE_METADATA"
+    },
+    {
+      "input_id": "OSCILLOSCOPE_RECEIVED_WAVEFORM",
+      "available": false,
+      "required_provenance": "MEASURED_OR_PHYSICALLY_SURVEYED_WITH_TRACEABLE_METADATA"
+    },
+    {
+      "input_id": "MEASUREMENT_BANDWIDTH_SAMPLE_RATE",
+      "available": false,
+      "required_provenance": "MEASURED_OR_PHYSICALLY_SURVEYED_WITH_TRACEABLE_METADATA"
+    },
+    {
+      "input_id": "CALIBRATION_ENVIRONMENT_METADATA",
+      "available": false,
+      "required_provenance": "MEASURED_OR_PHYSICALLY_SURVEYED_WITH_TRACEABLE_METADATA"
+    },
+    {
+      "input_id": "REPEATED_MEASUREMENTS_UNCERTAINTY",
+      "available": false,
+      "required_provenance": "MEASURED_OR_PHYSICALLY_SURVEYED_WITH_TRACEABLE_METADATA"
+    }
+  ],
+  "comparison_targets": {
+    "200_500MHz": "MEASURED_RECEIVER_VOLTAGE_SPECTRUM_VS_H3_REFERENCE_SPECTRUM",
+    "trusted_native_GHz": "MEASURED_GHZ_RECEIVER_SPECTRUM_VS_H4_TRUSTED_BAND_PREDICTION_WHERE_HARDWARE_EXISTS",
+    "metrics": [
+      "FEATURE_FREQUENCY",
+      "SPECTRAL_SHAPE",
+      "CALIBRATED_AMPLITUDE",
+      "REFERENCE_PLANE_COMPATIBLE_PHASE",
+      "DISTANCE_DEPENDENCE",
+      "ORIENTATION_POLARIZATION_DEPENDENCE"
+    ]
+  }
+}
