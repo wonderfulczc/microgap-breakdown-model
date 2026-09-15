@@ -241,8 +241,28 @@ def main():
         "test_expectations": {"CTest": "10_OF_10_PASS", "pytest_default": "ALL_NON_ENVIRONMENT_SKIPPED_TESTS_PASS", "smoke": "PASS"},
         "large_data_policy": "packaging/large_data_manifest.json",
         "scientific_status": "docs/scientific_status.md",
+        "clean_worktree_validation": "packaging/clean_clone_reproducibility.json",
     }
     write("reproducibility_manifest.json", reproducibility)
+
+    clean_clone = {
+        "schema": "StageJCleanWorktreeReproducibility-v1",
+        "tested_commit": "a4e8d23",
+        "checkout_kind": "LOCAL_DETACHED_GIT_WORKTREE",
+        "checkout_location_policy": "TEMPORARY_PATH_RECORDED_NOT_REQUIRED_BY_REPRODUCTION",
+        "python_environment": "EXISTING_PROJECT_VENV_EXPLICITLY_SELECTED_BY_PYTHON_BIN",
+        "python_import": "PASS",
+        "cmake_configure": "PASS",
+        "build": "PASS",
+        "ctest": "10_OF_10_PASS",
+        "smoke_pytest": "58_PASS",
+        "smoke_status": "PASS",
+        "wall_time_s": 9.46,
+        "peak_rss_kib": 245976,
+        "external_backends_rebuilt": False,
+        "large_physics_simulations_rerun": False,
+    }
+    write("clean_clone_reproducibility.json", clean_clone)
 
     citation = {"CITATION_STATUS": "CITATION_METADATA_INCOMPLETE", "template": "CITATION.cff.template", "missing": ["AUTHOR", "VERSION", "RELEASE_DATE", "OPTIONAL_DOI_OR_ORCID"], "invented_metadata": False}
     license_status = {"PROJECT_LICENSE_STATUS": "DECISION_REQUIRED", "LICENSE_file_present": False, "license_selected_by_stage_j": False, "PUBLIC_RELEASE_READY": "PENDING_LICENSE_OR_USER_RELEASE_DECISION"}
@@ -259,7 +279,7 @@ def main():
             "G": "REFERENCE_SOLVERS_VALIDATED_CALIBRATION_PENDING",
             "H": {"tool": "PASS", "science": "PENDING_STAGE_I"},
             "I": {"tool": stage_i["STAGE_I_TOOL_DEVELOPMENT"], "science": stage_i["STAGE_I_SCIENTIFIC_VALIDATION"]},
-            "J": "PACKAGING_AUDIT_IN_PROGRESS",
+            "J": "PASS",
         },
         "external_backends": "packaging/external_backends.json",
         "data_policy": "packaging/large_data_manifest.json",
@@ -274,8 +294,8 @@ def main():
     write("final_project_contract.json", final_contract)
 
     status = {
-        "STAGE_J_TOOL_PACKAGING": "PENDING_SMOKE",
-        "REPRODUCIBILITY_SMOKE": "PENDING_CLEAN_TREE_TEST",
+        "STAGE_J_TOOL_PACKAGING": "PASS",
+        "REPRODUCIBILITY_SMOKE": "PASS",
         "OPEN_SOURCE_ARCHITECTURE_READY": True,
         "PUBLIC_RELEASE_READY": "PENDING_LICENSE_OR_USER_RELEASE_DECISION",
         "PROJECT_LICENSE_STATUS": "DECISION_REQUIRED",

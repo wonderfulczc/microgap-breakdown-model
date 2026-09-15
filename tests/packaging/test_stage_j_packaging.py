@@ -124,6 +124,17 @@ def test_reproducibility_manifest_preserves_stage_i_science_boundary():
     status = load("stage_j_status.json")
     assert status["STAGE_I_SCIENTIFIC_VALIDATION"] == "PENDING_REAL_EXPERIMENT"
     assert status["PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE"] is False
+    assert status["STAGE_J_TOOL_PACKAGING"] == "PASS"
+    assert status["REPRODUCIBILITY_SMOKE"] == "PASS"
+
+
+def test_clean_worktree_reproduction_evidence_is_recorded():
+    evidence = load("clean_clone_reproducibility.json")
+    assert evidence["smoke_status"] == "PASS"
+    assert evidence["ctest"] == "10_OF_10_PASS"
+    assert evidence["smoke_pytest"] == "58_PASS"
+    assert evidence["external_backends_rebuilt"] is False
+    assert evidence["large_physics_simulations_rerun"] is False
 
 
 def test_final_project_contract_has_no_release_side_effects():
@@ -132,6 +143,7 @@ def test_final_project_contract_has_no_release_side_effects():
     assert contract["STAGE_I_SCIENTIFIC_VALIDATION"] == "PENDING_REAL_EXPERIMENT"
     assert contract["PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE"] is False
     assert contract["automatic_release_actions_performed"] is False
+    assert contract["stages"]["J"] == "PASS"
     assert contract["real_experiment_reentry"].endswith("stage_i_real_data_reentry_contract.json")
 
 

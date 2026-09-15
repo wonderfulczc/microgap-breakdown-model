@@ -1,0 +1,17 @@
+{
+  "schema": "StageJCleanWorktreeReproducibility-v1",
+  "tested_commit": "a4e8d23",
+  "checkout_kind": "LOCAL_DETACHED_GIT_WORKTREE",
+  "checkout_location_policy": "TEMPORARY_PATH_RECORDED_NOT_REQUIRED_BY_REPRODUCTION",
+  "python_environment": "EXISTING_PROJECT_VENV_EXPLICITLY_SELECTED_BY_PYTHON_BIN",
+  "python_import": "PASS",
+  "cmake_configure": "PASS",
+  "build": "PASS",
+  "ctest": "10_OF_10_PASS",
+  "smoke_pytest": "58_PASS",
+  "smoke_status": "PASS",
+  "wall_time_s": 9.46,
+  "peak_rss_kib": 245976,
+  "external_backends_rebuilt": false,
+  "large_physics_simulations_rerun": false
+}

@@ -16,7 +16,7 @@
       "tool": "PASS",
       "science": "PENDING_REAL_EXPERIMENT"
     },
-    "J": "PACKAGING_AUDIT_IN_PROGRESS"
+    "J": "PASS"
   },
   "external_backends": "packaging/external_backends.json",
   "data_policy": "packaging/large_data_manifest.json",

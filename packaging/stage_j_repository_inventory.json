@@ -22,13 +22,13 @@
     {
       "path": ".git",
       "classification": "EXCLUDE_FROM_RELEASE",
-      "bytes_in_worktree": 22201493,
+      "bytes_in_worktree": 22331741,
       "tracked": false
     },
     {
       "path": ".pytest_cache",
       "classification": "BUILD_ARTIFACT",
-      "bytes_in_worktree": 38444,
+      "bytes_in_worktree": 38342,
       "tracked": false
     },
     {
@@ -88,8 +88,8 @@
     {
       "path": "packaging",
       "classification": "REQUIRED_REFERENCE",
-      "bytes_in_worktree": 18508,
-      "tracked": false
+      "bytes_in_worktree": 18656,
+      "tracked": true
     },
     {
       "path": "python",
@@ -113,7 +113,7 @@
       "path": "scripts",
       "classification": "CORE",
       "bytes_in_worktree": 1075,
-      "tracked": false
+      "tracked": true
     },
     {
       "path": "solver3d",
@@ -124,7 +124,7 @@
     {
       "path": "tests",
       "classification": "CORE",
-      "bytes_in_worktree": 1244287,
+      "bytes_in_worktree": 1244823,
       "tracked": true
     },
     {
@@ -136,7 +136,7 @@
     {
       "path": "tools",
       "classification": "CORE",
-      "bytes_in_worktree": 94363,
+      "bytes_in_worktree": 95162,
       "tracked": true
     },
     {

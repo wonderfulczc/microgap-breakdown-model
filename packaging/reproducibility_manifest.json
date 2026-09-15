@@ -1,6 +1,6 @@
 {
   "schema": "StageJReproducibilityManifest-v1",
-  "repository_commit": "62facafb60dd2cb442462f3a4d3e1f53d6ac0f20",
+  "repository_commit": "a4e8d23f19c66740cb285b7f1ed80abf503d6017",
   "branch": "stage-j-packaging",
   "platform_reference": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
   "build_toolchain": {
@@ -90,5 +90,6 @@
     "smoke": "PASS"
   },
   "large_data_policy": "packaging/large_data_manifest.json",
-  "scientific_status": "docs/scientific_status.md"
+  "scientific_status": "docs/scientific_status.md",
+  "clean_worktree_validation": "packaging/clean_clone_reproducibility.json"
 }
