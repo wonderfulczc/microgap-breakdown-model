@@ -1,0 +1,39 @@
+{
+  "WP_I_D_PIPELINE_DRY_RUN": "PASS",
+  "DISTANCE_ANALYSIS_PIPELINE_READY": true,
+  "ORIENTATION_ANALYSIS_PIPELINE_READY": true,
+  "REPEATABILITY_PIPELINE_READY": true,
+  "UNCERTAINTY_PIPELINE_READY": true,
+  "SYSTEM_350MHZ_VALIDATION": "NOT_MEASURED",
+  "STAGE_I_EXPERIMENTAL_DATA": "NOT_PROVIDED",
+  "input_provenance": "SYNTHETIC_DEVELOPMENT_INPUT",
+  "scientific_validation_allowed": false,
+  "condition_count": 8,
+  "event_count": 90,
+  "supplemental_event_count": 60,
+  "new_raw_quality_pass_count": 60,
+  "H3_comparison_band_Hz": [
+    200000000.0,
+    500000000.0
+  ],
+  "H3_below_200MHz_extrapolation": false,
+  "H3_distance_reference_boundary": "ONLY_FROZEN_1P0M_COPOLARIZED_REFERENCE",
+  "H3_orientation_reference_boundary": "NO_DIRECT_H3_ORIENTATION_REFERENCE",
+  "future_real_data_replacement": {
+    "status": "ARCHITECTURE_READY",
+    "core_analysis_code_change_required": false,
+    "replace_only": [
+      "RAW_DATA",
+      "DISTANCE_ORIENTATION_METADATA",
+      "INSTRUMENT_CALIBRATION_METADATA",
+      "UNCERTAINTY_VALUES",
+      "PROVENANCE",
+      "VALIDATION_STATUS"
+    ]
+  },
+  "supplement_manifest_hash": "e7f406c4001585c72552f91d48b537ce3948b1a9d95e06f2e72f016a6770f5e0",
+  "WP_I_B_metrics_hash": "cc79b57abefd0555110e759b6d77635c3a82c7807c1f458001c854c8cf760273",
+  "physical_simulations_rerun": false,
+  "runtime_s": 0.12453015799997047,
+  "peak_RSS_KiB": 85840
+}

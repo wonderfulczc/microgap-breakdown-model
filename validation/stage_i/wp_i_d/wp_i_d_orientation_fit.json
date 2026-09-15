@@ -1,0 +1,78 @@
+{
+  "model": "sqrt(A_parallel^2*cos(theta)^2+A_floor^2)",
+  "orientation_deg": [
+    0.0,
+    30.0,
+    60.0,
+    90.0
+  ],
+  "peak_voltage_fit": {
+    "A_parallel": 0.07663593474265046,
+    "A_floor": 0.006950187175880432,
+    "cross_polarization_floor_ratio": 0.09069096891973343,
+    "predicted": [
+      0.07695044896333973,
+      0.06673158901292257,
+      0.03894318586414982,
+      0.006950187175880432
+    ],
+    "residuals": [
+      0.005079575085716548,
+      -0.004802545415906086,
+      -0.0018744059958277562,
+      0.0003759479683566767
+    ],
+    "R_squared": 0.983180237636363,
+    "observed_normalized": [
+      1.0,
+      0.7549558142270099,
+      0.4518928318996211,
+      0.08931041078149474
+    ],
+    "absolute_cosine_reference": [
+      1.0,
+      0.8660254037844387,
+      0.5000000000000001,
+      6.123233995736766e-17
+    ],
+    "fit_method": "BOUNDED_NONNEGATIVE_GRID_REFINEMENT",
+    "interpretation": "SYNTHETIC_POLARIZATION_MODEL_DRY_RUN_ONLY"
+  },
+  "RMS_voltage_fit": {
+    "A_parallel": 0.006266927230858134,
+    "A_floor": 0.0017261780404574528,
+    "cross_polarization_floor_ratio": 0.27544248989485814,
+    "predicted": [
+      0.006500312880487272,
+      0.005695214948973474,
+      0.0035774690573889436,
+      0.0017261780404574528
+    ],
+    "residuals": [
+      -0.0009883123524449117,
+      0.000886096022569457,
+      0.0005058939559995867,
+      -0.0002502167513306567
+    ],
+    "R_squared": 0.8579328256240256,
+    "observed_normalized": [
+      1.0,
+      1.193996796273956,
+      0.7408132478606231,
+      0.26777234175102627
+    ],
+    "absolute_cosine_reference": [
+      1.0,
+      0.8660254037844387,
+      0.5000000000000001,
+      6.123233995736766e-17
+    ],
+    "fit_method": "BOUNDED_NONNEGATIVE_GRID_REFINEMENT",
+    "interpretation": "SYNTHETIC_POLARIZATION_MODEL_DRY_RUN_ONLY"
+  },
+  "SYNTHETIC_POLARIZATION_CONTRAST_peak_dB": 20.981958262000184,
+  "SYNTHETIC_POLARIZATION_CONTRAST_RMS_dB": 11.444685667110424,
+  "H3_orientation_comparison_status": "NO_DIRECT_H3_ORIENTATION_REFERENCE",
+  "evidence_type": "SYNTHETIC_DRY_RUN",
+  "scientific_interpretation_allowed": false
+}

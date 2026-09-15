@@ -1,0 +1,11 @@
+{
+  "data_origin": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+  "scientific_use_allowed": false,
+  "distance_standard_uncertainty_m": 0.001,
+  "orientation_standard_uncertainty_deg": 1.0,
+  "voltage_scale_relative_standard_uncertainty": 0.02,
+  "frequency_reference_relative_standard_uncertainty": 2e-05,
+  "sample_interval_relative_standard_uncertainty": 2e-05,
+  "repeatability_source": "computed_from_synthetic_repetitions",
+  "note": "Development-only placeholders to exercise uncertainty propagation; replace later with real instrument/calibration/geometry uncertainty."
+}

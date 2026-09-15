@@ -1,0 +1,101 @@
+{
+  "model": "V(d)=A*d^(-n)",
+  "evidence_type": "SYNTHETIC_DRY_RUN",
+  "scientific_interpretation_allowed": false,
+  "distance_m": [
+    0.3,
+    0.5,
+    0.6,
+    0.8,
+    1.0
+  ],
+  "peak_voltage_fit": {
+    "A": 0.04846700702468976,
+    "n": 0.9272799931049477,
+    "A_confidence_95": [
+      0.04367657845379719,
+      0.05378284776625176
+    ],
+    "n_confidence_95": [
+      0.7718194006405397,
+      1.0827405855693557
+    ],
+    "A_standard_error_log_space": 0.05309760339668574,
+    "n_standard_error": 0.07931662880837144,
+    "R_squared_amplitude_space": 0.9900100179765081,
+    "residuals": [
+      0.0013182707505209612,
+      -0.002088689294636098,
+      0.004197321835096385,
+      -0.005503827514124114,
+      0.00291521970753688
+    ],
+    "predicted": [
+      0.14801345660212775,
+      0.09216908878691439,
+      0.0778327022139599,
+      0.059608599444723485,
+      0.04846700702468976
+    ],
+    "interpretation": "SYNTHETIC_DEVELOPMENT_EMPIRICAL_FIT_ONLY"
+  },
+  "RMS_voltage_fit": {
+    "A": 0.003784560546508402,
+    "n": 1.1840382150599933,
+    "A_confidence_95": [
+      0.00297190484181802,
+      0.004819433761353594
+    ],
+    "n_confidence_95": [
+      0.8229495184266595,
+      1.545126911693327
+    ],
+    "A_standard_error_log_space": 0.12332993269180086,
+    "n_standard_error": 0.18422892685374168,
+    "R_squared_amplitude_space": 0.9615170917013959,
+    "residuals": [
+      0.00010769430701182414,
+      0.0009950920922842544,
+      -0.001417355169616931,
+      0.0007801842980360114,
+      -0.00012804496007582907
+    ],
+    "predicted": [
+      0.01574431875771485,
+      0.008598970842588942,
+      0.006929355697659291,
+      0.004929020409380126,
+      0.003784560546508402
+    ],
+    "interpretation": "SYNTHETIC_DEVELOPMENT_EMPIRICAL_FIT_ONLY"
+  },
+  "frequency_stability": {
+    "reference_distance_m": 0.6,
+    "peak_frequency_shift_Hz": [
+      1399999.9999998808,
+      -400000.0,
+      0.0,
+      699999.9999998808,
+      66666.66666668653
+    ],
+    "spectral_centroid_shift_Hz": [
+      4203129.247327924,
+      2131598.281250298,
+      0.0,
+      1666106.406928122,
+      -523550.43859279156
+    ],
+    "maximum_absolute_peak_shift_Hz": 1399999.9999998808,
+    "maximum_absolute_centroid_shift_Hz": 4203129.247327924,
+    "peak_frequency_across_distance_CV": 0.0020336439422226444,
+    "spectral_centroid_across_distance_CV": 0.005541446086968518,
+    "distance_peak_frequency_correlation": -0.37254276087926447,
+    "distance_centroid_correlation": -0.8135047368740264,
+    "scientific_interpretation_allowed": false
+  },
+  "H3_distance_boundary": {
+    "direct_reference_distance_m": 1.0,
+    "other_distances": "NO_DIRECT_H3_FULLWAVE_REFERENCE",
+    "inverse_distance_H3_extrapolation_used": false
+  }
+}

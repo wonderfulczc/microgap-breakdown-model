@@ -1,0 +1,77 @@
+{
+  "input_path": "validation/stage_i/system_350mhz/wp_i_d_synthetic/synthetic_uncertainty_assumptions.json",
+  "input_hash": "f965e6fe3c4248912e5d1da1e16d04a4f7a0a06d978fdbe4be370cdaadf56c5c",
+  "data_origin": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+  "scientific_use_allowed": false,
+  "assumptions": {
+    "data_origin": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+    "scientific_use_allowed": false,
+    "distance_standard_uncertainty_m": 0.001,
+    "orientation_standard_uncertainty_deg": 1.0,
+    "voltage_scale_relative_standard_uncertainty": 0.02,
+    "frequency_reference_relative_standard_uncertainty": 2e-05,
+    "sample_interval_relative_standard_uncertainty": 2e-05,
+    "repeatability_source": "computed_from_synthetic_repetitions",
+    "note": "Development-only placeholders to exercise uncertainty propagation; replace later with real instrument/calibration/geometry uncertainty."
+  },
+  "distance_exponent_monte_carlo": {
+    "method": "FIXED_SEED_MONTE_CARLO",
+    "seed": 20260915,
+    "samples": 2000,
+    "components": {
+      "repeatability": {
+        "mean": 0.9271087256890083,
+        "standard_uncertainty": 0.01459001504963671,
+        "confidence_95": [
+          0.8989862392448881,
+          0.9552436858298337
+        ]
+      },
+      "distance_geometry": {
+        "mean": 0.9273212437709409,
+        "standard_uncertainty": 0.0025915621004899557,
+        "confidence_95": [
+          0.9223676963046783,
+          0.9326400575764685
+        ]
+      },
+      "voltage_scale": {
+        "mean": 0.92708615434328,
+        "standard_uncertainty": 0.021473673579148284,
+        "confidence_95": [
+          0.8856818248311373,
+          0.9687713791377693
+        ]
+      },
+      "combined": {
+        "mean": 0.926956634907848,
+        "standard_uncertainty": 0.02632842320415101,
+        "confidence_95": [
+          0.8754111063907147,
+          0.9807045247203345
+        ]
+      }
+    },
+    "convergence_sanity": {
+      "first_half_standard_uncertainty": 0.026233593077397217,
+      "full_standard_uncertainty": 0.02632842320415101,
+      "relative_change": 0.0036018156506554834
+    }
+  },
+  "combined_standard_uncertainty": {
+    "distance_exponent_n": 0.02609029302735277,
+    "peak_voltage_0p6m": 0.0018981714611628865,
+    "peak_frequency_0p6m": 543446.5429442434,
+    "spectral_centroid_0p6m": 691860.0513818614,
+    "peak_orientation_contrast": 0.43729509399326066
+  },
+  "dominant_terms": {
+    "distance_exponent_n": "voltage_scale",
+    "peak_voltage_0p6m": "voltage_scale",
+    "peak_frequency_0p6m": "repeatability",
+    "spectral_centroid_0p6m": "repeatability",
+    "peak_orientation_contrast": "repeatability"
+  },
+  "orientation_monte_carlo_seed": 20260915,
+  "orientation_monte_carlo_samples": 2000
+}

@@ -1,0 +1,65 @@
+{
+  "ledger_type": "StageIModelDiscrepancyLedger",
+  "entries": [
+    {
+      "quantity": "DISTANCE_TREND",
+      "simulation_value": "NOT_APPLICABLE_PIPELINE_DRY_RUN",
+      "measurement_value": "SYNTHETIC_DEVELOPMENT_RESULT",
+      "difference": "NOT_INTERPRETED",
+      "uncertainty": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+      "possible_source": "UNRESOLVED",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPLACE_WITH_REAL_DISTANCE_SWEEP",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false
+    },
+    {
+      "quantity": "DISTANCE_FREQUENCY_STABILITY",
+      "simulation_value": "NOT_APPLICABLE_PIPELINE_DRY_RUN",
+      "measurement_value": "SYNTHETIC_DEVELOPMENT_RESULT",
+      "difference": "NOT_INTERPRETED",
+      "uncertainty": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+      "possible_source": "UNRESOLVED",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPLACE_WITH_REAL_DISTANCE_SWEEP",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false
+    },
+    {
+      "quantity": "ORIENTATION_RESPONSE",
+      "simulation_value": "NOT_APPLICABLE_PIPELINE_DRY_RUN",
+      "measurement_value": "SYNTHETIC_DEVELOPMENT_RESULT",
+      "difference": "NOT_INTERPRETED",
+      "uncertainty": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+      "possible_source": "UNRESOLVED",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPLACE_WITH_REAL_ORIENTATION_SWEEP",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false
+    },
+    {
+      "quantity": "REPEATABILITY",
+      "simulation_value": "NOT_APPLICABLE_PIPELINE_DRY_RUN",
+      "measurement_value": "SYNTHETIC_DEVELOPMENT_RESULT",
+      "difference": "NOT_INTERPRETED",
+      "uncertainty": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+      "possible_source": "INSTRUMENT",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPLACE_WITH_REAL_REPETITIONS",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false
+    },
+    {
+      "quantity": "UNCERTAINTY_PROPAGATION",
+      "simulation_value": "NOT_APPLICABLE_PIPELINE_DRY_RUN",
+      "measurement_value": "SYNTHETIC_DEVELOPMENT_RESULT",
+      "difference": "NOT_INTERPRETED",
+      "uncertainty": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+      "possible_source": "CALIBRATION",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPLACE_SYNTHETIC_UNCERTAINTY_ASSUMPTIONS",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false
+    }
+  ]
+}
