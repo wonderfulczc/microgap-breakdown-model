@@ -2,15 +2,17 @@
   "status": "CITATION_METADATA_INCOMPLETE",
   "formal_CITATION_cff_created": false,
   "candidate": "CITATION.cff.candidate",
-  "user_required": [
-    "authors_and_order",
-    "preferred_citation_name_or_message",
-    "repository_url",
+  "cff_minimum_required_by_schema": ["cff-version", "message", "title", "authors"],
+  "project_release_required": [
+    "authors_given_names_family_names_and_order",
+    "preferred_citation_policy_and_message",
+    "repository_code_url_confirmation",
     "license",
-    "release_version_decision",
-    "release_date_when_released"
+    "release_version",
+    "date_released"
   ],
-  "optional": ["ORCID", "DOI", "affiliation", "preferred_citation_paper"],
+  "optional_recommended": ["ORCID", "affiliation", "keywords"],
+  "optional": ["email", "DOI", "preferred_citation_paper", "repository-artifact"],
+  "third_party_authors_are_project_authors": false,
   "invented_metadata": false
 }
-

@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "candidate_only": true,
+  "effective_license_grant": false,
+  "USER_DECISION_REQUIRED": true,
+  "PRIMARY_RECOMMENDATION": {
+    "license": "Apache-2.0",
+    "reason": "Permissive academic and commercial reuse with an explicit patent grant and termination mechanism, while keeping the externally invoked GPL/LGPL backends outside project artifacts."
+  },
+  "SECONDARY_OPTION": {
+    "license": "BSD-3-Clause",
+    "reason": "Simple permissive terms and a non-endorsement clause suit university dissemination, but patent rights are less explicit."
+  },
+  "NOT_RECOMMENDED_FOR_CURRENT_GOAL": {
+    "license": "GPL-3.0-only",
+    "reason": "Strong copyleft adds avoidable integration and technology-transfer review for the stated enterprise-collaboration goal."
+  },
+  "MIT_status": "COMPATIBLE_BUT_NOT_PREFERRED_DUE_TO_NO_EXPLICIT_PATENT_OR_NON_ENDORSEMENT_TERMS",
+  "legal_advice": false
+}

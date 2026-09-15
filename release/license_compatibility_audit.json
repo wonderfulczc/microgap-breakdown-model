@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "current_distribution_boundary": "PROJECT_SOURCE_AND_WHEEL_EXCLUDE_EXTERNAL_BACKEND_SOURCE_AND_BINARIES",
+  "legal_advice": false,
+  "candidates": {
+    "MIT": ["NO_OBVIOUS_CONFLICT", "NOTICE_REQUIRED", "LEGAL_REVIEW_RECOMMENDED_FOR_FUTURE_BACKEND_BUNDLING"],
+    "BSD-3-Clause": ["NO_OBVIOUS_CONFLICT", "NOTICE_REQUIRED", "LEGAL_REVIEW_RECOMMENDED_FOR_FUTURE_BACKEND_BUNDLING"],
+    "Apache-2.0": ["NO_OBVIOUS_CONFLICT", "NOTICE_REQUIRED", "LEGAL_REVIEW_RECOMMENDED_FOR_FUTURE_BACKEND_BUNDLING"],
+    "GPL-3.0-only": ["NOTICE_REQUIRED", "SOURCE_DISTRIBUTION_CONCERN", "LINKING_REVIEW_REQUIRED", "LEGAL_REVIEW_RECOMMENDED"]
+  },
+  "boundary_note": "Current dependency declarations, subprocess/file interfaces, and separately installed backends do not by themselves select the project license. Bundling or distributing linked backend binaries changes the review boundary."
+}

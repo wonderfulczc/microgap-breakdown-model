@@ -116,6 +116,12 @@
       "tracked": true
     },
     {
+      "path": "release",
+      "classification": "REQUIRED_REFERENCE",
+      "bytes_in_worktree": 5727,
+      "tracked": false
+    },
+    {
       "path": "results",
       "classification": "REGENERABLE",
       "bytes_in_worktree": 1407745397,

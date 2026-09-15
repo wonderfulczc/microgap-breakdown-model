@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "CURRENT_VERSION": "0.1.0.dev0",
+  "NEXT_CANDIDATE_VERSION": "0.1.0rc1",
+  "RC1_ALLOWED": false,
+  "requirements": {
+    "formal_LICENSE_exists": false,
+    "THIRD_PARTY_LICENSE_REVIEW": "PASS",
+    "formal_CITATION_cff_complete": false,
+    "repository_URL_confirmed": false,
+    "authors_and_order_confirmed": false,
+    "user_approved_RC1": false,
+    "SCIENTIFIC_STATUS_AUDIT": "PASS",
+    "CLEAN_WHEEL_INSTALL": "PASS"
+  },
+  "documented_exception_allowed_for_third_party_review": true,
+  "version_changed": false
+}

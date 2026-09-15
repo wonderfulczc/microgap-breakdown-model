@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "backends": [
+    {"name":"Afivo-streamer","relationships":["SUBPROCESS_EXECUTION","FILE_INTERFACE","NOT_DISTRIBUTED"],"project_artifact_inclusion":false},
+    {"name":"openEMS","relationships":["PYTHON_RUNTIME_IMPORT","DYNAMIC_LINK","FILE_INTERFACE","NOT_DISTRIBUTED"],"project_artifact_inclusion":false},
+    {"name":"CSXCAD","relationships":["PYTHON_RUNTIME_IMPORT","DYNAMIC_LINK","FILE_INTERFACE","NOT_DISTRIBUTED"],"project_artifact_inclusion":false},
+    {"name":"fparser","relationships":["DYNAMIC_LINK","NOT_DISTRIBUTED"],"relationship_scope":"TRANSITIVE_THROUGH_OPENEMS","project_artifact_inclusion":false},
+    {"name":"AppCSXCAD","relationships":["NOT_DISTRIBUTED"],"runtime_status":"NOT_INSTALLED_NOT_REQUIRED_BY_NO_GUI_WORKFLOW","project_artifact_inclusion":false}
+  ]
+}

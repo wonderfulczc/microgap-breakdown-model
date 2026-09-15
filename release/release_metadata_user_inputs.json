@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "software_names": {
+    "distribution_name": "microgap-rf",
+    "CLI_name": "microgap-rf",
+    "Python_import_name": "streamer_rf",
+    "software_display_name_en": "Microgap Breakdown RF Simulation & Validation Toolkit",
+    "software_display_name_zh": "微间隙击穿放电RF仿真与验证工具包"
+  },
+  "repository": {
+    "REPOSITORY_URL_CANDIDATE": "https://github.com/wonderfulczc/microgap-breakdown-model",
+    "REPOSITORY_VISIBILITY": "UNKNOWN",
+    "user_confirmation_required": true
+  },
+  "required_user_inputs": {
+    "license": "Choose one project license and confirm copyright holder(s).",
+    "authors_and_order": "Provide software authors in citation order, with given and family names.",
+    "preferred_citation_policy": "Choose software-only citation or software plus preferred paper.",
+    "repository_url_confirmation": "Confirm the canonical repository URL and intended public visibility.",
+    "approve_rc1_later": "Explicit yes/no approval after all gates pass."
+  },
+  "optional_user_inputs": ["ORCID", "affiliation", "public_contact_email", "DOI", "preferred_citation_paper"],
+  "invented_metadata": false
+}

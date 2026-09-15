@@ -119,8 +119,9 @@ def test_synthetic_fixture_labels_and_distribution_advice():
     assert inventory["synthetic_fixture_distribution"] == "KEEP_IN_REPOSITORY_ONLY"
 
 
-def test_third_party_unknown_is_not_guessed():
+def test_third_party_fparser_license_is_confirmed_from_local_evidence():
     inventory = json.loads((ROOT / "packaging/third_party_license_inventory.json").read_text())
-    fparser = next(item for item in inventory["records"] if item["dependency"] == "fparser")
-    assert fparser["license"] == "UNKNOWN_REQUIRES_REVIEW"
-    assert inventory["status"] == "INCOMPLETE_REVIEW_REQUIRED"
+    fparser = next(item for item in inventory["records"] if item["name"] == "fparser")
+    assert fparser["license_name"] == "LGPL-3.0-only"
+    assert fparser["license_status"] == "CONFIRMED"
+    assert inventory["status"] == "PASS"

@@ -1,13 +1,19 @@
 cff-version: 1.2.0
-message: "<USER_REQUIRED: preferred citation message>"
-title: "microgap-rf"
+message: "<USER_REQUIRED: preferred citation message and policy>"
+title: "Microgap Breakdown RF Simulation & Validation Toolkit"
 type: software
 authors:
   - family-names: "<USER_REQUIRED>"
     given-names: "<USER_REQUIRED>"
-repository-code: "<USER_REQUIRED: public repository URL>"
+    # orcid: "<OPTIONAL: https://orcid.org/...>"
+    # affiliation: "<OPTIONAL>"
+repository-code: "<USER_CONFIRM: https://github.com/wonderfulczc/microgap-breakdown-model>"
 license: "<USER_REQUIRED: selected SPDX license identifier>"
 version: "0.1.0.dev0"
 date-released: "<USER_REQUIRED_WHEN_RELEASED: YYYY-MM-DD>"
 abstract: "Configuration-driven microgap discharge and RF research toolkit."
-
+keywords:
+  - microgap breakdown
+  - streamer discharge
+  - radio-frequency simulation
+# preferred-citation: <OPTIONAL; add only for a software-plus-paper policy>

@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "distribution_name": "microgap-rf",
+  "CLI_name": "microgap-rf",
+  "Python_import_name": "streamer_rf",
+  "software_display_name_en": "Microgap Breakdown RF Simulation & Validation Toolkit",
+  "software_display_name_zh": "微间隙击穿放电RF仿真与验证工具包",
+  "rename_required": false,
+  "status": "CONSISTENT_THREE_LAYER_NAMING"
+}

@@ -62,6 +62,7 @@ def main():
         "literature": "REQUIRED_REFERENCE",
         "packaging": "REQUIRED_REFERENCE",
         "python": "CORE",
+        "release": "REQUIRED_REFERENCE",
         "results": "REGENERABLE",
         "rf": "REQUIRED_REFERENCE",
         "scripts": "CORE",

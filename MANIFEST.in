@@ -6,6 +6,7 @@ recursive-include examples *.yaml
 recursive-include literature *.yaml *.md
 recursive-include docs *.md *.csv
 recursive-include packaging *.json
+recursive-include release *.json
 exclude packaging/rp2_artifact_audit.json
 recursive-include tests *.py
 include scripts/reproduce_smoke.sh
