@@ -9,6 +9,10 @@ thermal-channel/circuit, full-wave receiver, and simulation-to-experiment
 validation studies. The repository combines a C++17/PETSc/MPI core with a
 Python analysis package and explicit external-backend contracts.
 
+Current candidate version: `0.1.0rc1` (built for acceptance, not published).
+See [CHANGELOG](CHANGELOG.md) and the
+[RC notes](release/0.1.0rc1_release_notes.md).
+
 ## Scientific scope
 
 The software implements the frozen v2.0 A--J architecture. It provides working
@@ -64,6 +68,7 @@ python3 -m venv .venv
 .venv/bin/pip install -r requirements-dev.txt
 .venv/bin/pip install -e .
 microgap-rf doctor
+microgap-rf --version
 microgap-rf run examples/configs/smoke.yaml
 microgap-rf validate examples/configs/validation_synthetic.yaml
 microgap-rf report rp1_smoke

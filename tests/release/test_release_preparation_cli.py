@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -49,7 +50,7 @@ def test_doctor_reports_optional_backends_without_crashing():
     report = json.loads(result.stdout)
     assert "optional_backends" in report
     assert report["optional_backends"]["Afivo"]["status"] in {"AVAILABLE", "OPTIONAL_MISSING"}
-    assert len(report["repository"]["commit"]) == 40
+    assert re.fullmatch(r"[0-9a-f]{40}(\+RP4_RELEASE_CANDIDATE_WORKTREE)?", report["repository"]["commit"])
     assert "PETSC_DIR" in report["environment_variables"]
 
 
@@ -57,7 +58,7 @@ def test_doctor_accepts_packaged_resource_root_without_git_noise(tmp_path, capsy
     from streamer_rf.release.doctor import doctor_report
     resource_root = ROOT / "python/streamer_rf/resources"
     report = doctor_report(resource_root)
-    assert report["repository"]["branch"] == "INSTALLED_WHEEL"
+    assert report["repository"]["branch"] == "SOURCE_ARCHIVE_OR_INSTALLED_WHEEL"
     assert "fatal:" not in capsys.readouterr().err
 
 
@@ -109,7 +110,7 @@ def test_run_manifest_hashes_versions_and_science(tmp_path):
     assert manifest["exit_status"] == "PASS"
     assert len(manifest["input_config_hash"]) == 64
     assert len(manifest["resolved_config_hash"]) == 64
-    assert len(manifest["backend_version"]["core"]) == 40
+    assert re.fullmatch(r"[0-9a-f]{40}(\+RP4_RELEASE_CANDIDATE_WORKTREE)?", manifest["backend_version"]["core"])
     assert (manifest["model_version"], manifest["contract_version"], manifest["schema_version"]) == ("frozen-v2.0", "rp1.1", "1.0")
     assert manifest["scientific_status"]["NATIVE_RF_350MHZ"] == "NOT_RESOLVED"
 

@@ -56,13 +56,17 @@ def doctor_report(repo_root: Path) -> dict:
         commit = subprocess.check_output(["git", "-C", str(repo_root), "rev-parse", "HEAD"], text=True).strip()
         branch = subprocess.check_output(["git", "-C", str(repo_root), "branch", "--show-current"], text=True).strip()
     except (OSError, subprocess.SubprocessError):
-        metadata_path = repo_root / "packaging/release_build_metadata.json"
-        if metadata_path.is_file():
-            import json
-            record = json.loads(metadata_path.read_text())
-            commit, branch = f"{record['base_checkpoint']}+{record['source_state']}", "INSTALLED_WHEEL"
-        else:
+        import json
+        metadata_paths = (
+            repo_root / "packaging/release_build_metadata.json",
+            repo_root / "python/streamer_rf/resources/packaging/release_build_metadata.json",
+        )
+        metadata_path = next((path for path in metadata_paths if path.is_file()), None)
+        if metadata_path is None:
             commit, branch = "UNAVAILABLE", "UNAVAILABLE"
+        else:
+            record = json.loads(metadata_path.read_text())
+            commit, branch = f"{record['base_checkpoint']}+{record['source_state']}", "SOURCE_ARCHIVE_OR_INSTALLED_WHEEL"
     required_missing = [name for name, item in {**dependencies, **commands}.items() if item["status"] == "REQUIRED_MISSING"]
     return {
         "python": {"status": "AVAILABLE", "version": sys.version.split()[0], "executable": sys.executable},

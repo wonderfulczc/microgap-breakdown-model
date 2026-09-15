@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "microgap-rf"
-version = "0.1.0.dev0"
+version = "0.1.0rc1"
 description = "Configuration-driven microgap discharge and RF research toolkit"
 readme = "README.md"
 requires-python = ">=3.11"

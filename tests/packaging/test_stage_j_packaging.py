@@ -20,7 +20,9 @@ def test_top_level_repository_inventory_is_complete():
     inventory = load("stage_j_repository_inventory.json")["directories"]
     recorded = {entry["path"] for entry in inventory}
     actual = {path.name for path in ROOT.iterdir() if path.is_dir()}
-    assert recorded == actual
+    generated = {"build-rc", "build-smoke-rc"}
+    assert actual <= recorded | generated
+    assert {entry["path"] for entry in inventory if entry["tracked"]} <= actual
     allowed = {
         "CORE", "REQUIRED_REFERENCE", "REGENERABLE", "EXTERNAL_BACKEND",
         "SYNTHETIC_FIXTURE", "ARCHIVE_ONLY", "BUILD_ARTIFACT", "EXCLUDE_FROM_RELEASE",

@@ -5,6 +5,7 @@ import argparse
 import json
 import subprocess
 import sys
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 from .literature import impact_analysis, load_registry
@@ -15,8 +16,21 @@ from .release.reporting import generate_report
 from .release.runner import execute_run, execute_validation, repository_root, user_execution_root
 
 
+def _package_version() -> str:
+    source_root = Path(__file__).resolve().parents[2]
+    if (source_root / "pyproject.toml").is_file():
+        from .release.audit import CURRENT_VERSION
+        return CURRENT_VERSION
+    try:
+        return version("microgap-rf")
+    except PackageNotFoundError:
+        from .release.audit import CURRENT_VERSION
+        return CURRENT_VERSION
+
+
 def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(prog="microgap-rf", description="多物理微间隙放电与射频科研工具包")
+    root.add_argument("--version", action="version", version=f"%(prog)s {_package_version()}")
     sub = root.add_subparsers(dest="command", required=True)
     sub.add_parser("doctor", help="检查核心工具链和可选外部后端")
     run = sub.add_parser("run", help="运行配置驱动的轻量工作流")

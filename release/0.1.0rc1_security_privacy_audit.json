@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS_WITH_SAFE_HISTORICAL_METADATA",
+  "private_key_markers": 0,
+  "credential_assignment_findings": 0,
+  "wheel_machine_local_paths": 0,
+  "sdist_absolute_path_classification": "SAFE_HISTORICAL_METADATA",
+  "active_runtime_hardcode": false,
+  "real_secret_found": false,
+  "secret_values_recorded_in_report": false
+}

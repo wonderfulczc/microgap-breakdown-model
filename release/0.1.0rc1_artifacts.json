@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "version": "0.1.0rc1",
+  "build_timestamp": "2026-09-15T20:52:33+08:00",
+  "source_commit": "76a8e927245257ab49b97ef669f0e1c5fde67182",
+  "source_state": "RP4_RELEASE_CANDIDATE_WORKTREE",
+  "wheel": {
+    "filename": "microgap_rf-0.1.0rc1-py3-none-any.whl",
+    "sha256": "2995b25d355458979b7cada558405f334e0784aa3d884b40621c1bb68edc90d8",
+    "size_bytes": 143600,
+    "file_count": 93
+  },
+  "sdist": {
+    "filename": "microgap_rf-0.1.0rc1.tar.gz",
+    "sha256": "599ed27228afb0ccc35db5b1991c485de4f2a6f6d83f06cb19895a444bc79b42",
+    "size_bytes": 443858,
+    "member_count": 424
+  },
+  "python_version": "3.14.4",
+  "build_tool": "build 1.3.0",
+  "build_command": ".venv/bin/python -m build --no-isolation",
+  "build_duration_s": 1.00,
+  "build_peak_rss_kib": 36588,
+  "license": "Apache-2.0",
+  "citation_file": "CITATION.cff",
+  "citation_sha256": "fc2d5873f5735831e473f2edadab9cc0c151fac9a3d2a5bca46e98ffc69078e2",
+  "scientific_status": {
+    "STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT",
+    "PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE": false,
+    "SYSTEM_350MHZ_VALIDATION": "NOT_MEASURED",
+    "NATIVE_RF_350MHZ": "NOT_RESOLVED"
+  },
+  "artifacts_tracked_in_git": false,
+  "RC1_PUBLISHED": false
+}

@@ -11,8 +11,9 @@ from urllib.parse import urlparse
 import yaml
 
 
-CURRENT_VERSION = "0.1.0.dev0"
+CURRENT_VERSION = "0.1.0rc1"
 NEXT_CANDIDATE_VERSION = "0.1.0rc1"
+FINAL_VERSION = "0.1.0"
 FORBIDDEN_ARCHIVE_MARKERS = ("/.git/", "/.venv/", "/build/", "/results/", "results_raw", "__pycache__", "openems_simulation", "solver3d/afivo")
 REQUIRED_WHEEL_FILES = (
     "streamer_rf/cli.py",
@@ -147,7 +148,9 @@ def release_audit(root: Path) -> dict:
     if inventory_path.is_file():
         gates["THIRD_PARTY_LICENSE_REVIEW"] = json.loads(inventory_path.read_text()).get("status", "PENDING_EXTERNAL_VERIFICATION")
     gates["RC1_ALLOWED"] = rc1_allowed(root, gates, answers)
-    gates["PUBLIC_RELEASE_READY"] = "READY_FOR_RELEASE_CANDIDATE" if gates["RC1_ALLOWED"] else "PENDING_LICENSE_OR_USER_RELEASE_DECISION"
+    gates["VERSION"] = CURRENT_VERSION
+    gates["RC1_BUILD_READY"] = gates["RC1_ALLOWED"] and CURRENT_VERSION == NEXT_CANDIDATE_VERSION
+    gates["PUBLIC_RELEASE_READY"] = "AWAITING_FINAL_RELEASE_APPROVAL" if gates["RC1_BUILD_READY"] else "PENDING_LICENSE_OR_USER_RELEASE_DECISION"
     docs = [
         "README.zh-CN.md", "docs/zh/软件架构.md", "docs/zh/CLI架构说明.md",
         "docs/zh/配置与结果合同.md", "docs/zh/科学状态.md", "docs/zh/数据政策.md",
@@ -156,15 +159,18 @@ def release_audit(root: Path) -> dict:
         "docs/zh/开源许可与知识产权边界.md", "docs/zh/软件引用与学术署名说明.md",
         "docs/zh/RP3用户决策清单.md",
     ]
-    try:
-        installed_version = version("microgap-rf")
-    except PackageNotFoundError:
+    if (root / "pyproject.toml").is_file():
         installed_version = CURRENT_VERSION
+    else:
+        try:
+            installed_version = version("microgap-rf")
+        except PackageNotFoundError:
+            installed_version = CURRENT_VERSION
     return {
         "audit_only": True,
         "side_effects": {"tag_created": False, "release_created": False, "upload_performed": False, "license_selected": False},
         "package": {"project_name": "microgap-rf", "import_name": "streamer_rf", "cli_name": "microgap-rf", "version": installed_version},
-        "version_policy": {"CURRENT_VERSION": CURRENT_VERSION, "NEXT_CANDIDATE_VERSION": NEXT_CANDIDATE_VERSION, "candidate_transition_allowed": gates["RC1_ALLOWED"], "RC1_ALLOWED": gates["RC1_ALLOWED"]},
+        "version_policy": {"CURRENT_VERSION": CURRENT_VERSION, "NEXT_CANDIDATE_VERSION": NEXT_CANDIDATE_VERSION, "FINAL_VERSION": FINAL_VERSION, "candidate_transition_allowed": gates["RC1_ALLOWED"], "RC1_ALLOWED": gates["RC1_ALLOWED"]},
         "required_docs_present": all((root / path).is_file() for path in docs) or gates.get("REQUIRED_DOCS_PRESENT") is True,
         "gates": gates,
         "scientific_status": {"STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT", "PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE": False, "SYSTEM_350MHZ_VALIDATION": "NOT_MEASURED", "NATIVE_RF_350MHZ": "NOT_RESOLVED"},

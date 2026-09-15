@@ -1,4 +1,4 @@
-include README.md README.zh-CN.md LICENSE CITATION.cff CITATION.cff.template THIRD_PARTY_NOTICES.md pyproject.toml requirements.txt requirements-dev.txt CMakeLists.txt
+include README.md README.zh-CN.md LICENSE CITATION.cff CITATION.cff.template THIRD_PARTY_NOTICES.md CHANGELOG.md pyproject.toml requirements.txt requirements-dev.txt CMakeLists.txt
 recursive-include python *.py *.json *.yaml
 recursive-include cpp *.cpp *.hpp
 recursive-include config *.yaml *.json
@@ -6,9 +6,11 @@ recursive-include examples *.yaml
 recursive-include literature *.yaml *.md
 recursive-include docs *.md *.csv
 recursive-include packaging *.json
-recursive-include release *.json
+recursive-include release *.json *.md
 exclude packaging/rp2_artifact_audit.json
 exclude packaging/rp3b_artifact_audit.json
+exclude release/0.1.0rc1_artifacts.json
+exclude release/0.1.0rc1_acceptance.json
 recursive-include tests *.py
 include scripts/reproduce_smoke.sh
 prune build

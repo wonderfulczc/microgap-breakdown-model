@@ -38,10 +38,13 @@ def repository_root(start: Path | None = None) -> Path:
 def _git_commit(root: Path) -> str:
     if (root / ".git").exists():
         return subprocess.check_output(["git", "-C", str(root), "rev-parse", "HEAD"], text=True).strip()
-    metadata = root / "packaging/release_build_metadata.json"
-    if metadata.is_file():
-        record = json.loads(metadata.read_text())
-        return f"{record['base_checkpoint']}+{record['source_state']}"
+    for metadata in (
+        root / "packaging/release_build_metadata.json",
+        root / "python/streamer_rf/resources/packaging/release_build_metadata.json",
+    ):
+        if metadata.is_file():
+            record = json.loads(metadata.read_text())
+            return f"{record['base_checkpoint']}+{record['source_state']}"
     return "INSTALLED_PACKAGE_SOURCE_COMMIT_UNAVAILABLE"
 
 

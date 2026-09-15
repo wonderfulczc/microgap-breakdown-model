@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "source_base_commit": "76a8e927245257ab49b97ef669f0e1c5fde67182",
+  "source_state": "RP4_RELEASE_CANDIDATE_WORKTREE",
+  "checkout_kind": "GIT_ARCHIVE_PLUS_REVIEWED_WORKTREE_PATCH",
+  "configure": "PASS",
+  "build": "PASS",
+  "ctest": "10_OF_10_PASS",
+  "pytest": "466_PASS_3_SKIP_5_DESELECTED",
+  "reproducibility_smoke": "75_PASS",
+  "release_audit": "PASS",
+  "wall_time_s": 86.33,
+  "peak_rss_kib": 258900,
+  "large_physics_simulations_rerun": false
+}

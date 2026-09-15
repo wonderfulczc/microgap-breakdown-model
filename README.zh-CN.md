@@ -7,6 +7,9 @@
 可导入的 `streamer_rf` Python 包、外部 Afivo/openEMS/COMSOL 接口和可追溯数据合同组成。
 当前软件工具链已完成，但真实实验科学验证仍待进行。
 
+当前候选版本为 `0.1.0rc1`。变更记录见 [CHANGELOG](CHANGELOG.md)，候选版本说明见
+[0.1.0rc1 release notes](release/0.1.0rc1_release_notes.md)。该候选版本尚未公开发布。
+
 ## 主要能力与 A-J 架构
 
 - A：配置、生命周期和数值基础；B：外部 COMSOL 静电/几何接口。
@@ -25,6 +28,7 @@ python3 -m venv .venv
 .venv/bin/pip install -r requirements-dev.txt
 .venv/bin/pip install -e .
 microgap-rf --help
+microgap-rf --version
 microgap-rf doctor
 microgap-rf run examples/configs/smoke.yaml
 microgap-rf validate examples/configs/validation_synthetic.yaml

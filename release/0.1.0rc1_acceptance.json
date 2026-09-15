@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "version": "0.1.0rc1",
+  "checks": {
+    "VERSION_CONSISTENCY": "PASS",
+    "LICENSE": "PASS",
+    "CITATION": "PASS",
+    "THIRD_PARTY": "PASS",
+    "WHEEL_BUILD": "PASS",
+    "SDIST_BUILD": "PASS",
+    "WHEEL_INSTALL": "PASS",
+    "SDIST_REBUILD": "PASS",
+    "CLI_SMOKE": "PASS",
+    "PYTHON_API": "PASS",
+    "CTEST": "PASS",
+    "PYTEST": "PASS",
+    "REPRODUCIBILITY_SMOKE": "PASS",
+    "PRIVACY": "PASS",
+    "SCIENTIFIC_STATUS": "PASS",
+    "DOCUMENTATION": "PASS",
+    "EXTERNAL_BACKEND_BOUNDARY": "PASS"
+  },
+  "RC1_BUILD_READY": true,
+  "RC1_ACCEPTANCE": "PASS",
+  "RELEASE_CANDIDATE_FROZEN": true,
+  "RC1_PUBLISHED": false,
+  "GITHUB_RELEASE_CREATED": false,
+  "PYPI_PUBLISHED": false,
+  "FINAL_0_1_0_ALLOWED": "AWAITING_USER_FINAL_RELEASE_APPROVAL"
+}

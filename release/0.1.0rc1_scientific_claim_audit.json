@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "overclaim_found": false,
+  "STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT",
+  "PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE": false,
+  "SYSTEM_350MHZ_VALIDATION": "NOT_MEASURED",
+  "NATIVE_RF_350MHZ": "NOT_RESOLVED",
+  "full_maxwell_validated_claim": false,
+  "production_ready_claim": false
+}
