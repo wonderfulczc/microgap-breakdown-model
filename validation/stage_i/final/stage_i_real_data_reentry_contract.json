@@ -1,0 +1,16 @@
+{
+  "contract_type": "StageIRealExperimentReentryContract",
+  "workflow": [
+    "REAL_DATA_INGESTION",
+    "PROVENANCE_GATE",
+    "QUALITY_GATE",
+    "CALIBRATION_REFERENCE_PLANE_CHECK",
+    "STAGE_I_COMPARISON",
+    "DISCREPANCY_LEDGER_UPDATE",
+    "VALIDATION_STATUS_UPDATE"
+  ],
+  "rerun_tool_development_dry_runs": false,
+  "required_inputs_reference": "fullwave/h5/h5_stage_i_required_inputs.json",
+  "status_before_reentry": "PENDING_REAL_EXPERIMENT",
+  "status_updates_require_real_evidence": true
+}

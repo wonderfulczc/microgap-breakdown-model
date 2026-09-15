@@ -1,0 +1,95 @@
+{
+  "items": [
+    {
+      "path": "python/streamer_rf",
+      "classification": "CORE_SOURCE",
+      "action": "PACKAGE"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "classification": "CONFIG",
+      "action": "PACKAGE"
+    },
+    {
+      "path": "requirements.txt",
+      "classification": "CONFIG",
+      "action": "PACKAGE"
+    },
+    {
+      "path": "tests",
+      "classification": "TEST",
+      "action": "PACKAGE"
+    },
+    {
+      "path": "docs",
+      "classification": "DOCUMENTATION",
+      "action": "PACKAGE_REVIEW_MACHINE_PATHS"
+    },
+    {
+      "path": "fullwave/h1/openems_backend.json",
+      "classification": "EXTERNAL_BACKEND_REFERENCE",
+      "action": "PACKAGE_PROVENANCE_ONLY"
+    },
+    {
+      "path": "solver3d/afivo_reference",
+      "classification": "EXTERNAL_BACKEND_REFERENCE",
+      "action": "PACKAGE_ADAPTERS_NOT_EXTERNAL_SOURCE"
+    },
+    {
+      "path": "fullwave/h2",
+      "classification": "REFERENCE_DATA",
+      "action": "PACKAGE_COMPACT_RESULTS"
+    },
+    {
+      "path": "fullwave/h3",
+      "classification": "DERIVED_RESULT",
+      "action": "PACKAGE_COMPACT_RESULTS"
+    },
+    {
+      "path": "fullwave/h4",
+      "classification": "DERIVED_RESULT",
+      "action": "PACKAGE_COMPACT_RESULTS"
+    },
+    {
+      "path": "fullwave/h5",
+      "classification": "DERIVED_RESULT",
+      "action": "PACKAGE_CONTRACTS"
+    },
+    {
+      "path": "validation/stage_i/system_350mhz/synthetic_input",
+      "classification": "SYNTHETIC_FIXTURE",
+      "action": "PACKAGE_WITH_PROVENANCE"
+    },
+    {
+      "path": "validation/stage_i/system_350mhz/wp_i_d_synthetic",
+      "classification": "SYNTHETIC_FIXTURE",
+      "action": "PACKAGE_WITH_PROVENANCE"
+    },
+    {
+      "path": "validation/stage_i",
+      "classification": "DERIVED_RESULT",
+      "action": "PACKAGE_CONTRACTS_AND_SMALL_RESULTS"
+    },
+    {
+      "path": "build",
+      "classification": "DO_NOT_PACKAGE_RAW_TEMP",
+      "action": "EXCLUDE_FROM_GIT"
+    },
+    {
+      "path": ".venv",
+      "classification": "DO_NOT_PACKAGE_RAW_TEMP",
+      "action": "EXCLUDE_FROM_GIT"
+    },
+    {
+      "path": "/tmp/h1_h2_h4_openems_validation",
+      "classification": "DO_NOT_PACKAGE_RAW_TEMP",
+      "action": "DO_NOT_PACKAGE"
+    }
+  ],
+  "external_source_policy": {
+    "Afivo": "MUST_REMAIN_EXTERNAL",
+    "openEMS": "MUST_REMAIN_EXTERNAL"
+  },
+  "future_real_measurement_data": "LICENSE_PRIVACY_AND_CONSENT_REVIEW_REQUIRED",
+  "synthetic_fixture_policy": "PACKAGE_ONLY_WITH_EXPLICIT_SYNTHETIC_PROVENANCE"
+}

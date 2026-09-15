@@ -1,0 +1,51 @@
+{
+  "machine_local_paths": {
+    "ACTIVE_HARDCODE": [],
+    "ENV_CONFIG_REQUIRED": [
+      "solver3d/afivo_reference/**/*.cfg",
+      "fullwave/h1/generate_h1_audit.py",
+      "fullwave/h2/generate_h2_results.py",
+      "fullwave/h4/generate_h4_results.py"
+    ],
+    "DOCUMENTATION_ONLY": [
+      "docs/environment_baseline.md",
+      "docs/stage_d1_afivo_backend.md",
+      "docs/stage_h1_fullwave_foundation.md"
+    ],
+    "TEST_FIXTURE": [
+      "fullwave/h1-h4 compact result metadata",
+      "rf/source/audit frozen manifests"
+    ],
+    "packaging_action": "DOCUMENT_ENVIRONMENT_VARIABLES_OR_TEMPLATES_DURING_STAGE_J"
+  },
+  "large_files": {
+    "solver3d/afivo_reference/stage_e/results_raw": {
+      "action": "ARCHIVE_EXTERNALLY",
+      "bytes": 5119626784
+    },
+    "results/stage_f4/source_gate_recovery": {
+      "action": "ARCHIVE_EXTERNALLY_OR_REGENERATE",
+      "bytes": 1393235992
+    },
+    "build": {
+      "action": "EXCLUDE_FROM_GIT",
+      "bytes": 6564698
+    },
+    ".venv": {
+      "action": "EXCLUDE_FROM_GIT",
+      "bytes": 454417101
+    },
+    "tracked_compact_reference_and_summary_data": {
+      "action": "KEEP"
+    },
+    "stage_i_synthetic_fixtures": {
+      "action": "KEEP_WITH_SYNTHETIC_PROVENANCE",
+      "bytes": 24093134
+    },
+    "automatic_deletion_performed": false
+  },
+  "open_source_boundary": {
+    "Afivo": "MUST_REMAIN_EXTERNAL",
+    "openEMS": "MUST_REMAIN_EXTERNAL"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "checks": {
+    "environment_documentation": "docs/environment_baseline.md",
+    "python_dependencies": "requirements.txt",
+    "python_dependency_version_pinning": "STAGE_J_ACTION_REQUIRED",
+    "cpp_petsc_mpi_build": "CMakeLists.txt_AND_README_COMMANDS",
+    "openems_provenance": "fullwave/h1/openems_backend.json",
+    "afivo_provenance": "docs/stage_d1_afivo_backend.md",
+    "frozen_input_hashes": "PRESENT_IN_STAGE_CONTRACTS_AND_MANIFESTS",
+    "commands_and_scripts": "PRESENT",
+    "tests": "PRESENT",
+    "stage_contracts": "PRESENT",
+    "synthetic_fixture_provenance": "PRESENT"
+  },
+  "external_backend_source_policy": {
+    "Afivo": "EXTERNAL",
+    "openEMS": "EXTERNAL"
+  }
+}

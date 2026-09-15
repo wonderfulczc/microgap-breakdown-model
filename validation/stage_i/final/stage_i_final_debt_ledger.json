@@ -1,0 +1,86 @@
+{
+  "debts": [
+    {
+      "debt_id": "H2_VNA_MEASUREMENT_PENDING",
+      "owner": "H2_STAGE_I",
+      "status": "VNA_MEASUREMENT_PENDING",
+      "severity_categories": [
+        "BLOCKS_SCIENTIFIC_VALIDATION",
+        "LIMITS_PRODUCTION_PREDICTION"
+      ]
+    },
+    {
+      "debt_id": "H3_FULL_WAVE_LOADING_MISMATCH_HIGH",
+      "owner": "H3",
+      "status": "FULL_WAVE_LOADING_MISMATCH_HIGH",
+      "severity_categories": [
+        "LIMITS_ABSOLUTE_AMPLITUDE",
+        "LIMITS_PRODUCTION_PREDICTION"
+      ]
+    },
+    {
+      "debt_id": "H3_FULL_WAVE_LOADING_FEEDBACK_NOT_COUPLED",
+      "owner": "H3",
+      "status": "FULL_WAVE_LOADING_FEEDBACK_NOT_COUPLED",
+      "severity_categories": [
+        "LIMITS_ABSOLUTE_AMPLITUDE",
+        "LIMITS_PRODUCTION_PREDICTION"
+      ]
+    },
+    {
+      "debt_id": "H4_RECEIVER_TRANSFER_MESH_SENSITIVITY",
+      "owner": "H4",
+      "status": "RECEIVER_TRANSFER_MESH_SENSITIVITY_PRESENT",
+      "severity_categories": [
+        "LIMITS_ABSOLUTE_AMPLITUDE",
+        "NON_BLOCKING_DOCUMENTED_DEBT"
+      ]
+    },
+    {
+      "debt_id": "H4_ABSOLUTE_AMPLITUDE_NUMERICAL_REFERENCE_ONLY",
+      "owner": "H4",
+      "status": "NUMERICAL_REFERENCE_ONLY",
+      "severity_categories": [
+        "LIMITS_ABSOLUTE_AMPLITUDE",
+        "LIMITS_PRODUCTION_PREDICTION"
+      ]
+    },
+    {
+      "debt_id": "STAGE5_FULL_MAXWELL_REFERENCE_PENDING",
+      "owner": "STAGE5",
+      "status": "FULL_MAXWELL_REFERENCE_PENDING",
+      "severity_categories": [
+        "BLOCKS_SCIENTIFIC_VALIDATION",
+        "LIMITS_MECHANISM_INTERPRETATION"
+      ]
+    },
+    {
+      "debt_id": "STAGE_F_SPARSE_TRUSTED_FFT_BINS",
+      "owner": "STAGE_F_H4",
+      "status": "STAGE4_5_BINS_STAGE5_7_BINS",
+      "severity_categories": [
+        "LIMITS_MECHANISM_INTERPRETATION",
+        "NON_BLOCKING_DOCUMENTED_DEBT"
+      ]
+    },
+    {
+      "debt_id": "STAGE_I_EXPERIMENTAL_DATA_NOT_PROVIDED",
+      "owner": "STAGE_I",
+      "status": "NOT_PROVIDED",
+      "severity_categories": [
+        "BLOCKS_SCIENTIFIC_VALIDATION"
+      ]
+    },
+    {
+      "debt_id": "PRODUCTION_TX_RX_GEOMETRY_NOT_PROVIDED",
+      "owner": "STAGE_I",
+      "status": "NOT_PROVIDED",
+      "severity_categories": [
+        "BLOCKS_SCIENTIFIC_VALIDATION",
+        "LIMITS_PRODUCTION_PREDICTION"
+      ]
+    }
+  ],
+  "blocks_tool_packaging": false,
+  "unresolved_debt_count": 9
+}

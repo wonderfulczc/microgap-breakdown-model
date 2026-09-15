@@ -1,0 +1,57 @@
+{
+  "contract_type": "StageIFinalContract",
+  "STAGE_I_TOOL_DEVELOPMENT": "PASS",
+  "STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT",
+  "STAGE_I_EXPERIMENTAL_DATA": "NOT_PROVIDED",
+  "SYSTEM_350MHZ_VALIDATION": "NOT_MEASURED",
+  "NATIVE_GHZ_STAGE4_VALIDATION": "NOT_MEASURED",
+  "NATIVE_GHZ_STAGE5_VALIDATION": "NOT_MEASURED",
+  "distance_orientation_repeatability_ready": true,
+  "uncertainty_ready": true,
+  "REAL_DATA_REPLACEMENT_READY": true,
+  "frequency_boundaries": {
+    "system_experimental_context_Hz": [
+      50000000.0,
+      500000000.0
+    ],
+    "H3_formal_comparison_Hz": [
+      200000000.0,
+      500000000.0
+    ],
+    "system_target_center_Hz": 350000000.0,
+    "native_350MHz": "NOT_RESOLVED",
+    "Stage4_trusted_Hz": [
+      2941408508.9091916,
+      7966314711.629051
+    ],
+    "Stage5_trusted_Hz": [
+      3047273105.1868486,
+      10233758844.919172
+    ],
+    "native_primary_comparison": "SPARSE_TRUSTED_FREQUENCY_BINS"
+  },
+  "CROSS_PATH_COHERENT_SUMMATION": "NOT_PERMITTED_CURRENT_CONFIGURATION",
+  "CROSS_MECHANISM_ABSOLUTE_CONTRIBUTION": "NOT_RESOLVED",
+  "debt_ledger": "stage_i_final_debt_ledger.json",
+  "validation_matrix": "stage_i_validation_matrix.csv",
+  "discrepancy_ledger": "stage_i_final_discrepancy_ledger.json",
+  "STAGE_J_TOOL_PACKAGING_ALLOWED": true,
+  "PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE": false,
+  "future_experimental_requirements": "fullwave/h5/h5_stage_i_required_inputs.json",
+  "real_data_reentry_contract": "stage_i_real_data_reentry_contract.json",
+  "frozen_upstream_hashes": {
+    "Stage_H_contract": "ca4557ba93a32307ad65dc332386fcdb8982fe1827e63798a17e068e86ac5807",
+    "WP_I_A_status": "6f4793a88c5a03d4727f3e09e255b00a5e5e003c578a22a23e2781dc75d7bbd7",
+    "WP_I_B_status": "c43c3dfb343fa9c0cc12c17575fab78511eddf5d30a23290ad70cf45dda38fc8",
+    "WP_I_C_status": "6419ef1d03db218ec5fe8bdfa8c3fbe187c37a0d1ffe55ef21a187990c9915be",
+    "WP_I_D_status": "211913036514a8a4da0fb11be2f31b64f61072a48160e95e821ae2521414a9c5"
+  },
+  "frozen_commits": {
+    "Stage_H": "a11aebe58eccb708ddb62e6aa22f3908487972ce",
+    "WP_I_A": "6faf0e554dd3168495b88a376b13224645d1330b",
+    "WP_I_B": "a4da6126df919857a1817c52020330f5c0d90f57",
+    "WP_I_C": "0e24f955c9e337a3a4cf2c3d9d673db1f488a43d",
+    "WP_I_D": "e8a8400e48f82f0e84489a144767eafbc474da0f"
+  },
+  "scientific_statement": "Stage I tool development completed the simulation-to-measurement validation architecture; synthetic dry runs demonstrate software readiness only; scientific validation awaits real VNA, oscilloscope, geometry, calibration, and uncertainty data."
+}

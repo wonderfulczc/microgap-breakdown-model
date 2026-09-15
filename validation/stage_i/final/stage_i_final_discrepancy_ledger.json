@@ -1,0 +1,141 @@
+{
+  "development_discrepancies": [
+    {
+      "quantity": "H3_OVERLAP_SPECTRAL_PEAK_FREQUENCY_Hz",
+      "simulation_value": 330836454.432,
+      "measurement_value": 349563046.1923,
+      "difference": -18726591.76030004,
+      "uncertainty": "SYNTHETIC_REPEATABILITY_ONLY",
+      "possible_source": "SOURCE_MODEL",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPEAT_WITH_REAL_MEASUREMENT",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false,
+      "source_ledger": "validation/stage_i/system_350mhz/wp_i_b_discrepancy_ledger.json"
+    },
+    {
+      "quantity": "H3_OVERLAP_SPECTRAL_CENTROID_Hz",
+      "simulation_value": 337571508.2474526,
+      "measurement_value": 346264082.5021826,
+      "difference": -8692574.254729986,
+      "uncertainty": "SYNTHETIC_REPEATABILITY_ONLY",
+      "possible_source": "SOURCE_MODEL",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPEAT_WITH_REAL_MEASUREMENT",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false,
+      "source_ledger": "validation/stage_i/system_350mhz/wp_i_b_discrepancy_ledger.json"
+    },
+    {
+      "quantity": "H3_OVERLAP_NORMALIZED_SHAPE_CORRELATION",
+      "simulation_value": 1.0,
+      "measurement_value": 0.6839742137192734,
+      "difference": 0.31602578628072664,
+      "uncertainty": "SYNTHETIC_REPEATABILITY_ONLY",
+      "possible_source": "RX_GEOMETRY",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPEAT_WITH_REAL_MEASUREMENT",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false,
+      "source_ledger": "validation/stage_i/system_350mhz/wp_i_b_discrepancy_ledger.json"
+    },
+    {
+      "quantity": "FULL_WAVE_LOADING_CURRENT_NORMALIZED_L2",
+      "simulation_value": 0.0,
+      "measurement_value": 2.0521087993569855,
+      "difference": 2.0521087993569855,
+      "uncertainty": "SYNTHETIC_VNA_ONLY",
+      "possible_source": "FULL_WAVE_LOADING",
+      "classification": "FULL_WAVE_LOADING_MISMATCH_HIGH",
+      "action_required": "RETAIN_FEEDBACK_NOT_COUPLED_DEBT",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false,
+      "source_ledger": "validation/stage_i/system_350mhz/wp_i_b_discrepancy_ledger.json"
+    },
+    {
+      "quantity": "DISTANCE_TREND",
+      "simulation_value": "NOT_APPLICABLE_PIPELINE_DRY_RUN",
+      "measurement_value": "SYNTHETIC_DEVELOPMENT_RESULT",
+      "difference": "NOT_INTERPRETED",
+      "uncertainty": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+      "possible_source": "UNRESOLVED",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPLACE_WITH_REAL_DISTANCE_SWEEP",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false,
+      "source_ledger": "validation/stage_i/wp_i_d/wp_i_d_discrepancy_ledger.json"
+    },
+    {
+      "quantity": "DISTANCE_FREQUENCY_STABILITY",
+      "simulation_value": "NOT_APPLICABLE_PIPELINE_DRY_RUN",
+      "measurement_value": "SYNTHETIC_DEVELOPMENT_RESULT",
+      "difference": "NOT_INTERPRETED",
+      "uncertainty": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+      "possible_source": "UNRESOLVED",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPLACE_WITH_REAL_DISTANCE_SWEEP",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false,
+      "source_ledger": "validation/stage_i/wp_i_d/wp_i_d_discrepancy_ledger.json"
+    },
+    {
+      "quantity": "ORIENTATION_RESPONSE",
+      "simulation_value": "NOT_APPLICABLE_PIPELINE_DRY_RUN",
+      "measurement_value": "SYNTHETIC_DEVELOPMENT_RESULT",
+      "difference": "NOT_INTERPRETED",
+      "uncertainty": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+      "possible_source": "UNRESOLVED",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPLACE_WITH_REAL_ORIENTATION_SWEEP",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false,
+      "source_ledger": "validation/stage_i/wp_i_d/wp_i_d_discrepancy_ledger.json"
+    },
+    {
+      "quantity": "REPEATABILITY",
+      "simulation_value": "NOT_APPLICABLE_PIPELINE_DRY_RUN",
+      "measurement_value": "SYNTHETIC_DEVELOPMENT_RESULT",
+      "difference": "NOT_INTERPRETED",
+      "uncertainty": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+      "possible_source": "INSTRUMENT",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPLACE_WITH_REAL_REPETITIONS",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false,
+      "source_ledger": "validation/stage_i/wp_i_d/wp_i_d_discrepancy_ledger.json"
+    },
+    {
+      "quantity": "UNCERTAINTY_PROPAGATION",
+      "simulation_value": "NOT_APPLICABLE_PIPELINE_DRY_RUN",
+      "measurement_value": "SYNTHETIC_DEVELOPMENT_RESULT",
+      "difference": "NOT_INTERPRETED",
+      "uncertainty": "SYNTHETIC_UNCERTAINTY_ASSUMPTION",
+      "possible_source": "CALIBRATION",
+      "classification": "DEVELOPMENT_DIAGNOSTIC",
+      "action_required": "REPLACE_SYNTHETIC_UNCERTAINTY_ASSUMPTIONS",
+      "evidence_type": "SYNTHETIC_DRY_RUN",
+      "scientific_interpretation_allowed": false,
+      "source_ledger": "validation/stage_i/wp_i_d/wp_i_d_discrepancy_ledger.json"
+    }
+  ],
+  "future_experimental_discrepancies": [],
+  "source_ledgers": [
+    {
+      "path": "validation/stage_i/stage_i_discrepancy_ledger.json",
+      "sha256": "1a23f30a144a49855b13b339866ef336bbf73a171eb36da3a3c9448e816c3341"
+    },
+    {
+      "path": "validation/stage_i/system_350mhz/wp_i_b_discrepancy_ledger.json",
+      "sha256": "7ab1b4337d7337e2f4504c59941b22b256305daaa848a7dbfed4a12e14735416"
+    },
+    {
+      "path": "validation/stage_i/native_ghz/native_ghz_discrepancy_ledger.json",
+      "sha256": "a707fbff8170100a926ae346122183ba8d7527285634681274301b63fbbc2daf"
+    },
+    {
+      "path": "validation/stage_i/wp_i_d/wp_i_d_discrepancy_ledger.json",
+      "sha256": "e607e5c9cd822bb57c4add96bc98e13fd35c8344d0f71bbde924a05e0bcd796a"
+    }
+  ],
+  "synthetic_discrepancies_are_physical_model_errors": false
+}
