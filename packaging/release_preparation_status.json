@@ -1,0 +1,16 @@
+{
+  "work_package": "Release Preparation RP-1",
+  "formal_stage_created": false,
+  "UNIFIED_CLI_READY": true,
+  "CONFIG_DRIVEN_WORKFLOW_READY": true,
+  "LITERATURE_MAINTENANCE_FRAMEWORK": "PASS",
+  "SCIENTIFIC_CHANGE_MANAGEMENT_READY": true,
+  "STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT",
+  "PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE": false,
+  "NATIVE_RF_350MHZ": "NOT_RESOLVED",
+  "PUBLIC_RELEASE_READY": "PENDING_LICENSE_OR_USER_RELEASE_DECISION",
+  "release_created": false,
+  "license_selected": false,
+  "large_physics_simulations_rerun": false
+}
+

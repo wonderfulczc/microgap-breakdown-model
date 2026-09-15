@@ -1,0 +1,16 @@
+schema_version: "1.0"
+paper_id: null
+problem_addressed: null
+physical_models: []
+key_equations: []
+key_parameters: []
+validation_methods: []
+applicability_range: null
+known_limitations: []
+agreements_with_current_tool: []
+conflicts_with_current_tool: []
+possibly_affected_stages: []
+modification_recommendation: PENDING_EXPERT_REVIEW
+evidence_locations: []
+reviewer: null
+review_date: null

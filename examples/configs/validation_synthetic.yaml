@@ -1,0 +1,17 @@
+schema_version: "1.0"
+contract_version: rp1.1
+model_version: frozen-v2.0
+case_id: validation_synthetic
+workflow:
+  type: validation
+backend:
+  validation: stage_i
+inputs:
+  dataset: validation/stage_i/system_350mhz/synthetic_input
+output:
+  directory: results/validation_synthetic
+scientific_claims:
+  requested_status: SYNTHETIC_DRY_RUN
+  native_rf_trusted_at_target: false
+# NOT EXPERIMENTAL: this fixture verifies software only.
+

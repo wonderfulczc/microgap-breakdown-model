@@ -1,0 +1,18 @@
+schema_version: "1.0"
+contract_version: rp1.1
+model_version: frozen-v2.0
+case_id: system_350mhz_development
+workflow:
+  type: system_rf
+frequency:
+  analysis_band_MHz: [200, 500]
+  target_MHz: 350
+backend:
+  fullwave: openems
+inputs:
+  h3_contract: fullwave/h3/h3_result_contract.json
+output:
+  directory: results/system_350mhz_development
+scientific_claims:
+  native_rf_trusted_at_target: false
+

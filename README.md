@@ -1,5 +1,9 @@
 # Streamer RF Replica
 
+**Authoritative research-development documentation:**
+[简体中文 README](README.zh-CN.md). The English README is a concise public entry;
+scientific state definitions and maintenance rules are governed by the Chinese documentation.
+
 Resource-aware scientific software for microgap streamer, native-RF,
 thermal-channel/circuit, full-wave receiver, and simulation-to-experiment
 validation studies. The repository combines a C++17/PETSc/MPI core with a
@@ -58,6 +62,11 @@ Open MPI, and PETSc discoverable through `pkg-config`.
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements-dev.txt
+.venv/bin/pip install -e .
+microgap-rf doctor
+microgap-rf run examples/configs/smoke.yaml
+microgap-rf validate examples/configs/validation_synthetic.yaml
+microgap-rf report rp1_smoke
 cmake -S . -B build -G Ninja
 cmake --build build --parallel
 ctest --test-dir build --output-on-failure
@@ -123,3 +132,7 @@ by the repository owner before a public release.
 
 No release, tag, package publication, or repository-visibility change is
 performed by Stage J.
+
+Release Preparation RP-1 adds only a thin configuration/CLI layer over the
+existing modules. See [CLI architecture](docs/en/cli_architecture.md); it does
+not revise frozen physical models or scientific validation states.

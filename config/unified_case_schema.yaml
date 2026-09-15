@@ -1,0 +1,16 @@
+schema_version: "1.0"
+contract_version: rp1.1
+required: [case_id, workflow]
+case_id_pattern: "^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$"
+workflow_types: [smoke, system_rf, validation]
+backend_values: [core, petsc, openems, afivo, stage_i]
+backend_execution_modes: [FROZEN_RESULT_REUSE, LIVE]
+frequency_input_units: MHz
+physics_internal_frequency_units: Hz
+version_fields: [model_version, contract_version, schema_version]
+scientific_guards:
+  STAGE_I_SCIENTIFIC_VALIDATION: PENDING_REAL_EXPERIMENT
+  PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE: false
+  NATIVE_RF_350MHZ: NOT_RESOLVED
+historical_result_migration: forbidden
+

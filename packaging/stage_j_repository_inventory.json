@@ -80,9 +80,21 @@
       "tracked": true
     },
     {
+      "path": "examples",
+      "classification": "REQUIRED_REFERENCE",
+      "bytes_in_worktree": 1064,
+      "tracked": true
+    },
+    {
       "path": "fullwave",
       "classification": "REQUIRED_REFERENCE",
       "bytes_in_worktree": 1885645,
+      "tracked": true
+    },
+    {
+      "path": "literature",
+      "classification": "REQUIRED_REFERENCE",
+      "bytes_in_worktree": 2226,
       "tracked": true
     },
     {

@@ -27,6 +27,7 @@ ctest --test-dir "$BUILD_DIR" --output-on-failure
   "$ROOT/tests/rf/test_stage_f2_jefimenko.py" \
   "$ROOT/tests/thermal/test_stage_g3_port.py" \
   "$ROOT/tests/fullwave/test_h3_transient.py" \
-  "$ROOT/tests/validation/test_stage_i_wp_e.py"
+  "$ROOT/tests/validation/test_stage_i_wp_e.py" \
+  "$ROOT/tests/release/test_release_preparation_cli.py"
 
-printf 'Stage-J smoke reproduction passed.\n'
+printf 'Stage-J/RP-1 smoke reproduction passed.\n'

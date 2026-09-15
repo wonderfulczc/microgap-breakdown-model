@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "microgap-rf"
+version = "0.1.0.dev0"
+description = "Configuration-driven microgap discharge and RF research toolkit"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy==2.5.1",
+  "pandas==3.0.3",
+  "scipy==1.18.0",
+  "matplotlib==3.11.1",
+  "h5py==3.16.0",
+  "PyYAML==6.0.3",
+]
+
+[project.scripts]
+microgap-rf = "streamer_rf.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "python"}
+
+[tool.setuptools.packages.find]
+where = ["python"]
+
+[tool.setuptools.package-data]
+streamer_rf = ["thermal/*.json"]

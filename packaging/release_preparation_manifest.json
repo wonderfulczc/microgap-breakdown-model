@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "contract_version": "rp1.1",
+  "model_version": "frozen-v2.0",
+  "work_package": "Release Preparation RP-1",
+  "branch": "release-preparation",
+  "base_stage_j_commit": "825c65c",
+  "cli_entry": "microgap-rf",
+  "commands": ["doctor", "run", "validate", "report", "literature impact"],
+  "config_schema": "config/unified_case_schema.yaml",
+  "examples": [
+    "examples/configs/smoke.yaml",
+    "examples/configs/system_350mhz_dry_run.yaml",
+    "examples/configs/validation_synthetic.yaml"
+  ],
+  "authoritative_language": "zh-CN",
+  "scientific_model_changed": false,
+  "frozen_results_reformatted": false,
+  "large_simulations_rerun": false,
+  "release_created": false,
+  "license_selected": false,
+  "scientific_status": {
+    "STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT",
+    "PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE": false,
+    "NATIVE_RF_350MHZ": "NOT_RESOLVED"
+  }
+}
