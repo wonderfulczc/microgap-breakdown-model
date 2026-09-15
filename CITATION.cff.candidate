@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "<USER_REQUIRED: preferred citation message>"
+title: "microgap-rf"
+type: software
+authors:
+  - family-names: "<USER_REQUIRED>"
+    given-names: "<USER_REQUIRED>"
+repository-code: "<USER_REQUIRED: public repository URL>"
+license: "<USER_REQUIRED: selected SPDX license identifier>"
+version: "0.1.0.dev0"
+date-released: "<USER_REQUIRED_WHEN_RELEASED: YYYY-MM-DD>"
+abstract: "Configuration-driven microgap discharge and RF research toolkit."
+

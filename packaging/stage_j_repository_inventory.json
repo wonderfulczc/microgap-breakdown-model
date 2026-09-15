@@ -80,6 +80,12 @@
       "tracked": true
     },
     {
+      "path": "dist",
+      "classification": "BUILD_ARTIFACT",
+      "bytes_in_worktree": 559903,
+      "tracked": false
+    },
+    {
       "path": "examples",
       "classification": "REQUIRED_REFERENCE",
       "bytes_in_worktree": 1064,

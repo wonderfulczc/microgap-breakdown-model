@@ -1,0 +1,11 @@
+schema_version: "1.0"
+contract_version: rp1.1
+required: [case_id, workflow]
+workflow_types: [smoke, system_rf, validation]
+frequency_input_units: MHz
+physics_internal_frequency_units: Hz
+scientific_guards:
+  STAGE_I_SCIENTIFIC_VALIDATION: PENDING_REAL_EXPERIMENT
+  PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE: false
+  NATIVE_RF_350MHZ: NOT_RESOLVED
+

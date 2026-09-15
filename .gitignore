@@ -1,6 +1,7 @@
 # Local build and execution products
 build/
 build-smoke/
+dist/
 results/
 archive/audit_only/
 checkpoints/

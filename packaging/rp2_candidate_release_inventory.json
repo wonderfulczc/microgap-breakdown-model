@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "include": [
+    "Python source and console entry point",
+    "C++ source and CMake metadata in sdist",
+    "tests",
+    "configs and packaged schemas",
+    "README.zh-CN.md and English README",
+    "docs/zh and public documentation",
+    "literature registry/templates",
+    "example configs",
+    "synthetic fixture policy",
+    "external backend provenance/documentation",
+    "reproducibility and scientific-status manifests"
+  ],
+  "exclude": ["build products", "virtual environments", "Afivo source/raw output", "openEMS/CSXCAD source/runtime", "COMSOL", "Stage-F large raw fields", "temporary FDTD data", "real experimental data"],
+  "synthetic_fixture_distribution": "KEEP_IN_REPOSITORY_ONLY",
+  "synthetic_fixture_reason": "24.1 MB development data are not required by the installed runtime or candidate sdist build",
+  "release_performed": false
+}
+

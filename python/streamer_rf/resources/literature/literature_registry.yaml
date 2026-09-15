@@ -1,0 +1,19 @@
+schema_version: "1.0"
+papers:
+  - paper_id: DANGOLA_2008_EQUILIBRIUM_AIR
+    title: Thermodynamic and transport properties in equilibrium air plasmas in a wide pressure and temperature range
+    authors: [A. D'Angola, G. Colonna, C. Gorse, M. Capitelli]
+    year: 2008
+    journal: European Physical Journal D
+    doi: 10.1140/epjd/e2007-00305-4
+    url: https://doi.org/10.1140/epjd/e2007-00305-4
+    topic_tags: [equilibrium-air, LTE, thermodynamic-properties, transport-properties]
+    related_stages: [G1]
+    related_modules: [streamer_rf.thermal.properties]
+    related_tests: [tests/thermal/test_stage_g1_thermal.py]
+    relevance: Frozen provenance source for the equilibrium-air property backend.
+    review_status: REVIEWED_IN_STAGE_G1
+    impact_status: REFERENCE_ONLY
+    frozen_result_risk: NONE_WITHOUT_NEW_CHANGE_REQUEST
+    notes: No article full text is distributed.
+

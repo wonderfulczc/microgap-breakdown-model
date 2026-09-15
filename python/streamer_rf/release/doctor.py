@@ -51,10 +51,18 @@ def doctor_report(repo_root: Path) -> dict:
         value = os.environ.get(variable)
         environment[variable] = {"status": "AVAILABLE" if value else "OPTIONAL_MISSING", "value": value}
     try:
+        if not (repo_root / ".git").exists():
+            raise FileNotFoundError("packaged resources have no Git worktree")
         commit = subprocess.check_output(["git", "-C", str(repo_root), "rev-parse", "HEAD"], text=True).strip()
         branch = subprocess.check_output(["git", "-C", str(repo_root), "branch", "--show-current"], text=True).strip()
     except (OSError, subprocess.SubprocessError):
-        commit, branch = "UNAVAILABLE", "UNAVAILABLE"
+        metadata_path = repo_root / "packaging/release_build_metadata.json"
+        if metadata_path.is_file():
+            import json
+            record = json.loads(metadata_path.read_text())
+            commit, branch = f"{record['base_checkpoint']}+{record['source_state']}", "INSTALLED_WHEEL"
+        else:
+            commit, branch = "UNAVAILABLE", "UNAVAILABLE"
     required_missing = [name for name, item in {**dependencies, **commands}.items() if item["status"] == "REQUIRED_MISSING"]
     return {
         "python": {"status": "AVAILABLE", "version": sys.version.split()[0], "executable": sys.executable},

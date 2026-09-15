@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "distribution_name": "microgap-rf",
+  "import_name": "streamer_rf",
+  "cli_name": "microgap-rf",
+  "current_version": "0.1.0.dev0",
+  "description_status": "PRESENT",
+  "readme": "README.md",
+  "python_requires": ">=3.11",
+  "authors_status": "USER_INPUT_REQUIRED",
+  "license_status": "DECISION_REQUIRED",
+  "project_urls_status": "USER_INPUT_REQUIRED",
+  "relationship_documented": true,
+  "status": "CONSISTENT_WITH_PENDING_RELEASE_METADATA"
+}

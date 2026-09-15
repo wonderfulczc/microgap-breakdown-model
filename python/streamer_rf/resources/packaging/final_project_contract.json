@@ -1,0 +1,11 @@
+{
+  "schema": "FinalProjectContract-v2.0",
+  "stages": {
+    "J": "PASS",
+    "I": {"tool": "PASS", "science": "PENDING_REAL_EXPERIMENT"}
+  },
+  "STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT",
+  "PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE": false,
+  "automatic_release_actions_performed": false
+}
+

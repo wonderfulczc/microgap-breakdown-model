@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "wheel_install": {
+    "status": "PASS",
+    "environment": "NEW_TEMPORARY_VENV",
+    "editable": false,
+    "source_PYTHONPATH": false,
+    "dependency_install": "FROM_WHEEL_DECLARATIONS",
+    "wall_time_s": 14.06,
+    "peak_rss_kib": 150096
+  },
+  "installed_smoke": {
+    "status": "PASS",
+    "working_directory": "OUTSIDE_REPOSITORY",
+    "cli_path_class": "TEMP_VENV_BIN",
+    "module_path_class": "TEMP_VENV_SITE_PACKAGES",
+    "package_version": "0.1.0.dev0",
+    "commands": ["microgap-rf --help", "microgap-rf doctor", "microgap-rf run CONFIG", "microgap-rf report CASE_ID"],
+    "wall_time_s": 2.85,
+    "peak_rss_kib": 124524
+  },
+  "installed_api": {
+    "status": "PASS",
+    "modules": ["streamer_rf", "streamer_rf.fullwave", "streamer_rf.thermal", "streamer_rf.validation"]
+  },
+  "sdist_rebuild": {
+    "status": "PASS",
+    "environment": "SEPARATE_TEMPORARY_BUILD_VENV",
+    "build_mode": "WHEEL_FROM_EXTRACTED_SDIST_NO_ISOLATION_WITH_PINNED_BUILD_TOOLS",
+    "wall_time_s": 0.45,
+    "peak_rss_kib": 36212
+  }
+}

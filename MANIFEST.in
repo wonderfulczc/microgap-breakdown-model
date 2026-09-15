@@ -1,0 +1,16 @@
+include README.md README.zh-CN.md CITATION.cff.template CITATION.cff.candidate THIRD_PARTY_NOTICES.md pyproject.toml requirements.txt requirements-dev.txt CMakeLists.txt
+recursive-include python *.py *.json *.yaml
+recursive-include cpp *.cpp *.hpp
+recursive-include config *.yaml *.json
+recursive-include examples *.yaml
+recursive-include literature *.yaml *.md
+recursive-include docs *.md *.csv
+recursive-include packaging *.json
+exclude packaging/rp2_artifact_audit.json
+recursive-include tests *.py
+include scripts/reproduce_smoke.sh
+prune build
+prune build-smoke
+prune results
+prune solver3d/afivo_reference/stage_e/results_raw
+global-exclude __pycache__ *.py[cod] *.log

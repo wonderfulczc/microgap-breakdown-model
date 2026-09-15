@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "wheel": {
+    "filename": "microgap_rf-0.1.0.dev0-py3-none-any.whl",
+    "bytes": 135868,
+    "sha256": "0a7f5bec8c96227f93803e4849824026585eb5b6ca66f400b5b33cb1dca2426b",
+    "members": 89,
+    "classification": {
+      "REQUIRED_RUNTIME": "streamer_rf Python modules",
+      "REQUIRED_METADATA": "dist-info and packaged contracts/resources",
+      "OPTIONAL_DOCUMENTATION": [],
+      "UNEXPECTED": [],
+      "FORBIDDEN": []
+    },
+    "status": "PASS"
+  },
+  "sdist": {
+    "filename": "microgap_rf-0.1.0.dev0.tar.gz",
+    "bytes": 424116,
+    "sha256": "58e4f36b4160f6013365bed7366a0786ee48b8494d70e9bf01448eca5c991c2d",
+    "members": 399,
+    "forbidden_members": [],
+    "status": "PASS"
+  },
+  "external_source_included": false,
+  "large_raw_data_included": false,
+  "build": {
+    "command": ".venv/bin/python -m build --no-isolation",
+    "wall_time_s": 1.00,
+    "peak_rss_kib": 36632,
+    "date": "2026-09-15"
+  }
+}

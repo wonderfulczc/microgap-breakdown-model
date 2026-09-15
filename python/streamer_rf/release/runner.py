@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import yaml
+from importlib.resources import files
 
 from streamer_rf.fullwave.transient import H3_BAND_HZ
 from streamer_rf.thermal.port import PortTransientContract
@@ -28,16 +29,35 @@ def repository_root(start: Path | None = None) -> Path:
     package_root = Path(__file__).resolve().parents[3]
     if (package_root / "packaging/final_project_contract.json").is_file():
         return package_root
-    raise ValueError("REPOSITORY_ROOT_NOT_FOUND")
+    resource_root = Path(str(files("streamer_rf").joinpath("resources")))
+    if (resource_root / "packaging/final_project_contract.json").is_file():
+        return resource_root
+    raise ValueError("REPOSITORY_OR_PACKAGED_RESOURCES_NOT_FOUND")
 
 
 def _git_commit(root: Path) -> str:
-    return subprocess.check_output(["git", "-C", str(root), "rev-parse", "HEAD"], text=True).strip()
+    if (root / ".git").exists():
+        return subprocess.check_output(["git", "-C", str(root), "rev-parse", "HEAD"], text=True).strip()
+    metadata = root / "packaging/release_build_metadata.json"
+    if metadata.is_file():
+        record = json.loads(metadata.read_text())
+        return f"{record['base_checkpoint']}+{record['source_state']}"
+    return "INSTALLED_PACKAGE_SOURCE_COMMIT_UNAVAILABLE"
+
+
+def user_execution_root(resource_root: Path, config_path: str | Path | None = None) -> Path:
+    """Keep package resources separate from the user's writable case directory."""
+    if (resource_root / "pyproject.toml").is_file():
+        return resource_root
+    if config_path and str(config_path) != "IN_MEMORY":
+        return Path(config_path).resolve().parent
+    return Path.cwd().resolve()
 
 
 def _output_dir(root: Path, cfg: dict) -> Path:
     configured = Path(cfg["output"]["directory"])
-    path = configured if configured.is_absolute() else root / configured
+    execution_root = user_execution_root(root, cfg.get("_config_path"))
+    path = configured if configured.is_absolute() else execution_root / configured
     path = path.resolve()
     if path.exists():
         raise ValueError(f"CASE_OUTPUT_ALREADY_EXISTS:{path}")
@@ -108,13 +128,14 @@ def execute_run(root: Path, cfg: dict, command: list[str]) -> Path:
             raise ValueError("USE_VALIDATE_COMMAND_FOR_VALIDATION_WORKFLOW")
         result = _architecture_smoke(root)
         if kind == "system_rf":
-            transfer = root / cfg.get("inputs", {}).get("h3_contract", "fullwave/h3/h3_result_contract.json")
+            relative = cfg.get("inputs", {}).get("h3_contract", "fullwave/h3/h3_result_contract.json")
+            transfer = user_execution_root(root, cfg.get("_config_path")) / relative
             if not transfer.is_file():
                 raise ValueError("H3_CONTRACT_NOT_FOUND")
-            manifest["input_hashes"][str(transfer.relative_to(root))] = sha256(transfer)
+            manifest["input_hashes"][str(relative)] = sha256(transfer)
             result["system_band_Hz"] = [200e6, 500e6]
             result["target_Hz"] = 350e6
-            result["H3_contract"] = str(transfer.relative_to(root))
+            result["H3_contract"] = str(relative)
         (output / "data/result.json").write_text(json.dumps(result, indent=2) + "\n")
         manifest["output_hashes"]["data/result.json"] = sha256(output / "data/result.json")
         manifest["exit_status"] = "PASS"
@@ -138,7 +159,7 @@ def execute_validation(root: Path, cfg: dict, command: list[str]) -> Path:
         relative = cfg.get("inputs", {}).get("dataset")
         if not relative:
             raise ValueError("VALIDATION_DATASET_REQUIRED")
-        dataset = (root / relative).resolve() if not Path(relative).is_absolute() else Path(relative).resolve()
+        dataset = (user_execution_root(root, cfg.get("_config_path")) / relative).resolve() if not Path(relative).is_absolute() else Path(relative).resolve()
         bundle = verify_synthetic_bundle(dataset)
         for name in bundle["metadata"]["vna"]["files"]:
             validate_vna_input(dataset / name)

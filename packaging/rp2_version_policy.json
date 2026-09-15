@@ -1,0 +1,10 @@
+{
+  "CURRENT_VERSION": "0.1.0.dev0",
+  "NEXT_CANDIDATE_VERSION": "0.1.0rc1",
+  "version_changed_in_rp2": false,
+  "dev_entry": "active development and packaging changes may remain",
+  "rc_entry_requirements": ["license decided", "citation required fields complete", "clean wheel pass", "sdist rebuild pass", "release inventory pass", "privacy audit pass", "scientific-status wording pass"],
+  "final_entry_requirements": ["release-candidate review complete", "no unresolved packaging blocker", "user explicitly authorizes final release"],
+  "rc1_transition_currently_allowed": false
+}
+

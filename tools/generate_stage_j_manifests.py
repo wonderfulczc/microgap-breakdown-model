@@ -56,6 +56,7 @@ def main():
         "config": "CORE",
         "cpp": "CORE",
         "docs": "REQUIRED_REFERENCE",
+        "dist": "BUILD_ARTIFACT",
         "examples": "REQUIRED_REFERENCE",
         "fullwave": "REQUIRED_REFERENCE",
         "literature": "REQUIRED_REFERENCE",

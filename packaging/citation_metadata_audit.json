@@ -1,0 +1,16 @@
+{
+  "status": "CITATION_METADATA_INCOMPLETE",
+  "formal_CITATION_cff_created": false,
+  "candidate": "CITATION.cff.candidate",
+  "user_required": [
+    "authors_and_order",
+    "preferred_citation_name_or_message",
+    "repository_url",
+    "license",
+    "release_version_decision",
+    "release_date_when_released"
+  ],
+  "optional": ["ORCID", "DOI", "affiliation", "preferred_citation_paper"],
+  "invented_metadata": false
+}
+

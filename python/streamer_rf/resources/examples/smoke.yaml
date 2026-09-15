@@ -1,0 +1,13 @@
+schema_version: "1.0"
+contract_version: rp1.1
+model_version: frozen-v2.0
+case_id: installed_wheel_smoke
+workflow:
+  type: smoke
+backend:
+  core: core
+output:
+  directory: results/installed_wheel_smoke
+scientific_claims:
+  native_rf_trusted_at_target: false
+

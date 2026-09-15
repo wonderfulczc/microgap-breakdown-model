@@ -25,6 +25,7 @@ package-dir = {"" = "python"}
 
 [tool.setuptools.packages.find]
 where = ["python"]
+include = ["streamer_rf*"]
 
 [tool.setuptools.package-data]
-streamer_rf = ["thermal/*.json"]
+streamer_rf = ["thermal/*.json", "resources/**/*.yaml", "resources/**/*.json"]

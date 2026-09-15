@@ -1,0 +1,15 @@
+schema_version: "1.0"
+change_request_id: CR-XXXX
+trigger_papers: []
+affected_modules: []
+affected_stages: []
+change_type: PENDING_REVIEW
+scientific_reason: null
+current_behavior: null
+proposed_behavior: null
+required_tests: []
+required_reruns: []
+backward_compatibility: UNASSESSED
+decision_status: DRAFT
+automatic_code_change_permitted: false
+

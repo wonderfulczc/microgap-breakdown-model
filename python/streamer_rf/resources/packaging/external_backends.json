@@ -1,0 +1,17 @@
+{
+  "Afivo": {
+    "source_policy": "EXTERNAL_NOT_VENDORED",
+    "commit": "a50b5508775086e90dfe423455fb58d812578410"
+  },
+  "openEMS": {
+    "source_policy": "EXTERNAL_NOT_VENDORED",
+    "commits": {
+      "openEMS": "8f480d04e0e17a780df28e0ac12e2086be041f9e",
+      "CSXCAD": "0458ee11ad711909cb32390b195079c3cff0606e",
+      "fparser": "4b9c845b449b520c4b8c5f23c74cd04820084f81",
+      "AppCSXCAD": "9249ab7f084c376822cea30ac9a361c47ed18131"
+    }
+  },
+  "COMSOL": {"source_policy": "PROPRIETARY_EXTERNAL_TOOL_NOT_DISTRIBUTED"}
+}
+

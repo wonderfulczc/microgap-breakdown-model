@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS_WITH_SAFE_HISTORICAL_METADATA",
+  "wheel": {
+    "machine_home_paths": 0,
+    "secret_indicators": 0,
+    "classification": "PASS"
+  },
+  "sdist": {
+    "machine_home_paths": "PRESENT_IN_FROZEN_PROVENANCE_AND_DOCUMENTATION",
+    "classification": "SAFE_HISTORICAL_METADATA",
+    "active_runtime_hardcode": false
+  },
+  "secret_categories": {
+    "REMOVE_BEFORE_RELEASE": [],
+    "POTENTIAL_SECRET_REVIEW": [],
+    "SAFE_HISTORICAL_METADATA": ["frozen local backend install provenance", "historical environment documentation"]
+  },
+  "real_secret_found": false
+}
+

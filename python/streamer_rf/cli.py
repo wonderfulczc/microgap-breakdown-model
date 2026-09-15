@@ -9,9 +9,10 @@ from pathlib import Path
 
 from .literature import impact_analysis, load_registry
 from .release.config import CASE_ID, load_case_config
+from .release.audit import release_audit
 from .release.doctor import doctor_report
 from .release.reporting import generate_report
-from .release.runner import execute_run, execute_validation, repository_root
+from .release.runner import execute_run, execute_validation, repository_root, user_execution_root
 
 
 def parser() -> argparse.ArgumentParser:
@@ -30,6 +31,9 @@ def parser() -> argparse.ArgumentParser:
     impact = literature_sub.add_parser("impact", help="分析登记论文的潜在影响")
     impact.add_argument("paper_id")
     impact.add_argument("--registry", type=Path)
+    release = sub.add_parser("release", help="只读候选发布审计")
+    release_sub = release.add_subparsers(dest="release_command", required=True)
+    release_sub.add_parser("audit", help="检查发布门，不创建发布")
     return root
 
 
@@ -53,8 +57,11 @@ def main(argv=None) -> int:
         if args.command == "report":
             if not CASE_ID.fullmatch(args.case_id):
                 raise ValueError("INVALID_CASE_ID")
-            base = (args.results_root or repo / "results").resolve()
+            base = (args.results_root or user_execution_root(repo) / "results").resolve()
             print(generate_report(base / args.case_id))
+            return 0
+        if args.command == "release":
+            print(json.dumps(release_audit(repo), indent=2, ensure_ascii=False))
             return 0
         registry_path = args.registry or repo / "literature/literature_registry.yaml"
         print(json.dumps(impact_analysis(load_registry(registry_path), args.paper_id), indent=2, ensure_ascii=False))

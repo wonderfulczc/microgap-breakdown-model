@@ -10,7 +10,7 @@ import yaml
 from streamer_rf.literature import impact_analysis, load_registry
 from streamer_rf.release.config import resolve_case_config
 from streamer_rf.release.reporting import generate_report
-from streamer_rf.release.runner import execute_run, execute_validation
+from streamer_rf.release.runner import execute_run, execute_validation, user_execution_root
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -51,6 +51,23 @@ def test_doctor_reports_optional_backends_without_crashing():
     assert report["optional_backends"]["Afivo"]["status"] in {"AVAILABLE", "OPTIONAL_MISSING"}
     assert len(report["repository"]["commit"]) == 40
     assert "PETSC_DIR" in report["environment_variables"]
+
+
+def test_doctor_accepts_packaged_resource_root_without_git_noise(tmp_path, capsys):
+    from streamer_rf.release.doctor import doctor_report
+    resource_root = ROOT / "python/streamer_rf/resources"
+    report = doctor_report(resource_root)
+    assert report["repository"]["branch"] == "INSTALLED_WHEEL"
+    assert "fatal:" not in capsys.readouterr().err
+
+
+def test_packaged_resources_are_not_used_as_user_output_root(tmp_path):
+    resource_root = tmp_path / "site-packages/streamer_rf/resources"
+    resource_root.mkdir(parents=True)
+    config = tmp_path / "case/smoke.yaml"
+    config.parent.mkdir()
+    config.write_text("case_id: smoke\n")
+    assert user_execution_root(resource_root, config) == config.parent.resolve()
 
 
 def test_config_validation_and_unknown_backend(tmp_path):
@@ -165,4 +182,6 @@ def test_release_preparation_manifest_has_no_physics_or_release_side_effects():
 def test_pyproject_includes_runtime_property_data_and_console_entry():
     text = (ROOT / "pyproject.toml").read_text()
     assert 'microgap-rf = "streamer_rf.cli:main"' in text
-    assert 'streamer_rf = ["thermal/*.json"]' in text
+    assert '"thermal/*.json"' in text
+    assert '"resources/**/*.yaml"' in text
+    assert 'include = ["streamer_rf*"]' in text
