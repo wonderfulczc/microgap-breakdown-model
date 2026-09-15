@@ -1,0 +1,28 @@
+{
+  "classifications": {
+    "DOCUMENTATION_ONLY": [
+      "docs/environment_baseline.md",
+      "docs/stage_d1_afivo_backend.md",
+      "docs/stage_h1_fullwave_foundation.md"
+    ],
+    "FROZEN_METADATA": [
+      "fullwave/h1/openems_backend.json",
+      "fullwave/h1-h4 summary JSON",
+      "rf/source/audit manifests",
+      "bridge-export/simulation"
+    ],
+    "TEST_FIXTURE": [
+      "frozen result paths under rf validation JSON"
+    ],
+    "ENV_CONFIG_REQUIRED": [
+      "solver3d/afivo_reference/**/*.cfg",
+      "OPENEMS_* external regeneration variables"
+    ],
+    "ACTIVE_PACKAGING_DEFECT": []
+  },
+  "corrected_active_code": [
+    "fullwave/h1/generate_h1_audit.py",
+    "fullwave/h4/generate_h4_results.py"
+  ],
+  "normal_core_source_requires_machine_absolute_path": false
+}

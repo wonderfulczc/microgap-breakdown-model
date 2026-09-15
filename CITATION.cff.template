@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Please cite this software using metadata completed by the repository owner."
+title: "Streamer RF Replica"
+type: software
+authors:
+  - family-names: "REQUIRED"
+    given-names: "REQUIRED"
+version: "REQUIRED_BEFORE_RELEASE"
+date-released: "REQUIRED_BEFORE_RELEASE"

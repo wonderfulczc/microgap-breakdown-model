@@ -1,0 +1,45 @@
+{
+  "components": [
+    {
+      "path": "cpp, python/streamer_rf, tools, scripts, config",
+      "classification": "INCLUDE_SOURCE_RELEASE"
+    },
+    {
+      "path": "tests, CMakeLists.txt, requirements*.txt",
+      "classification": "INCLUDE_SOURCE_RELEASE"
+    },
+    {
+      "path": "docs, packaging, compact stage contracts",
+      "classification": "INCLUDE_REFERENCE_DATA"
+    },
+    {
+      "path": "validation/stage_i/system_350mhz/*synthetic*",
+      "classification": "INCLUDE_SYNTHETIC_FIXTURE"
+    },
+    {
+      "path": "Afivo-streamer source",
+      "classification": "DOCUMENT_ONLY_EXTERNAL_BACKEND"
+    },
+    {
+      "path": "openEMS/CSXCAD source",
+      "classification": "DOCUMENT_ONLY_EXTERNAL_BACKEND"
+    },
+    {
+      "path": "COMSOL binaries/projects",
+      "classification": "DOCUMENT_ONLY_EXTERNAL_BACKEND"
+    },
+    {
+      "path": "build,.venv,caches,temp openEMS",
+      "classification": "EXCLUDE_BUILD_ARTIFACT"
+    },
+    {
+      "path": "Afivo raw and Stage-F raw fields",
+      "classification": "EXCLUDE_LARGE_RAW_DATA"
+    },
+    {
+      "path": "entire source release",
+      "classification": "LICENSE_REVIEW_REQUIRED"
+    }
+  ],
+  "public_release_created": false
+}

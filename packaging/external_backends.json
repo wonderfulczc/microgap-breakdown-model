@@ -1,0 +1,54 @@
+{
+  "Afivo": {
+    "source_policy": "EXTERNAL_NOT_VENDORED",
+    "upstream": "https://github.com/MD-CWI/afivo-streamer.git",
+    "commit": "a50b5508775086e90dfe423455fb58d812578410",
+    "license": "GPL-3.0_UPSTREAM",
+    "environment_variable": "AFIVO_STREAMER_ROOT",
+    "interface": "solver3d/afivo_reference configs and exported CSV source/field data",
+    "role": "3D streamer cross-validation backend",
+    "required_project_files": [
+      "solver3d/afivo_reference",
+      "docs/stage_d1_afivo_backend.md"
+    ]
+  },
+  "openEMS": {
+    "source_policy": "EXTERNAL_NOT_VENDORED",
+    "upstream": "https://github.com/thliebig/openEMS-Project.git",
+    "commits": {
+      "project": "ea3c012c688c9110973b2fdbf77b7b8aa09a099b",
+      "openEMS": "8f480d04e0e17a780df28e0ac12e2086be041f9e",
+      "CSXCAD": "0458ee11ad711909cb32390b195079c3cff0606e",
+      "fparser": "4b9c845b449b520c4b8c5f23c74cd04820084f81",
+      "AppCSXCAD": "9249ab7f084c376822cea30ac9a361c47ed18131"
+    },
+    "versions": {
+      "openEMS": "v0.37.0-rc2",
+      "CSXCAD": "v0.7.0-rc2"
+    },
+    "build_options": [
+      "--python",
+      "--disable-GUI",
+      "WITH_MPI=OFF",
+      "--njobs=2"
+    ],
+    "environment_variables": [
+      "OPENEMS_PROJECT_ROOT",
+      "OPENEMS_ROOT",
+      "OPENEMS_DEPS_ROOT",
+      "OPENEMS_PYTHON"
+    ],
+    "interface": "isolated Python openEMS/CSXCAD environment and compact CSV/JSON results",
+    "role": "passive full-wave structure and receiver backend"
+  },
+  "COMSOL": {
+    "source_policy": "PROPRIETARY_EXTERNAL_TOOL_NOT_DISTRIBUTED",
+    "role": "Stage-B electrostatic geometry/field comparison interface",
+    "packaged_scope": [
+      "DOCUMENTATION",
+      "GEOMETRY_FIELD_METADATA_CONVENTION",
+      "EXISTING_IMPORT_INTERFACE"
+    ],
+    "scientific_status": "EXTERNAL_VALIDATION_PENDING"
+  }
+}

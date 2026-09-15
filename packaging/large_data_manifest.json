@@ -1,0 +1,28 @@
+{
+  "datasets": [
+    {
+      "dataset": "AFIVO_STAGE_E_RAW",
+      "path": "solver3d/afivo_reference/stage_e/results_raw",
+      "bytes_local": 5119626784,
+      "scientific_role": "3D source and field exports for Stage E/F",
+      "directory_hash": "NOT_COMPUTED_MULTI_GB_DIRECTORY",
+      "provenance": "docs/stage_d1_afivo_backend.md and Stage-E configs",
+      "regenerable": true,
+      "required_upstream": "Afivo pinned commit plus solver3d/afivo_reference/stage_e/configs",
+      "release_policy": "EXTERNAL_ARCHIVE"
+    },
+    {
+      "dataset": "STAGE_F_RAW_FIELDS",
+      "path": "results/stage_f4/source_gate_recovery",
+      "bytes_local": 1393235992,
+      "scientific_role": "dense field/source-gate recovery evidence",
+      "directory_hash": "NOT_COMPUTED_MULTI_GB_DIRECTORY",
+      "provenance": "rf/source/audit manifests and frozen Stage-F contracts",
+      "regenerable": true,
+      "required_upstream": "frozen Stage-C/E source configurations",
+      "release_policy": "DO_NOT_PACKAGE"
+    }
+  ],
+  "normal_source_release_contains_multi_GB_raw_data": false,
+  "local_files_deleted": false
+}

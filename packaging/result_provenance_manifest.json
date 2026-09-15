@@ -1,0 +1,75 @@
+{
+  "records": [
+    {
+      "path": "thermal/g1/g1_reference_summary.json",
+      "source_hash": "491191d8193b4c6c273ff3f3d9c7a8d059a7a6fa1e9c8e67e81fea60cfd3e35e",
+      "producer_script": "thermal/g1/generate_g1_reference.py",
+      "config_hash": "RECORDED_UPSTREAM_WHERE_AVAILABLE_OTHERWISE_NOT_RECONSTRUCTED",
+      "backend_version": "RECORDED_IN_SOURCE_CONTRACT_OR_EXTERNAL_BACKEND_MANIFEST",
+      "status": "THERMAL_REFERENCE",
+      "units": "SI thermodynamic and electrical units",
+      "reference_plane": "NOT_APPLICABLE"
+    },
+    {
+      "path": "thermal/g3_port/g3_port_summary.json",
+      "source_hash": "7bc0c37a20dd280f69776172d1a031f26b306bbf9bf3ad2a81db4d870d62bb6e",
+      "producer_script": "thermal/g3_port/generate_g3_port.py",
+      "config_hash": "RECORDED_UPSTREAM_WHERE_AVAILABLE_OTHERWISE_NOT_RECONSTRUCTED",
+      "backend_version": "RECORDED_IN_SOURCE_CONTRACT_OR_EXTERNAL_BACKEND_MANIFEST",
+      "status": "PHYSICS_DERIVED_PORT_MODEL_VALIDATED",
+      "units": "V,A,ohm,s",
+      "reference_plane": "EXTERNAL_CEXT_TO_GAP_CGAP_PARALLEL_GSP"
+    },
+    {
+      "path": "fullwave/h2/h2_350mhz_summary.json",
+      "source_hash": "7f8dda154e836f190aacc32022fc0478f22484b32f9c4d22e02333de1080eadf",
+      "producer_script": "fullwave/h2/generate_h2_350mhz_results.py",
+      "config_hash": "RECORDED_UPSTREAM_WHERE_AVAILABLE_OTHERWISE_NOT_RECONSTRUCTED",
+      "backend_version": "RECORDED_IN_SOURCE_CONTRACT_OR_EXTERNAL_BACKEND_MANIFEST",
+      "status": "DEVELOPMENT_REFERENCE",
+      "units": "Hz,ohm,S-parameters",
+      "reference_plane": "50_OHM_PORTS"
+    },
+    {
+      "path": "fullwave/h3/h3_result_contract.json",
+      "source_hash": "4514850dce4c847ffc4aceda3a4d47f4ae1c7a3d88500e61f7095343f6fa1e39",
+      "producer_script": "fullwave/h3/generate_h3_results.py",
+      "config_hash": "RECORDED_UPSTREAM_WHERE_AVAILABLE_OTHERWISE_NOT_RECONSTRUCTED",
+      "backend_version": "RECORDED_IN_SOURCE_CONTRACT_OR_EXTERNAL_BACKEND_MANIFEST",
+      "status": "DEVELOPMENT_VERIFIED",
+      "units": "Hz,V,ohm,S",
+      "reference_plane": "G3_TOTAL_PORT_VOLTAGE_TO_RX_50OHM"
+    },
+    {
+      "path": "fullwave/h4/h4_result_contract.json",
+      "source_hash": "9e789507a48caf222a8de652ddaf1f40398b21ca105e759f593f35204ba154c7",
+      "producer_script": "fullwave/h4/generate_h4_results.py",
+      "config_hash": "RECORDED_UPSTREAM_WHERE_AVAILABLE_OTHERWISE_NOT_RECONSTRUCTED",
+      "backend_version": "RECORDED_IN_SOURCE_CONTRACT_OR_EXTERNAL_BACKEND_MANIFEST",
+      "status": "NUMERICAL_REFERENCE_ONLY",
+      "units": "Hz,V,m,V/m",
+      "reference_plane": "LOCAL_50_OHM_RECEIVER"
+    },
+    {
+      "path": "fullwave/h5/h5_stage_h_transfer_contract.json",
+      "source_hash": "ca4557ba93a32307ad65dc332386fcdb8982fe1827e63798a17e068e86ac5807",
+      "producer_script": "fullwave/h5/generate_h5_results.py",
+      "config_hash": "RECORDED_UPSTREAM_WHERE_AVAILABLE_OTHERWISE_NOT_RECONSTRUCTED",
+      "backend_version": "RECORDED_IN_SOURCE_CONTRACT_OR_EXTERNAL_BACKEND_MANIFEST",
+      "status": "STAGE_H_TOOL_DEVELOPMENT_PASS",
+      "units": "branch-specific",
+      "reference_plane": "PATHWAY_SPECIFIC"
+    },
+    {
+      "path": "validation/stage_i/final/stage_i_final_contract.json",
+      "source_hash": "d799ddea0a642f6bea3d45f9e8bb77cc5a78afe4d92d8ae657abd66ca541eb81",
+      "producer_script": "validation/stage_i/final/generate_wp_i_e.py",
+      "config_hash": "RECORDED_UPSTREAM_WHERE_AVAILABLE_OTHERWISE_NOT_RECONSTRUCTED",
+      "backend_version": "RECORDED_IN_SOURCE_CONTRACT_OR_EXTERNAL_BACKEND_MANIFEST",
+      "status": "STAGE_I_TOOL_DEVELOPMENT_PASS",
+      "units": "contract/status",
+      "reference_plane": "MEASUREMENT_CONTRACT_SPECIFIC"
+    }
+  ],
+  "historical_hashes_guessed": false
+}

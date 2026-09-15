@@ -1,0 +1,94 @@
+{
+  "schema": "StageJReproducibilityManifest-v1",
+  "repository_commit": "62facafb60dd2cb442462f3a4d3e1f53d6ac0f20",
+  "branch": "stage-j-packaging",
+  "platform_reference": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "build_toolchain": {
+    "C++": "C++17",
+    "CMake": "4.2.3",
+    "Ninja": "1.13.2",
+    "PETSc": "3.24.4",
+    "MPI": "Open MPI 5.0.10"
+  },
+  "Python": {
+    "version": "3.14.4",
+    "runtime_requirements": "requirements.txt",
+    "development_requirements": "requirements-dev.txt",
+    "requirement_hashes": {
+      "requirements.txt": "146f2ffd49ad2f46c31da6470cb674f53075061b4c3e3ac4d6f20d5beafa6792",
+      "requirements-dev.txt": "1438527233ce7beb1cdf4a046b8b5d38f140bd77217ef4df17d5592989d3ec15"
+    },
+    "openEMS_environment": "SEPARATE_EXTERNAL_ENVIRONMENT"
+  },
+  "external_backends": {
+    "Afivo": {
+      "source_policy": "EXTERNAL_NOT_VENDORED",
+      "upstream": "https://github.com/MD-CWI/afivo-streamer.git",
+      "commit": "a50b5508775086e90dfe423455fb58d812578410",
+      "license": "GPL-3.0_UPSTREAM",
+      "environment_variable": "AFIVO_STREAMER_ROOT",
+      "interface": "solver3d/afivo_reference configs and exported CSV source/field data",
+      "role": "3D streamer cross-validation backend",
+      "required_project_files": [
+        "solver3d/afivo_reference",
+        "docs/stage_d1_afivo_backend.md"
+      ]
+    },
+    "openEMS": {
+      "source_policy": "EXTERNAL_NOT_VENDORED",
+      "upstream": "https://github.com/thliebig/openEMS-Project.git",
+      "commits": {
+        "project": "ea3c012c688c9110973b2fdbf77b7b8aa09a099b",
+        "openEMS": "8f480d04e0e17a780df28e0ac12e2086be041f9e",
+        "CSXCAD": "0458ee11ad711909cb32390b195079c3cff0606e",
+        "fparser": "4b9c845b449b520c4b8c5f23c74cd04820084f81",
+        "AppCSXCAD": "9249ab7f084c376822cea30ac9a361c47ed18131"
+      },
+      "versions": {
+        "openEMS": "v0.37.0-rc2",
+        "CSXCAD": "v0.7.0-rc2"
+      },
+      "build_options": [
+        "--python",
+        "--disable-GUI",
+        "WITH_MPI=OFF",
+        "--njobs=2"
+      ],
+      "environment_variables": [
+        "OPENEMS_PROJECT_ROOT",
+        "OPENEMS_ROOT",
+        "OPENEMS_DEPS_ROOT",
+        "OPENEMS_PYTHON"
+      ],
+      "interface": "isolated Python openEMS/CSXCAD environment and compact CSV/JSON results",
+      "role": "passive full-wave structure and receiver backend"
+    },
+    "COMSOL": {
+      "source_policy": "PROPRIETARY_EXTERNAL_TOOL_NOT_DISTRIBUTED",
+      "role": "Stage-B electrostatic geometry/field comparison interface",
+      "packaged_scope": [
+        "DOCUMENTATION",
+        "GEOMETRY_FIELD_METADATA_CONVENTION",
+        "EXISTING_IMPORT_INTERFACE"
+      ],
+      "scientific_status": "EXTERNAL_VALIDATION_PENDING"
+    }
+  },
+  "reference_input_hashes": {
+    "Stage_I_final_contract": "d799ddea0a642f6bea3d45f9e8bb77cc5a78afe4d92d8ae657abd66ca541eb81",
+    "Stage_H_contract": "ca4557ba93a32307ad65dc332386fcdb8982fe1827e63798a17e068e86ac5807",
+    "Stage_I_system_fixture_manifest": "b6aa6402d07063891873d3fbf7c10b9a6899a602d4a344b0b70c4df29f0de335",
+    "Stage_I_WP_D_fixture_manifest": "e7f406c4001585c72552f91d48b537ce3948b1a9d95e06f2e72f016a6770f5e0",
+    "D_Angola_property_provenance": "4d64d05a09f19706564316288bf2c2c9df9a1a10f418f6920244bbe33ffdc6bb"
+  },
+  "minimal_reproduction_commands": [
+    "./scripts/reproduce_smoke.sh"
+  ],
+  "test_expectations": {
+    "CTest": "10_OF_10_PASS",
+    "pytest_default": "ALL_NON_ENVIRONMENT_SKIPPED_TESTS_PASS",
+    "smoke": "PASS"
+  },
+  "large_data_policy": "packaging/large_data_manifest.json",
+  "scientific_status": "docs/scientific_status.md"
+}

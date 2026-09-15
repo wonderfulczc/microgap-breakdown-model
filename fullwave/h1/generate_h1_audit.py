@@ -1,6 +1,7 @@
 """Generate compact H1 audits from the already completed openEMS runs."""
 import csv
 import json
+import os
 from pathlib import Path
 import platform
 import re
@@ -24,7 +25,7 @@ from streamer_rf.fullwave.foundation import (  # noqa: E402
     wavelength_cell,
 )
 
-RAW = Path("/tmp/h1_openems_validation")
+RAW = Path(os.environ.get("OPENEMS_H1_RAW", "/tmp/h1_openems_validation"))
 
 
 def _sha(path):
@@ -64,9 +65,12 @@ def _complex_relative(a, b):
 def main():
     start = time.perf_counter()
     out = Path(__file__).parent
-    backend = Path("/home/helianthusczc/projects/openEMS-Project")
-    install = Path("/home/helianthusczc/opt/openems")
-    deps = Path("/home/helianthusczc/opt/openems-deps")
+    try:
+        backend = Path(os.environ["OPENEMS_PROJECT_ROOT"])
+        install = Path(os.environ["OPENEMS_ROOT"])
+    except KeyError as error:
+        raise RuntimeError(f"{error.args[0]} must be set to regenerate H1 provenance") from error
+    deps = Path(os.environ.get("OPENEMS_DEPS_ROOT", install.parent / "openems-deps"))
     records = {}
     for case in ("coarse", "baseline", "fine", "pml10"):
         record = json.loads((RAW / case / "result.json").read_text())

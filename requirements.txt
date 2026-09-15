@@ -1,7 +1,6 @@
-numpy
-pandas
-scipy
-matplotlib
-h5py
-PyYAML
-pytest
+numpy==2.5.1
+pandas==3.0.3
+scipy==1.18.0
+matplotlib==3.11.1
+h5py==3.16.0
+PyYAML==6.0.3

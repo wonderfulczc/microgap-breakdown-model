@@ -1,0 +1,149 @@
+{
+  "schema": "StageJRepositoryInventory-v1",
+  "directories": [
+    {
+      "path": ".agents",
+      "classification": "EXCLUDE_FROM_RELEASE",
+      "bytes_in_worktree": 0,
+      "tracked": false
+    },
+    {
+      "path": ".codex",
+      "classification": "EXCLUDE_FROM_RELEASE",
+      "bytes_in_worktree": 0,
+      "tracked": false
+    },
+    {
+      "path": ".codex_skill_staging",
+      "classification": "EXCLUDE_FROM_RELEASE",
+      "bytes_in_worktree": 8582,
+      "tracked": false
+    },
+    {
+      "path": ".git",
+      "classification": "EXCLUDE_FROM_RELEASE",
+      "bytes_in_worktree": 22201493,
+      "tracked": false
+    },
+    {
+      "path": ".pytest_cache",
+      "classification": "BUILD_ARTIFACT",
+      "bytes_in_worktree": 38444,
+      "tracked": false
+    },
+    {
+      "path": ".venv",
+      "classification": "BUILD_ARTIFACT",
+      "bytes_in_worktree": 454417101,
+      "tracked": false
+    },
+    {
+      "path": "bridge-export",
+      "classification": "ARCHIVE_ONLY",
+      "bytes_in_worktree": 8456,
+      "tracked": true
+    },
+    {
+      "path": "build",
+      "classification": "BUILD_ARTIFACT",
+      "bytes_in_worktree": 6564697,
+      "tracked": false
+    },
+    {
+      "path": "build-smoke",
+      "classification": "BUILD_ARTIFACT",
+      "bytes_in_worktree": 10024396,
+      "tracked": false
+    },
+    {
+      "path": "circuit",
+      "classification": "REQUIRED_REFERENCE",
+      "bytes_in_worktree": 6299901,
+      "tracked": true
+    },
+    {
+      "path": "config",
+      "classification": "CORE",
+      "bytes_in_worktree": 19232,
+      "tracked": true
+    },
+    {
+      "path": "cpp",
+      "classification": "CORE",
+      "bytes_in_worktree": 293633,
+      "tracked": true
+    },
+    {
+      "path": "docs",
+      "classification": "REQUIRED_REFERENCE",
+      "bytes_in_worktree": 1527196,
+      "tracked": true
+    },
+    {
+      "path": "fullwave",
+      "classification": "REQUIRED_REFERENCE",
+      "bytes_in_worktree": 1885645,
+      "tracked": true
+    },
+    {
+      "path": "packaging",
+      "classification": "REQUIRED_REFERENCE",
+      "bytes_in_worktree": 18508,
+      "tracked": false
+    },
+    {
+      "path": "python",
+      "classification": "CORE",
+      "bytes_in_worktree": 1019375,
+      "tracked": true
+    },
+    {
+      "path": "results",
+      "classification": "REGENERABLE",
+      "bytes_in_worktree": 1407745397,
+      "tracked": false
+    },
+    {
+      "path": "rf",
+      "classification": "REQUIRED_REFERENCE",
+      "bytes_in_worktree": 2224820,
+      "tracked": true
+    },
+    {
+      "path": "scripts",
+      "classification": "CORE",
+      "bytes_in_worktree": 1075,
+      "tracked": false
+    },
+    {
+      "path": "solver3d",
+      "classification": "EXTERNAL_BACKEND",
+      "bytes_in_worktree": 5133154978,
+      "tracked": true
+    },
+    {
+      "path": "tests",
+      "classification": "CORE",
+      "bytes_in_worktree": 1244287,
+      "tracked": true
+    },
+    {
+      "path": "thermal",
+      "classification": "REQUIRED_REFERENCE",
+      "bytes_in_worktree": 1641460,
+      "tracked": true
+    },
+    {
+      "path": "tools",
+      "classification": "CORE",
+      "bytes_in_worktree": 94363,
+      "tracked": true
+    },
+    {
+      "path": "validation",
+      "classification": "REQUIRED_REFERENCE",
+      "bytes_in_worktree": 24384678,
+      "tracked": true
+    }
+  ]
+}

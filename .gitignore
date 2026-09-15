@@ -1,5 +1,6 @@
 # Local build and execution products
 build/
+build-smoke/
 results/
 archive/audit_only/
 checkpoints/
@@ -28,6 +29,12 @@ core
 .vscode/
 *.swp
 *.swo
+*.log
+
+# External-backend runtime products
+fullwave/**/raw/
+openems_simulation/
+nf2ff/
 
 # Large local literature/data artifacts not required for toolchain execution
 references/*.pdf

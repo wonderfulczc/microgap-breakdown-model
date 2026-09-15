@@ -1,0 +1,30 @@
+{
+  "schema": "FinalProjectContract-v2.0",
+  "architecture": "docs/software_architecture.md",
+  "stages": {
+    "A": "FROZEN_TOOL_FOUNDATION",
+    "B": "EXTERNAL_COMSOL_VALIDATION_PENDING",
+    "C": "FROZEN",
+    "D_E": "FROZEN_EXTERNAL_BACKEND_REFERENCE",
+    "F": "TRUSTED_PHYSICS_WITH_RECORDED_LIMITATIONS",
+    "G": "REFERENCE_SOLVERS_VALIDATED_CALIBRATION_PENDING",
+    "H": {
+      "tool": "PASS",
+      "science": "PENDING_STAGE_I"
+    },
+    "I": {
+      "tool": "PASS",
+      "science": "PENDING_REAL_EXPERIMENT"
+    },
+    "J": "PACKAGING_AUDIT_IN_PROGRESS"
+  },
+  "external_backends": "packaging/external_backends.json",
+  "data_policy": "packaging/large_data_manifest.json",
+  "reproduction_entry_point": "scripts/reproduce_smoke.sh",
+  "real_experiment_reentry": "validation/stage_i/final/stage_i_real_data_reentry_contract.json",
+  "release_readiness": "PENDING_LICENSE_OR_USER_RELEASE_DECISION",
+  "known_debts": "validation/stage_i/final/stage_i_final_debt_ledger.json",
+  "STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT",
+  "PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE": false,
+  "automatic_release_actions_performed": false
+}

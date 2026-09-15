@@ -1,151 +1,125 @@
-# Microgap Breakdown Model
+# Streamer RF Replica
 
-This repository contains a C++/PETSc/MPI streamer-fluid simulation toolchain prepared for future microgap-breakdown modeling. It was built through a resource-aware reconstruction of the Shi 2019 streamer-collision and broadband-radiation workflow, then reduced for GitHub archival as a reusable solver and workflow foundation.
+Resource-aware scientific software for microgap streamer, native-RF,
+thermal-channel/circuit, full-wave receiver, and simulation-to-experiment
+validation studies. The repository combines a C++17/PETSc/MPI core with a
+Python analysis package and explicit external-backend contracts.
 
-The repository contains:
+## Scientific scope
 
-- C++17 streamer-fluid solver components.
-- PETSc/MPI/CMake build integration.
-- Python configuration, run orchestration, postprocessing and plotting tools.
-- Unit tests and validation scripts.
-- Documentation of the Stage 1–5 reconstruction process.
-- Project-transfer notes for adapting the workflow to microgap electrode simulations.
+The software implements the frozen v2.0 A--J architecture. It provides working
+development and reference pathways, but it is not an experimentally validated
+microgap prediction package. In particular:
 
-Large historical simulation outputs have been removed. The project should therefore be described as a solver/toolchain/workflow archive, not as a complete raw-result evidence package.
+- Stage-I tool development is complete.
+- Stage-I scientific validation is pending real experiments.
+- Native discharge RF near 350 MHz is unresolved, not zero.
+- H3 full-wave loading feedback is not coupled.
+- H4 absolute receiver amplitude is a numerical reference.
+- Stage5 retains a pending full-Maxwell reference.
 
-## Purpose
+See [scientific status](docs/scientific_status.md) before interpreting results.
 
-The immediate purpose is to preserve a working numerical framework that can be adapted from simplified free-space streamer cases toward a real microgap discharge model:
+## Architecture
 
-实际微间隙电极几何
-→ 电极电势边界和实际电压波形
-→ 电极附近种子电子/表面发射
-→ 微间隙流注与击穿
-→ 电极回路时变电流
-→ 电流矩与原生宽频辐射
-→ 外部 RLC 耦合
-→ 接收端信号
+| Stage | Role |
+|---|---|
+| A | configuration, lifecycle, and numerical foundations |
+| B | external COMSOL electrostatic/geometry validation interface |
+| C | 2D PETSc streamer, electrode current, and cold/thermal handoff observables |
+| D--E | external Afivo 3D cross-validation and geometry references |
+| F | Jefimenko native field, spectral trust, and mechanism diagnostics |
+| G | cold/thermal handoff, LTE thermal channel, RLC coupling, transient port |
+| H | openEMS structure/receiver paths and native-field receiver response |
+| I | measurement contracts, dry-run pipelines, and real-data reentry |
+| J | packaging, reproducibility, and open-source preparation |
 
-Current code covers only part of this chain: streamer-fluid transport, Poisson coupling, SP3 photoionization, ISG-0 electron flux, checkpoint-style run logic, current-moment integration, FFT/ESD postprocessing, and validation infrastructure.
+The canonical handoff description is in
+[software architecture](docs/software_architecture.md).
 
-## Recommended platform
+## Repository layout
 
-Use Linux or Windows + WSL2 Ubuntu. Native Windows builds are not recommended because PETSc, MPI, `pkg-config`, and `mpirun` are used directly by the CMake and Python workflows.
+- `cpp/`: C++17/PETSc/MPI solver and C++ tests.
+- `python/streamer_rf/`: reusable Python analysis package.
+- `config/`: core run configurations.
+- `tests/`: Python regression tests.
+- `rf/`, `thermal/`, `fullwave/`: compact stage scripts, contracts, and results.
+- `validation/stage_i/`: measurement contracts and explicitly synthetic fixtures.
+- `solver3d/afivo_reference/`: Afivo adapters/configurations, not Afivo source.
+- `docs/`: architecture, methods, status, and reproducibility guidance.
+- `packaging/`: Stage-J release and reproducibility manifests.
+- `results/`, `build/`, `.venv/`: local/regenerable artifacts excluded from release.
 
-## Dependencies
+## Quick start
 
-System packages on Ubuntu/WSL2:
-
-```bash
-sudo apt update
-sudo apt install -y build-essential cmake ninja-build pkg-config \
-  openmpi-bin libopenmpi-dev libpetsc-real-dev python3-venv
-```
-
-Python packages:
+Supported reference environment: Linux or WSL2, Python 3.14, CMake, Ninja,
+Open MPI, and PETSc discoverable through `pkg-config`.
 
 ```bash
 python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
-```
-
-## Build
-
-Configure and build:
-
-```bash
+.venv/bin/pip install -r requirements-dev.txt
 cmake -S . -B build -G Ninja
 cmake --build build --parallel
-```
-
-Run C++ unit tests:
-
-```bash
 ctest --test-dir build --output-on-failure
+PYTHONPATH=python .venv/bin/python -m pytest -q
 ```
 
-Run the default Python source/core regression baseline:
+If PETSc is not installed in a system search path, set `PETSC_DIR` and, where
+applicable, `PETSC_ARCH`. Configure the MPI launcher through the host MPI
+installation; do not hard-code it into project source.
+
+## Smoke reproduction
+
+The smoke profile builds the C++ targets, runs CTest, and exercises lightweight
+Stage-F/G/H/I checks. It does not run Afivo, openEMS, or multi-GB simulations.
 
 ```bash
-PYTHONPATH=python PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest
+./scripts/reproduce_smoke.sh
 ```
 
-Historical result-evidence checks are retained separately and are not part of
-the default source/core baseline:
+Alternative interpreter/build locations are explicit:
 
 ```bash
-PYTHONPATH=python PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest -m evidence
+PYTHON_BIN=/path/to/python BUILD_DIR=/path/to/build ./scripts/reproduce_smoke.sh
 ```
 
-If the archived `results/` tree is absent, the evidence suite reports
-`EVIDENCE_UNAVAILABLE` with the cleanup/archive reference instead of failing
-the core code-health baseline.
+See [reproducibility profiles](docs/reproducibility.md) for `SMOKE`,
+`REFERENCE`, and `FULL_RESEARCH` scope.
 
-Run a Python import smoke test:
+## External backends
 
-```bash
-PYTHONPATH=python PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -c \
-  "import streamer_rf.stage4, streamer_rf.stage5; print('python smoke passed')"
-```
+Afivo-streamer and openEMS/CSXCAD remain external source trees. Set
+`AFIVO_STREAMER_ROOT`, `OPENEMS_ROOT`, and `OPENEMS_PYTHON` when executing their
+workflows. Their pinned commits and interfaces are recorded in
+`packaging/external_backends.json`. The core smoke suite does not require them.
 
-## How to use the toolchain
+COMSOL is a proprietary external Stage-B comparison workflow. No COMSOL binary
+or proprietary project file is distributed here.
 
-The repository is organized around reproducible stages:
+## Data policy
 
-- `cpp/`: C++ solver, PETSc/MPI numerical modules, C++ tests.
-- `python/`: run drivers, analysis tools, current-moment and radiation postprocessing.
-- `config/`: stage and run configuration templates.
-- `tests/`: Python regression tests.
-- `tools/`: validators, evidence audit tools, cleanup and summary validators.
-- `docs/`: method notes, closure reports, project-transfer guidance, and final summaries.
+Small contracts, manifests, reference results, and labelled synthetic fixtures
+are retained. Approximately 5.12 GB of raw Afivo data and 1.39 GB of Stage-F
+raw fields are excluded from normal source releases and must be regenerated or
+obtained from an external archive. See `packaging/large_data_manifest.json`.
 
-Typical workflow:
+Stage-I fixtures are marked `SYNTHETIC_DEVELOPMENT_INPUT` or
+`SYNTHETIC_DRY_RUN`. They are not experimental measurements.
 
-1. Edit or add a configuration under `config/`.
-2. Build the C++ executables with CMake/Ninja.
-3. Run the appropriate Python driver, for example `python/stage4/run_stage4.py` or `python/stage5/finalize_resource_run.py`.
-4. Analyze generated outputs with the corresponding Python analysis script.
-5. Use the validator tools as consistency checks when result evidence is present.
+## Real-data reentry
 
-New simulations will recreate a local `results/` directory. This directory is intentionally ignored by Git.
+Real VNA, oscilloscope, geometry, calibration, and uncertainty inputs use the
+existing contracts under `validation/stage_i/`. The ordered reentry workflow is
+defined in `validation/stage_i/final/stage_i_real_data_reentry_contract.json`
+and [reproducibility documentation](docs/reproducibility.md). Core parser and
+comparison APIs do not need redesign.
 
-## Current scientific status
+## Citation and license
 
-The reconstruction completed the solver, collision, radiation-chain, trend-logic, and research-transfer preparation workflow under resource-aware criteria. It did not complete a 1:1 quantitative reproduction of Shi 2019.
+Citation author/release metadata are incomplete; see `CITATION.cff.template`
+and `packaging/citation_status.json`. No project license has been selected.
+`PROJECT_LICENSE_STATUS=DECISION_REQUIRED`; redistribution terms must be chosen
+by the repository owner before a public release.
 
-Historical Stage closure validators require the deleted `results/` tree and are retained as reference tools. They will pass again only after the corresponding result evidence is regenerated or restored.
-
-Default `pytest` is therefore the source/core regression baseline. The
-`evidence` pytest marker is reserved for historical production-artifact
-validation under `results/`.
-
-## Limitations
-
-This repository is not yet a complete microgap-breakdown model. The following pieces still need to be implemented or replaced:
-
-- Real electrode geometry.
-- Electrode potential boundary conditions.
-- Actual voltage waveform input.
-- Seed electrons near electrodes or surface-emission models.
-- Electrode-circuit time-domain current.
-- External RLC coupling.
-- Receiver/antenna signal model.
-- Calibrated gas transport tables for the target gas and pressure.
-
-It also does not contain the original author transport table from Shi 2019 and does not claim point-by-point reproduction of Shi 2019 figures.
-
-## Documentation
-
-- `docs/github_archive_assessment.md`: archive scope and consequences of result deletion.
-- `docs/project_simulation_transfer.md`: how to adapt the solver workflow to a microgap project.
-- `docs/simulation_toolchain_summary_for_project_book.md`: Chinese project-book style summary.
-- `docs/simulation_reconstruction_summary/index.html`: offline visual summary.
-
-## Minimal validation already checked before upload
-
-```bash
-cmake --build build --parallel
-ctest --test-dir build --output-on-failure
-PYTHONPATH=python PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -c \
-  "import streamer_rf.stage4, streamer_rf.stage5; print('python smoke passed')"
-```
+No release, tag, package publication, or repository-visibility change is
+performed by Stage J.

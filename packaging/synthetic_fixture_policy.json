@@ -1,0 +1,27 @@
+{
+  "fixtures": [
+    {
+      "path": "validation/stage_i/system_350mhz/synthetic_input",
+      "bytes": 12496171,
+      "manifest": "validation/stage_i/system_350mhz/synthetic_input/sha256_manifest.json",
+      "labels": [
+        "SYNTHETIC_DEVELOPMENT_INPUT",
+        "SYNTHETIC_DRY_RUN",
+        "NOT_EXPERIMENTAL_DATA"
+      ],
+      "policy": "KEEP_IN_REPOSITORY_WITH_HASH_MANIFEST"
+    },
+    {
+      "path": "validation/stage_i/system_350mhz/wp_i_d_synthetic",
+      "bytes": 11596963,
+      "manifest": "validation/stage_i/system_350mhz/wp_i_d_synthetic/sha256_manifest.json",
+      "labels": [
+        "SYNTHETIC_DEVELOPMENT_INPUT",
+        "SYNTHETIC_DRY_RUN",
+        "NOT_EXPERIMENTAL_DATA"
+      ],
+      "policy": "KEEP_IN_REPOSITORY_WITH_HASH_MANIFEST"
+    }
+  ],
+  "replacement_policy": "DO_NOT_REWRITE_FROZEN_FIXTURES_WITHOUT_BYTE_AND_PROVENANCE_TRACEABILITY"
+}

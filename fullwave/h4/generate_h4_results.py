@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import resource
 import sys
@@ -331,7 +332,10 @@ def main(raw: Path):
             "exc_type": 10,
             "incident_field_amplitude_V_m": 1.0,
             "normalization": "VPORT_SPECTRUM_DIVIDED_BY_OPENEMS_ET_EXCITATION_SPECTRUM",
-            "official_example": "/home/helianthusczc/opt/openems/share/openEMS/python/Tutorials/RCS_Sphere.py",
+            "official_example": str(
+                Path(os.environ.get("OPENEMS_ROOT", "OPENEMS_ROOT"))
+                / "share/openEMS/python/Tutorials/RCS_Sphere.py"
+            ),
         },
         "boundary": "PML_8_ALL_SIDES",
         "domain_geometry": {

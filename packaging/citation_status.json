@@ -1,0 +1,11 @@
+{
+  "CITATION_STATUS": "CITATION_METADATA_INCOMPLETE",
+  "template": "CITATION.cff.template",
+  "missing": [
+    "AUTHOR",
+    "VERSION",
+    "RELEASE_DATE",
+    "OPTIONAL_DOI_OR_ORCID"
+  ],
+  "invented_metadata": false
+}
