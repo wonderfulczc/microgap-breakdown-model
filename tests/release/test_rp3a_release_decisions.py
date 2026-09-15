@@ -21,37 +21,36 @@ def test_third_party_inventory_schema_and_fparser_evidence():
     assert "docs/fparser.html" in fparser["license_source"]
 
 
-def test_license_recommendation_is_non_effective_and_requires_user():
+def test_license_recommendation_history_and_user_resolution_are_distinct():
     recommendation = load("release/license_recommendation.json")
     assert recommendation["PRIMARY_RECOMMENDATION"]["license"] == "Apache-2.0"
     assert recommendation["SECONDARY_OPTION"]["license"] == "BSD-3-Clause"
     assert recommendation["effective_license_grant"] is False
-    assert recommendation["USER_DECISION_REQUIRED"] is True
-    assert not (ROOT / "LICENSE").exists()
+    assert recommendation["USER_DECISION_REQUIRED"] is False
+    assert recommendation["FINAL_PROJECT_LICENSE"] == "Apache-2.0"
+    assert (ROOT / "LICENSE").exists()
     assert not (ROOT / "LICENSE.candidate").exists()
-    metadata = load("release/license_candidate_metadata.json")
-    assert metadata["notice"] == "NOT_EFFECTIVE_UNTIL_USER_APPROVAL"
-    assert metadata["effective_license_grant"] is False
+    resolved = load("release/rp3_user_decision_resolved.json")
+    assert resolved["PROJECT_LICENSE"] == "Apache-2.0"
+    assert resolved["resolved_gate_inputs"]["license_approved"] is True
 
 
-def test_citation_candidate_retains_placeholders_and_formal_file_absent():
-    text = (ROOT / "CITATION.cff.candidate").read_text()
-    assert "<USER_REQUIRED" in text and "<USER_CONFIRM" in text
-    assert not (ROOT / "CITATION.cff").exists()
-    assert not citation_file_complete(ROOT / "CITATION.cff.candidate")
+def test_formal_citation_replaces_stale_candidate():
+    assert citation_file_complete(ROOT / "CITATION.cff")
+    assert not (ROOT / "CITATION.cff.candidate").exists()
 
 
-def test_release_user_input_schema_is_small_and_unresolved():
-    record = load("release/rp3_user_decision_required.json")
-    assert set(record["questions"]) == {"A_LICENSE", "B_authors_order", "C_repository_URL", "D_optional_ORCID_affiliation", "E_preferred_citation_policy", "F_approve_RC1_later"}
-    assert record["automatic_release_action"] is False
-    assert not any(record["resolved_gate_inputs"].values())
+def test_release_user_input_is_resolved_without_release_action():
+    record = load("release/rp3_user_decision_resolved.json")
+    assert record["status"] == "RESOLVED"
+    assert all(record["resolved_gate_inputs"].values())
+    assert record["release_actions_performed"] is False
 
 
 def test_rc1_gate_rejects_candidate_files_and_missing_approval(tmp_path):
-    gates = {"LICENSE_DECISION": "PASS", "THIRD_PARTY_LICENSE_REVIEW": "PASS", "CITATION_METADATA": "PASS", "SCIENTIFIC_STATUS_AUDIT": "PASS", "CLEAN_WHEEL_INSTALL": "PASS"}
+    gates = {"LICENSE_DECISION": "PASS", "THIRD_PARTY_LICENSE_REVIEW": "PASS", "CITATION_METADATA": "PASS", "SCIENTIFIC_STATUS_AUDIT": "PASS", "CLEAN_WHEEL_INSTALL": "PASS", "SDIST_REBUILD": "PASS"}
     (tmp_path / "LICENSE").write_text("approved text")
-    (tmp_path / "CITATION.cff").write_text("cff-version: 1.2.0\nmessage: cite\ntitle: tool\nauthors:\n  - family-names: A\n")
+    (tmp_path / "CITATION.cff").write_text("cff-version: 1.2.0\nmessage: cite\ntitle: tool\nauthors:\n  - family-names: A\nrepository-code: https://github.com/a/b\nlicense: Apache-2.0\nversion: 1.0\n")
     approved = {"license_approved": True, "repository_url_confirmed": True, "authors_and_order_confirmed": True, "user_approved_rc1": True}
     assert not rc1_allowed(tmp_path, gates, {**approved, "license_approved": False})
     assert not rc1_allowed(tmp_path, gates, {**approved, "user_approved_rc1": False})
@@ -62,15 +61,15 @@ def test_repository_url_normalization_does_not_infer_visibility():
     expected = "https://github.com/wonderfulczc/microgap-breakdown-model"
     assert canonical_repository_url("https://github.com/wonderfulczc/microgap-breakdown-model.git") == expected
     assert canonical_repository_url("git@github.com:wonderfulczc/microgap-breakdown-model.git") == expected
-    assert load("release/release_metadata_user_inputs.json")["repository"]["REPOSITORY_VISIBILITY"] == "UNKNOWN"
+    assert load("release/rp3_user_decision_resolved.json")["REPOSITORY_VISIBILITY"] == "UNCHANGED_NOT_INFERRED"
 
 
-def test_release_audit_preserves_science_and_pending_user_gates():
+def test_release_audit_preserves_science_and_closes_user_gates():
     result = release_audit(ROOT)
-    assert result["gates"]["LICENSE_DECISION"] == "PENDING_USER_DECISION"
-    assert result["gates"]["CITATION_METADATA"] == "INCOMPLETE_USER_INPUT_REQUIRED"
+    assert result["gates"]["LICENSE_DECISION"] == "PASS"
+    assert result["gates"]["CITATION_METADATA"] == "PASS"
     assert result["gates"]["THIRD_PARTY_LICENSE_REVIEW"] == "PASS"
-    assert result["gates"]["RC1_ALLOWED"] is False
+    assert result["gates"]["RC1_ALLOWED"] is True
     assert result["scientific_status"] == {"STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT", "PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE": False, "SYSTEM_350MHZ_VALIDATION": "NOT_MEASURED", "NATIVE_RF_350MHZ": "NOT_RESOLVED"}
 
 

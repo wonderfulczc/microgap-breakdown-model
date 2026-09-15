@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "wheel_install": {
+    "status": "PASS",
+    "environment": "NEW_TEMPORARY_VENV",
+    "editable": false,
+    "source_PYTHONPATH": false,
+    "dependency_install": "FROM_WHEEL_DECLARATIONS"
+  },
+  "installed_smoke": {
+    "status": "PASS",
+    "working_directory": "OUTSIDE_REPOSITORY",
+    "cli_path": "/tmp/microgap-rf-rp3b-final-venv/bin/microgap-rf",
+    "module_path_class": "TEMP_VENV_SITE_PACKAGES",
+    "package_version": "0.1.0.dev0",
+    "commands": [
+      "microgap-rf --help",
+      "microgap-rf doctor",
+      "microgap-rf release audit",
+      "microgap-rf run smoke.yaml",
+      "microgap-rf report installed_wheel_smoke",
+      "import streamer_rf"
+    ]
+  },
+  "installed_metadata": {
+    "Name": "microgap-rf",
+    "Version": "0.1.0.dev0",
+    "Author": "Zach",
+    "License-Expression": "Apache-2.0",
+    "Repository": "https://github.com/wonderfulczc/microgap-breakdown-model"
+  },
+  "sdist_rebuild": {
+    "status": "PASS",
+    "environment": "SEPARATE_TEMPORARY_BUILD_VENV",
+    "wall_time_s": 0.50,
+    "peak_rss_kib": 36140
+  },
+  "large_physics_simulations_rerun": false
+}

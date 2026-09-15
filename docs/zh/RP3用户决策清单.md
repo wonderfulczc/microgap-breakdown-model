@@ -1,12 +1,13 @@
-# RP-3 用户决策清单
+# RP-3 用户决策记录
 
-RP-3B 前只需用户确认以下事项，仓库可自动获得的信息无需重复填写：
+状态：`USER_DECISIONS_RESOLVED`。RP-3B 使用以下用户明确决定：
 
-1. **LICENSE**：是否接受 Apache-2.0；若否，选择 BSD-3-Clause、MIT 或 GPL-3.0。
-2. **作者与顺序**：逐位提供 `given-names`、`family-names` 和软件作者排列顺序。
-3. **仓库 URL**：是否确认 `https://github.com/wonderfulczc/microgap-breakdown-model` 为 canonical URL；仓库 visibility 由用户确认。
-4. **可选身份信息**：是否填写 ORCID、机构或公开联系邮箱。
-5. **引用策略**：仅引用软件，还是同时指定一篇 preferred citation paper。
-6. **RC1 批准**：上述门全部关闭后，是否批准推进到 `0.1.0rc1`。
+1. **LICENSE**：Apache-2.0。
+2. **作者与顺序**：唯一软件作者署名为单名 `Zach`。
+3. **仓库 URL**：`https://github.com/wonderfulczc/microgap-breakdown-model`。
+4. **身份信息**：机构使用用户提供原文；ORCID 未提供。
+5. **引用策略**：当前独立引用软件，未来可增加 preferred paper 并保留软件 citation。
+6. **RC1 批准**：用户批准在全部门控通过后进入未来 `0.1.0rc1` 工作。
 
-当前没有 RC1 批准，也不会自动创建 `LICENSE`、`CITATION.cff`、tag 或公开发行。
+机器可读记录为 `release/rp3_user_decision_resolved.json`。本工作包创建正式 LICENSE 和
+CITATION，但不会切换版本、创建 tag、上传包或公开发行。

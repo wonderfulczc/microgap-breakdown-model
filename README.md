@@ -125,13 +125,13 @@ comparison APIs do not need redesign.
 
 ## Citation and license
 
-Citation author/release metadata are incomplete; see `CITATION.cff.template`
-and `packaging/citation_status.json`. No project license has been selected.
-`PROJECT_LICENSE_STATUS=DECISION_REQUIRED`; redistribution terms must be chosen
-by the repository owner before a public release.
+The project code is licensed under [Apache-2.0](LICENSE). The software author is
+`Zach`; citation metadata are provided in [`CITATION.cff`](CITATION.cff). Release
+candidate preparation does not imply experimental validation:
+`STAGE_I_SCIENTIFIC_VALIDATION=PENDING_REAL_EXPERIMENT` remains unchanged.
 
-No release, tag, package publication, or repository-visibility change is
-performed by Stage J.
+No release, tag, package publication, or repository-visibility change has been
+performed by Stage J or Release Preparation RP-3B.
 
 Release Preparation RP-1 adds only a thin configuration/CLI layer over the
 existing modules. See [CLI architecture](docs/en/cli_architecture.md); it does

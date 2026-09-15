@@ -1,9 +1,0 @@
-{
-  "schema_version": "1.0",
-  "status": "CANDIDATE_ONLY",
-  "effective_license_grant": false,
-  "notice": "NOT_EFFECTIVE_UNTIL_USER_APPROVAL",
-  "recommended_spdx_identifier": "Apache-2.0",
-  "formal_rp3b_action_after_approval": "Create LICENSE using the unmodified official Apache License 2.0 text and confirmed copyright metadata.",
-  "reason_for_metadata_instead_of_LICENSE_candidate": "Avoid setuptools or release tooling treating a candidate filename as an effective project license."
-}

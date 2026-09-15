@@ -1,11 +1,9 @@
 {
-  "CITATION_STATUS": "CITATION_METADATA_INCOMPLETE",
-  "template": "CITATION.cff.template",
-  "missing": [
-    "AUTHOR",
-    "VERSION",
-    "RELEASE_DATE",
-    "OPTIONAL_DOI_OR_ORCID"
-  ],
+  "CITATION_STATUS": "PASS",
+  "formal_file": "CITATION.cff",
+  "author": "Zach",
+  "ORCID": "NOT_PROVIDED",
+  "date_released": "OMITTED_UNTIL_RELEASE",
+  "preferred_citation": "FUTURE_PREFERRED_PAPER_NOT_YET_PROVIDED",
   "invented_metadata": false
 }

@@ -268,8 +268,8 @@ def main():
     }
     write("clean_clone_reproducibility.json", clean_clone)
 
-    citation = {"CITATION_STATUS": "CITATION_METADATA_INCOMPLETE", "template": "CITATION.cff.template", "missing": ["AUTHOR", "VERSION", "RELEASE_DATE", "OPTIONAL_DOI_OR_ORCID"], "invented_metadata": False}
-    license_status = {"PROJECT_LICENSE_STATUS": "DECISION_REQUIRED", "LICENSE_file_present": False, "license_selected_by_stage_j": False, "PUBLIC_RELEASE_READY": "PENDING_LICENSE_OR_USER_RELEASE_DECISION"}
+    citation = {"CITATION_STATUS": "PASS", "formal_file": "CITATION.cff", "author": "Zach", "ORCID": "NOT_PROVIDED", "date_released": "OMITTED_UNTIL_RELEASE", "invented_metadata": False}
+    license_status = {"PROJECT_LICENSE_STATUS": "DECIDED", "PROJECT_LICENSE": "Apache-2.0", "LICENSE_file_present": True, "license_selected_by_stage_j": False, "license_selected_by_user_in_rp3b": True, "PUBLIC_RELEASE_READY": "READY_FOR_RELEASE_CANDIDATE"}
     write("citation_status.json", citation)
     write("license_status.json", license_status)
 
@@ -301,9 +301,10 @@ def main():
         "STAGE_J_TOOL_PACKAGING": "PASS",
         "REPRODUCIBILITY_SMOKE": "PASS",
         "OPEN_SOURCE_ARCHITECTURE_READY": True,
-        "PUBLIC_RELEASE_READY": "PENDING_LICENSE_OR_USER_RELEASE_DECISION",
-        "PROJECT_LICENSE_STATUS": "DECISION_REQUIRED",
-        "CITATION_STATUS": "CITATION_METADATA_INCOMPLETE",
+        "PUBLIC_RELEASE_READY": "READY_FOR_RELEASE_CANDIDATE",
+        "PROJECT_LICENSE_STATUS": "DECIDED",
+        "PROJECT_LICENSE": "Apache-2.0",
+        "CITATION_STATUS": "PASS",
         "PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE": False,
         "STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT",
         "large_physics_simulations_rerun": False,

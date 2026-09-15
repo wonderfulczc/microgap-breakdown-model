@@ -2,7 +2,9 @@
   "schema_version": "1.0",
   "candidate_only": true,
   "effective_license_grant": false,
-  "USER_DECISION_REQUIRED": true,
+  "decision_record_status": "SUPERSEDED_BY_USER_DECISION",
+  "FINAL_PROJECT_LICENSE": "Apache-2.0",
+  "USER_DECISION_REQUIRED": false,
   "PRIMARY_RECOMMENDATION": {
     "license": "Apache-2.0",
     "reason": "Permissive academic and commercial reuse with an explicit patent grant and termination mechanism, while keeping the externally invoked GPL/LGPL backends outside project artifacts."

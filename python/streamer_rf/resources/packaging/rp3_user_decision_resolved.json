@@ -1,0 +1,12 @@
+{
+  "status": "RESOLVED",
+  "PROJECT_LICENSE": "Apache-2.0",
+  "SOFTWARE_AUTHOR_DISPLAY_NAME": "Zach",
+  "CANONICAL_REPOSITORY_URL": "https://github.com/wonderfulczc/microgap-breakdown-model",
+  "resolved_gate_inputs": {
+    "license_approved": true,
+    "repository_url_confirmed": true,
+    "authors_and_order_confirmed": true,
+    "user_approved_rc1": true
+  }
+}

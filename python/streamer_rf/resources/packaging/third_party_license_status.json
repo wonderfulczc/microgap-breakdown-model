@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "inventory": "packaging/third_party_license_inventory.json",
+  "external_backend_sources_distributed": false
+}

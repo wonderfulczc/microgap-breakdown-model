@@ -7,9 +7,10 @@
   "description_status": "PRESENT",
   "readme": "README.md",
   "python_requires": ">=3.11",
-  "authors_status": "USER_INPUT_REQUIRED",
-  "license_status": "DECISION_REQUIRED",
-  "project_urls_status": "USER_INPUT_REQUIRED",
+  "authors_status": "DECIDED_ZACH",
+  "license_status": "APACHE_2_0",
+  "project_urls_status": "CANONICAL_REPOSITORY_CONFIGURED",
+  "canonical_repository_url": "https://github.com/wonderfulczc/microgap-breakdown-model",
   "relationship_documented": true,
-  "status": "CONSISTENT_WITH_PENDING_RELEASE_METADATA"
+  "status": "CONSISTENT"
 }

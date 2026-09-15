@@ -70,14 +70,14 @@ def test_sdist_archive_exclusion_policy(tmp_path):
     assert audit_archive(good, kind="sdist")["status"] == "PASS"
 
 
-def test_license_and_citation_gates_remain_pending_user_input():
+def test_license_and_citation_gates_reflect_resolved_user_input():
     gates = json.loads((ROOT / "packaging/rp2_release_gate.json").read_text())
     citation = json.loads((ROOT / "packaging/citation_metadata_audit.json").read_text())
-    assert not (ROOT / "LICENSE").exists()
-    assert gates["LICENSE_DECISION"] == "PENDING_USER_DECISION"
-    assert gates["CITATION_METADATA"] == "INCOMPLETE_USER_INPUT_REQUIRED"
+    assert (ROOT / "LICENSE").exists()
+    assert gates["LICENSE_DECISION"] == "PASS"
+    assert gates["CITATION_METADATA"] == "PASS"
     assert citation["invented_metadata"] is False
-    assert not (ROOT / "CITATION.cff").exists()
+    assert (ROOT / "CITATION.cff").exists()
 
 
 def test_scientific_validation_gate_is_immutable():
@@ -99,7 +99,7 @@ def test_version_state_requires_user_gates_before_rc1():
     gates = json.loads((ROOT / "packaging/rp2_release_gate.json").read_text())
     assert CURRENT_VERSION == "0.1.0.dev0"
     assert NEXT_CANDIDATE_VERSION == "0.1.0rc1"
-    assert candidate_version_allowed(gates) is False
+    assert candidate_version_allowed(gates) is True
     complete = {key: "PASS" for key in ("CLEAN_WHEEL_INSTALL", "SDIST_REBUILD", "LICENSE_DECISION", "CITATION_METADATA", "PRIVACY_AUDIT", "SCIENTIFIC_STATUS_AUDIT", "RELEASE_INVENTORY")}
     assert candidate_version_allowed(complete) is True
 

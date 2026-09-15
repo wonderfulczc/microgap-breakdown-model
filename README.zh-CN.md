@@ -71,6 +71,7 @@ Afivo-streamer 与 openEMS/CSXCAD 均保持外置，分别通过 `AFIVO_STREAMER
 
 小型合同和参考数据保留；多 GB Afivo/Stage-F 数据外部归档或重建。详见
 [数据政策](docs/zh/数据政策.md)。轻量复现命令为 `./scripts/reproduce_smoke.sh`。
-本项目尚未选择许可证，`PROJECT_LICENSE_STATUS=DECISION_REQUIRED`；引用元数据模板为
-`CITATION.cff.template`，当前状态为 `CITATION_METADATA_INCOMPLETE`。不得在用户明确决定前发布。
-
+本项目代码采用 [Apache-2.0](LICENSE) 许可证，软件作者署名为 `Zach`，引用信息见
+[`CITATION.cff`](CITATION.cff)。当前仅达到 release candidate 准备条件，尚未创建公开发行。
+`STAGE_I_SCIENTIFIC_VALIDATION=PENDING_REAL_EXPERIMENT`，软件发行准备状态不得解释为
+物理模型已经通过真实实验验证。

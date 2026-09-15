@@ -1,7 +1,6 @@
 {
   "package_version": "0.1.0.dev0",
-  "base_checkpoint": "e92db74",
-  "source_state": "RP2_CANDIDATE_WORKTREE",
+  "base_checkpoint": "d148d7f7dee4b06b43b97c7bc64a31d514088889",
+  "source_state": "RP3B_RELEASE_METADATA_WORKTREE",
   "release_created": false
 }
-

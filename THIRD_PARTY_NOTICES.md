@@ -2,10 +2,13 @@
 
 状态：`THIRD_PARTY_LICENSE_REVIEW = PASS`。
 
+本项目自身软件代码采用 Apache-2.0；这是项目许可证，不是下列第三方后端的许可证。
+
 本项目 wheel 和 sdist 不包含第三方依赖源码或二进制。Python 依赖由包管理器独立安装；
 PETSc 与 Open MPI 是系统依赖；Afivo-streamer、openEMS、CSXCAD、fparser、AppCSXCAD
 与 COMSOL 均保持外部边界。若未来分发预装二进制环境或外部后端，必须重新审查许可证
-正文、NOTICE、源码提供及动态链接义务。
+正文、NOTICE、源码提供及动态链接义务。当前 wheel/sdist 不分发 Afivo、openEMS、
+CSXCAD、fparser 或 AppCSXCAD 的源码或二进制；若分发模式改变，必须重新审计。
 
 | 依赖 | 固定版本/提交 | 许可证 | 当前关系 |
 |---|---|---|---|

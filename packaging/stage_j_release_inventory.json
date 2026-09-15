@@ -37,9 +37,11 @@
       "classification": "EXCLUDE_LARGE_RAW_DATA"
     },
     {
-      "path": "entire source release",
-      "classification": "LICENSE_REVIEW_REQUIRED"
+      "path": "LICENSE, CITATION.cff, THIRD_PARTY_NOTICES.md",
+      "classification": "INCLUDE_SOURCE_RELEASE"
     }
   ],
+  "PROJECT_LICENSE": "Apache-2.0",
+  "license_review_required": false,
   "public_release_created": false
 }

@@ -1,17 +1,14 @@
 {
-  "status": "CITATION_METADATA_INCOMPLETE",
-  "formal_CITATION_cff_created": false,
-  "candidate": "CITATION.cff.candidate",
+  "status": "PASS",
+  "formal_CITATION_cff_created": true,
+  "formal_file": "CITATION.cff",
   "cff_minimum_required_by_schema": ["cff-version", "message", "title", "authors"],
-  "project_release_required": [
-    "authors_given_names_family_names_and_order",
-    "preferred_citation_policy_and_message",
-    "repository_code_url_confirmation",
-    "license",
-    "release_version",
-    "date_released"
-  ],
-  "optional_recommended": ["ORCID", "affiliation", "keywords"],
+  "project_release_required": ["author_and_order", "repository_code", "license", "version", "citation_policy"],
+  "missing_required": [],
+  "author_expression": "MONONYM_AS_FAMILY_NAMES_ONLY",
+  "date_released": "OPTIONAL_OMITTED_UNTIL_RELEASE",
+  "citation_policy": "CURRENT_SOFTWARE_CITATION_WITH_FUTURE_PREFERRED_PAPER",
+  "optional_recommended": ["ORCID", "preferred_citation_paper"],
   "optional": ["email", "DOI", "preferred_citation_paper", "repository-artifact"],
   "third_party_authors_are_project_authors": false,
   "invented_metadata": false

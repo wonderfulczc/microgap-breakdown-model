@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "status": "RESOLVED",
+  "decision_scope": "RP-3B_RELEASE_METADATA",
+  "decision_timestamp": "2026-09-15T16:14:25+08:00",
+  "based_on_commit": "d148d7f7dee4b06b43b97c7bc64a31d514088889",
+  "PROJECT_LICENSE": "Apache-2.0",
+  "SOFTWARE_AUTHOR_DISPLAY_NAME": "Zach",
+  "AFFILIATION": "College of Integrated Circuits of Southeast University",
+  "AFFILIATION_USER_PROVIDED": true,
+  "ORCID": "NOT_PROVIDED",
+  "CANONICAL_REPOSITORY_URL": "https://github.com/wonderfulczc/microgap-breakdown-model",
+  "REPOSITORY_VISIBILITY": "UNCHANGED_NOT_INFERRED",
+  "CITATION_POLICY": "CURRENT_SOFTWARE_CITATION_WITH_FUTURE_PREFERRED_PAPER",
+  "USER_APPROVES_FUTURE_RC1": true,
+  "COPYRIGHT_HOLDER_STATUS": "USER_AUTHOR_DECLARATION_ONLY",
+  "resolved_gate_inputs": {
+    "license_approved": true,
+    "repository_url_confirmed": true,
+    "authors_and_order_confirmed": true,
+    "user_approved_rc1": true
+  },
+  "release_actions_performed": false
+}

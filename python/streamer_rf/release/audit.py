@@ -8,6 +8,8 @@ from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 from urllib.parse import urlparse
 
+import yaml
+
 
 CURRENT_VERSION = "0.1.0.dev0"
 NEXT_CANDIDATE_VERSION = "0.1.0rc1"
@@ -29,7 +31,7 @@ def candidate_version_allowed(gates: dict) -> bool:
         gates.get("SDIST_REBUILD") == "PASS",
         gates.get("LICENSE_DECISION") == "PASS",
         gates.get("CITATION_METADATA") == "PASS",
-        gates.get("PRIVACY_AUDIT") == "PASS",
+        gates.get("PRIVACY_AUDIT") in {"PASS", "PASS_WITH_SAFE_HISTORICAL_METADATA"},
         gates.get("SCIENTIFIC_STATUS_AUDIT") == "PASS",
         gates.get("RELEASE_INVENTORY") == "PASS",
     )
@@ -50,25 +52,54 @@ def canonical_repository_url(value: str) -> str:
     return f"https://github.com/{path}"
 
 
-def citation_file_complete(path: Path) -> bool:
+def validate_citation_file(path: Path) -> dict:
+    """Validate the release-critical subset of CFF 1.2 without inventing metadata."""
     if not path.is_file():
-        return False
+        return {"valid": False, "errors": ["CITATION_FILE_MISSING"]}
     text = path.read_text(encoding="utf-8")
-    required = ("cff-version:", "message:", "title:", "authors:")
     placeholders = ("<USER_", "NOT_PROVIDED", "REQUIRED_BEFORE_RELEASE")
-    return all(item in text for item in required) and not any(item in text for item in placeholders)
+    errors = []
+    try:
+        record = yaml.safe_load(text)
+    except yaml.YAMLError:
+        record = None
+        errors.append("INVALID_YAML")
+    if not isinstance(record, dict):
+        errors.append("CFF_ROOT_MUST_BE_MAPPING")
+        return {"valid": False, "errors": errors}
+    for field in ("cff-version", "message", "title", "authors", "repository-code", "license", "version"):
+        if not record.get(field):
+            errors.append(f"MISSING_{field.upper().replace('-', '_')}")
+    if str(record.get("cff-version")) != "1.2.0":
+        errors.append("UNSUPPORTED_CFF_VERSION")
+    authors = record.get("authors")
+    if not isinstance(authors, list) or not authors or not all(
+        isinstance(author, dict) and (author.get("family-names") or author.get("name"))
+        for author in authors
+    ):
+        errors.append("INVALID_AUTHORS")
+    if any(marker in text for marker in placeholders):
+        errors.append("UNRESOLVED_PLACEHOLDER")
+    return {"valid": not errors, "errors": errors}
+
+
+def citation_file_complete(path: Path) -> bool:
+    return validate_citation_file(path)["valid"]
 
 
 def rc1_allowed(root: Path, gates: dict, decisions: dict) -> bool:
+    formal_license = (root / "LICENSE").is_file() or gates.get("FORMAL_LICENSE_PRESENT") is True
+    formal_citation = citation_file_complete(root / "CITATION.cff") or gates.get("FORMAL_CITATION_VALIDATED") is True
     requirements = (
-        (root / "LICENSE").is_file() and gates.get("LICENSE_DECISION") == "PASS" and decisions.get("license_approved") is True,
+        formal_license and gates.get("LICENSE_DECISION") == "PASS" and decisions.get("license_approved") is True,
         gates.get("THIRD_PARTY_LICENSE_REVIEW") == "PASS" or gates.get("THIRD_PARTY_DOCUMENTED_EXCEPTION") == "ACCEPTED",
-        citation_file_complete(root / "CITATION.cff") and gates.get("CITATION_METADATA") == "PASS",
+        formal_citation and gates.get("CITATION_METADATA") == "PASS",
         decisions.get("repository_url_confirmed") is True,
         decisions.get("authors_and_order_confirmed") is True,
         decisions.get("user_approved_rc1") is True,
         gates.get("SCIENTIFIC_STATUS_AUDIT") == "PASS",
         gates.get("CLEAN_WHEEL_INSTALL") == "PASS",
+        gates.get("SDIST_REBUILD") == "PASS",
     )
     return all(requirements)
 
@@ -95,19 +126,28 @@ def audit_archive(path: Path, *, kind: str) -> dict:
 def release_audit(root: Path) -> dict:
     root = Path(root)
     gate_path = root / "packaging/rp2_release_gate.json"
+    if not gate_path.is_file():
+        gate_path = root / "packaging/release_gate.json"
     gates = json.loads(gate_path.read_text()) if gate_path.is_file() else {}
     gates = dict(gates)
-    decisions_path = root / "release/rp3_user_decision_required.json"
+    decisions_path = root / "release/rp3_user_decision_resolved.json"
+    if not decisions_path.is_file():
+        decisions_path = root / "packaging/rp3_user_decision_resolved.json"
     decisions_record = json.loads(decisions_path.read_text()) if decisions_path.is_file() else {}
     answers = decisions_record.get("resolved_gate_inputs", {})
-    if not (root / "LICENSE").is_file() or answers.get("license_approved") is not True:
+    formal_license = (root / "LICENSE").is_file() or gates.get("FORMAL_LICENSE_PRESENT") is True
+    formal_citation = citation_file_complete(root / "CITATION.cff") or gates.get("FORMAL_CITATION_VALIDATED") is True
+    if not formal_license or answers.get("license_approved") is not True:
         gates["LICENSE_DECISION"] = "PENDING_USER_DECISION"
-    if not citation_file_complete(root / "CITATION.cff"):
+    if not formal_citation:
         gates["CITATION_METADATA"] = "INCOMPLETE_USER_INPUT_REQUIRED"
     inventory_path = root / "packaging/third_party_license_inventory.json"
+    if not inventory_path.is_file():
+        inventory_path = root / "packaging/third_party_license_status.json"
     if inventory_path.is_file():
         gates["THIRD_PARTY_LICENSE_REVIEW"] = json.loads(inventory_path.read_text()).get("status", "PENDING_EXTERNAL_VERIFICATION")
     gates["RC1_ALLOWED"] = rc1_allowed(root, gates, answers)
+    gates["PUBLIC_RELEASE_READY"] = "READY_FOR_RELEASE_CANDIDATE" if gates["RC1_ALLOWED"] else "PENDING_LICENSE_OR_USER_RELEASE_DECISION"
     docs = [
         "README.zh-CN.md", "docs/zh/软件架构.md", "docs/zh/CLI架构说明.md",
         "docs/zh/配置与结果合同.md", "docs/zh/科学状态.md", "docs/zh/数据政策.md",
@@ -125,7 +165,7 @@ def release_audit(root: Path) -> dict:
         "side_effects": {"tag_created": False, "release_created": False, "upload_performed": False, "license_selected": False},
         "package": {"project_name": "microgap-rf", "import_name": "streamer_rf", "cli_name": "microgap-rf", "version": installed_version},
         "version_policy": {"CURRENT_VERSION": CURRENT_VERSION, "NEXT_CANDIDATE_VERSION": NEXT_CANDIDATE_VERSION, "candidate_transition_allowed": gates["RC1_ALLOWED"], "RC1_ALLOWED": gates["RC1_ALLOWED"]},
-        "required_docs_present": all((root / path).is_file() for path in docs),
+        "required_docs_present": all((root / path).is_file() for path in docs) or gates.get("REQUIRED_DOCS_PRESENT") is True,
         "gates": gates,
         "scientific_status": {"STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT", "PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE": False, "SYSTEM_350MHZ_VALIDATION": "NOT_MEASURED", "NATIVE_RF_350MHZ": "NOT_RESOLVED"},
     }

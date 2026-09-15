@@ -8,6 +8,8 @@ version = "0.1.0.dev0"
 description = "Configuration-driven microgap discharge and RF research toolkit"
 readme = "README.md"
 requires-python = ">=3.11"
+authors = [{ name = "Zach" }]
+license = "Apache-2.0"
 dependencies = [
   "numpy==2.5.1",
   "pandas==3.0.3",
@@ -19,6 +21,11 @@ dependencies = [
 
 [project.scripts]
 microgap-rf = "streamer_rf.cli:main"
+
+[project.urls]
+Repository = "https://github.com/wonderfulczc/microgap-breakdown-model"
+Source = "https://github.com/wonderfulczc/microgap-breakdown-model"
+Issues = "https://github.com/wonderfulczc/microgap-breakdown-model/issues"
 
 [tool.setuptools]
 package-dir = {"" = "python"}

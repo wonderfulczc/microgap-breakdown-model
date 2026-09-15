@@ -87,12 +87,14 @@ def test_machine_paths_have_no_remaining_active_packaging_defect():
     assert 'os.environ["OPENEMS_ROOT"]' in h1
 
 
-def test_license_and_citation_are_not_invented():
+def test_license_and_citation_follow_user_decision():
     license_status = load("license_status.json")
     citation = load("citation_status.json")
-    assert license_status["PROJECT_LICENSE_STATUS"] == "DECISION_REQUIRED"
+    assert license_status["PROJECT_LICENSE_STATUS"] == "DECIDED"
+    assert license_status["PROJECT_LICENSE"] == "Apache-2.0"
     assert license_status["license_selected_by_stage_j"] is False
-    assert citation["CITATION_STATUS"] == "CITATION_METADATA_INCOMPLETE"
+    assert license_status["license_selected_by_user_in_rp3b"] is True
+    assert citation["CITATION_STATUS"] == "PASS"
     assert citation["invented_metadata"] is False
 
 
@@ -102,7 +104,6 @@ def test_release_inventory_has_all_required_boundaries():
     assert classes == {
         "INCLUDE_SOURCE_RELEASE", "INCLUDE_REFERENCE_DATA", "INCLUDE_SYNTHETIC_FIXTURE",
         "DOCUMENT_ONLY_EXTERNAL_BACKEND", "EXCLUDE_BUILD_ARTIFACT", "EXCLUDE_LARGE_RAW_DATA",
-        "LICENSE_REVIEW_REQUIRED",
     }
     assert inventory["public_release_created"] is False
 

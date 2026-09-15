@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "build_timestamp": "2026-09-15T16:28:37+08:00",
+  "source_base_checkpoint": "d148d7f7dee4b06b43b97c7bc64a31d514088889",
+  "wheel": {
+    "filename": "microgap_rf-0.1.0.dev0-py3-none-any.whl",
+    "bytes": 143089,
+    "sha256": "2795260967e0166e92446f64249dbd0b9cda05a308de0ec1bb0a49e410162101",
+    "members": 93,
+    "license_member": "microgap_rf-0.1.0.dev0.dist-info/licenses/LICENSE",
+    "external_backend_source_included": false,
+    "large_raw_data_included": false,
+    "status": "PASS"
+  },
+  "sdist": {
+    "filename": "microgap_rf-0.1.0.dev0.tar.gz",
+    "bytes": 439401,
+    "sha256": "62528eda9f90df9bf2de857efe536dd5237275077b06eefdfa6e16e59cfa6505",
+    "members": 417,
+    "contains_LICENSE": true,
+    "contains_CITATION_cff": true,
+    "contains_stale_candidate": false,
+    "external_backend_source_included": false,
+    "large_raw_data_included": false,
+    "status": "PASS"
+  },
+  "build": {
+    "command": ".venv/bin/python -m build --no-isolation",
+    "wall_time_s": 0.93,
+    "peak_rss_kib": 36724,
+    "status": "PASS"
+  }
+}
