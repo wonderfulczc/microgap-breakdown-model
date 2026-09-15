@@ -1,0 +1,101 @@
+{
+  "H4_contract_path": "fullwave/h4/h4_result_contract.json",
+  "H4_contract_hash": "9e789507a48caf222a8de652ddaf1f40398b21ca105e759f593f35204ba154c7",
+  "H4_summary_path": "fullwave/h4/h4_summary.json",
+  "H4_summary_hash": "344702ff72ef2b5b6fb1a9db5297b3ab31f0e543a68bcee1a2e435ac43eaa347",
+  "receiver_id": "H4_CANONICAL_SHORT_DIPOLE_FIELD_SENSOR",
+  "receiver_transfer_path": "fullwave/h4/h4_receiver_transfer.csv",
+  "receiver_transfer_hash": "dbfe52d59367877d5b5d9575bb431b6a1744ccaabe5c276ea7f02bc9c7fa3db6",
+  "receiver_transfer_support_Hz": [
+    2800000000.0,
+    10500000000.0
+  ],
+  "receiver_absolute_amplitude_status": "NUMERICAL_REFERENCE_ONLY",
+  "receiver_mesh_status": "RECEIVER_TRANSFER_MESH_SENSITIVITY_PRESENT",
+  "stages": {
+    "Stage4": {
+      "source_case_id": "F4-P-stage4-left-isolated",
+      "source_path": "rf/production/f4_attribution/F4-P-stage4-left-isolated_jefimenko_waveform.csv",
+      "source_hash": "a40eb67deaebb3164d527b453b9b4ef4b4d65fef3ea26b19623215ddfe631ed8",
+      "rf_trust_report_path": "rf/production/f4_attribution/F4-P-stage4-left-isolated_rf_trust_report.json",
+      "rf_trust_report_hash": "517b1b6e2253c240b50f080c09bc60e4c52c52dddca272abadc4a0ed83c5b2e5",
+      "observer_id": "F4_far_field_reference",
+      "observer_position_m": [
+        0.2,
+        0.0,
+        0.005
+      ],
+      "observer_distance_m": 0.2,
+      "field_components": [
+        "Ex_total",
+        "Ey_total",
+        "Ez_total"
+      ],
+      "receiver_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "NATIVE_PROPAGATION_ALREADY_INCLUDED": true,
+      "trusted_frequency_band_Hz": [
+        2941408508.9091916,
+        7966314711.629051
+      ],
+      "trusted_frequency_bins_Hz": [
+        3771036549.883574,
+        4713795687.354467,
+        5656554824.825361,
+        6599313962.296254,
+        7542073099.767148
+      ],
+      "trusted_bin_count": 5,
+      "received_native_spectrum_path": "fullwave/h4/h4_stage4_native_received_spectrum.csv",
+      "received_native_spectrum_hash": "130a5667f5165f1d0ae837a120e8474cf3d13e70072ed7d3fcf9421bf6ff8128",
+      "received_time_semantics": "TRUSTED_BAND_LIMITED_NATIVE_RESPONSE"
+    },
+    "Stage5": {
+      "source_case_id": "F4-C-stage5-highfield-collision",
+      "source_path": "rf/production/f4_attribution/F4-C-stage5-highfield-collision_jefimenko_waveform.csv",
+      "source_hash": "1511975749e903718a65223edf6c17272293fab36b88cd75b6f7b07d96a02615",
+      "rf_trust_report_path": "rf/production/f4_attribution/F4-C-stage5-highfield-collision_rf_trust_report.json",
+      "rf_trust_report_hash": "9026b066102b10331aa32eb3ba7a9b904a482fbedfdc25ed6afff289b71392be",
+      "observer_id": "F4_far_field_reference",
+      "observer_position_m": [
+        0.2,
+        0.0,
+        0.005
+      ],
+      "observer_distance_m": 0.2,
+      "field_components": [
+        "Ex_total",
+        "Ey_total",
+        "Ez_total"
+      ],
+      "receiver_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "NATIVE_PROPAGATION_ALREADY_INCLUDED": true,
+      "trusted_frequency_band_Hz": [
+        3047273105.1868486,
+        10233758844.919172
+      ],
+      "trusted_frequency_bins_Hz": [
+        3936061094.1996818,
+        4920076367.749602,
+        5904091641.299522,
+        6888106914.849443,
+        7872122188.3993635,
+        8856137461.949284,
+        9840152735.499205
+      ],
+      "trusted_bin_count": 7,
+      "received_native_spectrum_path": "fullwave/h4/h4_stage5_native_received_spectrum.csv",
+      "received_native_spectrum_hash": "e31cdfab364a6afa56f8d807fa1397e5ee38b578a09ba3d066b2b0e9e6fbb35a",
+      "received_time_semantics": "TRUSTED_BAND_LIMITED_NATIVE_RESPONSE"
+    }
+  },
+  "Stage5_full_maxwell_status": "FULL_MAXWELL_REFERENCE_PENDING",
+  "inputs_recomputed": false
+}

@@ -1,0 +1,20 @@
+{
+  "ledger_type": "StageINativeGHzDiscrepancyLedger",
+  "pathways": [
+    "NATIVE_STAGE4",
+    "NATIVE_STAGE5"
+  ],
+  "allowed_possible_sources": [
+    "SOURCE_MODEL",
+    "RECEIVER_TRANSFER",
+    "MESH_NUMERICS",
+    "FULL_MAXWELL_REFERENCE",
+    "POLARIZATION",
+    "INSTRUMENT_BANDWIDTH",
+    "CALIBRATION",
+    "UNRESOLVED"
+  ],
+  "entries": [],
+  "empty_reason": "STAGE_I_EXPERIMENTAL_DATA_NOT_PROVIDED",
+  "automatic_cause_assignment": false
+}

@@ -1,0 +1,35 @@
+{
+  "contract_type": "NativeGHzFrequencyCoveragePolicy",
+  "coverage_statuses": [
+    "FULL_TRUST_BAND_COVERAGE",
+    "PARTIAL_TRUST_BAND_COVERAGE",
+    "NO_TRUST_BAND_COVERAGE"
+  ],
+  "classification_basis": "MEASUREMENT_SUPPORT_VERSUS_EXACT_RFTRUSTREPORT_BAND",
+  "comparison_bins": "EXACT_FROZEN_STAGE_F_TRUSTED_FFT_BINS",
+  "instruments": {
+    "OSCILLOSCOPE_WIDEBAND_WAVEFORM": {
+      "capability_bandwidth_Hz": 8000000000.0,
+      "capability_sample_rate_Hz": 80000000000.0,
+      "capability_vertical_bits": 12,
+      "capability_only": true,
+      "measurement_settings": "NOT_PROVIDED",
+      "Stage4_coverage": "FULL_TRUST_BAND_COVERAGE",
+      "Stage5_coverage": "PARTIAL_TRUST_BAND_COVERAGE",
+      "Stage4_trusted_bins_covered": 5,
+      "Stage5_trusted_bins_covered": 5
+    },
+    "SPECTRUM_ANALYZER": {
+      "capability_frequency_Hz": [
+        2.0,
+        67000000000.0
+      ],
+      "capability_only": true,
+      "measurement_settings": "NOT_PROVIDED",
+      "Stage4_coverage": "FULL_TRUST_BAND_COVERAGE",
+      "Stage5_coverage": "FULL_TRUST_BAND_COVERAGE",
+      "Stage4_trusted_bins_covered": 5,
+      "Stage5_trusted_bins_covered": 7
+    }
+  }
+}

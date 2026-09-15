@@ -1,0 +1,51 @@
+{
+  "contract_type": "StageINativeGHzMeasurementContractSet",
+  "profile_separation": "SYSTEM_350MHZ_AND_NATIVE_GHZ_INDEPENDENT",
+  "templates": {
+    "NATIVE_GHZ_STAGE4": {
+      "contract_type": "StageINativeGHzMeasurementContract",
+      "experiment_id": "NOT_PROVIDED",
+      "validation_profile": "NATIVE_GHZ_STAGE4",
+      "receiver_id": "NOT_PROVIDED",
+      "receiver_geometry": "NOT_PROVIDED",
+      "receiver_orientation": "NOT_PROVIDED",
+      "distance_m": "NOT_PROVIDED",
+      "instrument": "NOT_PROVIDED",
+      "frequency_range_Hz": "NOT_PROVIDED",
+      "frequency_resolution_Hz": "NOT_PROVIDED",
+      "reference_plane": "NOT_PROVIDED",
+      "receiver_load_impedance_ohm": "NOT_PROVIDED",
+      "cable_metadata": "NOT_PROVIDED",
+      "calibration_metadata": "NOT_PROVIDED",
+      "raw_spectrum_path": "NOT_PROVIDED",
+      "raw_waveform_path": "NOT_PROVIDED",
+      "repetition_index": "NOT_PROVIDED",
+      "uncertainty_metadata": "NOT_PROVIDED",
+      "measurement_status": "NOT_MEASURED"
+    },
+    "NATIVE_GHZ_STAGE5": {
+      "contract_type": "StageINativeGHzMeasurementContract",
+      "experiment_id": "NOT_PROVIDED",
+      "validation_profile": "NATIVE_GHZ_STAGE5",
+      "receiver_id": "NOT_PROVIDED",
+      "receiver_geometry": "NOT_PROVIDED",
+      "receiver_orientation": "NOT_PROVIDED",
+      "distance_m": "NOT_PROVIDED",
+      "instrument": "NOT_PROVIDED",
+      "frequency_range_Hz": "NOT_PROVIDED",
+      "frequency_resolution_Hz": "NOT_PROVIDED",
+      "reference_plane": "NOT_PROVIDED",
+      "receiver_load_impedance_ohm": "NOT_PROVIDED",
+      "cable_metadata": "NOT_PROVIDED",
+      "calibration_metadata": "NOT_PROVIDED",
+      "raw_spectrum_path": "NOT_PROVIDED",
+      "raw_waveform_path": "NOT_PROVIDED",
+      "repetition_index": "NOT_PROVIDED",
+      "uncertainty_metadata": "NOT_PROVIDED",
+      "measurement_status": "NOT_MEASURED"
+    }
+  },
+  "raw_values_normalized": false,
+  "missing_values": "NOT_PROVIDED",
+  "scientific_data_present": false
+}

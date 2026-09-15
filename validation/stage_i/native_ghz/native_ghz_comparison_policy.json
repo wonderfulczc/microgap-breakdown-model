@@ -1,0 +1,31 @@
+{
+  "contract_type": "NativeGHzComparisonPolicy",
+  "comparison_mask": "MEASUREMENT_SUPPORT_INTERSECT_RFTRUSTREPORT_MASK_INTERSECT_RECEIVER_TRANSFER_SUPPORT",
+  "interpolation_across_missing_trusted_bins": "FORBIDDEN",
+  "validity_extrapolation": "FORBIDDEN",
+  "NATIVE_GHZ_PRIMARY_COMPARISON": "FREQUENCY_DOMAIN_TRUSTED_BINS",
+  "H4_time_waveform": "SECONDARY_RECONSTRUCTION_ONLY",
+  "metrics": [
+    "TRUSTED_BIN_PEAK_FREQUENCY",
+    "TRUSTED_BIN_SPECTRAL_CENTROID",
+    "NORMALIZED_TRUSTED_BIN_CORRELATION",
+    "RELATIVE_TRUSTED_BIN_AMPLITUDE_PATTERN",
+    "ABSOLUTE_VOLTAGE_ONLY_WITH_COMPATIBLE_CALIBRATION",
+    "POLARIZATION_CONTRAST_WHERE_AVAILABLE"
+  ],
+  "dense_spectrum_assumption": false,
+  "synthetic_hook": {
+    "status": "READY_NO_FIXTURE_PROVIDED",
+    "required_provenance": "SYNTHETIC_NATIVE_GHZ_DRY_RUN",
+    "scientific_validation_allowed": false,
+    "frequency_unit": "Hz",
+    "allowed_quantity_units": [
+      "V",
+      "V_s",
+      "V_per_m",
+      "V_s_per_m"
+    ],
+    "trust_mask_semantics": "STAGE_F_EXACT_TRUSTED_BINS_ONLY",
+    "repetition_index_required": true
+  }
+}

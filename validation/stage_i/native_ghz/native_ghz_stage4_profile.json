@@ -1,0 +1,53 @@
+{
+  "VALIDATION_PROFILE": "NATIVE_GHZ_STAGE4",
+  "receiver_id": "H4_CANONICAL_SHORT_DIPOLE_FIELD_SENSOR",
+  "receiver_transfer_hash": "dbfe52d59367877d5b5d9575bb431b6a1744ccaabe5c276ea7f02bc9c7fa3db6",
+  "receiver_transfer_support_Hz": [
+    2800000000.0,
+    10500000000.0
+  ],
+  "primary_comparison": "FREQUENCY_DOMAIN_TRUSTED_BINS",
+  "time_waveform_status": "SECONDARY_RECONSTRUCTION_ONLY",
+  "absolute_amplitude_status": "NUMERICAL_REFERENCE_ONLY_AND_CALIBRATION_REQUIRED",
+  "validation_status": "NOT_MEASURED",
+  "production_receiver_status": "NOT_RESOLVED",
+  "source_case_id": "F4-P-stage4-left-isolated",
+  "source_path": "rf/production/f4_attribution/F4-P-stage4-left-isolated_jefimenko_waveform.csv",
+  "source_hash": "a40eb67deaebb3164d527b453b9b4ef4b4d65fef3ea26b19623215ddfe631ed8",
+  "rf_trust_report_path": "rf/production/f4_attribution/F4-P-stage4-left-isolated_rf_trust_report.json",
+  "rf_trust_report_hash": "517b1b6e2253c240b50f080c09bc60e4c52c52dddca272abadc4a0ed83c5b2e5",
+  "observer_id": "F4_far_field_reference",
+  "observer_position_m": [
+    0.2,
+    0.0,
+    0.005
+  ],
+  "observer_distance_m": 0.2,
+  "field_components": [
+    "Ex_total",
+    "Ey_total",
+    "Ez_total"
+  ],
+  "receiver_axis": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "NATIVE_PROPAGATION_ALREADY_INCLUDED": true,
+  "trusted_frequency_band_Hz": [
+    2941408508.9091916,
+    7966314711.629051
+  ],
+  "trusted_frequency_bins_Hz": [
+    3771036549.883574,
+    4713795687.354467,
+    5656554824.825361,
+    6599313962.296254,
+    7542073099.767148
+  ],
+  "trusted_bin_count": 5,
+  "received_native_spectrum_path": "fullwave/h4/h4_stage4_native_received_spectrum.csv",
+  "received_native_spectrum_hash": "130a5667f5165f1d0ae837a120e8474cf3d13e70072ed7d3fcf9421bf6ff8128",
+  "received_time_semantics": "TRUSTED_BAND_LIMITED_NATIVE_RESPONSE",
+  "full_maxwell_status": null
+}
