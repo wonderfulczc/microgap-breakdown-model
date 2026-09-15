@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "work_package": "Release Preparation RP-5",
+  "FINAL_RELEASE_APPROVED": true,
+  "FINAL_VERSION": "0.1.0",
+  "GITHUB_RELEASE_APPROVED": true,
+  "UPLOAD_WHEEL_TO_GITHUB_RELEASE": true,
+  "UPLOAD_SDIST_TO_GITHUB_RELEASE": true,
+  "PYPI_PUBLICATION_APPROVED": false,
+  "canonical_repository": "https://github.com/wonderfulczc/microgap-breakdown-model",
+  "approval_source": "EXPLICIT_USER_INSTRUCTION",
+  "scientific_status_unchanged": true
+}

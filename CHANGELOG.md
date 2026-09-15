@@ -2,6 +2,18 @@
 
 本项目遵循语义化版本的开发、候选和正式发行序列。科学状态与软件版本相互独立。
 
+## 0.1.0 - Initial release
+
+首个正式软件版本提供：
+
+- `microgap-rf` 统一 CLI 与配置驱动工作流；
+- PETSc/MPI 二维 streamer 框架与 Afivo 三维外部后端接口；
+- Jefimenko 本征 RF、热通道/RLC 与 openEMS 全波接口；
+- Stage-I 验证架构及距离、方位、重复性和不确定度处理管线；
+- 文献维护、科学变更治理与资源友好的可复现检查。
+
+Scientific validation remains pending real experiments. 软件发行不代表物理模型已完成真实实验验证。
+
 ## 0.1.0rc1 - Initial release candidate
 
 首个候选版本提供：

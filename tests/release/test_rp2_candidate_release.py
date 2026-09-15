@@ -97,7 +97,7 @@ def test_release_audit_has_no_release_side_effect():
 
 def test_version_state_requires_user_gates_before_rc1():
     gates = json.loads((ROOT / "packaging/rp2_release_gate.json").read_text())
-    assert CURRENT_VERSION == "0.1.0rc1"
+    assert CURRENT_VERSION == "0.1.0"
     assert NEXT_CANDIDATE_VERSION == "0.1.0rc1"
     assert candidate_version_allowed(gates) is True
     complete = {key: "PASS" for key in ("CLEAN_WHEEL_INSTALL", "SDIST_REBUILD", "LICENSE_DECISION", "CITATION_METADATA", "PRIVACY_AUDIT", "SCIENTIFIC_STATUS_AUDIT", "RELEASE_INVENTORY")}

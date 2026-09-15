@@ -7,7 +7,8 @@ authors:
     affiliation: "College of Integrated Circuits of Southeast University"
 repository-code: "https://github.com/wonderfulczc/microgap-breakdown-model"
 license: "Apache-2.0"
-version: "0.1.0rc1"
+version: "0.1.0"
+date-released: "2026-09-15"
 abstract: "Configuration-driven microgap discharge and RF research toolkit."
 keywords:
   - microgap breakdown

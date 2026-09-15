@@ -2,8 +2,8 @@
 
 正式 `CITATION.cff` 已依据用户确认的信息创建并通过项目级字段校验。
 
-已确认：作者单名 `Zach`、软件名称、正式 repository URL、Apache-2.0、当前版本
-`0.1.0rc1` 候选版本。尚未公开发布 RC1 或正式版本，因此可选的发布日期暂不填写。
+已确认：作者单名 `Zach`、软件名称、正式 repository URL、Apache-2.0、正式版本
+`0.1.0` 及发行日期 `2026-09-15`。
 
 可选字段中的 ORCID、软件 DOI 和 preferred citation paper 未提供并已省略，禁止推测；
 机构使用用户提供的原文。未来论文可成为 preferred citation，但不能替代软件 citation。

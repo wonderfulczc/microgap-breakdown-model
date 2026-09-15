@@ -1,6 +1,6 @@
 {
-  "work_package": "Release Preparation RP-4",
-  "CURRENT_VERSION": "0.1.0rc1",
+  "work_package": "Release Preparation RP-5",
+  "CURRENT_VERSION": "0.1.0",
   "formal_stage_created": false,
   "UNIFIED_CLI_READY": true,
   "CONFIG_DRIVEN_WORKFLOW_READY": true,
@@ -17,8 +17,9 @@
   "RC1_ACCEPTANCE": "PASS",
   "RELEASE_CANDIDATE_FROZEN": true,
   "RC1_PUBLISHED": false,
-  "PUBLIC_RELEASE_READY": "AWAITING_FINAL_RELEASE_APPROVAL",
-  "FINAL_0_1_0_ALLOWED": "AWAITING_USER_FINAL_RELEASE_APPROVAL",
+  "FINAL_RELEASE_APPROVED": true,
+  "PUBLIC_RELEASE_READY": "APPROVED_FOR_GITHUB_RELEASE",
+  "FINAL_0_1_0_ALLOWED": true,
   "release_created": false,
   "license_selected": true,
   "large_physics_simulations_rerun": false

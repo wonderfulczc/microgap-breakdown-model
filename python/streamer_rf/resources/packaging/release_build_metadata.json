@@ -1,6 +1,6 @@
 {
-  "package_version": "0.1.0rc1",
-  "base_checkpoint": "76a8e927245257ab49b97ef669f0e1c5fde67182",
-  "source_state": "RP4_RELEASE_CANDIDATE_WORKTREE",
+  "package_version": "0.1.0",
+  "base_checkpoint": "2397f4b17f754651233e15364c8987bcc955dd44",
+  "source_state": "RP5_FINAL_RELEASE_SOURCE",
   "release_created": false
 }

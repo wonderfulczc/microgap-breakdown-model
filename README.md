@@ -9,9 +9,9 @@ thermal-channel/circuit, full-wave receiver, and simulation-to-experiment
 validation studies. The repository combines a C++17/PETSc/MPI core with a
 Python analysis package and explicit external-backend contracts.
 
-Current candidate version: `0.1.0rc1` (built for acceptance, not published).
-See [CHANGELOG](CHANGELOG.md) and the
-[RC notes](release/0.1.0rc1_release_notes.md).
+Current software version: `0.1.0`. See [CHANGELOG](CHANGELOG.md) and the
+[release notes](release/0.1.0_release_notes.md). Software publication does not
+mean that the scientific models have been validated by real experiments.
 
 ## Scientific scope
 
@@ -131,12 +131,12 @@ comparison APIs do not need redesign.
 ## Citation and license
 
 The project code is licensed under [Apache-2.0](LICENSE). The software author is
-`Zach`; citation metadata are provided in [`CITATION.cff`](CITATION.cff). Release
-candidate preparation does not imply experimental validation:
+`Zach`; citation metadata are provided in [`CITATION.cff`](CITATION.cff). Software
+publication does not imply experimental validation:
 `STAGE_I_SCIENTIFIC_VALIDATION=PENDING_REAL_EXPERIMENT` remains unchanged.
 
-No release, tag, package publication, or repository-visibility change has been
-performed by Stage J or Release Preparation RP-3B.
+The canonical source repository is
+<https://github.com/wonderfulczc/microgap-breakdown-model>.
 
 Release Preparation RP-1 adds only a thin configuration/CLI layer over the
 existing modules. See [CLI architecture](docs/en/cli_architecture.md); it does

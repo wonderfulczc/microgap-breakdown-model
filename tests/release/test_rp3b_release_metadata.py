@@ -29,7 +29,7 @@ def test_formal_citation_preserves_user_metadata_without_invention():
     assert citation["authors"] == [{"family-names": "Zach", "affiliation": "College of Integrated Circuits of Southeast University"}]
     assert "orcid" not in citation["authors"][0]
     assert "given-names" not in citation["authors"][0]
-    assert "date-released" not in citation
+    assert citation["date-released"] == "2026-09-15"
     assert "preferred-citation" not in citation
 
 
@@ -45,7 +45,7 @@ def test_rc1_gate_is_closed_but_version_and_release_actions_are_unchanged():
     audit = release_audit(ROOT)
     status = load_json("release/rp3_status.json")
     assert audit["gates"]["RC1_ALLOWED"] is True
-    assert audit["gates"]["PUBLIC_RELEASE_READY"] == "AWAITING_FINAL_RELEASE_APPROVAL"
+    assert audit["gates"]["PUBLIC_RELEASE_READY"] == "APPROVED_FOR_GITHUB_RELEASE"
     assert status["CURRENT_VERSION"] == "0.1.0.dev0"
     assert status["release_actions_performed"] is False
     assert not any(audit["side_effects"].values())

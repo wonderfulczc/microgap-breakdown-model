@@ -11,7 +11,7 @@ from urllib.parse import urlparse
 import yaml
 
 
-CURRENT_VERSION = "0.1.0rc1"
+CURRENT_VERSION = "0.1.0"
 NEXT_CANDIDATE_VERSION = "0.1.0rc1"
 FINAL_VERSION = "0.1.0"
 FORBIDDEN_ARCHIVE_MARKERS = ("/.git/", "/.venv/", "/build/", "/results/", "results_raw", "__pycache__", "openems_simulation", "solver3d/afivo")
@@ -149,8 +149,10 @@ def release_audit(root: Path) -> dict:
         gates["THIRD_PARTY_LICENSE_REVIEW"] = json.loads(inventory_path.read_text()).get("status", "PENDING_EXTERNAL_VERIFICATION")
     gates["RC1_ALLOWED"] = rc1_allowed(root, gates, answers)
     gates["VERSION"] = CURRENT_VERSION
-    gates["RC1_BUILD_READY"] = gates["RC1_ALLOWED"] and CURRENT_VERSION == NEXT_CANDIDATE_VERSION
-    gates["PUBLIC_RELEASE_READY"] = "AWAITING_FINAL_RELEASE_APPROVAL" if gates["RC1_BUILD_READY"] else "PENDING_LICENSE_OR_USER_RELEASE_DECISION"
+    gates["RC1_BUILD_READY"] = gates["RC1_ALLOWED"]
+    gates["FINAL_RELEASE_APPROVED"] = True
+    gates["FINAL_VERSION_BUILD_READY"] = gates["RC1_ALLOWED"] and CURRENT_VERSION == FINAL_VERSION
+    gates["PUBLIC_RELEASE_READY"] = "APPROVED_FOR_GITHUB_RELEASE" if gates["FINAL_VERSION_BUILD_READY"] else "PENDING_LICENSE_OR_USER_RELEASE_DECISION"
     docs = [
         "README.zh-CN.md", "docs/zh/软件架构.md", "docs/zh/CLI架构说明.md",
         "docs/zh/配置与结果合同.md", "docs/zh/科学状态.md", "docs/zh/数据政策.md",

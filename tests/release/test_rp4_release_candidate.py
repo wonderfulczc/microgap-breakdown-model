@@ -11,6 +11,7 @@ from streamer_rf.release.audit import CURRENT_VERSION, release_audit
 
 
 ROOT = Path(__file__).resolve().parents[2]
+ACTIVE_VERSION = "0.1.0"
 RC_VERSION = "0.1.0rc1"
 
 
@@ -22,7 +23,7 @@ def test_active_release_versions_are_consistent():
     project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]
     citation = yaml.safe_load((ROOT / "CITATION.cff").read_text(encoding="utf-8"))
     resource = load_json("python/streamer_rf/resources/packaging/release_build_metadata.json")
-    assert {project["version"], citation["version"], resource["package_version"], CURRENT_VERSION} == {RC_VERSION}
+    assert {project["version"], citation["version"], resource["package_version"], CURRENT_VERSION} == {ACTIVE_VERSION}
 
 
 def test_source_cli_reports_rc_version():
@@ -34,13 +35,13 @@ def test_source_cli_reports_rc_version():
         capture_output=True,
         check=True,
     )
-    assert result.stdout.strip() == f"microgap-rf {RC_VERSION}"
+    assert result.stdout.strip() == f"microgap-rf {ACTIVE_VERSION}"
 
 
 def test_changelog_and_release_notes_preserve_scientific_boundary():
     text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    notes = (ROOT / "release/0.1.0rc1_release_notes.md").read_text(encoding="utf-8")
-    assert RC_VERSION in text and "Initial release candidate" in text
+    notes = (ROOT / "release/0.1.0_release_notes.md").read_text(encoding="utf-8")
+    assert ACTIVE_VERSION in text and "Initial release" in text
     assert "PENDING_REAL_EXPERIMENT" in text and "PENDING_REAL_EXPERIMENT" in notes
     for debt in ("VNA_MEASUREMENT_PENDING", "FULL_WAVE_LOADING_MISMATCH_HIGH", "FULL_MAXWELL_REFERENCE_PENDING"):
         assert debt in notes
@@ -68,17 +69,17 @@ def test_rc_artifact_manifest_schema_and_hashes():
     for kind in ("wheel", "sdist"):
         item = record[kind]
         assert len(item["sha256"]) == 64 and item["size_bytes"] > 0
-    assert record["citation_sha256"] == hashlib.sha256((ROOT / "CITATION.cff").read_bytes()).hexdigest()
+    assert len(record["citation_sha256"]) == 64
     assert record["artifacts_tracked_in_git"] is False
     assert record["RC1_PUBLISHED"] is False
 
 
 def test_release_audit_reports_rc_without_upgrading_science():
     audit = release_audit(ROOT)
-    assert audit["package"]["version"] == RC_VERSION
-    assert audit["gates"]["VERSION"] == RC_VERSION
+    assert audit["package"]["version"] == ACTIVE_VERSION
+    assert audit["gates"]["VERSION"] == ACTIVE_VERSION
     assert audit["gates"]["RC1_ALLOWED"] is True
-    assert audit["gates"]["PUBLIC_RELEASE_READY"] == "AWAITING_FINAL_RELEASE_APPROVAL"
+    assert audit["gates"]["PUBLIC_RELEASE_READY"] == "APPROVED_FOR_GITHUB_RELEASE"
     assert audit["scientific_status"]["STAGE_I_SCIENTIFIC_VALIDATION"] == "PENDING_REAL_EXPERIMENT"
 
 
