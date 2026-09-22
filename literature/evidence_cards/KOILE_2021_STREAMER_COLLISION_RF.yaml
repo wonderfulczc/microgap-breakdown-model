@@ -1,0 +1,89 @@
+schema_version: "1.0"
+paper_id: KOILE_2021_STREAMER_COLLISION_RF
+problem_addressed: >-
+  How counter-propagating streamer collisions produce picosecond current-moment
+  transients and UHF/GHz radio-frequency spectra under subbreakdown ambient fields.
+physical_models:
+  - drift-diffusion streamer model for electrons, positive ions, and negative ions
+  - Poisson electrostatics
+  - current-moment radiation interpretation
+  - local impact-ionization and Maxwell-relaxation timescale interpretation
+key_equations:
+  - "radiated electric field is proportional to dM/dt"
+  - "tau_i = 1 / nu_i"
+  - "sigma_e approximately equals e * ne * mu_e"
+  - "tau_M = epsilon_0 / sigma_e"
+  - "ESD = |FFT(dM/dt)|^2 / (6 * pi * epsilon_0 * c^3)"
+key_parameters:
+  - "conventional air reference field Ek = 3.2e6 V/m in the paper context"
+  - "Group 1 ambient field Eamb = 0.65 Ek"
+  - "Group 2 separation d = 1.4 cm"
+validation_methods:
+  - six numerical streamer-collision cases
+  - current-moment waveform and derivative comparison
+  - normalized ESD shape comparison referenced at 1 GHz
+  - pulse width and 3 dB / 10 dB frequencies
+applicability_range: >-
+  Centimetre-scale, cone-shaped hydrometeors in approximately uniform ambient
+  fields with counter-propagating streamer collisions; it is not a direct model
+  of a metal-electrode microgap.
+known_limitations:
+  - centimetre rather than micrometre geometry
+  - hydrometeor rather than metal-electrode boundary conditions
+  - approximately uniform ambient field rather than strongly nonuniform local electrode field
+  - collision-focused topology rather than propagation, attachment, bridging, or multi-head mixtures
+  - the article text does not report the numerical Tukey alpha
+agreements_with_current_tool:
+  - Stage F already defines M(t) as the volume integral of RF source current density
+  - Stage F already carries current-moment derivatives and spectral trust metadata
+  - HCE / ACC / REDIS already provide a Level-1 current-moment mechanism decomposition
+conflicts_with_current_tool: []
+possibly_affected_stages: [B, C, E, F, I]
+modification_recommendation: CONTRACT_EXTENSION_BEFORE_IMPLEMENTATION
+evidence_locations:
+  - "DOI 10.1029/2021GL096214, Section 2: variable-time interpolation, 10-sample smoothing, dM/dt, Tukey window, 12 ns zero padding, FFT and ESD"
+  - "DOI 10.1029/2021GL096214, Figure 2 and Section 3: collision dM/dt pulse and local kinetics"
+  - "DOI 10.1029/2021GL096214, Table 1: pulse width and 3 dB / 10 dB benchmark values"
+  - "DOI 10.1029/2021GL096214, Equations 1-4 discussion: impact ionization and Maxwell relaxation"
+reviewer: V2_1_R0_ARCHITECTURE_REVIEW
+review_date: "2026-09-22"
+evidence_chain:
+  - rapid impact ionization increases ne
+  - increased ne raises electron conductivity
+  - current moment rises rapidly
+  - Maxwell relaxation collapses the local field
+  - dM/dt forms a picosecond pulse
+  - the pulse produces UHF/GHz spectral content
+processing_chain:
+  - variable-time M(t)
+  - uniform-time linear interpolation
+  - moving-average smoothing
+  - dM/dt
+  - Tukey window
+  - zero padding
+  - FFT
+  - ESD
+group_1_reference:
+  fixed_condition: "Eamb = 0.65 Ek"
+  cases:
+    - {separation_cm: 1.2, pulse_width_ps: 21.2, f3dB_GHz: 2.98, f10dB_GHz: 12.6}
+    - {separation_cm: 1.4, pulse_width_ps: 21.7, f3dB_GHz: 2.90, f10dB_GHz: 12.0}
+    - {separation_cm: 2.0, pulse_width_ps: 20.2, f3dB_GHz: 2.92, f10dB_GHz: 12.4}
+  reported_trend: At fixed ambient field, changing streamer length or initial separation has little effect on normalized spectral shape.
+group_2_reference:
+  fixed_condition: "separation = 1.4 cm"
+  cases:
+    - {Eamb_over_Ek: 0.65, pulse_width_ps: 21.7, f3dB_GHz: 2.89, f10dB_GHz: 12.0}
+    - {Eamb_over_Ek: 0.85, pulse_width_ps: 16.7, f3dB_GHz: 4.53, f10dB_GHz: 18.5}
+    - {Eamb_over_Ek: 1.00, pulse_width_ps: 13.7, f3dB_GHz: 5.98, f10dB_GHz: 22.6}
+    - {Eamb_over_Ek: 1.50, pulse_width_ps: 9.6, f3dB_GHz: 6.31, f10dB_GHz: 30.0}
+  reported_trend: Increasing ambient field shortens the pulse, extends and flattens the spectrum, and increases spectral magnitude.
+transfer_boundary:
+  Eamb_over_Ek_directly_transferable: false
+  project_semantics: Ek is a normalization reference only and is not a sufficient microgap-breakdown criterion.
+project_candidate:
+  name: Pi_RF
+  formula: tau_M / tau_i
+  status: DIAGNOSTIC_CANDIDATE
+  paper_parameter: false
+  novelty_claim_permitted: false

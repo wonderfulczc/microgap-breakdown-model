@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "simulation_architecture_version": "v2.1",
+  "formal_stage_names": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+  "new_formal_stage_created": false,
+  "stages": {
+    "A": {"status": "COMPLETE_FROZEN", "planned_internal_nodes": []},
+    "B": {"status": "IN_PROGRESS", "planned_internal_nodes": ["B-RF1"]},
+    "C": {"status": "BASELINE_COMPLETE_FROZEN", "planned_internal_nodes": ["C-R5"]},
+    "D": {"status": "COMPLETE_FROZEN", "planned_internal_nodes": []},
+    "E": {"status": "ENGINEERING_COMPLETE_SCIENTIFIC_NOT_RESOLVED", "planned_internal_nodes": ["E-R2"]},
+    "F": {"status": "BASELINE_COMPLETE_FROZEN", "planned_internal_nodes": ["F-R5A", "F-R5B", "F-R6"]},
+    "G": {"status": "G0_G3_COMPLETE_FROZEN", "planned_internal_nodes": []},
+    "H": {"status": "TOOL_DEVELOPMENT_COMPLETE", "planned_internal_nodes": []},
+    "I": {"status": "TOOL_DEVELOPMENT_COMPLETE_SCIENTIFIC_VALIDATION_PENDING_REAL_EXPERIMENT", "planned_internal_nodes": ["I-R1"]},
+    "J": {"status": "COMPLETE_FROZEN", "planned_internal_nodes": []}
+  },
+  "internal_mechanism_layer": {
+    "name": "ULTRAFAST_SOURCE_KINETICS",
+    "between": ["Stage C/E streamer state", "Stage F native RF"],
+    "formal_stage": false
+  },
+  "signal_path_separation": ["S_native(f)", "S_port(f)", "S_receiver(f)"],
+  "signal_path_relation": "DISTINCT_NOT_INTERCHANGEABLE",
+  "scientific_status": {
+    "STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT",
+    "PUBLIC_SCIENTIFIC_VALIDATION_COMPLETE": false,
+    "SYSTEM_350MHZ_VALIDATION": "NOT_MEASURED",
+    "NATIVE_RF_350MHZ": "NOT_RESOLVED"
+  }
+}

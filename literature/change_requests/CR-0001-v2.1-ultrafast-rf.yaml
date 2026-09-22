@@ -1,0 +1,46 @@
+schema_version: "1.0"
+change_request_id: CR-0001
+title: v2.1 ultrafast streamer-to-native-RF diagnostic layer
+trigger_papers: [KOILE_2021_STREAMER_COLLISION_RF]
+affected_modules:
+  - Stage B field handoff metadata
+  - Stage C event diagnostics
+  - Stage E event diagnostics
+  - Stage F current-moment and spectral postprocessing
+  - Stage I future validation metadata
+affected_stages: [B, C, E, F, I]
+change_type: ARCHITECTURE_CONTRACT_EXTENSION
+scientific_reason: >-
+  Add event topology and local electron-kinetics diagnostics between streamer
+  state and the existing current-moment/native-RF pathway without changing the
+  frozen streamer or RF algorithms in R0.
+current_behavior: >-
+  The frozen v2.0 pathway maps streamer current to J_RF, M(t), mechanism terms,
+  and RF spectra, but it has no common contract for event ROI, tau_i, tau_M,
+  field normalization, or picosecond temporal-resolution sufficiency.
+proposed_behavior: >-
+  Introduce contract-only ULTRAFAST_SOURCE_KINETICS diagnostics, a Koile-compatible
+  processing profile, benchmark data, processing-sensitivity states, and a future
+  Stage-F handoff for F-R5A/F-R5B/F-R6.
+required_tests:
+  - evidence-card and Table-1 integrity
+  - diagnostic fields, units, and event-topology enum
+  - Pi_RF candidate-only status
+  - Ek normalization-only semantics
+  - temporal-resolution and smoothing-sensitivity gates
+  - frozen A-J stages, scientific states, and contract hashes
+required_reruns:
+  - NONE_FOR_V2_1_R0
+  - F-R5A_LIGHTWEIGHT_BENCHMARK_LATER
+  - TARGETED_PHYSICS_RERUN_ONLY_AFTER_SEPARATE_APPROVAL
+backward_compatibility: FROZEN_V2_0_BASELINE_PRESERVED
+decision_status: APPROVED_FOR_R0_CONTRACT_ONLY
+automatic_code_change_permitted: false
+prohibited_changes:
+  - StreamerSolver equations
+  - ReactionModel
+  - PETSc numerics
+  - Afivo backend
+  - frozen Stage F algorithms
+  - Stage G/H
+  - v0.1.0 release and tag

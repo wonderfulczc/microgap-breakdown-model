@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>子方向1仿真平台进展汇报</title>
+  <style>
+    :root{--seu:#0B3B82;--blue:#1455A3;--bright:#2E78D2;--sky:#5A9BE8;--pale:#EEF5FC;--ink:#172A46;--muted:#63758D;--line:#CBD9E9;--teal:#16847B;--amber:#C67A16;--red:#B42318}
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#071f43}
+    body{font-family:"Source Han Sans SC","Microsoft YaHei","PingFang SC",Arial,sans-serif;color:var(--ink);letter-spacing:0}
+    #viewport{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center center}
+    .slide{display:none;position:absolute;inset:0;width:1600px;height:900px;background:#fff;overflow:hidden;padding:106px 82px 64px}
+    .slide.active{display:block}.slide:before{content:"";position:absolute;left:0;top:0;width:100%;height:14px;background:linear-gradient(90deg,var(--seu) 0 72%,var(--bright) 72% 90%,var(--sky) 90%)}
+    .header{position:absolute;left:82px;right:82px;top:34px;height:52px;display:flex;align-items:center;border-bottom:2px solid #D9E5F2}
+    .brand{font-size:19px;font-weight:800;color:var(--seu);white-space:nowrap}.brand small{font-size:11px;color:#6B7D94;font-weight:600;margin-left:8px;letter-spacing:.08em}
+    .section-name{margin-left:auto;color:#56708F;font-size:15px;font-weight:700}
+    .footer{position:absolute;left:0;right:0;bottom:0;height:42px;background:linear-gradient(110deg,#F0F6FC 0 60%,#D8E9F8 60% 79%,var(--seu) 79%);color:#6B7D94;font-size:13px;padding:13px 82px}
+    .footer .page{position:absolute;right:38px;color:white;font-weight:800;top:12px}.footer .version{margin-left:18px;color:#31577F}
+    h1,h2,h3,p{margin-top:0}h1{font-size:58px;line-height:1.18;color:var(--seu);margin-bottom:22px}h2{font-size:36px;line-height:1.2;color:var(--seu);margin:0 0 24px;font-weight:850}h2:after{content:"";display:block;width:74px;height:5px;background:var(--bright);margin-top:13px}h3{font-size:23px;line-height:1.28;margin-bottom:10px}p,li,td,th{font-size:18px;line-height:1.48}.eyebrow{font-size:16px;color:var(--bright);font-weight:800;letter-spacing:.08em;margin-bottom:10px}.subtitle{font-size:29px;color:#415B78;line-height:1.45}.bigline{font-size:29px;line-height:1.5;font-weight:750}.em{color:var(--seu);font-weight:850}.teal{color:var(--teal)}.amber{color:var(--amber)}.risk{color:var(--red)}.muted{color:var(--muted)}.small{font-size:14px;line-height:1.42}.tiny{font-size:12px;line-height:1.35}
+    .cover{padding:0;background:linear-gradient(125deg,#fff 0 63%,#EAF3FB 63%)}.cover .blue-block{position:absolute;right:0;top:0;width:220px;height:900px;background:var(--seu)}.cover .blue-block:before{content:"";position:absolute;left:-180px;top:0;border-top:900px solid transparent;border-right:180px solid var(--seu)}.cover-content{position:absolute;left:112px;top:152px;width:1110px}.cover-mark{display:inline-flex;align-items:center;border-left:8px solid var(--bright);padding-left:18px;color:var(--seu);font-size:20px;font-weight:850;margin-bottom:58px}.release-badge{display:inline-block;background:var(--seu);color:#fff;padding:14px 24px;font-weight:800;font-size:21px;margin-top:32px;box-shadow:9px 9px 0 #CFE2F5}.cover-foot{position:absolute;left:112px;bottom:70px;color:#49627E;font-size:17px}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:42px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.four{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .question{border-left:7px solid var(--blue);background:linear-gradient(90deg,#EDF5FC,#FAFCFE);padding:22px 24px;margin-bottom:18px}.question b{display:block;color:var(--blue);font-size:19px;margin-bottom:5px}
+    .chain{display:flex;align-items:center;gap:8px;margin:24px 0}.chain.vertical{flex-direction:column;margin:0;gap:6px}.node{flex:1;text-align:center;padding:18px 12px;background:#F2F7FC;border-top:5px solid var(--blue);font-size:17px;font-weight:800;min-width:0}.node.teal-line{border-color:var(--teal)}.node.amber-line{border-color:var(--amber)}.arr{font-size:25px;color:#6E8EB0;font-weight:900}.conclusion{background:var(--seu);color:#fff;padding:17px 24px;font-size:22px;font-weight:800;line-height:1.4}.conclusion.light{background:#EAF3FB;color:var(--seu);border-left:7px solid var(--bright)}
+    .architecture{position:relative;height:635px}.arch-row{display:flex;align-items:center;justify-content:center;gap:12px}.arch-box{width:210px;min-height:88px;padding:14px 12px;background:#F1F6FB;border:2px solid #BDD2E7;border-top:7px solid var(--blue);text-align:center;font-size:17px;font-weight:800}.arch-box small{display:block;font-size:13px;color:#657A92;font-weight:600;margin-top:4px}.arch-box.source{border-top-color:var(--amber)}.arch-box.validation{border-top-color:var(--teal);background:#ECF8F6}.arch-arrow{font-size:30px;color:#6488AD}.arch-split{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin:25px 180px 23px}.path{padding:16px 20px 18px;border:2px solid #C7D8EA;border-top:8px solid var(--bright);background:#FAFCFE}.path:last-child{border-top-color:var(--amber)}.path-title{font-size:19px;font-weight:900;color:var(--seu);margin-bottom:12px}.path-line{display:flex;align-items:center;gap:8px}.path-step{flex:1;text-align:center;background:#EDF4FB;padding:13px 8px;font-size:14px;font-weight:750}.legend-row{position:absolute;bottom:0;left:90px;right:90px;display:flex;justify-content:space-between;color:#60758E;font-size:14px}
+    .cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.cap{height:254px;padding:22px 20px;background:#F7FAFD;border-top:7px solid var(--blue);box-shadow:0 5px 15px rgba(20,85,163,.08)}.cap:nth-child(2n){border-top-color:var(--bright)}.cap:nth-child(5),.cap:nth-child(6){border-top-color:var(--amber)}.cap:nth-child(7){border-top-color:var(--teal)}.cap h3{color:var(--seu);font-size:22px}.cap .io{font-size:14px;color:#58708B;margin-bottom:12px}.cap .answer{font-size:16px;line-height:1.45;border-top:1px solid #D8E4F0;padding-top:11px}
+    table{width:100%;border-collapse:collapse}th{background:var(--seu);color:white;text-align:left;padding:13px 15px;font-size:17px}td{padding:11px 15px;border-bottom:1px solid #D9E4EF;font-size:16px;line-height:1.37;vertical-align:top}tr:nth-child(even) td{background:#F4F8FC}.tight td,.tight th{font-size:14px;padding:8px 11px}.wp{font-weight:900;color:var(--blue)}
+    .figure{width:100%;display:block;object-fit:contain}.figure.a{height:515px}.figure.b{height:505px}.figure.c{height:505px}.figure.d{height:470px}.figline{display:flex;align-items:center;justify-content:space-between;margin-top:8px}.source-note{font-size:13px;color:#657A92}.status-pill{display:inline-block;padding:7px 12px;border:1px solid #D7A4A0;background:#FFF4F2;color:var(--red);font-size:13px;font-weight:900}.dev-pill{display:inline-block;padding:7px 12px;border:1px solid #9BBDE0;background:#EDF5FC;color:var(--seu);font-size:13px;font-weight:900}
+    .experiment-flow{display:flex;flex-direction:column;gap:9px}.exp-step{display:flex;align-items:center;background:#F2F7FC;border-left:6px solid var(--teal);padding:12px 15px;font-size:16px;font-weight:750}.exp-step span{display:inline-grid;place-items:center;width:26px;height:26px;background:var(--teal);color:white;border-radius:50%;font-size:13px;margin-right:12px}.syn-banner{background:var(--red);color:#fff;text-align:center;font-size:16px;font-weight:900;padding:8px;letter-spacing:.05em}
+    .reuse td:first-child{font-weight:900;color:var(--seu);width:16%}.reuse td:nth-child(2){width:31%;font-weight:700}.reuse td:nth-child(3){width:53%}
+    .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.metric{height:150px;background:#F3F8FC;border-top:7px solid var(--bright);padding:20px;text-align:center}.metric strong{display:block;color:var(--seu);font-size:39px;line-height:1;margin-bottom:12px}.metric span{font-size:16px;font-weight:700}.accomplished{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}.done{background:#F7FAFD;border-left:5px solid var(--teal);padding:14px 17px;font-size:16px;font-weight:750}
+    .phase{height:455px;padding:28px 30px;background:#F6F9FC;border-top:8px solid var(--teal)}.phase.next{border-top-color:var(--amber)}.phase h3{font-size:27px;color:var(--seu)}.phase li{font-size:19px;margin:14px 0}.route{display:flex;align-items:center;justify-content:center;gap:11px;margin:22px 0}.route span{background:#EDF4FB;border:1px solid #C4D7EA;padding:13px 17px;font-size:16px;font-weight:800}.route b{color:var(--bright);font-size:23px}
+    .status-table td:nth-child(2){color:var(--teal);font-weight:850}.status-table td:nth-child(3){color:var(--red);font-weight:850}
+    #progress{position:fixed;left:0;bottom:0;height:4px;background:#5A9BE8;z-index:20}.keyhint{position:fixed;right:14px;top:10px;color:rgba(255,255,255,.55);font:12px Arial,sans-serif;z-index:20}
+    @media print{@page{size:16in 9in;margin:0}html,body{overflow:visible;background:white}#viewport{position:static;transform:none!important;width:auto;height:auto}.slide{display:block!important;position:relative;width:16in;height:9in;page-break-after:always}.keyhint,#progress{display:none}}
+  </style>
+</head>
+<body>
+<div id="viewport">
+  <section class="slide cover active">
+    <div class="blue-block"></div>
+    <div class="cover-content">
+      <div class="cover-mark">东南大学　博士课题阶段汇报</div>
+      <div class="eyebrow">子方向 1 · 发射端电极结构 / 材料 / 界面调控与无线可读性机制</div>
+      <h1>子方向1阶段进展</h1>
+      <p class="subtitle">微间隙击穿放电多物理仿真工具链构建</p>
+      <p class="bigline">从电极结构到无线接收的正式仿真与验证平台</p>
+      <div class="release-badge">microgap-rf v0.1.0 已正式发布</div>
+    </div>
+    <div class="cover-foot">基于可调控微间隙击穿放电的多机制无线传感方法研究</div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">科学问题</div></div>
+    <h2>为什么子方向1需要仿真</h2>
+    <div class="two">
+      <div>
+        <div class="chain vertical">
+          <div class="node">电极几何 / 曲率 / 材料 / 界面</div><div class="arr">↓</div>
+          <div class="node">局部电场增强与击穿起始</div><div class="arr">↓</div>
+          <div class="node teal-line">电子雪崩 / 流注 / 空间电荷</div><div class="arr">↓</div>
+          <div class="node amber-line">电流 / Joule 能量 / RF</div>
+        </div>
+      </div>
+      <div style="padding-top:8px">
+        <div class="question"><b>Q1　稳定性</b>不同针尖曲率、间隙和对准方式，为什么会改变放电稳定性？</div>
+        <div class="question"><b>Q2　无线可读性</b>铜箔、针电极及材料/界面变化，为什么会改变信号频率和幅值？</div>
+        <div class="question"><b>Q3　机制证据链</b>如何把实验看到的差异追溯到场、流注、电流和传播过程？</div>
+      </div>
+    </div>
+    <div class="conclusion light" style="margin-top:25px">工具作用：把“实验现象”追溯到“具体物理过程”，形成结构参数 → 物理量 → 无线指标的证据链。</div>
+    <div class="footer">子方向1仿真平台进展<span class="version">microgap-rf v0.1.0</span><span class="page">02</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">平台总体架构</div></div>
+    <h2>从实际电极到无线接收：两条信号机制、一个实验闭环</h2>
+    <div class="architecture">
+      <div class="arch-row">
+        <div class="arch-box source">实际电极<small>几何 / 曲率 / 材料 / 界面</small></div><div class="arch-arrow">→</div>
+        <div class="arch-box source">局部电场<small>COMSOL 外部工作流</small></div><div class="arch-arrow">→</div>
+        <div class="arch-box">二维流注<small>代表结构参数扫描</small></div><div class="arch-arrow">↔</div>
+        <div class="arch-box">三维流注<small>非轴对称关键工况</small></div>
+      </div>
+      <div style="text-align:center;font-size:28px;color:#6B8DAF;margin:12px 0 0">↓　空间电荷 / 电流 / Joule 能量　↓</div>
+      <div class="arch-split">
+        <div class="path"><div class="path-title">路径 A　放电本征瞬态</div><div class="path-line"><div class="path-step">current moment</div><b>→</b><div class="path-step">Jefimenko</div><b>→</b><div class="path-step">原生宽带 RF</div><b>→</b><div class="path-step">接收器</div></div></div>
+        <div class="path"><div class="path-title">路径 B　击穿后导电通道</div><div class="path-line"><div class="path-step">thermal / RLC</div><b>→</b><div class="path-step">port transient</div><b>→</b><div class="path-step">天线 / 全波</div><b>→</b><div class="path-step">接收器</div></div></div>
+      </div>
+      <div class="arch-row">
+        <div class="arch-box validation" style="width:620px">实验测量<small>VNA / 示波器 / 距离 / 方向 / 重复性</small></div><div class="arch-arrow">↔</div>
+        <div class="arch-box validation" style="width:450px">仿真—实验验证<small>校准 / 不确定度 / 差异记录</small></div>
+      </div>
+      <div class="legend-row"><span><b class="amber">电极与外部场：</b>真实几何入口</span><span><b class="em">放电与信号：</b>平台计算主线</span><span><b class="teal">实验验证：</b>真实数据闭环</span></div>
+    </div>
+    <div class="footer">完整物理链<span class="version">两条机制不能混为同一来源</span><span class="page">03</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">平台能力</div></div>
+    <h2>平台内部有哪些具体能力</h2>
+    <div class="cap-grid">
+      <div class="cap"><h3>电场</h3><div class="io">输入：实际几何、电压、材料</div><div class="answer">输出电势、E场、Emax、高场区；回答击穿可能从哪里开始。</div></div>
+      <div class="cap"><h3>二维 / 三维流注</h3><div class="io">输入：场、气体、初始电荷</div><div class="answer">输出 ne/np/nn、空间电荷、流注头、速度与桥接过程。</div></div>
+      <div class="cap"><h3>电流与能量</h3><div class="io">输入：放电状态、边界条件</div><div class="answer">输出导电电流、current moment、Joule功率和通道状态。</div></div>
+      <div class="cap"><h3>原生 RF</h3><div class="io">输入：守恒电流、空间电荷</div><div class="answer">输出Jefimenko场、时域波形、频谱、可信带和机制归因。</div></div>
+      <div class="cap"><h3>thermal / RLC</h3><div class="io">输入：Joule交接、回路参数</div><div class="answer">输出通道电阻、Vport、Iport和端口频谱。</div></div>
+      <div class="cap"><h3>全波传播</h3><div class="io">输入：Tx/Rx、结构、距离</div><div class="answer">输出S11、S21、传递函数、接收波形和频谱。</div></div>
+      <div class="cap"><h3>实验验证</h3><div class="io">输入：VNA、示波器、元数据</div><div class="answer">分析距离、方向、重复性、不确定度及仿真—实验差异。</div></div>
+      <div class="cap"><h3>统一可追溯</h3><div class="io">输入：工况配置与原始文件</div><div class="answer">保留来源、参数、版本和状态，避免历史结果被覆盖。</div></div>
+    </div>
+    <div class="footer">八类科研能力<span class="version">输入—计算—输出—验证可连续追踪</span><span class="page">04</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">子方向1直接作用</div></div>
+    <h2>对子方向1到底有什么用</h2>
+    <table>
+      <thead><tr><th style="width:13%">工作包</th><th style="width:26%">研究问题</th><th style="width:30%">平台提供的量</th><th>形成的论文证据</th></tr></thead>
+      <tbody>
+        <tr><td class="wp">WP1<br>几何矩阵</td><td>针尖曲率、箔片结构、间隙和对准如何改变稳定性？</td><td>Emax、高场区、流注头、路径、桥接时序、电流</td><td>几何参数 → 起始条件 → 放电发展 → 稳定性</td></tr>
+        <tr><td class="wp">WP2<br>材料/界面</td><td>材料、涂层和表面状态如何影响寿命与可读性？</td><td>材料条件分组、界面参数、current/Joule、实验重复性</td><td>界面变化 → 能量沉积/退化 → 信号稳定性</td></tr>
+        <tr><td class="wp">WP3<br>分层机制</td><td>不同放电阶段和等效阻尼如何塑造频谱？</td><td>原生RF、thermal/RLC、端口谱、机制归因</td><td>源时间尺度与系统选频作用分离</td></tr>
+        <tr><td class="wp">WP4<br>链路排除</td><td>接收端变化如何与发射端变化分离？</td><td>S11/S21、传递函数、距离/方向、接收器响应</td><td>发射端结构效应与传播/接收效应分离</td></tr>
+      </tbody>
+    </table>
+    <div class="route"><span>结构参数</span><b>→</b><span>局部场</span><b>→</b><span>放电物理量</span><b>→</b><span>RF / 端口</span><b>→</b><span>无线指标</span><b>→</b><span>真实实验</span></div>
+    <div class="conclusion">论文1目标：不只比较“哪个结构信号更强”，而是解释“为什么更强、由哪一段物理链造成”。</div>
+    <div class="footer">论文1证据链<span class="version">结构参数 → 物理量 → 无线指标</span><span class="page">05</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">案例 A · 结构 → 放电</div></div>
+    <h2>二维参考工况已能同步输出场、流注、电流与Joule能量</h2>
+    <img class="figure a" src="subdirection1_simulation_progress_v2_assets/case_a_stage_c.png" alt="Stage C二维针板参考结果">
+    <div class="figline"><div class="source-note"><b>Data source:</b> Stage C frozen 2D needle-plane reference，500 V，本地冻结结果。</div><span class="dev-pill">参考工况 · 非最终实验结构</span></div>
+    <div class="conclusion light" style="margin-top:12px">替换为实际针尖 / 箔片几何后，可保持同一套指标比较曲率、间隙和对准方式。</div>
+    <div class="footer">真实运行结果<span class="version">electron density · E field · streamer head · current · Joule</span><span class="page">06</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">案例 B · 放电 → 原生 RF</div></div>
+    <h2>放电是宽带瞬态源；频谱解释必须服从可信频带</h2>
+    <img class="figure b" src="subdirection1_simulation_progress_v2_assets/case_b_native_rf.png" alt="Stage F原生RF参考结果">
+    <div class="figline"><div class="source-note"><b>Data source:</b> Stage-F frozen current-moment/Jefimenko result + H4 Stage4 numerical receiver reference。</div><span class="status-pill">NATIVE_RF_350MHZ = NOT_RESOLVED</span></div>
+    <div class="conclusion light" style="margin-top:12px">当前可信信息主要位于约 2.94–7.97 GHz；不能由本案例证明原生 350 MHz 辐射。</div>
+    <div class="footer">真实运行结果<span class="version">current moment · time waveform · FFT · trust band</span><span class="page">07</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">案例 C · 端口 → 传播 → 接收</div></div>
+    <h2>最终接收频率由源、RLC、天线、结构与传播共同选择</h2>
+    <img class="figure c" src="subdirection1_simulation_progress_v2_assets/case_c_system_350mhz.png" alt="G3 H2 H3 350MHz系统开发参考">
+    <div class="figline"><div class="source-note"><b>Data source:</b> G3 port transient + H2 openEMS S-parameters + H3 transfer/received spectrum。</div><span class="dev-pill">系统开发参考 · 尚未按真实实验标定</span></div>
+    <div class="conclusion light" style="margin-top:12px">该结果证明系统链可以计算，不代表 350 MHz 原生RF已被证明，也不代表接收绝对幅值已实验验证。</div>
+    <div class="footer">真实运行结果<span class="version">Vport · S11/S21 · transfer · receiver spectrum</span><span class="page">08</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">案例 D · 仿真与实验闭环</div></div>
+    <h2>统计与不确定度流程已跑通，等待换入真实测量</h2>
+    <div class="syn-banner">SYNTHETIC DEVELOPMENT DATA · NOT EXPERIMENTAL RESULT</div>
+    <div class="two" style="grid-template-columns:1.63fr .87fr;gap:30px;margin-top:15px">
+      <div><img class="figure d" src="subdirection1_simulation_progress_v2_assets/case_d_stage_i_synthetic.png" alt="Stage I synthetic距离方向统计"></div>
+      <div>
+        <h3 style="color:var(--seu)">未来真实实验进入流程</h3>
+        <div class="experiment-flow">
+          <div class="exp-step"><span>1</span>原始 VNA / 示波器波形</div>
+          <div class="exp-step"><span>2</span>几何、仪器与工况元数据</div>
+          <div class="exp-step"><span>3</span>校准与参考面检查</div>
+          <div class="exp-step"><span>4</span>频率、幅值、SNR、重复性特征</div>
+          <div class="exp-step"><span>5</span>仿真—实验比较与不确定度</div>
+          <div class="exp-step"><span>6</span>差异记录与验证状态更新</div>
+        </div>
+      </div>
+    </div>
+    <div class="figline"><div class="source-note"><b>Data source:</b> Stage-I WP-I-B / WP-I-D synthetic dry-run；0.3–1.0 m、0–90°、90个事件。</div><span class="status-pill">STAGE_I = PENDING_REAL_EXPERIMENT</span></div>
+    <div class="footer">开发闭环演示<span class="version">distance · orientation · repeatability · 95% CI · uncertainty</span><span class="page">09</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">跨方向复用</div></div>
+    <h2>平台不是论文1的临时工具，而是博士课题的共性仿真基础设施</h2>
+    <table class="reuse">
+      <thead><tr><th>研究方向</th><th>直接复用的能力</th><th>可回答的问题</th></tr></thead>
+      <tbody>
+        <tr><td>子方向2<br>宽频同步表征与接收链路</td><td>原生RF、S参数、系统传递、接收器、实验验证</td><td>不同频段来自放电源还是传播/接收链？宽频同步测量应如何解释？</td></tr>
+        <tr><td>子方向3<br>多特征解码与距离补偿</td><td>传播、距离/方向、重复性、不确定度分析</td><td>哪些特征对距离最敏感？如何利用传播状态进行补偿？</td></tr>
+        <tr><td>子方向4<br>多模态气体放电EM指纹</td><td>二维/三维流注、current moment、原生RF、验证框架</td><td>不同放电模式的电流、时间尺度与EM频谱有何差异？</td></tr>
+        <tr><td>子方向5<br>神经触觉或系统级应用</td><td>thermal/RLC、全波传播、接收与验证</td><td>端到端系统能否稳定输出可用信息？哪些环节限制鲁棒性？</td></tr>
+      </tbody>
+    </table>
+    <div class="conclusion" style="margin-top:25px">后续方向复用的是已经建立的物理模块、输入输出接口和验证方法，而不是重新搭建一套工具。</div>
+    <div class="footer">共性基础设施<span class="version">一个平台支撑多个研究方向</span><span class="page">10</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">已完成工作量</div></div>
+    <h2>正式研究平台已经形成并通过可重复性验收</h2>
+    <div class="metric-row">
+      <div class="metric"><strong>v0.1.0</strong><span>正式发布版本</span></div>
+      <div class="metric"><strong>7</strong><span>核心科研计算模块</span></div>
+      <div class="metric"><strong>466</strong><span>分析与接口测试通过</span></div>
+      <div class="metric"><strong>10/10 + 75</strong><span>数值测试 + 端到端检查</span></div>
+    </div>
+    <div class="accomplished">
+      <div class="done">二维流注框架<br><span class="small muted">场、传播、电流与Joule</span></div>
+      <div class="done">三维流注接口<br><span class="small muted">非轴对称关键工况</span></div>
+      <div class="done">放电到原生RF<br><span class="small muted">时域、频谱与可信门</span></div>
+      <div class="done">thermal/RLC端口链<br><span class="small muted">冷放电到热通道</span></div>
+      <div class="done">全波传播与接收<br><span class="small muted">S参数、传递与波形</span></div>
+      <div class="done">实验验证框架<br><span class="small muted">重复性与不确定度</span></div>
+    </div>
+    <div class="two" style="margin-top:22px;gap:18px">
+      <div class="conclusion light">科研意义：模型可重复，跨阶段参数可追踪，历史结果不会被新工况覆盖。</div>
+      <div class="conclusion light">后续价值：新结构、新实验和新文献可以直接进入既有研究流程。</div>
+    </div>
+    <div class="source-note" style="margin-top:11px">验收依据：正式发行记录为 466 pass、10/10 pass、75 pass；未采用无法由 v0.1.0 冻结记录确认的其他计数。</div>
+    <div class="footer">科研工作量<span class="version">完整物理链 + 可追溯证据体系</span><span class="page">11</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">当前阶段与下一步</div></div>
+    <h2>工具阶段结束，下一阶段开始用工具回答子方向1的科学问题</h2>
+    <div class="two">
+      <div class="phase"><h3>已完成</h3><ul><li>完整多物理仿真平台</li><li>放电到RF的两条机制链</li><li>外部求解器数据接口</li><li>实验数据验证框架</li><li>结果冻结、追溯与复现</li></ul></div>
+      <div class="phase next"><h3>下一步</h3><ol><li>建立实际针 / 箔结构与材料矩阵</li><li>推进实际电极 COMSOL 电场</li><li>代表结构进入二维 / 三维放电</li><li>输出 current / Joule / RF 指标</li><li>导入真实 VNA / 示波器 / 距离实验</li></ol></div>
+    </div>
+    <div class="route"><span>实际电极</span><b>→</b><span>正式仿真</span><b>→</b><span>真实实验</span><b>→</b><span>论文1机制闭环</span></div>
+    <div class="conclusion">下一阶段：实际电极结构 → 正式仿真 → 实验闭环</div>
+    <div class="footer">microgap-rf v0.1.0<span class="version">正式仿真平台已建立</span><span class="page">12</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">Appendix A</div></div>
+    <h2>模块、计算后端、主要输出与当前状态</h2>
+    <table class="tight">
+      <thead><tr><th>科研模块</th><th>辅助Stage</th><th>计算后端</th><th>主要输出</th><th>当前状态</th></tr></thead>
+      <tbody>
+        <tr><td>实际电极静电场</td><td>B</td><td>COMSOL（外部）</td><td>电势、E场、Emax、高场区</td><td>接口明确；正式微电极工作独立推进</td></tr>
+        <tr><td>二维流注与电流</td><td>C</td><td>PETSc / MPI</td><td>粒子密度、空间电荷、流注头、电流、Joule</td><td>框架可用；待正式结构矩阵</td></tr>
+        <tr><td>三维流注</td><td>D/E</td><td>Afivo（外部）</td><td>非轴对称场与流注演化</td><td>接口与关键工况流程已建立</td></tr>
+        <tr><td>原生RF</td><td>F</td><td>Jefimenko后处理</td><td>current moment、时域场、FFT、可信带</td><td>分析链建立；350 MHz未解决</td></tr>
+        <tr><td>热通道与端口</td><td>G</td><td>thermal / RLC</td><td>通道电阻、Vport、Iport、端口谱</td><td>开发参考链可用</td></tr>
+        <tr><td>全波传播与接收</td><td>H</td><td>openEMS（外部）</td><td>S11、S21、传递函数、接收波形/频谱</td><td>开发参考；绝对幅值仅数值参考</td></tr>
+        <tr><td>实验验证</td><td>I</td><td>验证与统计模块</td><td>频谱、重复性、CI、不确定度、差异记录</td><td>流程就绪；真实实验待提供</td></tr>
+      </tbody>
+    </table>
+    <div class="conclusion light" style="margin-top:24px">COMSOL、Afivo、openEMS保持外部；平台负责固定它们与其他计算阶段的数据交接和科学状态。</div>
+    <div class="footer">备查<span class="version">模块边界</span><span class="page">A1</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">Appendix B</div></div>
+    <h2>正式仿真与实验闭环需要准备什么输入</h2>
+    <div class="four">
+      <div class="cap" style="height:510px"><h3>电极与工况</h3><ul><li>geometry</li><li>gap</li><li>tip radius / alignment</li><li>voltage</li><li>material / coating / interface</li></ul><p class="small muted">决定局部场和边界条件。</p></div>
+      <div class="cap" style="height:510px"><h3>放电计算</h3><ul><li>gas composition</li><li>pressure / temperature</li><li>initial electrons</li><li>mesh</li><li>time step / duration</li></ul><p class="small muted">决定雪崩、流注和电流分辨率。</p></div>
+      <div class="cap" style="height:510px"><h3>传播与接收</h3><ul><li>Tx / Rx geometry</li><li>distance</li><li>orientation</li><li>frequency band</li><li>reference plane</li></ul><p class="small muted">用于区分发射端与接收链影响。</p></div>
+      <div class="cap" style="height:510px"><h3>真实实验</h3><ul><li>VNA .s1p / .s2p</li><li>scope waveform CSV</li><li>instrument metadata</li><li>calibration metadata</li><li>uncertainty metadata</li></ul><p class="small muted">缺少元数据时不能完成正式科学验证。</p></div>
+    </div>
+    <div class="conclusion light" style="margin-top:25px">正式工况的关键不是“只有一条波形”，而是同时保留几何、单位、仪器、校准和不确定度。</div>
+    <div class="footer">备查<span class="version">输入清单</span><span class="page">A2</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="header"><div class="brand">东南大学 <small>SOUTHEAST UNIVERSITY</small></div><div class="section-name">Appendix C</div></div>
+    <h2>软件已发布，但科学验证状态保持独立</h2>
+    <table class="status-table">
+      <thead><tr><th style="width:29%">对象</th><th style="width:28%">软件 / 工具状态</th><th>当前科学状态</th></tr></thead>
+      <tbody>
+        <tr><td>整体仿真与验证平台</td><td>microgap-rf v0.1.0 已发布</td><td>不等同于全部物理结论已验证</td></tr>
+        <tr><td>Stage-I实验验证</td><td>数据、质量、比较与不确定度流程就绪</td><td>PENDING_REAL_EXPERIMENT</td></tr>
+        <tr><td>350 MHz系统</td><td>开发参考链可运行</td><td>SYSTEM_350MHZ_VALIDATION = NOT_MEASURED</td></tr>
+        <tr><td>350 MHz原生RF</td><td>原生RF分析链可运行</td><td>NATIVE_RF_350MHZ = NOT_RESOLVED</td></tr>
+        <tr><td>Stage5全Maxwell参考</td><td>接收后处理接口就绪</td><td>FULL_MAXWELL_REFERENCE_PENDING</td></tr>
+        <tr><td>H4接收绝对幅值</td><td>可形成数值接收参考</td><td>NUMERICAL_REFERENCE_ONLY</td></tr>
+      </tbody>
+    </table>
+    <div class="two" style="margin-top:28px;gap:22px">
+      <div class="conclusion light">可以说：平台能力已建立、开发案例已完成、真实实验可直接接入。</div>
+      <div class="conclusion" style="background:var(--red)">不能说：已验证原生350 MHz、已与真实实验吻合、绝对幅值已确认。</div>
+    </div>
+    <div class="footer">备查<span class="version">SOFTWARE RELEASED ≠ SCIENTIFICALLY VALIDATED</span><span class="page">A3</span></div>
+  </section>
+</div>
+<div class="keyhint">← → / PgUp PgDn / Space · F 全屏</div><div id="progress"></div>
+<script>
+  const slides=[...document.querySelectorAll('.slide')];let index=0;
+  function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);document.getElementById('viewport').style.transform=`translate(-50%,-50%) scale(${s})`}
+  function show(i){index=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,n)=>s.classList.toggle('active',n===index));document.getElementById('progress').style.width=`${(index+1)/slides.length*100}%`}
+  addEventListener('resize',fit);document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(index+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(index-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);if(e.key.toLowerCase()==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}});
+  document.addEventListener('dblclick',()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen());fit();show(0);
+</script>
+</body>
+</html>

@@ -1,5 +1,21 @@
 schema_version: "1.0"
 papers:
+  - paper_id: KOILE_2021_STREAMER_COLLISION_RF
+    title: Radio Frequency Emissions From Streamer Collisions in Subbreakdown Fields
+    authors: [Jacob Koile, Ningyu Liu, Joseph Dwyer]
+    year: 2021
+    journal: Geophysical Research Letters
+    doi: 10.1029/2021GL096214
+    url: https://doi.org/10.1029/2021GL096214
+    topic_tags: [streamer-collision, native-rf, current-moment, ultrafast-kinetics, maxwell-relaxation]
+    related_stages: [B, C, E, F, I]
+    related_modules: [streamer, streamer_rf.rf.mechanisms, streamer_rf.rf.spectral]
+    related_tests: [tests/rf/test_v2_1_ultrafast_rf_governance.py]
+    relevance: Evidence basis for the v2.1 ultrafast source-kinetics layer between streamer event topology and native-RF processing.
+    review_status: REVIEWED_FOR_V2_1_R0
+    impact_status: ARCHITECTURE_IMPACT
+    frozen_result_risk: NONE_R0_CONTRACT_ONLY
+    notes: The centimetre-scale hydrometeor collision model is evidence for a candidate diagnostic layer, not a directly transferable microgap breakdown criterion.
   - paper_id: DANGOLA_2008_EQUILIBRIUM_AIR
     title: Thermodynamic and transport properties in equilibrium air plasmas in a wide pressure and temperature range
     authors: [A. D'Angola, G. Colonna, C. Gorse, M. Capitelli]
@@ -16,4 +32,3 @@ papers:
     impact_status: REFERENCE_ONLY
     frozen_result_risk: NONE_WITHOUT_NEW_CHANGE_REQUEST
     notes: No article full text is distributed.
-

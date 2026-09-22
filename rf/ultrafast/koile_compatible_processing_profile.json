@@ -1,0 +1,80 @@
+{
+  "profile_id": "KOILE_COMPATIBLE_PROCESSING_PROFILE",
+  "schema_version": "1.0",
+  "simulation_architecture_version": "v2.1",
+  "spec_status": "READY_FOR_F_R5A_BENCHMARK_IMPLEMENTATION",
+  "input": {
+    "quantity": "M(t)",
+    "unit": "A m",
+    "original_time_grid": "VARIABLE_OR_UNIFORM_MONOTONIC",
+    "original_samples_always_preserved": true
+  },
+  "uniform_resampling": {
+    "enabled": true,
+    "method": "LINEAR_INTERPOLATION",
+    "target_dt_rule": "EXPLICIT_AND_NO_LARGER_THAN_MINIMUM_ORIGINAL_EVENT_DT",
+    "interpolation_can_upgrade_temporal_trust": false
+  },
+  "smoothing": {
+    "mode": "MOVING_AVERAGE",
+    "window_samples": 10,
+    "paper_reported_physical_span_ps": [1.0, 3.0],
+    "edge_policy": "VALID_SUPPORT_ONLY_NO_EXTRAPOLATION"
+  },
+  "dMdt": {
+    "method": "SECOND_ORDER_CENTERED_FINITE_DIFFERENCE_ON_UNIFORM_GRID",
+    "edge_policy": "DROP_UNSUPPORTED_EDGE_SAMPLES",
+    "output_unit": "A m s^-1"
+  },
+  "window": {
+    "type": "TUKEY",
+    "alpha": 0.5,
+    "alpha_provenance": "PROJECT_BENCHMARK_CANDIDATE_NOT_REPORTED_BY_KOILE_2021",
+    "sensitivity_required": true
+  },
+  "zero_padding": {
+    "target_duration_s": 1.2e-8,
+    "purpose": "COMMON_FREQUENCY_SAMPLING_GRID_FOR_CASE_COMPARISON",
+    "physical_resolution_claim": "ZERO_PADDING_DOES_NOT_INCREASE_TRUE_FREQUENCY_RESOLUTION"
+  },
+  "fft": {
+    "transform": "ONE_SIDED_RFFT_OF_WINDOWED_DMDT",
+    "normalization": "CONTINUOUS_TIME_RIEMANN_SUM_DT_TIMES_DFT",
+    "physical_frequency_resolution_Hz": "1 / original_unpadded_event_record_duration_s",
+    "padded_grid_spacing_Hz": "1 / zero_padded_duration_s"
+  },
+  "ESD": {
+    "definition": "abs(FFT(dMdt))^2 / (6 * pi * epsilon_0 * c^3)",
+    "comparison_mode": "ABSOLUTE_WHEN_UNITS_AND_NORMALIZATION_ARE_RESOLVED_OTHERWISE_SHAPE_ONLY"
+  },
+  "reference_frequency_Hz": 1.0e9,
+  "pulse_width": {
+    "definition": "FULL_WIDTH_AT_ONE_OVER_E_OF_MAIN_ABS_DMDT_PEAK",
+    "multi_peak_policy": "NOT_RESOLVED_UNLESS_MAIN_EVENT_PULSE_IS_DECLARED"
+  },
+  "f3dB": {
+    "definition": "FIRST_HIGH_FREQUENCY_ESD_CROSSING_3_DB_BELOW_ESD_AT_REFERENCE_FREQUENCY",
+    "crossing_interpolation": "LINEAR_IN_DB_VERSUS_LOG10_FREQUENCY"
+  },
+  "f10dB": {
+    "definition": "FIRST_HIGH_FREQUENCY_ESD_CROSSING_10_DB_BELOW_ESD_AT_REFERENCE_FREQUENCY",
+    "crossing_interpolation": "LINEAR_IN_DB_VERSUS_LOG10_FREQUENCY"
+  },
+  "spectral_slope": {
+    "definition": "LEAST_SQUARES_ESD_DB_SLOPE_VERSUS_LOG10_FREQUENCY",
+    "unit": "dB decade^-1",
+    "fit_band_must_be_recorded": true
+  },
+  "sensitivity_profiles": {
+    "RAW": {"purpose": "IMMUTABLE_ORIGINAL_M_AND_TIME_GRID", "metrics_enabled": false},
+    "KOILE_COMPATIBLE": {"smoothing": "MOVING_AVERAGE_10_SAMPLES", "window": "TUKEY_ALPHA_0.5_CANDIDATE"},
+    "NO_SMOOTHING": {"smoothing": "NONE_AFTER_UNIFORM_RESAMPLING", "window": "SAME_AS_KOILE_COMPATIBLE"},
+    "ALTERNATIVE_WINDOW": {"smoothing": "SAVITZKY_GOLAY_CONFIG_RECORDED", "window": "TUKEY_ALPHA_SWEEP_RECORDED"}
+  },
+  "sensitivity_metrics": ["dMdt_pulse_width_s", "f3dB_Hz", "f10dB_Hz", "spectral_slope_dB_decade"],
+  "sensitivity_gate": {
+    "material_change_requires_status": "PROCESSING_SENSITIVE",
+    "automatic_trusted_status_permitted": false,
+    "thresholds": "NOT_RESOLVED_UNTIL_F_R5A"
+  }
+}

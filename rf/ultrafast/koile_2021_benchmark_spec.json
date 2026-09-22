@@ -1,0 +1,34 @@
+{
+  "benchmark_id": "KOILE_2021_TABLE_1",
+  "schema_version": "1.0",
+  "doi": "10.1029/2021GL096214",
+  "benchmark_role": "EXTERNAL_LITERATURE_PROCESSING_AND_TREND_REFERENCE_NOT_MICROGAP_PREDICTION",
+  "pulse_width_definition": "FULL_WIDTH_AT_ONE_OVER_E_OF_MAIN_ABS_DMDT_PEAK",
+  "spectral_reference_frequency_Hz": 1000000000.0,
+  "group_1": {
+    "fixed_Eamb_over_Ek": 0.65,
+    "cases": [
+      {"separation_m": 0.012, "pulse_width_s": 2.12e-11, "f3dB_Hz": 2.98e9, "f10dB_Hz": 1.26e10},
+      {"separation_m": 0.014, "pulse_width_s": 2.17e-11, "f3dB_Hz": 2.90e9, "f10dB_Hz": 1.20e10},
+      {"separation_m": 0.020, "pulse_width_s": 2.02e-11, "f3dB_Hz": 2.92e9, "f10dB_Hz": 1.24e10}
+    ],
+    "reported_trend": "SEPARATION_OR_TOTAL_STREAMER_LENGTH_HAS_SMALL_EFFECT_ON_NORMALIZED_SPECTRAL_SHAPE_AT_FIXED_FIELD"
+  },
+  "group_2": {
+    "fixed_separation_m": 0.014,
+    "cases": [
+      {"Eamb_over_Ek": 0.65, "pulse_width_s": 2.17e-11, "f3dB_Hz": 2.89e9, "f10dB_Hz": 1.20e10},
+      {"Eamb_over_Ek": 0.85, "pulse_width_s": 1.67e-11, "f3dB_Hz": 4.53e9, "f10dB_Hz": 1.85e10},
+      {"Eamb_over_Ek": 1.00, "pulse_width_s": 1.37e-11, "f3dB_Hz": 5.98e9, "f10dB_Hz": 2.26e10},
+      {"Eamb_over_Ek": 1.50, "pulse_width_s": 9.6e-12, "f3dB_Hz": 6.31e9, "f10dB_Hz": 3.00e10}
+    ],
+    "reported_trend": "HIGHER_FIELD_SHORTENS_PULSE_EXTENDS_AND_FLATTENS_SPECTRUM_AND_INCREASES_MAGNITUDE"
+  },
+  "transfer_restrictions": {
+    "direct_Eamb_over_Ek_microgap_breakdown_interpretation": false,
+    "Ek_semantics": "NORMALIZATION_REFERENCE_ONLY",
+    "geometry_scale": "CENTIMETRE_HYDROMETEOR",
+    "project_geometry_scale": "MICROMETRE_METAL_ELECTRODE",
+    "required_project_event_topology_check": true
+  }
+}

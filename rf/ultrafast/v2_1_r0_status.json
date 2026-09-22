@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "node": "v2.1-R0",
+  "V2_1_R0_STATUS": "PASS",
+  "SIMULATION_ARCHITECTURE": "v2.1",
+  "SOFTWARE_VERSION": "0.1.0",
+  "FROZEN_V2_0_BASELINE_PRESERVED": true,
+  "KOILE_EVIDENCE_REGISTERED": true,
+  "ULTRAFAST_KINETICS_CONTRACT_READY": true,
+  "KOILE_RF_BENCHMARK_SPEC_READY": true,
+  "PHYSICS_SOLVER_CHANGED": false,
+  "LARGE_SIMULATION_RERUN": false,
+  "NEXT_NODE": "F-R5A",
+  "frozen_baseline_hashes": {
+    "rf/source/schema/source_record_schema.json": "16277adc0a3289ae3b16272fe24b97ba57ffe3e428a6950f7b998d81e1f97387",
+    "python/streamer_rf/rf/mechanisms.py": "e0d1257e23ed438e0edfe3c779404613588df61698d9de1430a4f5c3ad3267cf",
+    "packaging/final_project_contract.json": "52e56a5e7311e2185c072fdaf888c402dfb2a7f2ea4737777a6ca43152fd90a4",
+    "validation/stage_i/final/stage_i_final_status.json": "b8fd2ea69711caf268b9e9346e642ef39f49ea5becc024a57cf844da77d900df",
+    "fullwave/h3/h3_result_contract.json": "4514850dce4c847ffc4aceda3a4d47f4ae1c7a3d88500e61f7095343f6fa1e39",
+    "fullwave/h4/h4_result_contract.json": "9e789507a48caf222a8de652ddaf1f40398b21ca105e759f593f35204ba154c7"
+  }
+}

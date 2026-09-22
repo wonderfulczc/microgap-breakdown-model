@@ -1,0 +1,192 @@
+{
+  "contract_id": "ULTRAFAST_RF_DIAGNOSTICS_V2_1",
+  "schema_version": "1.0",
+  "simulation_architecture_version": "v2.1",
+  "layer": "ULTRAFAST_SOURCE_KINETICS",
+  "layer_kind": "INTERNAL_STAGE_C_E_F_MECHANISM_LAYER_NOT_A_FORMAL_STAGE",
+  "implementation_status": "CONTRACT_READY_VALUES_NOT_RESOLVED",
+  "scientific_role": "DIAGNOSTIC_AND_HANDOFF_ONLY",
+  "event_topology": {
+    "enum": [
+      "PROPAGATION",
+      "HEAD_INTERACTION",
+      "STREAMER_COLLISION",
+      "ELECTRODE_ATTACHMENT",
+      "BRIDGING",
+      "UNRESOLVED"
+    ],
+    "definitions": {
+      "PROPAGATION": "A resolved streamer head advances without a resolved collision, attachment, or bridge event.",
+      "HEAD_INTERACTION": "Two or more resolved head regions interact but collision is not yet established.",
+      "STREAMER_COLLISION": "Opposing or converging streamer-head regions form a resolved collision ROI.",
+      "ELECTRODE_ATTACHMENT": "A resolved streamer/channel region attaches to an electrode boundary.",
+      "BRIDGING": "A conductive path connects the designated electrodes according to the producing solver's declared bridge criterion.",
+      "UNRESOLVED": "Topology cannot be assigned from available spatial or temporal resolution."
+    }
+  },
+  "constants": {
+    "epsilon_0_F_m": 8.8541878128e-12,
+    "elementary_charge_C": 1.602176634e-19
+  },
+  "field_definitions": {
+    "eta_0": {
+      "unit": "1",
+      "definition": "Pre-event electric-field magnitude in the declared event ROI divided by Ek.",
+      "source": "streamer field state plus event ROI and declared pre-event time",
+      "computation": "E0_event_region_V_m / Ek_V_m using the recorded ROI statistic",
+      "applicability": "all topologies when E0, Ek, ROI, time, and ROI statistic are resolved",
+      "not_resolved": "NOT_RESOLVED_FIELD_OR_ROI"
+    },
+    "eta_peak": {
+      "unit": "1",
+      "definition": "Maximum resolved electric-field magnitude over the event ROI and event interval divided by Ek.",
+      "source": "streamer field state in event ROI",
+      "computation": "max_ROI,time(|E|) / Ek_V_m",
+      "applicability": "all resolved event topologies",
+      "not_resolved": "NOT_RESOLVED_FIELD_OR_ROI"
+    },
+    "nu_i": {
+      "unit": "s^-1",
+      "definition": "Local electron impact-ionization frequency for the declared ROI statistic.",
+      "source": "existing reaction/transport output; no ReactionModel change is authorized",
+      "computation": "producer-declared ionization frequency evaluated from the frozen model state",
+      "applicability": "only where local gas state and ionization-frequency provenance are available",
+      "not_resolved": "NOT_RESOLVED_IONIZATION_FREQUENCY"
+    },
+    "tau_i_s": {
+      "unit": "s",
+      "definition": "Electron impact-ionization timescale.",
+      "source": "nu_i",
+      "computation": "1 / nu_i for finite nu_i > 0",
+      "applicability": "same ROI/time statistic as nu_i",
+      "not_resolved": "NOT_RESOLVED_IONIZATION_TIMESCALE"
+    },
+    "ne_m_3": {
+      "unit": "m^-3",
+      "definition": "Electron number density in the declared event ROI statistic.",
+      "source": "streamer state",
+      "computation": "producer-declared ROI statistic",
+      "applicability": "resolved streamer cells in the event ROI",
+      "not_resolved": "NOT_RESOLVED_ELECTRON_DENSITY"
+    },
+    "mu_e_m2_V_s": {
+      "unit": "m^2 V^-1 s^-1",
+      "definition": "Electron mobility consistent with the frozen transport model and local state.",
+      "source": "existing transport output",
+      "computation": "no new mobility model is introduced by this contract",
+      "applicability": "same ROI/time statistic as ne",
+      "not_resolved": "NOT_RESOLVED_ELECTRON_MOBILITY"
+    },
+    "sigma_e_S_m": {
+      "unit": "S m^-1",
+      "definition": "Candidate local electron conductivity.",
+      "source": "ne and mu_e",
+      "computation": "elementary_charge_C * ne_m_3 * mu_e_m2_V_s",
+      "applicability": "electron-dominated local conductivity approximation with declared ROI statistic",
+      "not_resolved": "NOT_RESOLVED_ELECTRON_CONDUCTIVITY"
+    },
+    "tau_M_s": {
+      "unit": "s",
+      "definition": "Candidate Maxwell relaxation timescale from electron conductivity.",
+      "source": "sigma_e",
+      "computation": "epsilon_0_F_m / sigma_e_S_m for finite sigma_e > 0",
+      "applicability": "same ROI/time statistic as sigma_e",
+      "not_resolved": "NOT_RESOLVED_MAXWELL_TIMESCALE"
+    },
+    "Pi_RF": {
+      "unit": "1",
+      "definition": "Candidate diagnostic ratio comparing Maxwell relaxation and impact-ionization timescales.",
+      "source": "tau_M and tau_i",
+      "computation": "tau_M_s / tau_i_s",
+      "applicability": "only when both timescales use a consistent ROI/time statistic",
+      "scientific_position": "DIAGNOSTIC_CANDIDATE",
+      "koile_original_parameter": false,
+      "novelty_claim_permitted": false,
+      "not_resolved": "NOT_RESOLVED_TIMESCALE_RATIO"
+    },
+    "dMdt_pulse_width_s": {
+      "unit": "s",
+      "definition": "Full width of the main |dM/dt| event pulse at peak/e for the Koile-compatible profile.",
+      "source": "processed dM/dt and event interval",
+      "computation": "threshold-crossing width with interpolation only between resolved samples",
+      "applicability": "single resolved main pulse with adequate temporal sampling",
+      "not_resolved": "NOT_RESOLVED_PULSE_OR_TEMPORAL_RESOLUTION"
+    },
+    "f3dB_Hz": {
+      "unit": "Hz",
+      "definition": "Frequency where ESD first falls 3 dB below its declared reference-frequency value.",
+      "source": "processed ESD",
+      "computation": "first high-frequency threshold crossing relative to reference_frequency_Hz",
+      "applicability": "resolved spectrum containing reference and crossing frequencies",
+      "not_resolved": "NOT_RESOLVED_SPECTRAL_CROSSING"
+    },
+    "f10dB_Hz": {
+      "unit": "Hz",
+      "definition": "Frequency where ESD first falls 10 dB below its declared reference-frequency value.",
+      "source": "processed ESD",
+      "computation": "first high-frequency threshold crossing relative to reference_frequency_Hz",
+      "applicability": "resolved spectrum containing reference and crossing frequencies",
+      "not_resolved": "NOT_RESOLVED_SPECTRAL_CROSSING"
+    },
+    "spectral_slope_dB_decade": {
+      "unit": "dB decade^-1",
+      "definition": "Linear-fit slope of ESD in dB versus log10 frequency over a recorded fit band.",
+      "source": "processed ESD and explicit fit band",
+      "computation": "least-squares slope; fit limits and sample count are mandatory metadata",
+      "applicability": "positive finite ESD with a resolved fit band",
+      "not_resolved": "NOT_RESOLVED_SPECTRAL_SLOPE"
+    },
+    "event_start_s": {"unit": "s", "definition": "Declared start of the event interval.", "source": "event detector", "computation": "topology-specific future detector", "applicability": "resolved event", "not_resolved": "NOT_RESOLVED_EVENT_TIME"},
+    "event_peak_s": {"unit": "s", "definition": "Time of the main resolved |dM/dt| event peak.", "source": "processed event waveform", "computation": "argmax within event interval", "applicability": "resolved main pulse", "not_resolved": "NOT_RESOLVED_EVENT_TIME"},
+    "event_end_s": {"unit": "s", "definition": "Declared end of the event interval.", "source": "event detector", "computation": "topology-specific future detector", "applicability": "resolved event", "not_resolved": "NOT_RESOLVED_EVENT_TIME"},
+    "event_time_resolution_s": {"unit": "s", "definition": "Largest effective original output interval contributing to the event estimate.", "source": "uninterpolated source timestamps", "computation": "max(diff(original_time_s)) over event-supporting samples", "applicability": "all events", "not_resolved": "NOT_RESOLVED_SOURCE_TIME_GRID"},
+    "event_sampling_quality": {"unit": "enum", "definition": "Temporal support class based on original effective samples per pulse width.", "source": "pulse width and event_time_resolution_s", "computation": "RESOLVED_PREFERRED if >=10; RESOLVED_MINIMUM if >=5; otherwise NOT_RESOLVED_TEMPORAL_RESOLUTION", "applicability": "pulse metrics", "not_resolved": "NOT_RESOLVED_TEMPORAL_RESOLUTION"},
+    "trust_status": {"unit": "enum", "definition": "Aggregate diagnostic trust state.", "source": "input, temporal, processing, and spectral gates", "computation": "worst applicable gate", "applicability": "all diagnostic records", "not_resolved": "NOT_RESOLVED"}
+  },
+  "event_metadata_required": [
+    "event_id",
+    "event_topology",
+    "event_roi_definition",
+    "event_roi_field_statistic",
+    "Ek_V_m",
+    "Ek_provenance",
+    "event_start_s",
+    "event_peak_s",
+    "event_end_s",
+    "event_time_resolution_s",
+    "event_sampling_quality",
+    "processing_profile_id",
+    "trust_status"
+  ],
+  "temporal_resolution_rule": {
+    "effective_samples_formula": "dMdt_pulse_width_s / event_time_resolution_s",
+    "minimum_effective_samples": 5,
+    "preferred_effective_samples": 10,
+    "below_minimum_status": "NOT_RESOLVED_TEMPORAL_RESOLUTION",
+    "interpolation_can_upgrade_status": false
+  },
+  "trust_status_enum": [
+    "TRUSTED",
+    "CONDITIONAL",
+    "PROCESSING_SENSITIVE",
+    "NOT_RESOLVED_TEMPORAL_RESOLUTION",
+    "NOT_RESOLVED_INPUT",
+    "NOT_RESOLVED"
+  ],
+  "stage_f_handoff": {
+    "required_outputs": [
+      "M_t_A_m",
+      "dMdt_A_m_s",
+      "dMdt_pulse_width_s",
+      "FFT_complex",
+      "ESD",
+      "f3dB_Hz",
+      "f10dB_Hz",
+      "spectral_slope_dB_decade",
+      "trust_metadata"
+    ],
+    "level_1_mechanisms_preserved": ["HCE", "ACC", "REDIS"],
+    "level_2_candidate_diagnostics": ["eta_0", "eta_peak", "ne_m_3", "nu_i", "tau_i_s", "sigma_e_S_m", "tau_M_s", "Pi_RF"]
+  },
+  "Ek_semantics": "NORMALIZATION_REFERENCE_ONLY_NOT_A_SUFFICIENT_MICROGAP_BREAKDOWN_CRITERION"
+}
