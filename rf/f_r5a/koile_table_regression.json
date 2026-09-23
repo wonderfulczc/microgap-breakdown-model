@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "classification": "LITERATURE_TREND_REGRESSION",
+  "group1": {
+    "status": "PASS",
+    "relative_spans": {
+      "PW_ps": 0.07131537242472268,
+      "f3dB_GHz": 0.027272727272727296,
+      "f10dB_GHz": 0.04864864864864862
+    },
+    "acceptance": {
+      "PW": "<0.10",
+      "f3dB": "<0.05",
+      "f10dB": "<0.05"
+    }
+  },
+  "group2": {
+    "status": "PASS",
+    "PW_strictly_decreasing": true,
+    "f3dB_strictly_increasing": true,
+    "f10dB_strictly_increasing": true
+  },
+  "scientific_semantics": "REFERENCE_TABLE_TREND_ONLY_NOT_MICROGAP_VALIDATION"
+}

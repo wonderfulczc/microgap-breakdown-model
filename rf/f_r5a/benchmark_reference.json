@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "literature": "Koile, Liu & Dwyer (2021)",
+  "doi": "10.1029/2021GL096214",
+  "group1": [
+    {
+      "distance_cm": 1.2,
+      "Eamb_over_Ek": 0.65,
+      "PW_ps": 21.2,
+      "f3dB_GHz": 2.98,
+      "f10dB_GHz": 12.6
+    },
+    {
+      "distance_cm": 1.4,
+      "Eamb_over_Ek": 0.65,
+      "PW_ps": 21.7,
+      "f3dB_GHz": 2.9,
+      "f10dB_GHz": 12.0
+    },
+    {
+      "distance_cm": 2.0,
+      "Eamb_over_Ek": 0.65,
+      "PW_ps": 20.2,
+      "f3dB_GHz": 2.92,
+      "f10dB_GHz": 12.4
+    }
+  ],
+  "group2": [
+    {
+      "distance_cm": 1.4,
+      "Eamb_over_Ek": 0.65,
+      "PW_ps": 21.7,
+      "f3dB_GHz": 2.89,
+      "f10dB_GHz": 12.0
+    },
+    {
+      "distance_cm": 1.4,
+      "Eamb_over_Ek": 0.85,
+      "PW_ps": 16.7,
+      "f3dB_GHz": 4.53,
+      "f10dB_GHz": 18.5
+    },
+    {
+      "distance_cm": 1.4,
+      "Eamb_over_Ek": 1.0,
+      "PW_ps": 13.7,
+      "f3dB_GHz": 5.98,
+      "f10dB_GHz": 22.6
+    },
+    {
+      "distance_cm": 1.4,
+      "Eamb_over_Ek": 1.5,
+      "PW_ps": 9.6,
+      "f3dB_GHz": 6.31,
+      "f10dB_GHz": 30.0
+    }
+  ],
+  "use": "LITERATURE_TREND_REGRESSION_NOT_PROJECT_SCIENTIFIC_CONCLUSION"
+}

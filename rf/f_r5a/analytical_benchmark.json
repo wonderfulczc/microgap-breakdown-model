@@ -1,0 +1,70 @@
+{
+  "status": "PASS",
+  "signal_classification": "ANALYTICAL_NUMERICAL_BENCHMARK_NOT_PHYSICAL_STREAMER",
+  "benchmark_A": {
+    "tau_s": 1e-11,
+    "exact_PW_FWHM_s": 1.7627471740390863e-11,
+    "computed_PW_FWHM_s": 1.7628265222515858e-11,
+    "relative_error_FWHM": 4.501394962820434e-05,
+    "exact_PW_FW1E_s": 2.1700770038967757e-11,
+    "computed_PW_FW1E_s": 2.1701846831351147e-11,
+    "relative_error_FW1E": 4.9620008020748e-05,
+    "time_shift_width_relative_error": 0.0,
+    "amplitude_scaling_ratio": 2.9999999999999836,
+    "parseval_relative_error": 1.2705833018121322e-16
+  },
+  "benchmark_B": [
+    {
+      "tau_s": 2e-11,
+      "PW_FWHM_s": 3.5255367962195647e-11,
+      "PW_FW1E_s": 4.340194303367168e-11,
+      "f3dB_Hz": 7616813411.740399,
+      "f10dB_Hz": 14834159272.727032,
+      "spectral_slope": {
+        "fit_band_Hz": [
+          2000000000.0,
+          10000000000.0
+        ],
+        "slope_dB_per_decade": -7.188930727246082,
+        "R2": 0.8890022104831535,
+        "number_of_bins": 96,
+        "status": "PASS"
+      }
+    },
+    {
+      "tau_s": 1e-11,
+      "PW_FWHM_s": 1.7628265222515858e-11,
+      "PW_FW1E_s": 2.1701846831351147e-11,
+      "f3dB_Hz": 15121084112.156515,
+      "f10dB_Hz": 29593431233.311283,
+      "spectral_slope": {
+        "fit_band_Hz": [
+          2000000000.0,
+          10000000000.0
+        ],
+        "slope_dB_per_decade": -1.9327150283085288,
+        "R2": 0.878330564509423,
+        "number_of_bins": 96,
+        "status": "PASS"
+      }
+    },
+    {
+      "tau_s": 5e-12,
+      "PW_FWHM_s": 8.815251207625164e-12,
+      "PW_FW1E_s": 1.0852411547663531e-11,
+      "f3dB_Hz": 30183693174.177216,
+      "f10dB_Hz": 59144430361.696304,
+      "spectral_slope": {
+        "fit_band_Hz": [
+          2000000000.0,
+          10000000000.0
+        ],
+        "slope_dB_per_decade": -0.4932248967360299,
+        "R2": 0.8750399421938202,
+        "number_of_bins": 96,
+        "status": "PASS"
+      }
+    }
+  ],
+  "trend": "PULSE_WIDTH_DECREASE_IMPLIES_CHARACTERISTIC_FREQUENCY_INCREASE"
+}

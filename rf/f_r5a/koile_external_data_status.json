@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "KOILE_RAW_DATA_STATUS": "EXTERNAL_DATA_UNAVAILABLE",
+  "KOILE_WAVEFORM_REPRODUCTION": "PENDING_EXTERNAL_DATA",
+  "dois": [
+    "10.6084/m9.figshare.16635463",
+    "10.6084/m9.figshare.16629118"
+  ],
+  "attempt_result": "FIGSHARE_API_HTTP_403_IN_CURRENT_ENVIRONMENT",
+  "downloaded_files": [],
+  "scientific_effect": "DOES_NOT_BLOCK_ALGORITHMIC_OR_TABLE_TREND_BENCHMARKS"
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "classification": "ALGORITHMIC_SENSITIVITY_NOT_PAPER_PARAMETER_FIT",
+  "rows": [
+    {
+      "tukey_alpha": 0.25,
+      "alpha_source": "PROJECT_OPERATIONAL_CHOICE",
+      "PW_FWHM_s": 1.7628265222515858e-11,
+      "PW_FW1E_s": 2.1701846831351147e-11,
+      "f3dB_Hz": 15121084112.157566,
+      "f10dB_Hz": 29593431233.31322,
+      "spectral_slope_dB_per_decade": -1.9327150283046568
+    },
+    {
+      "tukey_alpha": 0.5,
+      "alpha_source": "PROJECT_OPERATIONAL_CHOICE",
+      "PW_FWHM_s": 1.7628265222515858e-11,
+      "PW_FW1E_s": 2.1701846831351147e-11,
+      "f3dB_Hz": 15121084112.156515,
+      "f10dB_Hz": 29593431233.311283,
+      "spectral_slope_dB_per_decade": -1.9327150283085288
+    },
+    {
+      "tukey_alpha": 0.75,
+      "alpha_source": "PROJECT_OPERATIONAL_CHOICE",
+      "PW_FWHM_s": 1.7628265222515858e-11,
+      "PW_FW1E_s": 2.1701846831351147e-11,
+      "f3dB_Hz": 15121084294.204588,
+      "f10dB_Hz": 29593431448.944103,
+      "spectral_slope_dB_per_decade": -1.9327147446417423
+    },
+    {
+      "tukey_alpha": 1.0,
+      "alpha_source": "PROJECT_OPERATIONAL_CHOICE",
+      "PW_FWHM_s": 1.7628265222515858e-11,
+      "PW_FW1E_s": 2.1701846831351147e-11,
+      "f3dB_Hz": 15188340498.933178,
+      "f10dB_Hz": 29692475276.935955,
+      "spectral_slope_dB_per_decade": -1.9144743078716826
+    }
+  ],
+  "relative_spans": {
+    "PW_FWHM_s": 0.0,
+    "PW_FW1E_s": 0.0,
+    "f3dB_Hz": 0.004442914442054633,
+    "f10dB_Hz": 0.0033440273001042733,
+    "spectral_slope_dB_per_decade": 0.009460195131514448
+  },
+  "thresholds": {
+    "pulse_width": 0.02,
+    "crossing_frequency": 0.05,
+    "spectral_slope": 0.1
+  }
+}

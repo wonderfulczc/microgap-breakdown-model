@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "node": "F-R5A",
+  "stage": "F",
+  "input": {
+    "required": {
+      "time_s": "s",
+      "M_A_m": "A m"
+    },
+    "time_requirement": "STRICTLY_MONOTONIC_FINITE"
+  },
+  "uniform_resampling": {
+    "method": "LINEAR_UNIFORM_RESAMPLING",
+    "source": "PAPER_REPORTED",
+    "strategies": [
+      "USER_SPECIFIED_DT",
+      "MEDIAN_INPUT_DT",
+      "REFERENCE_PROFILE_DT"
+    ]
+  },
+  "derivative": {
+    "method": "CENTRAL_DIFFERENCE_SECOND_ORDER",
+    "source": "PROJECT_OPERATIONAL_CHOICE",
+    "boundary_policy": "DROP_FIRST_AND_LAST_PROCESSED_SAMPLES"
+  },
+  "profiles": {
+    "RAW": {
+      "smoothing_samples": 1,
+      "requires_uniform_input": true
+    },
+    "NO_SMOOTHING": {
+      "smoothing_samples": 1
+    },
+    "KOILE_COMPATIBLE": {
+      "smoothing_samples": 10,
+      "source": "PAPER_REPORTED",
+      "paper_reference_duration_s": [
+        1e-12,
+        3e-12
+      ]
+    }
+  },
+  "window": {
+    "type": "TUKEY",
+    "type_source": "PAPER_REPORTED",
+    "baseline_alpha": 0.5,
+    "alpha_source": "PROJECT_BASELINE_CANDIDATE",
+    "sensitivity_alphas": [
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ]
+  },
+  "zero_padding": {
+    "target_duration_s": 1.2e-08,
+    "source": "PAPER_REPORTED",
+    "semantic": "DISPLAY_GRID_ONLY_NOT_PHYSICAL_RESOLUTION"
+  },
+  "fft": {
+    "normalization": "X(f)=dt*rFFT[x(t)]",
+    "one_sided_storage": "NO_ESD_DOUBLING",
+    "source": "PROJECT_OPERATIONAL_CHOICE"
+  },
+  "ESD": {
+    "formula": "abs(X(f))^2/(6*pi*epsilon_0*c^3)",
+    "source": "PAPER_REPORTED",
+    "absolute_status": "IMPLEMENTED_FROM_REPORTED_FORMULA_NOT_EXACT_NUMERIC_MATCH"
+  },
+  "pulse_width": {
+    "PW_FWHM_s": "FULL_WIDTH_AT_HALF_MAXIMUM_OF_PRIMARY_ABS_DMDT_PEAK",
+    "PW_FW1E_s": "FULL_WIDTH_AT_1_OVER_E_MAXIMUM_OF_PRIMARY_ABS_DMDT_PEAK",
+    "interpretation": "AMBIGUOUS_PENDING_WAVEFORM_REPRODUCTION"
+  },
+  "relative_crossings": {
+    "reference_frequency_Hz": 1000000000.0,
+    "search": "FIRST_STABLE_HIGH_FREQUENCY_DOWNCROSSING",
+    "interpolation": "DB_VS_LOG10_F"
+  },
+  "spectral_slope": {
+    "field": "spectral_slope_dB_per_decade",
+    "fit_band": "USER_OR_BENCHMARK_REQUIRED"
+  },
+  "multi_peak": {
+    "without_primary_event": "NOT_RESOLVED_MULTI_PEAK",
+    "save_all_peak_metadata": true
+  },
+  "trust": {
+    "stage_f_trust_mask_priority": "HIGHEST",
+    "interpolation_cannot_upgrade_trust": true,
+    "NATIVE_RF_350MHZ": "NOT_RESOLVED"
+  }
+}
