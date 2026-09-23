@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "event_id": "F-R5B-DEV-ATTACHMENT-001",
+  "event_topology": "ELECTRODE_ATTACHMENT",
+  "event_classification": "DEVELOPMENT_REFERENCE",
+  "event_window": {
+    "status": "INCOMPLETE",
+    "event_topology": "ELECTRODE_ATTACHMENT",
+    "event_start_s": 2e-15,
+    "event_peak_s": 2.675000000000167e-12,
+    "event_end_s": 4.096000000000119e-12,
+    "N_pre": 1,
+    "N_event": 4095,
+    "N_post": 0,
+    "window_duration_s": 4.094000000000119e-12,
+    "dt_min_s": 9.99999999998885e-16,
+    "dt_median_s": 1.0000000000000967e-15,
+    "dt_max_s": 1.0000000000009045e-15,
+    "contiguous": true,
+    "requirements": "pre/rise/peak/decay/post must all be present"
+  },
+  "ROI": "ATTACHMENT_ROI",
+  "evidence": "HEAD_COMPONENT_WITHIN_ELECTRODE_DISTANCE",
+  "key_time_anchors": {
+    "t_E_peak": "NOT_RESOLVED",
+    "t_eta_peak": "NOT_RESOLVED",
+    "t_nu_i_peak": "NOT_RESOLVED",
+    "t_tau_i_min": "NOT_RESOLVED",
+    "t_ne_peak": 2.675000000000167e-12,
+    "t_sigma_peak": 2.675000000000167e-12,
+    "t_tau_M_min": 2.675000000000167e-12,
+    "t_Pi_RF_characteristic": 2.675000000000167e-12,
+    "t_M_characteristic": "NOT_RESOLVED",
+    "t_dMdt_positive_peak": 5.000000000000001e-15,
+    "t_dMdt_negative_peak": 2.5040000000001505e-12,
+    "t_abs_dMdt_peak": 2.5040000000001505e-12,
+    "boundary_extremum_policy": "NOT_RESOLVED"
+  },
+  "field_collapse": {
+    "status": "NOT_RESOLVED",
+    "reason": "No complete pre-rise-peak-decay-post event and no clear interior E peak followed by monotonic decay",
+    "E_peak_before_V_m": null,
+    "E_peak_event_V_m": 22358646.49280065,
+    "E_after_V_m": null,
+    "field_decay_time_s": null,
+    "ne_growth_time_s": null,
+    "sigma_growth_time_s": null
+  }
+}

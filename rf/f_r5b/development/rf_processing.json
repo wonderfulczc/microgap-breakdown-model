@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "implementation": "DIRECT_REUSE_OF_F_R5A_process_current_moment",
+  "profile": "KOILE_COMPATIBLE",
+  "diagnostics": {
+    "resampling": {
+      "strategy": "MEDIAN_INPUT_DT",
+      "original_dt_min_s": 9.99999999998885e-16,
+      "original_dt_median_s": 1.0000000000000967e-15,
+      "original_dt_max_s": 1.0000000000009045e-15,
+      "uniform_dt_s": 1.0000000000000967e-15,
+      "upsampling_factor": 1.0,
+      "resolution_status": "ORIGINAL_PHYSICAL_TIME_RESOLUTION_PRESERVED"
+    },
+    "smoothing": {
+      "profile": "KOILE_COMPATIBLE",
+      "smoothing_samples": 10,
+      "smoothing_duration_s": 1.0000000000000967e-14,
+      "status": "KOILE_TIMESCALE_MISMATCH",
+      "paper_reference_duration_s": [
+        1e-12,
+        3e-12
+      ],
+      "window_length_source": "PAPER_REPORTED"
+    },
+    "derivative": {
+      "method": "CENTRAL_DIFFERENCE_SECOND_ORDER",
+      "source": "PROJECT_OPERATIONAL_CHOICE",
+      "boundary_policy": "DROP_FIRST_AND_LAST_PROCESSED_SAMPLES"
+    },
+    "temporal_resolution": {
+      "status": "NOT_RESOLVED_PULSE_WIDTH",
+      "original_dt_median_s": 1.0000000000000967e-15,
+      "samples_per_FWHM": null,
+      "rule": "USE_ORIGINAL_TIME_RESOLUTION_NOT_INTERPOLATED_DT"
+    },
+    "pulse": {
+      "status": "NOT_RESOLVED_NO_INTERIOR_PEAK",
+      "peaks": [],
+      "primary_peak_index": null,
+      "primary_peak_time_s": null,
+      "primary_peak_abs_A_m_s": null,
+      "PW_FWHM_s": null,
+      "PW_FW1E_s": null,
+      "interpretation": "AMBIGUOUS_PENDING_WAVEFORM_REPRODUCTION"
+    },
+    "spectrum": {
+      "dt_s": 1.0000000000000967e-15,
+      "n_physical_samples": 4084,
+      "n_fft": 12000000,
+      "physical_record_duration_s": 4.0830000000003945e-12,
+      "zero_padded_duration_s": 1.2000000000001161e-08,
+      "physical_frequency_resolution_Hz": 244917952485.89355,
+      "display_fft_bin_spacing_Hz": 83333333.33332527,
+      "nyquist_Hz": 499999999999951.6,
+      "window_name": "TUKEY",
+      "tukey_alpha": 0.5,
+      "parseval_time_integral": 1.5323871483317736e-14,
+      "parseval_spectral_integral": 1.5323871483317733e-14,
+      "parseval_relative_error": 2.0591686796115504e-16,
+      "normalization": "X(f)=dt*rFFT[x(t)]",
+      "one_sided_convention": "NONNEGATIVE_FREQUENCIES_STORED_WITHOUT_ESD_DOUBLING",
+      "dc_handling": "DC_RETAINED_AND_EXCLUDED_FROM_RELATIVE_CROSSING_SEARCH",
+      "nyquist_handling": "NYQUIST_STORED_ONCE_FOR_EVEN_NFFT"
+    },
+    "f3dB": {
+      "level_dB": -3.0,
+      "reference_frequency_Hz": 1000000000.0,
+      "reference_ESD": 1.1293376419012114e-41,
+      "threshold_ESD": 5.660096085756152e-42,
+      "raw_crossing_candidates_Hz": [
+        142166244149.68515
+      ],
+      "validated_crossing_Hz": 142166244149.68515,
+      "status": "PASS"
+    },
+    "f10dB": {
+      "level_dB": -10.0,
+      "reference_frequency_Hz": 1000000000.0,
+      "reference_ESD": 1.1293376419012114e-41,
+      "threshold_ESD": 1.1293376419012114e-42,
+      "raw_crossing_candidates_Hz": [
+        239646743840.95367
+      ],
+      "validated_crossing_Hz": 239646743840.95367,
+      "status": "PASS"
+    },
+    "spectral_slope": {
+      "fit_band_Hz": [
+        1000000000.0,
+        5000000000.0
+      ],
+      "slope_dB_per_decade": -0.004997507390775552,
+      "R2": 0.8759657888169704,
+      "number_of_bins": 48,
+      "status": "PASS"
+    },
+    "processing_provenance": {
+      "uniform_resampling_method": "PAPER_REPORTED",
+      "moving_average_10_samples": "PAPER_REPORTED",
+      "derivative_scheme": "PROJECT_OPERATIONAL_CHOICE",
+      "tukey_window_type": "PAPER_REPORTED",
+      "tukey_alpha": "PROJECT_OPERATIONAL_CHOICE",
+      "zero_pad_12_ns": "PAPER_REPORTED",
+      "fft_discrete_normalization": "PROJECT_OPERATIONAL_CHOICE",
+      "ESD_formula": "PAPER_REPORTED",
+      "pulse_width_interpretation": "AMBIGUOUS_PENDING_WAVEFORM_REPRODUCTION"
+    }
+  },
+  "PW_FWHM_s": null,
+  "PW_FW1E_s": null,
+  "PULSE_WIDTH_INTERPRETATION": "AMBIGUOUS",
+  "numeric_spectrum_status": "COMPUTED",
+  "physical_resolution_assessment": {
+    "physical_frequency_resolution_Hz": 244917952485.89355,
+    "display_fft_bin_spacing_Hz": 83333333.33332527,
+    "reference_1GHz_status": "NOT_RESOLVED_RECORD_DURATION",
+    "f3dB_status": "NOT_RESOLVED_RECORD_DURATION",
+    "f10dB_status": "NOT_RESOLVED_RECORD_DURATION",
+    "zero_padding_increases_physical_resolution": false
+  },
+  "trusted_spectrum_status": "NOT_AVAILABLE_FOR_INCOMPLETE_DEVELOPMENT_EVENT",
+  "existing_stage_f_trust_mask_priority": "HIGHEST",
+  "NATIVE_RF_350MHZ": "NOT_RESOLVED"
+}

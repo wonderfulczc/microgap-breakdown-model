@@ -65,6 +65,10 @@ int main(int argc, char** argv) {
           "conductivity tauM and same-cell Pi_RF arithmetic");
 
     ElectronTransportCurrentSource current(grid);
+    for (int j = 0; j < grid.nz(); ++j) for (int i = 0; i < grid.nr(); ++i) {
+      current.jz(i, j) = 2.0 + i + 0.5 * j;
+      current.current_moment_z += current.jz(i, j) * grid.cell_volume(i);
+    }
     StreamerHeadDiagnostics head;
     head.head_valid = true;
     head.head_z_m = grid.z(10);
@@ -86,6 +90,16 @@ int main(int argc, char** argv) {
               relerr(one.tau_i_at_E_peak_s, tau_i) < 1e-15 &&
               relerr(one.Pi_RF_at_E_peak, tau_M / tau_i) < 1e-15,
           "local kinetics diagnostics are same-cell values");
+    const double expected_proxy = 1.602176634e-19 * (-transport.mobility * E) *
+                                  transport.ionization_frequency * ne *
+                                  (grid.cell_volume(2) + grid.cell_volume(3));
+    check(relerr(one.K_ion_z_A_m_s, expected_proxy) < 1e-15 &&
+              relerr(one.K_ion_abs_A_m_s, std::abs(expected_proxy)) < 1e-15 &&
+              one.signed_proxy_status == "DEFINED_FROM_FROZEN_ELECTRON_DRIFT_CONVENTION",
+          "Koile ionization proxy preserves electron drift sign and ROI integral");
+    check(one.current_moment_z_A_m == current.current_moment_z &&
+              one.current_definition == "FROZEN_FINITE_VOLUME_ELECTRON_TRANSPORT_CURRENT",
+          "current moment handoff is identical to frozen Stage-F source value");
     check(one.eta_0_mean == 2e6 / diagnostic.Ek_V_m() &&
               one.eta_peak == E / diagnostic.Ek_V_m(),
           "eta0 and eta_peak use reference-only Ek semantics");

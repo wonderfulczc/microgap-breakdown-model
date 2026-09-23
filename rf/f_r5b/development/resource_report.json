@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "mode": "LIGHTWEIGHT_STAGE_C_DEVELOPMENT_REFERENCE",
+  "source_run": {
+    "schema_version": "1.0",
+    "mode": "LIGHTWEIGHT_STAGE_C_DEVELOPMENT_REFERENCE",
+    "steps_requested": 4096,
+    "steps_accepted": 4096,
+    "physical_duration_s": 4.096000000000119e-12,
+    "runtime_total_s": 7.47187482,
+    "runtime_solver_s": 6.427032371000005,
+    "runtime_diagnostic_s": 0.7933067040000003,
+    "runtime_trace_io_s": 0.20040035199999975,
+    "diagnostic_plus_io_over_solver": 0.15461366905257792,
+    "overhead_status": "ABOVE_TARGET",
+    "peak_RSS_kB": 48120,
+    "trace_size_bytes": 7382832,
+    "history_2d_fields_retained": false,
+    "status": "PASS"
+  },
+  "aligned_trace_size_bytes": 1316601,
+  "mechanism_proxy_size_bytes": 351082,
+  "all_historical_2d_fields_retained": false
+}

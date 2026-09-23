@@ -49,11 +49,17 @@ void write_trace_header(std::ostream& stream) {
             "electrode_distance_m,Ek_V_m,gas,pressure_Pa,temperature_K,Ek_semantics,E0_source,"
             "E0_max_V_m,E0_mean_V_m,E0_p95_V_m,eta_0_max,eta_0_mean,eta_0_p95,"
             "E_peak_V_m,E_peak_time_s,E_peak_r_m,E_peak_z_m,eta_peak,ne_at_E_peak_m3,ne_peak_m3,"
-            "nu_i_at_E_peak_s_1,mu_e_at_E_peak_m2_V_s,tau_i_at_E_peak_s,tau_i_at_ne_peak_s,tau_i_min_s,"
+            "E_at_ne_peak_V_m,nu_i_at_E_peak_s_1,mu_e_at_E_peak_m2_V_s,nu_i_at_ne_peak_s_1,"
+            "mu_e_at_ne_peak_m2_V_s,tau_i_at_E_peak_s,tau_i_at_ne_peak_s,tau_i_min_s,"
             "tau_i_median_s,tau_i_p95_s,sigma_e_at_E_peak_S_m,sigma_e_at_ne_peak_S_m,sigma_e_peak_S_m,"
             "sigma_e_median_S_m,sigma_e_p95_S_m,tau_M_at_E_peak_s,tau_M_at_ne_peak_s,tau_M_min_s,"
             "tau_M_median_s,tau_M_p95_s,Pi_RF_at_E_peak,Pi_RF_at_ne_peak,Pi_RF_min,Pi_RF_median,Pi_RF_p95,"
             "N_tau_i_at_E_peak,N_tau_M_at_E_peak,tau_i_resolution_status,tau_M_resolution_status,"
+            "sigma_e_peak_r_m,sigma_e_peak_z_m,E_at_sigma_peak_V_m,ne_at_sigma_peak_m3,"
+            "mu_e_at_sigma_peak_m2_V_s,nu_i_at_sigma_peak_s_1,tau_i_at_sigma_peak_s,"
+            "tau_M_at_sigma_peak_s,Pi_RF_at_sigma_peak,E_roi_median_V_m,ne_roi_median_m3,"
+            "mu_e_roi_median_m2_V_s,nu_i_roi_median_s_1,K_ion_z_A_m_s,K_ion_abs_A_m_s,"
+            "signed_proxy_status,mechanism_proxy_role,"
             "current_moment_r_A_m,current_moment_z_A_m\n";
 }
 
@@ -70,8 +76,10 @@ void write_trace_row(std::ostream& stream, const UltrafastEventSample& value) {
          << value.E0_mean_V_m << ',' << value.E0_p95_V_m << ','
          << value.eta_0_max << ',' << value.eta_0_mean << ',' << value.eta_0_p95 << ',' << value.E_peak_V_m << ','
          << value.E_peak_time_s << ',' << value.E_peak_r_m << ',' << value.E_peak_z_m << ',' << value.eta_peak << ','
-         << value.ne_at_E_peak_m3 << ',' << value.ne_peak_m3 << ',' << value.nu_i_at_E_peak_s_1 << ','
-         << value.mu_e_at_E_peak_m2_V_s << ',' << value.tau_i_at_E_peak_s << ',' << value.tau_i_at_ne_peak_s << ','
+         << value.ne_at_E_peak_m3 << ',' << value.ne_peak_m3 << ',' << value.E_at_ne_peak_V_m << ','
+         << value.nu_i_at_E_peak_s_1 << ',' << value.mu_e_at_E_peak_m2_V_s << ','
+         << value.nu_i_at_ne_peak_s_1 << ',' << value.mu_e_at_ne_peak_m2_V_s << ','
+         << value.tau_i_at_E_peak_s << ',' << value.tau_i_at_ne_peak_s << ','
          << value.tau_i_min_s << ',' << value.tau_i_median_s << ',' << value.tau_i_p95_s << ','
          << value.sigma_e_at_E_peak_S_m << ',' << value.sigma_e_at_ne_peak_S_m << ',' << value.sigma_e_peak_S_m << ','
          << value.sigma_e_median_S_m << ',' << value.sigma_e_p95_S_m << ',' << value.tau_M_at_E_peak_s << ','
@@ -80,6 +88,15 @@ void write_trace_row(std::ostream& stream, const UltrafastEventSample& value) {
          << value.Pi_RF_min << ',' << value.Pi_RF_median << ',' << value.Pi_RF_p95 << ','
          << value.N_tau_i_at_E_peak << ',' << value.N_tau_M_at_E_peak << ','
          << value.tau_i_resolution_status << ',' << value.tau_M_resolution_status << ','
+         << value.sigma_e_peak_r_m << ',' << value.sigma_e_peak_z_m << ','
+         << value.E_at_sigma_peak_V_m << ',' << value.ne_at_sigma_peak_m3 << ','
+         << value.mu_e_at_sigma_peak_m2_V_s << ',' << value.nu_i_at_sigma_peak_s_1 << ','
+         << value.tau_i_at_sigma_peak_s << ',' << value.tau_M_at_sigma_peak_s << ','
+         << value.Pi_RF_at_sigma_peak << ',' << value.E_roi_median_V_m << ','
+         << value.ne_roi_median_m3 << ',' << value.mu_e_roi_median_m2_V_s << ','
+         << value.nu_i_roi_median_s_1 << ',' << value.K_ion_z_A_m_s << ','
+         << value.K_ion_abs_A_m_s << ',' << value.signed_proxy_status << ','
+         << value.mechanism_proxy_role << ','
          << value.current_moment_r_A_m << ',' << value.current_moment_z_A_m << '\n';
 }
 }  // namespace

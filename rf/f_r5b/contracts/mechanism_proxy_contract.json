@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "simulation_architecture_version": "v2.1",
+  "node": "F-R5B",
+  "name": "KOILE_LOCAL_IONIZATION_PROXY",
+  "role": "MECHANISM_DIAGNOSTIC_PROXY",
+  "formula": "K_ion,z(t)=integral_ROI[e*v_d,z*nu_i*ne dV]",
+  "units": "A m s^-1",
+  "inputs": {
+    "e": "positive elementary-charge magnitude",
+    "v_d_z": "-mu_e*E_z using the frozen electron transport sign convention",
+    "nu_i": "frozen Morrow-Lowke impact-ionization frequency",
+    "ne": "electron number density",
+    "dV": "axisymmetric cell volume",
+    "ROI": "same C-R5 event ROI"
+  },
+  "signed_proxy_status": "DEFINED_FROM_FROZEN_ELECTRON_DRIFT_CONVENTION",
+  "absolute_magnitude_proxy_also_stored": true,
+  "sign_flipped_to_match_dMdt": false,
+  "closure_relation": false,
+  "excluded_contributions": [
+    "head motion",
+    "acceleration",
+    "current redistribution",
+    "diffusion and current spatial redistribution",
+    "ROI boundary flux"
+  ],
+  "comparison_outputs": [
+    "zero-lag correlation",
+    "maximum cross-correlation",
+    "lag at maximum correlation",
+    "normalized L2 without time shift",
+    "peak-time difference"
+  ]
+}

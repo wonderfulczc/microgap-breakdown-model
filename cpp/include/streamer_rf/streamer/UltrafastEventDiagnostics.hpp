@@ -74,6 +74,10 @@ struct UltrafastEventSample {
   double ne_peak_r_m{std::numeric_limits<double>::quiet_NaN()};
   double ne_peak_z_m{std::numeric_limits<double>::quiet_NaN()};
 
+  double E_at_ne_peak_V_m{std::numeric_limits<double>::quiet_NaN()};
+  double mu_e_at_ne_peak_m2_V_s{std::numeric_limits<double>::quiet_NaN()};
+  double nu_i_at_ne_peak_s_1{std::numeric_limits<double>::quiet_NaN()};
+
   double mu_e_at_E_peak_m2_V_s{std::numeric_limits<double>::quiet_NaN()};
   double nu_i_at_E_peak_s_1{std::numeric_limits<double>::quiet_NaN()};
   double tau_i_at_E_peak_s{std::numeric_limits<double>::quiet_NaN()};
@@ -85,6 +89,8 @@ struct UltrafastEventSample {
   double sigma_e_at_E_peak_S_m{std::numeric_limits<double>::quiet_NaN()};
   double sigma_e_at_ne_peak_S_m{std::numeric_limits<double>::quiet_NaN()};
   double sigma_e_peak_S_m{std::numeric_limits<double>::quiet_NaN()};
+  double sigma_e_peak_r_m{std::numeric_limits<double>::quiet_NaN()};
+  double sigma_e_peak_z_m{std::numeric_limits<double>::quiet_NaN()};
   double sigma_e_median_S_m{std::numeric_limits<double>::quiet_NaN()};
   double sigma_e_p95_S_m{std::numeric_limits<double>::quiet_NaN()};
   std::string sigma_e_role{"ELECTRON_CONDUCTIVITY_DIAGNOSTIC"};
@@ -101,6 +107,24 @@ struct UltrafastEventSample {
   double Pi_RF_median{std::numeric_limits<double>::quiet_NaN()};
   double Pi_RF_p95{std::numeric_limits<double>::quiet_NaN()};
   std::string Pi_RF_role{"DIAGNOSTIC_CANDIDATE"};
+
+  double E_at_sigma_peak_V_m{std::numeric_limits<double>::quiet_NaN()};
+  double ne_at_sigma_peak_m3{std::numeric_limits<double>::quiet_NaN()};
+  double mu_e_at_sigma_peak_m2_V_s{std::numeric_limits<double>::quiet_NaN()};
+  double nu_i_at_sigma_peak_s_1{std::numeric_limits<double>::quiet_NaN()};
+  double tau_i_at_sigma_peak_s{std::numeric_limits<double>::quiet_NaN()};
+  double tau_M_at_sigma_peak_s{std::numeric_limits<double>::quiet_NaN()};
+  double Pi_RF_at_sigma_peak{std::numeric_limits<double>::quiet_NaN()};
+
+  double E_roi_median_V_m{std::numeric_limits<double>::quiet_NaN()};
+  double ne_roi_median_m3{std::numeric_limits<double>::quiet_NaN()};
+  double mu_e_roi_median_m2_V_s{std::numeric_limits<double>::quiet_NaN()};
+  double nu_i_roi_median_s_1{std::numeric_limits<double>::quiet_NaN()};
+
+  double K_ion_z_A_m_s{std::numeric_limits<double>::quiet_NaN()};
+  double K_ion_abs_A_m_s{std::numeric_limits<double>::quiet_NaN()};
+  std::string signed_proxy_status{"DEFINED_FROM_FROZEN_ELECTRON_DRIFT_CONVENTION"};
+  std::string mechanism_proxy_role{"MECHANISM_DIAGNOSTIC_PROXY_NOT_CLOSURE_RELATION"};
 
   double N_tau_i_at_E_peak{std::numeric_limits<double>::quiet_NaN()};
   double N_tau_M_at_E_peak{std::numeric_limits<double>::quiet_NaN()};

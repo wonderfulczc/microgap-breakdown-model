@@ -254,8 +254,11 @@ UltrafastEventSample UltrafastEventDiagnostics::sample(
   out.roi_r_min_m = out.roi_z_min_m = std::numeric_limits<double>::infinity();
   out.roi_r_max_m = out.roi_z_max_m = -std::numeric_limits<double>::infinity();
   double volume_r = 0.0, volume_z = 0.0;
-  std::vector<double> E0_values, tau_i_values, sigma_values, tau_M_values, pi_values;
+  std::vector<double> E0_values, E_values, ne_values, mu_values, nu_values;
+  std::vector<double> tau_i_values, sigma_values, tau_M_values, pi_values;
   int e_peak_i = -1, e_peak_j = -1, ne_peak_i = -1, ne_peak_j = -1;
+  int sigma_peak_i = -1, sigma_peak_j = -1;
+  double sigma_peak_value = -std::numeric_limits<double>::infinity();
   for (const auto& [i, j] : roi) {
     const double volume = grid_.cell_volume(i);
     out.roi_volume_m3 += volume;
@@ -283,9 +286,26 @@ UltrafastEventSample UltrafastEventDiagnostics::sample(
                              ? epsilon_0 / sigma_e
                              : std::numeric_limits<double>::quiet_NaN();
     if (std::isfinite(tau_i)) tau_i_values.push_back(tau_i);
+    E_values.push_back(state.emag(i, j));
+    ne_values.push_back(state.ne(i, j));
+    mu_values.push_back(transport.mobility);
+    nu_values.push_back(nu_i);
     if (std::isfinite(sigma_e) && sigma_e > 0.0) sigma_values.push_back(sigma_e);
     if (std::isfinite(tau_M)) tau_M_values.push_back(tau_M);
     if (std::isfinite(tau_i) && std::isfinite(tau_M)) pi_values.push_back(tau_M / tau_i);
+    if (sigma_e > sigma_peak_value) {
+      sigma_peak_i = i;
+      sigma_peak_j = j;
+      sigma_peak_value = sigma_e;
+    }
+    const double electron_drift_z = -transport.mobility * state.ez(i, j);
+    const double proxy_cell = elementary_charge * electron_drift_z * nu_i * state.ne(i, j) * volume;
+    if (std::isfinite(proxy_cell)) {
+      if (!std::isfinite(out.K_ion_z_A_m_s)) out.K_ion_z_A_m_s = 0.0;
+      if (!std::isfinite(out.K_ion_abs_A_m_s)) out.K_ion_abs_A_m_s = 0.0;
+      out.K_ion_z_A_m_s += proxy_cell;
+      out.K_ion_abs_A_m_s += std::abs(proxy_cell);
+    }
   }
   out.roi_centroid_r_m = volume_r / out.roi_volume_m3;
   out.roi_centroid_z_m = volume_z / out.roi_volume_m3;
@@ -321,12 +341,21 @@ UltrafastEventSample UltrafastEventDiagnostics::sample(
              ? tau_M / tau_i
              : std::numeric_limits<double>::quiet_NaN();
   };
-  double unused_mu{}, unused_nu{};
+  double unused_sigma{};
   at_cell(e_peak_i, e_peak_j, out.mu_e_at_E_peak_m2_V_s, out.nu_i_at_E_peak_s_1,
           out.tau_i_at_E_peak_s, out.sigma_e_at_E_peak_S_m, out.tau_M_at_E_peak_s,
           out.Pi_RF_at_E_peak);
-  at_cell(ne_peak_i, ne_peak_j, unused_mu, unused_nu, out.tau_i_at_ne_peak_s,
+  out.E_at_ne_peak_V_m = state.emag(ne_peak_i, ne_peak_j);
+  at_cell(ne_peak_i, ne_peak_j, out.mu_e_at_ne_peak_m2_V_s, out.nu_i_at_ne_peak_s_1,
+          out.tau_i_at_ne_peak_s,
           out.sigma_e_at_ne_peak_S_m, out.tau_M_at_ne_peak_s, out.Pi_RF_at_ne_peak);
+  out.sigma_e_peak_r_m = grid_.r(sigma_peak_i);
+  out.sigma_e_peak_z_m = grid_.z(sigma_peak_j);
+  out.E_at_sigma_peak_V_m = state.emag(sigma_peak_i, sigma_peak_j);
+  out.ne_at_sigma_peak_m3 = state.ne(sigma_peak_i, sigma_peak_j);
+  at_cell(sigma_peak_i, sigma_peak_j, out.mu_e_at_sigma_peak_m2_V_s,
+          out.nu_i_at_sigma_peak_s_1, out.tau_i_at_sigma_peak_s, unused_sigma,
+          out.tau_M_at_sigma_peak_s, out.Pi_RF_at_sigma_peak);
   out.tau_i_min_s = quantile(tau_i_values, 0.0);
   out.tau_i_median_s = quantile(tau_i_values, 0.5);
   out.tau_i_p95_s = quantile(tau_i_values, 0.95);
@@ -339,6 +368,10 @@ UltrafastEventSample UltrafastEventDiagnostics::sample(
   out.Pi_RF_min = quantile(pi_values, 0.0);
   out.Pi_RF_median = quantile(pi_values, 0.5);
   out.Pi_RF_p95 = quantile(pi_values, 0.95);
+  out.E_roi_median_V_m = quantile(E_values, 0.5);
+  out.ne_roi_median_m3 = quantile(ne_values, 0.5);
+  out.mu_e_roi_median_m2_V_s = quantile(mu_values, 0.5);
+  out.nu_i_roi_median_s_1 = quantile(nu_values, 0.5);
   out.N_tau_i_at_E_peak = out.tau_i_at_E_peak_s / accepted_dt_s;
   out.N_tau_M_at_E_peak = out.tau_M_at_E_peak_s / accepted_dt_s;
   out.tau_i_resolution_status = kinetic_resolution_status(out.tau_i_at_E_peak_s, accepted_dt_s);

@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "simulation_architecture_version": "v2.1",
+  "node": "F-R5B",
+  "kinetic_anchors": ["AT_E_PEAK", "AT_NE_PEAK", "AT_SIGMA_PEAK", "EVENT_ROI_MEDIAN"],
+  "time_anchors": [
+    "t_E_peak",
+    "t_eta_peak",
+    "t_nu_i_peak",
+    "t_tau_i_min",
+    "t_ne_peak",
+    "t_sigma_peak",
+    "t_tau_M_min",
+    "t_Pi_RF_characteristic",
+    "t_M_characteristic",
+    "t_dMdt_positive_peak",
+    "t_dMdt_negative_peak",
+    "t_abs_dMdt_peak"
+  ],
+  "boundary_extremum_policy": "NOT_RESOLVED",
+  "pulse_resolution": {
+    "definition": "N_PW=PW_dMdt/diagnostic_trace_dt",
+    "preferred": "N_PW>=10",
+    "minimum": "5<=N_PW<10",
+    "not_resolved": "N_PW<5",
+    "not_evaluable": "pulse width unresolved",
+    "interpolation_may_upgrade": false
+  },
+  "combined_temporal_trust": "PASS only when event window is complete and tau_i, tau_M, and pulse width all meet minimum sampling",
+  "candidate_ratios": {
+    "Pi_RF": "tau_M/tau_i at same cell and time",
+    "R_i": "PW_dMdt/tau_i_characteristic",
+    "R_M": "PW_dMdt/tau_M_characteristic"
+  },
+  "ratio_status": "TIMESCALE_RATIO_CANDIDATE",
+  "prohibited_claims": ["physical law", "scaling law", "novel invariant"]
+}

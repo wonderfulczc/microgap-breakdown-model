@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "simulation_architecture_version": "v2.1",
+  "node": "F-R5B",
+  "stage": "F",
+  "purpose": "Same-event local ultrafast kinetics to current-moment and RF cross-check",
+  "inputs": {
+    "source": "C_R5_ULTRAFAST_DIAGNOSTIC_HANDOFF",
+    "timebase": "SOLVER_ACCEPTED_STEP",
+    "required": [
+      "time_s",
+      "topology",
+      "topology_status",
+      "event ROI",
+      "E",
+      "ne",
+      "mu_e",
+      "nu_i",
+      "tau_i",
+      "sigma_e",
+      "tau_M",
+      "Pi_RF",
+      "current_moment_z_A_m"
+    ]
+  },
+  "current_moment_definition": "M(t)=integral(J_RF dV)",
+  "J_RF_definition": "J_RF=-e*Gamma_e from the frozen finite-volume electron transport current",
+  "f_r5a_reuse": true,
+  "timebase_policy": {
+    "event_timing": "raw accepted-step timestamps only",
+    "resampling": "allowed only inside frozen F-R5A RF processing",
+    "interpolation_may_upgrade_trust": false
+  },
+  "event_policy": {
+    "selection": "CONFIRMED topology only",
+    "collision_requires_two_heads": true,
+    "attachment_must_not_be_renamed_collision": true,
+    "complete_window_requires": ["pre-event", "rise", "peak", "decay", "post-event"]
+  },
+  "pulse_width_interpretation": "AMBIGUOUS_PENDING_KOILE_RAW_WAVEFORM",
+  "scientific_claim": "MECHANISM_CROSSCHECK_ONLY_NOT_VALIDATION"
+}

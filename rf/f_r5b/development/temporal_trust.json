@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "timebase": {
+    "status": "TIMEBASE_NATIVE_ALIGNMENT_PASS",
+    "maximum_absolute_difference_s": 0.0,
+    "matching_tolerance_s": 9.99999999998885e-25,
+    "resampling_required_for_rf": false,
+    "trust_upgrade_from_interpolation": false
+  },
+  "event_window_status": "INCOMPLETE",
+  "kinetic_resolution": {
+    "tau_i": "RESOLVED_PREFERRED",
+    "tau_M": "RESOLVED_PREFERRED"
+  },
+  "pulse_resolution": {
+    "status": "NOT_EVALUABLE",
+    "N_PW": null
+  },
+  "ULTRAFAST_EVENT_TIME_TRUST": "NOT_RESOLVED",
+  "interpolation_can_upgrade_trust": false
+}

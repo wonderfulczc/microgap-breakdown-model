@@ -14,6 +14,16 @@ from .processing import (
     process_current_moment,
     resample_uniform,
 )
+from .same_event import (
+    TimebaseAudit,
+    assess_event_window,
+    audit_native_timebases,
+    central_derivative_native,
+    combined_temporal_trust,
+    compare_proxy_to_derivative,
+    interior_extremum_time,
+    pulse_resolution_status,
+)
 
 __all__ = [
     "CrossingResult",
@@ -28,4 +38,12 @@ __all__ = [
     "fit_spectral_slope",
     "process_current_moment",
     "resample_uniform",
+    "TimebaseAudit",
+    "assess_event_window",
+    "audit_native_timebases",
+    "central_derivative_native",
+    "combined_temporal_trust",
+    "compare_proxy_to_derivative",
+    "interior_extremum_time",
+    "pulse_resolution_status",
 ]

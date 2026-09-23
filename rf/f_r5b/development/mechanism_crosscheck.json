@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "proxy_role": "MECHANISM_DIAGNOSTIC_PROXY_NOT_CLOSURE_RELATION",
+  "sign_convention": "DEFINED_FROM_FROZEN_ELECTRON_DRIFT_CONVENTION",
+  "comparison": {
+    "status": "DIAGNOSTIC_ONLY_NO_FREE_SHIFT_CLAIM",
+    "zero_lag_correlation": -0.9995555560312609,
+    "maximum_cross_correlation": 0.38114494879253247,
+    "lag_at_maximum_correlation_s": 2.132000000000206e-12,
+    "normalized_L2_without_time_shift": 1.9999829792172188,
+    "dMdt_peak_time_s": 2.5040000000001505e-12,
+    "proxy_peak_time_s": 2.4710000000001477e-12,
+    "peak_time_difference_s": -3.300000000000279e-14,
+    "interpretation": "K_ion is a mechanism proxy, not a closure relation for dM/dt"
+  },
+  "Level1_Level2_crosscheck": "NOT_AVAILABLE_FOR_REFERENCE_CASE",
+  "field_collapse": {
+    "status": "NOT_RESOLVED",
+    "reason": "No complete pre-rise-peak-decay-post event and no clear interior E peak followed by monotonic decay",
+    "E_peak_before_V_m": null,
+    "E_peak_event_V_m": 22358646.49280065,
+    "E_after_V_m": null,
+    "field_decay_time_s": null,
+    "ne_growth_time_s": null,
+    "sigma_growth_time_s": null
+  },
+  "timescale_ratios": {
+    "status": "TIMESCALE_RATIO_CANDIDATE",
+    "tau_anchor": "AT_SIGMA_PEAK",
+    "R_i": null,
+    "R_M": null,
+    "prohibited_interpretations": [
+      "physical law",
+      "scaling law",
+      "novel invariant"
+    ]
+  }
+}
