@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "node": "C-R5",
+  "directly_available": {
+    "ne_np_nn": "StreamerState",
+    "electric_field": "StreamerState.er/ez/emag",
+    "electron_mobility": "evaluate_morrow_lowke",
+    "impact_ionization_frequency": "evaluate_morrow_lowke.ionization_frequency",
+    "electron_flux": "frozen finite-volume gas/electrode flux path",
+    "J_cond": "StreamerSolver.electron_transport_current_source",
+    "head_position_velocity": "StreamerHeadTracker",
+    "time_step": "accepted StreamerSolver step diagnostic",
+    "current_moment": "ElectronTransportCurrentSource",
+    "bridge_status": "frozen StreamerSolver bridge_flag"
+  },
+  "derived_diagnostics": [
+    "event topology",
+    "secondary component count",
+    "event ROI",
+    "eta_0",
+    "eta_peak",
+    "tau_i",
+    "sigma_e",
+    "tau_M",
+    "Pi_RF",
+    "kinetic resolution indicators"
+  ],
+  "not_available": [
+    "validated collision identity in the Stage-C reference case",
+    "pulse-width resolution before F-R5B",
+    "actual-electrode COMSOL E0 before B-RF1",
+    "experimentally validated microgap ultrafast RF mechanism"
+  ],
+  "physics_formula_duplicated": false
+}

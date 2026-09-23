@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "raw_temporal_metadata": {
+    "dt_min_s": 1e-15,
+    "dt_median_s": 1e-15,
+    "dt_max_s": 1e-15,
+    "event_dt_min_s": 1e-15,
+    "event_dt_median_s": 1e-15,
+    "event_dt_max_s": 1e-15,
+    "DIAGNOSTIC_TRACE_DT": "SOLVER_ACCEPTED_STEP_SPACING",
+    "FIELD_SNAPSHOT_DT": "UNCHANGED_EXISTING_OUTPUT_POLICY",
+    "interpolation_used": false
+  },
+  "kinetic_resolution": {
+    "tau_i_status_counts": {
+      "RESOLVED_PREFERRED": 24
+    },
+    "tau_M_status_counts": {
+      "RESOLVED_PREFERRED": 24
+    },
+    "N_tau_i_min": 6044.268347240091,
+    "N_tau_M_min": 591603162.0801249,
+    "role": "KINETIC_RESOLUTION_DIAGNOSTIC",
+    "pulse_width_resolution_claimed": false
+  },
+  "status": "PASS"
+}

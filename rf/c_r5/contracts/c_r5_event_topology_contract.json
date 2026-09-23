@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "enum": [
+    "PROPAGATION",
+    "HEAD_INTERACTION",
+    "STREAMER_COLLISION",
+    "ELECTRODE_ATTACHMENT",
+    "BRIDGING",
+    "UNRESOLVED"
+  ],
+  "component_detector": {
+    "status": "SECONDARY_HEAD_DIAGNOSTIC_EXPERIMENTAL",
+    "field": "same-sign space charge selected from requested polarity",
+    "relative_threshold": 0.2,
+    "connectivity": "4-neighbor",
+    "minimum_component_cells": 2,
+    "does_not_change_C_R3_primary_head": true
+  },
+  "distance_scale": "max(grid_dr,grid_dz)",
+  "thresholds_in_cells": {
+    "collision": 3.0,
+    "head_interaction": 8.0,
+    "electrode_attachment": 1.5
+  },
+  "confirmation_samples": 2,
+  "priority_with_sufficient_evidence": [
+    "BRIDGING",
+    "STREAMER_COLLISION",
+    "ELECTRODE_ATTACHMENT",
+    "HEAD_INTERACTION",
+    "PROPAGATION",
+    "UNRESOLVED"
+  ],
+  "rules": {
+    "BRIDGING": "frozen Stage-C bridge condition and at least one component",
+    "STREAMER_COLLISION": "at least two distinct components within collision distance",
+    "ELECTRODE_ATTACHMENT": "primary component within electrode distance",
+    "HEAD_INTERACTION": "at least two distinct components within interaction distance",
+    "PROPAGATION": "exactly one resolved component",
+    "UNRESOLVED": "insufficient or conflicting evidence"
+  },
+  "outputs": ["topology", "topology_confidence", "topology_evidence", "topology_status"],
+  "single_head_can_be_collision": false
+}

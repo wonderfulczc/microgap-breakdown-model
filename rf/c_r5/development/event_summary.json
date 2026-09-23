@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "case_classification": "DEVELOPMENT_REFERENCE",
+  "trace_sha256": "d68e0bb4bba64fb84aff16a7cb9eb0468f31c0a08c6e04d827390a28c50f4a46",
+  "trace_rows": 24,
+  "event_id": "C-R5-DEV-001",
+  "event_start_s": 2e-15,
+  "event_peak_s": 2e-15,
+  "event_end_s": 2.4e-14,
+  "pre_event_duration_s": 1e-15,
+  "post_event_duration_s": 0.0,
+  "topology_counts": {
+    "ELECTRODE_ATTACHMENT": 24
+  },
+  "dominant_topology": "ELECTRODE_ATTACHMENT",
+  "topology_evidence": [
+    "HEAD_COMPONENT_WITHIN_ELECTRODE_DISTANCE"
+  ],
+  "head_count_max": 1,
+  "roi_definitions": [
+    "ATTACHMENT_ROI"
+  ],
+  "E_peak_V_m": 22358664.206941895,
+  "eta_peak_max": 8.491368719666289,
+  "eta_0_max": 8.491368722310343,
+  "ne_peak_max_m3": 2794699327390458.0,
+  "Ek_V_m": 2633104.856478684,
+  "gas": "AIR_MORROW_LOWKE_BASELINE",
+  "pressure_Pa": 101325.0,
+  "temperature_K": 300.0,
+  "Ek_semantics": "REFERENCE_NORMALIZATION_ONLY",
+  "E0_source": "STAGE_C_2D_ELECTROSTATIC_REFERENCE",
+  "STREAMER_COLLISION_DEMONSTRATION": "NOT_AVAILABLE_IN_REFERENCE_CASE",
+  "scientific_semantics": "DEVELOPMENT_REFERENCE_NOT_COLLISION_OR_RF_VALIDATION"
+}

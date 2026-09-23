@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "node": "C-R5",
+  "role": "READ_ONLY_DIAGNOSTIC_LAYER",
+  "inputs": [
+    "AxisymmetricGrid",
+    "StreamerState",
+    "StreamerConfig gas and transport conditions",
+    "StreamerHeadDiagnostics",
+    "ElectronTransportCurrentSource",
+    "zero-charge electrostatic reference E0",
+    "accepted solver time and dt"
+  ],
+  "Ek": {
+    "implementation": "morrow_lowke_breakdown_field",
+    "fields": ["Ek_V_m", "gas", "pressure_Pa", "temperature_K"],
+    "semantics": "REFERENCE_NORMALIZATION_ONLY",
+    "not_a_sufficient_breakdown_criterion": true
+  },
+  "eta_0": {
+    "definition": "E0_event/Ek",
+    "E0_SOURCE": "STAGE_C_2D_ELECTROSTATIC_REFERENCE",
+    "statistics": ["max", "mean", "p95"],
+    "future_source": "B-RF1"
+  },
+  "eta_peak": {
+    "definition": "max_event_ROI(abs(E))/Ek",
+    "supporting_fields": ["E_peak_V_m", "E_peak_time_s", "E_peak_position", "ne_at_E_peak"]
+  },
+  "kinetics": {
+    "nu_i": {"source": "evaluate_morrow_lowke.ionization_frequency", "unit": "s^-1"},
+    "tau_i": {"definition": "1/nu_i for nu_i>0", "unit": "s", "invalid_policy": "MASK"},
+    "sigma_e": {"definition": "e*ne*mu_e", "unit": "S/m", "role": "ELECTRON_CONDUCTIVITY_DIAGNOSTIC"},
+    "tau_M": {"definition": "epsilon_0/sigma_e for sigma_e>0", "unit": "s", "invalid_policy": "MASK_NO_CLIP"},
+    "Pi_RF": {
+      "definition": "tau_M/tau_i in the same cell and time",
+      "unit": "1",
+      "role": "DIAGNOSTIC_CANDIDATE",
+      "statistics": ["at_E_peak", "at_ne_peak", "min", "median", "p95"]
+    }
+  },
+  "temporal_resolution": {
+    "N_tau": "timescale/accepted_local_dt",
+    "RESOLVED_PREFERRED": "N_tau>=10",
+    "RESOLVED_MINIMUM": "5<=N_tau<10",
+    "NOT_RESOLVED_KINETIC_TIMESCALE": "N_tau<5",
+    "does_not_replace_pulse_width_test": true,
+    "interpolation_cannot_upgrade_status": true
+  },
+  "current": {
+    "source": "StreamerSolver.electron_transport_current_source",
+    "definition": "J_cond=-e*Gamma_e using frozen finite-volume electron flux",
+    "sigma_e_E_is_not_a_replacement_current": true
+  }
+}

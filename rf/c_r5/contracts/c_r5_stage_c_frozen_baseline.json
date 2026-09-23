@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "captured_from_commit": "466eb9b",
+  "sha256": {
+    "cpp/include/streamer_rf/streamer/MorrowLowke.hpp": "fe346f192df0c7e715bf7113c0c6c236632f3b00170e8c3c0b5ec9031ec5b1b5",
+    "cpp/src/streamer/MorrowLowke.cpp": "85c1c89727e59c5353ea91493f9ddcb276a4d8b86d163f4e4ddc5acc5a1ff74f",
+    "cpp/include/streamer_rf/streamer/ReactionModel.hpp": "750dc8acef888939d97b23cf178e0db88564056153bfd7c604435ce98003af1f",
+    "cpp/src/streamer/ReactionModel.cpp": "3b93240084b33a6a5c932dc18ad1a59d9d42f25b4148a2a49d7b4f5fd99844e4",
+    "cpp/include/streamer_rf/streamer/StreamerSolver.hpp": "bd151cd0e363a1feed5232aff621481db38e636058d1cba6b75a91b24e08beb5",
+    "cpp/src/streamer/StreamerSolver.cpp": "035c50056419f5ee6ae4fd2a634b8274a3c3d506e44b22a8726cb105653b934c",
+    "cpp/include/streamer_rf/streamer/HeadTracker.hpp": "2a3456bc9cd708f21f198fe86602ca2812efa7bff17a051c2d99d403913de617",
+    "cpp/src/streamer/HeadTracker.cpp": "b3c5fc78a701fcc43407196c8f15beaed4d81b6270fd2ae5d10432e782b8fcb2",
+    "cpp/include/streamer_rf/streamer/JouleHandoff.hpp": "320e62ac67a503d3bd0b2c159bdb6a4c740647bfbe1b49f9a6783029c7af7410",
+    "cpp/src/streamer/JouleHandoff.cpp": "84634b32e87a87cfe92430546a0562ef8eec4b3a6082d17c80517622bcebeb77",
+    "cpp/apps/stage_c2_dynamic.cpp": "a3cb2d2d348a98478f1b12478c427a20bb4b9bfaded76eedb04994c72a6acc61",
+    "cpp/apps/stage_c3_current.cpp": "f2810e78ed2486d7c506cd2b20f3b1ca7ff012fd320afa8928c5780279981e6a"
+  }
+}

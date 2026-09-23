@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "name": "C_R5_ULTRAFAST_DIAGNOSTIC_HANDOFF",
+  "status": "CANDIDATE_FOR_F_R5B",
+  "fields": [
+    "event_id",
+    "topology",
+    "event_start_s",
+    "event_peak_s",
+    "event_end_s",
+    "roi_definition",
+    "eta_0",
+    "eta_peak",
+    "tau_i_trace",
+    "tau_M_trace",
+    "Pi_RF_trace",
+    "accepted_step_temporal_metadata",
+    "trust_flags",
+    "current_moment_trace_reference"
+  ],
+  "excluded": [
+    "new Stage-F source definition",
+    "interpolated physical time resolution",
+    "pulse-width trust decision",
+    "automatic scientific validation upgrade"
+  ],
+  "consumer": "F-R5B"
+}
