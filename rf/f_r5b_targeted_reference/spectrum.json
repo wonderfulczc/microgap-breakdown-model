@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "classification": "NUMERIC_DIAGNOSTIC_ONLY",
+  "processing": {
+    "resampling": {
+      "strategy": "MEDIAN_INPUT_DT",
+      "original_dt_min_s": 5.8651001088463996e-15,
+      "original_dt_median_s": 5.865116988802889e-15,
+      "original_dt_max_s": 5.865133681976504e-15,
+      "uniform_dt_s": 5.865116988802889e-15,
+      "upsampling_factor": 1.0,
+      "resolution_status": "ORIGINAL_PHYSICAL_TIME_RESOLUTION_PRESERVED"
+    },
+    "smoothing": {
+      "profile": "KOILE_COMPATIBLE",
+      "smoothing_samples": 10,
+      "smoothing_duration_s": 5.865116988802889e-14,
+      "status": "KOILE_TIMESCALE_MISMATCH",
+      "paper_reference_duration_s": [
+        1e-12,
+        3e-12
+      ],
+      "window_length_source": "PAPER_REPORTED"
+    },
+    "derivative": {
+      "method": "CENTRAL_DIFFERENCE_SECOND_ORDER",
+      "source": "PROJECT_OPERATIONAL_CHOICE",
+      "boundary_policy": "DROP_FIRST_AND_LAST_PROCESSED_SAMPLES"
+    },
+    "temporal_resolution": {
+      "status": "RESOLVED_AT_10_SAMPLE_TARGET",
+      "original_dt_median_s": 5.865116988802889e-15,
+      "samples_per_FWHM": 582.4486683477128,
+      "minimum_samples": 5,
+      "target_samples": 10,
+      "rule": "USE_ORIGINAL_TIME_RESOLUTION_NOT_INTERPOLATED_DT"
+    },
+    "pulse": {
+      "status": "PASS",
+      "peaks": [
+        {
+          "index": 459,
+          "time_s": 1.660090504463903e-11,
+          "abs_dMdt_A_m_s": 0.02446045771444736,
+          "prominence_A_m_s": 0.02124949256933443
+        }
+      ],
+      "primary_peak_index": 459,
+      "primary_peak_time_s": 1.660090504463903e-11,
+      "primary_peak_abs_A_m_s": 0.02446045771444736,
+      "PW_FWHM_s": 3.4161295798317902e-12,
+      "PW_FW1E_s": 3.868076560977819e-12,
+      "interpretation": "AMBIGUOUS_PENDING_WAVEFORM_REPRODUCTION"
+    },
+    "spectrum": {
+      "dt_s": 5.865116988804505e-15,
+      "n_physical_samples": 792,
+      "n_fft": 2045995,
+      "physical_record_duration_s": 4.639307538144363e-12,
+      "zero_padded_duration_s": 1.2000000033509073e-08,
+      "physical_frequency_resolution_Hz": 215549409427.59344,
+      "display_fft_bin_spacing_Hz": 83333333.10063143,
+      "nyquist_Hz": 85249749761946.66,
+      "window_name": "TUKEY",
+      "tukey_alpha": 0.5,
+      "parseval_time_integral": 1.3898159989705258e-15,
+      "parseval_spectral_integral": 1.389815998970526e-15,
+      "parseval_relative_error": 1.4190024179555826e-16,
+      "normalization": "X(f)=dt*rFFT[x(t)]",
+      "one_sided_convention": "NONNEGATIVE_FREQUENCIES_STORED_WITHOUT_ESD_DOUBLING",
+      "dc_handling": "DC_RETAINED_AND_EXCLUDED_FROM_RELATIVE_CROSSING_SEARCH",
+      "nyquist_handling": "NYQUIST_STORED_ONCE_FOR_EVEN_NFFT"
+    },
+    "f3dB": {
+      "level_dB": -3.0,
+      "reference_frequency_Hz": 1000000000.0,
+      "reference_ESD": 1.057316093336668e-42,
+      "threshold_ESD": 5.2991332788899935e-43,
+      "raw_crossing_candidates_Hz": [
+        139414828699.3202
+      ],
+      "validated_crossing_Hz": 139414828699.3202,
+      "status": "PASS"
+    },
+    "f10dB": {
+      "level_dB": -10.0,
+      "reference_frequency_Hz": 1000000000.0,
+      "reference_ESD": 1.057316093336668e-42,
+      "threshold_ESD": 1.0573160933366679e-43,
+      "raw_crossing_candidates_Hz": [
+        237858034715.90045
+      ],
+      "validated_crossing_Hz": 237858034715.90045,
+      "status": "PASS"
+    },
+    "spectral_slope": {
+      "fit_band_Hz": [
+        1000000000.0,
+        5000000000.0
+      ],
+      "slope_dB_per_decade": -0.005243826719094512,
+      "R2": 0.8759668278878787,
+      "number_of_bins": 48,
+      "status": "PASS"
+    },
+    "processing_provenance": {
+      "uniform_resampling_method": "PAPER_REPORTED",
+      "moving_average_10_samples": "PAPER_REPORTED",
+      "derivative_scheme": "PROJECT_OPERATIONAL_CHOICE",
+      "tukey_window_type": "PAPER_REPORTED",
+      "tukey_alpha": "PROJECT_OPERATIONAL_CHOICE",
+      "zero_pad_12_ns": "PAPER_REPORTED",
+      "fft_discrete_normalization": "PROJECT_OPERATIONAL_CHOICE",
+      "ESD_formula": "PAPER_REPORTED",
+      "pulse_width_interpretation": "AMBIGUOUS_PENDING_WAVEFORM_REPRODUCTION"
+    }
+  },
+  "f3dB_physical_status": {
+    "status": "NOT_RESOLVED_REFERENCE_FREQUENCY",
+    "physical_frequency_resolution_Hz": 215549409427.59344,
+    "display_bin_spacing_is_not_physical_resolution": true,
+    "minimum_resolution_bins": 3.0
+  },
+  "f10dB_physical_status": {
+    "status": "NOT_RESOLVED_REFERENCE_FREQUENCY",
+    "physical_frequency_resolution_Hz": 215549409427.59344,
+    "display_bin_spacing_is_not_physical_resolution": true,
+    "minimum_resolution_bins": 3.0
+  },
+  "REFERENCE_CASE_SPECTRAL_TRUST": "NUMERIC_DIAGNOSTIC_ONLY",
+  "existing_stage_f_trust_mask_inherited": false,
+  "NATIVE_RF_350MHZ": "NOT_RESOLVED"
+}

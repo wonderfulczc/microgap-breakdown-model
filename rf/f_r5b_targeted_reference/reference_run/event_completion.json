@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "stop_policy": "PHYSICAL_EVENT_COMPLETION_WITH_MAX_STEPS_SAFETY_CAP",
+  "triggered": true,
+  "trigger_reason": "INTERIOR_DMDT_PEAK_WITH_KINETIC_ACTIVITY",
+  "primary_peak_time_s": 1.6603834282977127e-11,
+  "primary_peak_abs_dMdt_A_m_s": 0.024461727874895069,
+  "left_half_crossing_available": true,
+  "left_one_over_e_crossing_available": true,
+  "post_tail_fraction": 0.10000000000000001,
+  "post_tail_samples_required": 8,
+  "post_tail_duration_s_required": 4e-14,
+  "post_tail_samples_observed": 8,
+  "event_complete": true
+}

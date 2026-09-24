@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "node": "F-R5B_TARGETED_REFERENCE_FIX",
+  "role": "PROJECT_OPERATIONAL_CHOICE",
+  "stop_policy": "PHYSICAL_EVENT_COMPLETION_WITH_MAX_STEPS_SAFETY_CAP",
+  "event_trigger": {
+    "required": [
+      "interior local abs(dM/dt) peak",
+      "confirmed topology",
+      "valid event ROI",
+      "finite positive ne and sigma",
+      "applied-voltage transition complete",
+      "post-ramp settling interval complete"
+    ],
+    "does_not_modify_solver": true
+  },
+  "event_complete": {
+    "pre_event_required": true,
+    "left_half_crossing_required": true,
+    "right_half_crossing_required": true,
+    "left_one_over_e_crossing_required": true,
+    "right_one_over_e_crossing_required": true,
+    "post_tail_fraction": 0.1,
+    "post_tail_minimum_samples": 8,
+    "post_tail_minimum_duration_s": 4e-14,
+    "simulation_endpoint_truncation_allowed": false
+  },
+  "tail_sensitivity": [0.05, 0.1, 0.2],
+  "multi_peak_policy": "retain all peaks; analyze only the explicitly selected post-ramp primary event",
+  "max_steps_role": "safety cap only",
+  "field_history_retained": false
+}

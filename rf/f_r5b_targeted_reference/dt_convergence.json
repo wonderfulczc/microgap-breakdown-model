@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "reference": {
+    "topology": "ELECTRODE_ATTACHMENT",
+    "t_abs_dMdt_peak_s": 1.6603834282977127e-11,
+    "PW_FWHM_s": 3.4161295798317902e-12,
+    "PW_FW1E_s": 3.868076560977819e-12,
+    "M_event_change_A_m": 7.905758970111296e-14,
+    "eta_peak": 15.840740454660407,
+    "tau_i_characteristic_s": 2.3460478742780564e-12,
+    "tau_M_characteristic_s": 2.2496307224630085e-07
+  },
+  "finer": {
+    "topology": "ELECTRODE_ATTACHMENT",
+    "t_abs_dMdt_peak_s": 1.6585307305265634e-11,
+    "PW_FWHM_s": 3.4147366466939886e-12,
+    "PW_FW1E_s": 3.86647365458552e-12,
+    "M_event_change_A_m": 7.825815405646823e-14,
+    "eta_peak": 15.84074131505999,
+    "tau_i_characteristic_s": 2.3460476272022152e-12,
+    "tau_M_characteristic_s": 2.273052579724003e-07
+  },
+  "metrics": {
+    "t_abs_dMdt_peak_s": {
+      "status": "PASS",
+      "relative_change": 0.0011170717171824784,
+      "tolerance": 0.05
+    },
+    "PW_FWHM_s": {
+      "status": "PASS",
+      "relative_change": 0.00040791817405601847,
+      "tolerance": 0.05
+    },
+    "PW_FW1E_s": {
+      "status": "PASS",
+      "relative_change": 0.0004145654504585794,
+      "tolerance": 0.05
+    },
+    "M_event_change_A_m": {
+      "status": "PASS",
+      "relative_change": 0.010215365469365429,
+      "tolerance": 0.05
+    },
+    "eta_peak": {
+      "status": "PASS",
+      "relative_change": 5.4315613491755705e-08,
+      "tolerance": 0.05
+    },
+    "tau_i_characteristic_s": {
+      "status": "PASS",
+      "relative_change": 1.0531578229078569e-07,
+      "tolerance": 0.05
+    },
+    "tau_M_characteristic_s": {
+      "status": "PASS",
+      "relative_change": 0.010304142310618446,
+      "tolerance": 0.05
+    },
+    "event_topology": {
+      "status": "PASS",
+      "reference": "ELECTRODE_ATTACHMENT",
+      "finer": "ELECTRODE_ATTACHMENT"
+    }
+  },
+  "TEMPORAL_CONVERGENCE": "PASS",
+  "relative_change_target": 0.05
+}

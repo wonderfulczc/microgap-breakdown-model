@@ -24,6 +24,14 @@ from .same_event import (
     interior_extremum_time,
     pulse_resolution_status,
 )
+from .targeted_reference import (
+    ScalarRingBuffer,
+    convergence_metric,
+    f_r6_gate,
+    field_decay_diagnostic,
+    physical_crossing_status,
+    select_completed_pulse_window,
+)
 
 __all__ = [
     "CrossingResult",
@@ -46,4 +54,10 @@ __all__ = [
     "compare_proxy_to_derivative",
     "interior_extremum_time",
     "pulse_resolution_status",
+    "ScalarRingBuffer",
+    "convergence_metric",
+    "f_r6_gate",
+    "field_decay_diagnostic",
+    "physical_crossing_status",
+    "select_completed_pulse_window",
 ]

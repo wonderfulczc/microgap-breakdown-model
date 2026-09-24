@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "node": "F-R5B_TARGETED_REFERENCE_FIX",
+  "selected_case": "STAGE_C_NEEDLE_PLANE_RAMPED_ATTACHMENT_DEVELOPMENT_REFERENCE",
+  "selection_order": [
+    "existing lightweight Stage-C references audited",
+    "constant-voltage C-R5/F-R5B reference extended",
+    "existing numerical dt cap relaxed",
+    "existing SampledVoltage ramp used to provide pre-event history"
+  ],
+  "geometry": "existing 2D axisymmetric 75 um needle-plane development geometry",
+  "voltage": {
+    "pre_hold_s": 2e-12,
+    "linear_ramp_s": 5e-12,
+    "final_voltage_V": 500.0,
+    "post_ramp_settling_s": 2e-12
+  },
+  "reference_dt": {"dt_cap_s": 1e-14, "dt_scale": 0.05},
+  "finer_dt": {"dt_cap_s": 5e-15, "dt_scale": 0.05},
+  "physical_parameter_tuning_to_koile": false,
+  "streamer_collision_forced": false,
+  "large_simulation": false
+}

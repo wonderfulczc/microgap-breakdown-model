@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "SOLVER_INTERNAL_DT": "adaptive timestep limit",
+  "DIAGNOSTIC_TRACE_DT": "accepted solver-step spacing",
+  "FIELD_SNAPSHOT_DT": "not changed by C-R5",
+  "dt_min_s": 5.9165573123152958e-25,
+  "dt_median_s": 5e-15,
+  "dt_max_s": 5e-15,
+  "interpolation_used": false,
+  "pulse_width_resolution_claimed": false
+}

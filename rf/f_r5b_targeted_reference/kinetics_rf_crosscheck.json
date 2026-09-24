@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "event_topology": "ELECTRODE_ATTACHMENT",
+  "anchor_timing": {
+    "t_E_peak_s": "NOT_RESOLVED_INTERIOR_EXTREMUM",
+    "t_nu_i_peak_s": "NOT_RESOLVED_INTERIOR_EXTREMUM",
+    "t_ne_peak_s": "NOT_RESOLVED_INTERIOR_EXTREMUM",
+    "t_sigma_peak_s": "NOT_RESOLVED_INTERIOR_EXTREMUM",
+    "t_tauM_min_s": "NOT_RESOLVED_INTERIOR_EXTREMUM",
+    "t_abs_dMdt_peak_s": 1.6603834282977127e-11,
+    "boundary_extrema_are_not_promoted": true
+  },
+  "field_collapse": {
+    "status": "NOT_RESOLVED",
+    "reason": "NO_INTERIOR_FIELD_PEAK"
+  },
+  "signed_proxy_comparison": {
+    "status": "DIAGNOSTIC_ONLY_NO_FREE_SHIFT_CLAIM",
+    "zero_lag_correlation": 0.42439757525479727,
+    "maximum_cross_correlation": 0.5624577060944571,
+    "lag_at_maximum_correlation_s": -6.275675178019092e-13,
+    "normalized_L2_without_time_shift": 0.36047893019106736,
+    "dMdt_peak_time_s": 1.6603834282977127e-11,
+    "proxy_peak_time_s": 1.858624711068677e-11,
+    "peak_time_difference_s": 1.982412827709642e-12,
+    "interpretation": "K_ion is a mechanism proxy, not a closure relation for dM/dt"
+  },
+  "magnitude_proxy_comparison": {
+    "status": "DIAGNOSTIC_ONLY_NO_FREE_SHIFT_CLAIM",
+    "zero_lag_correlation": 0.42439757525479727,
+    "maximum_cross_correlation": 0.5624577060944571,
+    "lag_at_maximum_correlation_s": -6.275675178019092e-13,
+    "normalized_L2_without_time_shift": 0.36047893019106736,
+    "dMdt_peak_time_s": 1.6603834282977127e-11,
+    "proxy_peak_time_s": 1.858624711068677e-11,
+    "peak_time_difference_s": 1.982412827709642e-12,
+    "interpretation": "K_ion is a mechanism proxy, not a closure relation for dM/dt"
+  },
+  "sign_interpretation": "SIGN_EXPECTED_OPPOSITE_FOR_PURE_IONIZATION_GROWTH; selected relaxation pulse is not a closure test",
+  "kinetic_sequence": {
+    "ne_increases_over_event": true,
+    "sigma_increases_over_event": true,
+    "tau_M_decreases_over_event": true,
+    "interpretable": true
+  },
+  "characteristic_at_abs_dMdt_peak": {
+    "E_V_m": 41710229.13397936,
+    "ne_m_3": 7688320658893609.0,
+    "sigma_e_S_m": 3.9358405468013845e-05,
+    "tau_i_s": 2.3460478742780564e-12,
+    "tau_M_s": 2.2496307224630085e-07,
+    "Pi_RF": 95890.23084856194
+  }
+}

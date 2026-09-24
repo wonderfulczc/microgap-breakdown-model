@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "coordinate_z": "increases from grounded plane toward high-voltage needle",
+  "electric_field": "E_z=-d(phi)/dz; positive high-voltage needle normally gives E_z<0 in the gap",
+  "electron_drift_velocity": "v_e,z=-mu_e*E_z; normally v_e,z>0",
+  "electron_particle_flux": "Gamma_e uses frozen drift plus diffusion finite-volume convention",
+  "conventional_current": "J_RF,z=-e*Gamma_e,z",
+  "current_moment": "M_z=integral(J_RF,z dV)",
+  "koile_proxy": "K_ion,z=integral(e*v_e,z*nu_i*ne dV)",
+  "sign_flip_applied": false,
+  "SIGN_CONVENTION_AUDIT": "SIGN_EXPECTED_OPPOSITE",
+  "scope": "pure local ionization-growth contribution only; K_ion is not dM/dt closure"
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "event_window": {
+    "status": "EVENT_WINDOW_COMPLETE",
+    "start_index": 1925,
+    "peak_index": 2390,
+    "end_index": 2728,
+    "event_start_s": 1.3876558203340086e-11,
+    "event_peak_s": 1.6603834282977127e-11,
+    "event_end_s": 1.858624711068677e-11,
+    "N_pre": 465,
+    "N_post": 338,
+    "peak_abs_dMdt_A_m_s": 0.024461673123177263,
+    "tail_fraction": 0.1,
+    "left_half_crossing_available": true,
+    "right_half_crossing_available": true,
+    "left_one_over_e_crossing_available": true,
+    "right_one_over_e_crossing_available": true
+  },
+  "F_R5A_pulse": {
+    "status": "PASS",
+    "peaks": [
+      {
+        "index": 459,
+        "time_s": 1.660090504463903e-11,
+        "abs_dMdt_A_m_s": 0.02446045771444736,
+        "prominence_A_m_s": 0.02124949256933443
+      }
+    ],
+    "primary_peak_index": 459,
+    "primary_peak_time_s": 1.660090504463903e-11,
+    "primary_peak_abs_A_m_s": 0.02446045771444736,
+    "PW_FWHM_s": 3.4161295798317902e-12,
+    "PW_FW1E_s": 3.868076560977819e-12,
+    "interpretation": "AMBIGUOUS_PENDING_WAVEFORM_REPRODUCTION"
+  },
+  "pulse_resolution": {
+    "status": "RESOLVED_AT_10_SAMPLE_TARGET",
+    "original_dt_median_s": 5.865116988802889e-15,
+    "samples_per_FWHM": 582.4486683477128,
+    "minimum_samples": 5,
+    "target_samples": 10,
+    "rule": "USE_ORIGINAL_TIME_RESOLUTION_NOT_INTERPOLATED_DT"
+  },
+  "tail_threshold_sensitivity": {
+    "0.05": "INCOMPLETE_SINGLE_SAMPLE_ONLY",
+    "0.10": "PASS_12_CONSECUTIVE_REFERENCE_SAMPLES",
+    "0.20": "PASS_34_CONSECUTIVE_REFERENCE_SAMPLES",
+    "interpretation": "pulse widths use independent 1/2 and 1/e crossings and remain resolved"
+  },
+  "smoothing_sensitivity": {
+    "KOILE_COMPATIBLE_FWHM_s": 3.4161295798317902e-12,
+    "NO_SMOOTHING_FWHM_s": 3.4161884658983093e-12,
+    "KOILE_COMPATIBLE_FW1E_s": 3.868076560977819e-12,
+    "NO_SMOOTHING_FW1E_s": 3.86811523632698e-12
+  }
+}
