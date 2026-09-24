@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "required_levels_for_actual_descriptor": ["BASE", "REFINED"],
+  "comparison_metrics": ["E0_max", "E0_p95", "beta_E_p95", "high-field extent", "Cgap"],
+  "initial_relative_difference_guidance": 0.05,
+  "Emax_mesh_sensitive_status": "E_MAX_MESH_SENSITIVE",
+  "ideal_corner_status": "IDEAL_GEOMETRIC_SINGULARITY",
+  "ideal_corner_rule": "Emax is not a primary cross-geometry metric",
+  "preferred_finite_metrics": ["E0_p95", "beta_E_p95", "high-field area/volume", "L_E"]
+}

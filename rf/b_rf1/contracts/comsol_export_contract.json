@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "contract": "B_RF1_COMSOL_EXPORT",
+  "files": {
+    "metadata": "metadata.json",
+    "field": "field.csv or field.h5"
+  },
+  "required_field_columns_2d": ["x_m", "y_m", "potential_V", "Ex_V_m", "Ey_V_m", "E_mag_V_m", "domain_id"],
+  "required_field_columns_3d_additional": ["z_m", "Ez_V_m"],
+  "optional_field_columns": ["cell_area_m2", "cell_volume_m3", "grad_E_mag_V_m2"],
+  "units": "SI",
+  "required_metadata": [
+    "geometry identity", "coordinate system", "reference potential", "terminal definitions",
+    "applied voltage", "gas/domain condition", "mesh", "GAP_ANALYSIS_ROI", "Cgap", "source provenance"
+  ],
+  "dataset_roles": ["ACTUAL_STAGE_B_EXPORT", "SYNTHETIC_DEVELOPMENT_FIXTURE"],
+  "comsol_installation_required_for_import": false
+}

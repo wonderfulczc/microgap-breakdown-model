@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "contract": "PAPER1_ELECTRODE_DESCRIPTOR",
+  "fields": [
+    "geometry_id", "gap_m", "tip_radius_m", "electrode_material", "material_interface_id",
+    "E0_max_V_m", "E0_p95_V_m", "beta_E", "beta_E_p95", "eta_0_p95",
+    "high_field_regions", "field_localization", "Cgap", "mesh_status", "compatibility_class"
+  ],
+  "future_links": ["streamer_metrics", "rf_metrics", "experimental_metrics"],
+  "evidence_chain": "geometry -> field descriptor -> discharge descriptor -> wireless descriptor"
+}

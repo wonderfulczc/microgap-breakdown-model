@@ -1,0 +1,15 @@
+{
+  "status": "READY",
+  "geometry_id": "synthetic-axisymmetric-needle-plane-r10um-gap70um",
+  "compatibility_class": "AXISYMMETRIC_2D_EXACT",
+  "gap_m": 7e-05,
+  "tip_radius_m": 1e-05,
+  "tip_profile": "HEMISPHERICAL",
+  "boundary_locations_m": {
+    "ground_y_m": 0.0,
+    "tip_y_m": 7e-05
+  },
+  "reference_voltage_V": 500.0,
+  "stage_c_requirement": "reconstruct geometry and solve zero-charge electrostatics",
+  "forbidden_use": "do not replace self-consistent Stage-C Poisson with a fixed COMSOL E0 map"
+}

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "tolerance": 0.05,
+  "E0_max_relative_difference": 0.0,
+  "E0_p95_relative_difference": 0.004833201284788183,
+  "beta_E_p95_relative_difference": 0.004833201284788305,
+  "Cgap_relative_difference": 0.005964214711729547,
+  "high_field_q90_measure_relative_difference": 0.042105263157894854,
+  "Emax_status": "MESH_STABLE_AT_TESTED_LEVELS",
+  "primary_comparison_uses_robust_metrics": true
+}

@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "descriptor_type": "B_RF1_ELECTROSTATIC_DESCRIPTOR",
+  "dataset_role": "SYNTHETIC_DEVELOPMENT_FIXTURE",
+  "scientific_result_allowed": false,
+  "geometry_identity": {
+    "geometry_id": "synthetic-axisymmetric-needle-plane-r10um-gap70um",
+    "electrode_type": "NEEDLE_PLANE",
+    "geometry_revision": "fixture-r1",
+    "gap_m": 7e-05,
+    "tip_radius_m": 1e-05,
+    "tip_profile": "HEMISPHERICAL",
+    "boundary_locations_m": {
+      "ground_y_m": 0.0,
+      "tip_y_m": 7e-05
+    },
+    "electrode_material": "SYNTHETIC_COPPER_LABEL",
+    "alignment": "AXIS_ALIGNED",
+    "axisymmetric": true,
+    "compatibility_class": "AXISYMMETRIC_2D_EXACT",
+    "source_file": "SYNTHETIC_ANALYTICAL_FIXTURE",
+    "source_hash": "NOT_APPLICABLE_SYNTHETIC",
+    "comsol_model_identifier": "NOT_APPLICABLE_SYNTHETIC",
+    "simulation_date": "2026-09-24",
+    "singularity": {
+      "status": "FINITE_RADIUS_GEOMETRY",
+      "zero_radius_corner": false
+    }
+  },
+  "compatibility_class": "AXISYMMETRIC_2D_EXACT",
+  "routing": {
+    "stage_c_allowed": true,
+    "stage_e_r2_required": false,
+    "routing_status": "RESOLVED"
+  },
+  "gap_analysis_roi": {
+    "name": "GAP_ANALYSIS_ROI",
+    "type": "AXIS_ALIGNED_BOUNDS",
+    "x_bounds_m": [
+      0.0,
+      2.5e-05
+    ],
+    "y_bounds_m": [
+      0.0,
+      7e-05
+    ],
+    "domain_ids": [
+      "gas_gap"
+    ],
+    "candidate_distance_to_electrode_m": 0.0,
+    "excludes_remote_air_domain": true
+  },
+  "roi_statistics": {
+    "sample_count": 9338,
+    "measure_weight_source": "cell_area_m2",
+    "measure_m2": 1.7873515625e-09,
+    "E0_max_V_m": 9608176.805795372,
+    "E0_mean_V_m": 7183844.440069798,
+    "E0_p95_V_m": 8465435.513324158
+  },
+  "field_enhancement": {
+    "E_nominal_V_m": 7142857.142857144,
+    "beta_E": 1.3451447528113518,
+    "beta_E_p95": 1.185160971865382,
+    "is_breakdown_criterion": false
+  },
+  "ek_normalization": {
+    "Ek_V_m": 2633104.856478684,
+    "implementation": "morrow_lowke_breakdown_field",
+    "source_artifact": "docs/stage3_validation_matrix.csv",
+    "gas": "air",
+    "pressure_Pa": 101325.0,
+    "temperature_K": 300.0,
+    "semantics": "REFERENCE_NORMALIZATION_ONLY",
+    "eta_0_max": 3.64899133513605,
+    "eta_0_p95": 3.215001291154502
+  },
+  "high_field_regions": {
+    "q70": {
+      "threshold_fraction_of_E0_max": 0.7,
+      "area_m2": 1.633078125e-09,
+      "sample_count": 8532,
+      "centroid_m": [
+        1.314387013595874e-05,
+        3.230690342240974e-05
+      ],
+      "extent_m": [
+        2.49375e-05,
+        7e-05
+      ]
+    },
+    "q80": {
+      "threshold_fraction_of_E0_max": 0.8,
+      "area_m2": 1.9446875000000004e-10,
+      "sample_count": 1016,
+      "centroid_m": [
+        5.0829232283464535e-06,
+        4.522182578740155e-05
+      ],
+      "extent_m": [
+        1.1375e-05,
+        2.0125000000000008e-05
+      ]
+    },
+    "q90": {
+      "threshold_fraction_of_E0_max": 0.9,
+      "area_m2": 7.2734375e-11,
+      "sample_count": 380,
+      "centroid_m": [
+        3.156907894736841e-06,
+        4.614473684210525e-05
+      ],
+      "extent_m": [
+        7.437499999999999e-06,
+        1.1374999999999999e-05
+      ]
+    }
+  },
+  "field_localization": {
+    "status": "PASS",
+    "definition": "L_E=|E|/|grad|E||",
+    "L_E_at_Emax_m": 0.0009874577030438987,
+    "L_E_p50_highfield_m": 4.486758708953327e-05,
+    "L_E_p95_highfield_m": 0.000127786466542695
+  },
+  "static_event_region_candidate": {
+    "threshold_fraction_of_E0_max": 0.9,
+    "area_m2": 7.2734375e-11,
+    "sample_count": 380,
+    "centroid_m": [
+      3.156907894736841e-06,
+      4.614473684210525e-05
+    ],
+    "extent_m": [
+      7.437499999999999e-06,
+      1.1374999999999999e-05
+    ],
+    "role": "STATIC_EVENT_REGION_CANDIDATE",
+    "definition": "q90 high-field region containing the E0 maximum candidate",
+    "actual_streamer_initiation_asserted": false,
+    "distance_to_electrode_m": 0.0,
+    "E0_max_region_V_m": 9608176.805795372,
+    "E0_p95_region_V_m": 9559240.791357175
+  },
+  "Cgap": {
+    "value_F": 1.006e-13,
+    "unit": "F",
+    "role": "UPSTREAM_GAP_CAPACITANCE",
+    "reference_terminals": [
+      "high_voltage",
+      "ground"
+    ],
+    "voltage_used_V": 500.0,
+    "calculation_method": "SYNTHETIC_REFERENCE_VALUE",
+    "scientific_result_allowed": false
+  },
+  "mesh": {
+    "level": "REFINED",
+    "minimum_element_size_near_tip_m": 4.3749999999999994e-07,
+    "sample_count": 13041,
+    "status": "SYNTHETIC_FIXTURE_ONLY"
+  },
+  "singularity": {
+    "status": "FINITE_RADIUS_GEOMETRY",
+    "zero_radius_corner": false
+  },
+  "provenance": {
+    "generator": "rf/b_rf1/generate_b_rf1_artifacts.py",
+    "field_sha256": "94452adb21ecebdbcf28ee84b757755773c89d0327ee7329e7497c5d18365306",
+    "actual_comsol_data": false
+  },
+  "scientific_boundary": "static E-field descriptors are not RF-performance conclusions"
+}

@@ -1,0 +1,15 @@
+{
+  "audit_date": "2026-09-24",
+  "searched_locations": [
+    "repository working tree",
+    "/mnt/data",
+    "/home/helianthusczc/projects"
+  ],
+  "recognized_actual_comsol_exports": [],
+  "excluded_candidates": [
+    "Stage-C/Stage-F generated field CSV files",
+    "Stage-E Afivo electrostatic summaries and scripts"
+  ],
+  "ACTUAL_STAGE_B_DATA": "NOT_AVAILABLE",
+  "ACTUAL_ELECTRODE_DESCRIPTOR_COUNT": 0
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "node": "B-RF1",
+  "B_RF1_ENGINEERING": "PASS",
+  "ACTUAL_STAGE_B_DATA": "NOT_AVAILABLE",
+  "ACTUAL_ELECTRODE_DESCRIPTOR_COUNT": 0,
+  "ACTUAL_ELECTRODE_DESCRIPTOR_READY": false,
+  "B_C_ELECTROSTATIC_CROSSVALIDATION": "NOT_APPLICABLE",
+  "F_R6B_ALLOWED": false,
+  "E_R2_REQUIRED": false,
+  "NEXT_NODE": "WAIT_FOR_STAGE_B_ACTUAL_GEOMETRY",
+  "fixture_engineering_validation": "PASS",
+  "fixture_is_scientific_result": false,
+  "ACTUAL_ELECTRODE_RF_MECHANISM_VALIDATED": false,
+  "STAGE_I_SCIENTIFIC_VALIDATION": "PENDING_REAL_EXPERIMENT",
+  "NATIVE_RF_350MHZ": "NOT_RESOLVED",
+  "baseline_preserved": true
+}

@@ -1,0 +1,59 @@
+{
+  "actual_geometries": [],
+  "planned_priority_matrix": [
+    {
+      "group": "G1",
+      "type": "COPPER_FOIL_EDGE_PAIR",
+      "status": "WAIT_FOR_STAGE_B",
+      "likely_route": "STAGE_E_R2"
+    },
+    {
+      "group": "G2",
+      "type": "SHARP_NEEDLE_PAIR",
+      "status": "WAIT_FOR_STAGE_B",
+      "likely_route": "CLASSIFY_FROM_ACTUAL_ALIGNMENT"
+    },
+    {
+      "group": "G3",
+      "type": "CURVED_NEEDLE_PAIR",
+      "status": "WAIT_FOR_STAGE_B",
+      "likely_route": "CLASSIFY_FROM_ACTUAL_ALIGNMENT"
+    },
+    {
+      "group": "G4",
+      "type": "NEEDLE_PLANE_OR_COLUMN",
+      "status": "WAIT_FOR_STAGE_B",
+      "likely_route": "CLASSIFY_FROM_ACTUAL_ALIGNMENT"
+    },
+    {
+      "group": "G5",
+      "type": "ROUNDED_END_PAIR",
+      "status": "WAIT_FOR_STAGE_B",
+      "likely_route": "CLASSIFY_FROM_ACTUAL_ALIGNMENT"
+    }
+  ],
+  "synthetic_fixture_geometry": {
+    "geometry_id": "synthetic-axisymmetric-needle-plane-r10um-gap70um",
+    "electrode_type": "NEEDLE_PLANE",
+    "geometry_revision": "fixture-r1",
+    "gap_m": 7e-05,
+    "tip_radius_m": 1e-05,
+    "tip_profile": "HEMISPHERICAL",
+    "boundary_locations_m": {
+      "ground_y_m": 0.0,
+      "tip_y_m": 7e-05
+    },
+    "electrode_material": "SYNTHETIC_COPPER_LABEL",
+    "alignment": "AXIS_ALIGNED",
+    "axisymmetric": true,
+    "compatibility_class": "AXISYMMETRIC_2D_EXACT",
+    "source_file": "SYNTHETIC_ANALYTICAL_FIXTURE",
+    "source_hash": "NOT_APPLICABLE_SYNTHETIC",
+    "comsol_model_identifier": "NOT_APPLICABLE_SYNTHETIC",
+    "simulation_date": "2026-09-24",
+    "singularity": {
+      "status": "FINITE_RADIUS_GEOMETRY",
+      "zero_radius_corner": false
+    }
+  }
+}

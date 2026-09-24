@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "compatibility_enum": [
+    "AXISYMMETRIC_2D_EXACT",
+    "AXISYMMETRIC_2D_APPROXIMATE",
+    "NONAXISYMMETRIC_3D_REQUIRED",
+    "GEOMETRY_MAPPING_UNRESOLVED"
+  ],
+  "stage_c_rule": "Only physically justified axisymmetric exact/approximate geometries may be routed to Stage C",
+  "stage_e_rule": "Nonaxisymmetric actual structures route to E-R2",
+  "fixed_field_injection_forbidden": true,
+  "stage_c_reconstruction": "rebuild geometry and solve zero-charge electrostatics before comparison"
+}

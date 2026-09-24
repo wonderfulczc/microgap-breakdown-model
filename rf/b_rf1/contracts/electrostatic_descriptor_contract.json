@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "contract": "B_RF1_ELECTROSTATIC_DESCRIPTOR",
+  "roi": "GAP_ANALYSIS_ROI; remote low-field air must be excluded",
+  "field_statistics": ["E0_max", "E0_mean", "E0_p95"],
+  "field_enhancement": {
+    "E_nominal": "abs(applied_voltage)/gap",
+    "beta_E": "E0_max/E_nominal",
+    "beta_E_p95": "E0_p95/E_nominal",
+    "is_breakdown_criterion": false
+  },
+  "ek_normalization": {
+    "implementation": "morrow_lowke_breakdown_field",
+    "eta_0_max": "E0_max/Ek",
+    "eta_0_p95": "E0_p95/Ek",
+    "semantics": "REFERENCE_NORMALIZATION_ONLY"
+  },
+  "high_field_thresholds": [0.7, 0.8, 0.9],
+  "field_localization": "L_E=|E|/|grad|E||",
+  "event_region_role": "STATIC_EVENT_REGION_CANDIDATE",
+  "Cgap_role": "UPSTREAM_GAP_CAPACITANCE; positive SI value in F with reference terminals and calculation method",
+  "scientific_boundary": "static E-field is not an RF-performance conclusion"
+}

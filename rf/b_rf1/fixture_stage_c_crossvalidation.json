@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "E0_max_relative_difference": 0.0,
+  "E0_p95_relative_difference": 0.002000000000000055,
+  "beta_E_p95_relative_difference": 0.0019999999999999666,
+  "high_field_q90_measure_relative_difference": 0.0,
+  "axis_profile_correlation": 1.0,
+  "initial_acceptance_guidance": {
+    "robust_metric_relative_difference_max": 0.05,
+    "axis_profile_correlation_min": 0.99
+  },
+  "hard_parameter_tuning_to_match_forbidden": true,
+  "dataset_role": "SYNTHETIC_DEVELOPMENT_FIXTURE",
+  "actual_B_to_C_crossvalidation": false,
+  "scientific_result_allowed": false
+}

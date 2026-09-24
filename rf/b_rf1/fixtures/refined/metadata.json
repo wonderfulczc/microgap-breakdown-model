@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "dataset_role": "SYNTHETIC_DEVELOPMENT_FIXTURE",
+  "scientific_result_allowed": false,
+  "fixture_notice": "SYNTHETIC_DEVELOPMENT_FIXTURE; NOT A COMSOL RESULT; NOT FOR SCIENTIFIC CONCLUSIONS",
+  "units": "SI",
+  "field_file": "field.csv",
+  "applied_voltage_V": 500.0,
+  "gas": "air",
+  "pressure_Pa": 101325.0,
+  "temperature_K": 300.0,
+  "geometry": {
+    "geometry_id": "synthetic-axisymmetric-needle-plane-r10um-gap70um",
+    "electrode_type": "NEEDLE_PLANE",
+    "geometry_revision": "fixture-r1",
+    "gap_m": 7e-05,
+    "tip_radius_m": 1e-05,
+    "tip_profile": "HEMISPHERICAL",
+    "boundary_locations_m": {
+      "ground_y_m": 0.0,
+      "tip_y_m": 7e-05
+    },
+    "electrode_material": "SYNTHETIC_COPPER_LABEL",
+    "alignment": "AXIS_ALIGNED",
+    "axisymmetric": true,
+    "compatibility_class": "AXISYMMETRIC_2D_EXACT",
+    "source_file": "SYNTHETIC_ANALYTICAL_FIXTURE",
+    "source_hash": "NOT_APPLICABLE_SYNTHETIC",
+    "comsol_model_identifier": "NOT_APPLICABLE_SYNTHETIC",
+    "simulation_date": "2026-09-24",
+    "singularity": {
+      "status": "FINITE_RADIUS_GEOMETRY",
+      "zero_radius_corner": false
+    }
+  },
+  "coordinate_system": {
+    "name": "axisymmetric_rz_encoded_as_x_y",
+    "dimension": 2,
+    "handedness": "AXISYMMETRIC_RZ",
+    "axis_mapping": {
+      "x_m": "r_m",
+      "y_m": "z_m"
+    },
+    "reference_potential_V": 0.0,
+    "terminal_definition": {
+      "high_voltage": "y=gap",
+      "ground": "y=0"
+    }
+  },
+  "gap_analysis_roi": {
+    "name": "GAP_ANALYSIS_ROI",
+    "type": "AXIS_ALIGNED_BOUNDS",
+    "x_bounds_m": [
+      0.0,
+      2.5e-05
+    ],
+    "y_bounds_m": [
+      0.0,
+      7e-05
+    ],
+    "domain_ids": [
+      "gas_gap"
+    ],
+    "candidate_distance_to_electrode_m": 0.0,
+    "excludes_remote_air_domain": true
+  },
+  "mesh": {
+    "level": "REFINED",
+    "minimum_element_size_near_tip_m": 4.3749999999999994e-07,
+    "sample_count": 13041,
+    "status": "SYNTHETIC_FIXTURE_ONLY"
+  },
+  "capacitance": {
+    "value_F": 1.006e-13,
+    "unit": "F",
+    "role": "UPSTREAM_GAP_CAPACITANCE",
+    "reference_terminals": [
+      "high_voltage",
+      "ground"
+    ],
+    "voltage_used_V": 500.0,
+    "calculation_method": "SYNTHETIC_REFERENCE_VALUE",
+    "scientific_result_allowed": false
+  },
+  "ek_reference": {
+    "Ek_V_m": 2633104.856478684,
+    "implementation": "morrow_lowke_breakdown_field",
+    "source_artifact": "docs/stage3_validation_matrix.csv",
+    "gas": "air",
+    "pressure_Pa": 101325.0,
+    "temperature_K": 300.0,
+    "semantics": "REFERENCE_NORMALIZATION_ONLY"
+  },
+  "source_provenance": {
+    "generator": "rf/b_rf1/generate_b_rf1_artifacts.py",
+    "field_sha256": "94452adb21ecebdbcf28ee84b757755773c89d0327ee7329e7497c5d18365306",
+    "actual_comsol_data": false
+  }
+}
