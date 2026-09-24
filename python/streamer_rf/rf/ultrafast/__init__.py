@@ -32,6 +32,18 @@ from .targeted_reference import (
     physical_crossing_status,
     select_completed_pulse_window,
 )
+from .regime_map import (
+    align_reported_derivative_peak,
+    canonical_case_matrix,
+    eta_field_diagnostics,
+    f_r6b_gate,
+    frequency_proxy,
+    koile_trend_wording,
+    propagate_event_gate,
+    representative_finer_case_ids,
+    rise_time_confounding_status,
+    same_anchor_pi_rf,
+)
 
 __all__ = [
     "CrossingResult",
@@ -60,4 +72,14 @@ __all__ = [
     "field_decay_diagnostic",
     "physical_crossing_status",
     "select_completed_pulse_window",
+    "canonical_case_matrix",
+    "align_reported_derivative_peak",
+    "eta_field_diagnostics",
+    "f_r6b_gate",
+    "frequency_proxy",
+    "koile_trend_wording",
+    "propagate_event_gate",
+    "representative_finer_case_ids",
+    "rise_time_confounding_status",
+    "same_anchor_pi_rf",
 ]

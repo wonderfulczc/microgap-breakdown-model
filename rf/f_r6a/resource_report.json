@@ -1,0 +1,476 @@
+{
+  "schema_version": "1.0",
+  "estimated_runtime_s": 225.49999999999997,
+  "actual_solver_reported_runtime_s": 119.53084369800001,
+  "orchestration_wall_elapsed_s": 292.9969634320004,
+  "disk_bytes": 211835502,
+  "large_simulation": false,
+  "case_execution_records": [
+    {
+      "case_id": "l0_baseline_repeat_1",
+      "dt_variant": "finer",
+      "dt_cap_s": 5e-15,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=3726 physical_duration=1.86103e-11 runtime=6.17177 trace_bytes=6159994",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 6.381588792000002,
+      "final_solver_runtime_s": 6.171768301,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 6159994
+    },
+    {
+      "case_id": "l0_baseline_repeat_1",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=2737 physical_duration=1.86332e-11 runtime=4.61365 trace_bytes=4684132",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 4.975877091000257,
+      "final_solver_runtime_s": 4.613648483,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 4684132
+    },
+    {
+      "case_id": "l0_baseline_repeat_2",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=2737 physical_duration=1.86332e-11 runtime=4.60244 trace_bytes=4684132",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 4.865537056999983,
+      "final_solver_runtime_s": 4.602441986,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 4684132
+    },
+    {
+      "case_id": "l0_baseline_repeat_3",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=2737 physical_duration=1.86332e-11 runtime=4.56501 trace_bytes=4684132",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 4.78131187300005,
+      "final_solver_runtime_s": 4.565013049,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 4684132
+    },
+    {
+      "case_id": "l1_gap_60um",
+      "dt_variant": "finer",
+      "dt_cap_s": 5e-15,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=2357 physical_duration=1.177e-11 runtime=3.87364 trace_bytes=2496482",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 4.0928474470001674,
+      "final_solver_runtime_s": 3.873637737,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 2496482
+    },
+    {
+      "case_id": "l1_gap_60um",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=1529 physical_duration=1.17951e-11 runtime=2.46832 trace_bytes=1850296",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 2.683606644000065,
+      "final_solver_runtime_s": 2.468322287,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 1850296
+    },
+    {
+      "case_id": "l1_gap_80um",
+      "dt_variant": "finer",
+      "dt_cap_s": 5e-15,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=3698 physical_duration=1.84738e-11 runtime=6.2224 trace_bytes=5008403",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 6.4386127249999845,
+      "final_solver_runtime_s": 6.222397097,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 5008403
+    },
+    {
+      "case_id": "l1_gap_80um",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=3032 physical_duration=1.84873e-11 runtime=5.05196 trace_bytes=4541672",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 5.2958105170000636,
+      "final_solver_runtime_s": 5.051958789,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 4541672
+    },
+    {
+      "case_id": "l1_rise_10p0ps",
+      "dt_variant": "finer",
+      "dt_cap_s": 5e-15,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=4259 physical_duration=2.12703e-11 runtime=7.68778 trace_bytes=7085636",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 7.916570933000003,
+      "final_solver_runtime_s": 7.687779838,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 7085636
+    },
+    {
+      "case_id": "l1_rise_10p0ps",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=2891 physical_duration=2.12883e-11 runtime=4.85745 trace_bytes=4941120",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 5.079659160000119,
+      "final_solver_runtime_s": 4.857447225,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 4941120
+    },
+    {
+      "case_id": "l1_rise_2p5ps",
+      "dt_variant": "finer",
+      "dt_cap_s": 5e-15,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=3469 physical_duration=1.733e-11 runtime=5.73849 trace_bytes=5718214",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 5.9594657440002266,
+      "final_solver_runtime_s": 5.738486281,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 5718214
+    },
+    {
+      "case_id": "l1_rise_2p5ps",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=2665 physical_duration=1.7335e-11 runtime=4.52371 trace_bytes=4562458",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 4.7406502880003245,
+      "final_solver_runtime_s": 4.523710526,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 4562458
+    },
+    {
+      "case_id": "l1_voltage_400V",
+      "dt_variant": "finer",
+      "dt_cap_s": 5e-15,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": false,
+          "status_line": "initial bounded attempt retained",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        },
+        {
+          "steps": 18000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "controlled extension completed",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 44.83855596099997,
+      "final_solver_runtime_s": 21.785171846,
+      "peak_RSS_kB": 59396,
+      "trace_size_bytes": 14724211
+    },
+    {
+      "case_id": "l1_voltage_400V",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": false,
+          "status_line": "initial bounded attempt retained",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        },
+        {
+          "steps": 18000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "controlled extension completed",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 46.894420155999775,
+      "final_solver_runtime_s": 23.454003412,
+      "peak_RSS_kB": 60696,
+      "trace_size_bytes": 13422287
+    },
+    {
+      "case_id": "l1_voltage_450V",
+      "dt_variant": "finer",
+      "dt_cap_s": 5e-15,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=11692 physical_duration=3.95176e-11 runtime=21.9305 trace_bytes=14164726",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 22.16172465300002,
+      "final_solver_runtime_s": 21.930543501,
+      "peak_RSS_kB": 776096,
+      "trace_size_bytes": 14164726
+    },
+    {
+      "case_id": "l1_voltage_450V",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=8310 physical_duration=3.95607e-11 runtime=15.7062 trace_bytes=10122044",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 15.924257181999565,
+      "final_solver_runtime_s": 15.706229931,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 10122044
+    },
+    {
+      "case_id": "l1_voltage_550V",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=2693 physical_duration=1.68303e-11 runtime=4.45562 trace_bytes=4602880",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 4.668096031000005,
+      "final_solver_runtime_s": 4.455623377,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 4602880
+    },
+    {
+      "case_id": "l1_voltage_600V",
+      "dt_variant": "finer",
+      "dt_cap_s": 5e-15,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=3232 physical_duration=1.53868e-11 runtime=5.36377 trace_bytes=5315179",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 5.601741946999937,
+      "final_solver_runtime_s": 5.363772153,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 5315179
+    },
+    {
+      "case_id": "l1_voltage_600V",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=2652 physical_duration=1.54034e-11 runtime=4.39226 trace_bytes=4532607",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 4.618174804999853,
+      "final_solver_runtime_s": 4.392261332,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 4532607
+    },
+    {
+      "case_id": "l2_voltage_450V_rise_10p0ps",
+      "dt_variant": "finer",
+      "dt_cap_s": 5e-15,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=11644 physical_duration=4.07075e-11 runtime=21.3687 trace_bytes=14794819",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 21.59747087599999,
+      "final_solver_runtime_s": 21.368736714,
+      "peak_RSS_kB": 776096,
+      "trace_size_bytes": 14794819
+    },
+    {
+      "case_id": "l2_voltage_450V_rise_10p0ps",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=8070 physical_duration=4.07803e-11 runtime=15.2982 trace_bytes=10220874",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 15.546521001000201,
+      "final_solver_runtime_s": 15.298241272,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 10220874
+    },
+    {
+      "case_id": "l2_voltage_450V_rise_2p5ps",
+      "dt_variant": "finer",
+      "dt_cap_s": 5e-15,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=11673 physical_duration=3.88351e-11 runtime=21.5216 trace_bytes=13852231",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 21.737777162999976,
+      "final_solver_runtime_s": 21.521603817,
+      "peak_RSS_kB": 776096,
+      "trace_size_bytes": 13852231
+    },
+    {
+      "case_id": "l2_voltage_450V_rise_2p5ps",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=8394 physical_duration=3.88473e-11 runtime=15.9504 trace_bytes=10073965",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 16.16698928300002,
+      "final_solver_runtime_s": 15.950369146,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 10073965
+    },
+    {
+      "case_id": "l2_voltage_550V_rise_10p0ps",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=2820 physical_duration=1.94627e-11 runtime=5.02616 trace_bytes=4814695",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 5.236976861999665,
+      "final_solver_runtime_s": 5.026159125,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 4814695
+    },
+    {
+      "case_id": "l2_voltage_550V_rise_2p5ps",
+      "dt_variant": "reference",
+      "dt_cap_s": 1e-14,
+      "attempts": [
+        {
+          "steps": 12000,
+          "returncode": 0,
+          "event_complete": true,
+          "status_line": "stage_c_r5_diagnostics status=PASS accepted=2635 physical_duration=1.55424e-11 runtime=4.56541 trace_bytes=4509150",
+          "environment_note": "MPI/UCX sandbox warnings omitted from machine-readable summary"
+        }
+      ],
+      "wall_elapsed_s": 4.7927192410002135,
+      "final_solver_runtime_s": 4.565413758,
+      "peak_RSS_kB": 168056,
+      "trace_size_bytes": 4509150
+    }
+  ],
+  "all_final_solver_runtime_s": 241.194740983,
+  "peak_RSS_kB": 776096
+}

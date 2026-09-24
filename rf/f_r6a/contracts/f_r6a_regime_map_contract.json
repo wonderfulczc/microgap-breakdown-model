@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "scope": "CANONICAL_2D_STAGE_C_GEOMETRY_ONLY",
+  "layers": [
+    "CONTROL",
+    "FIELD",
+    "DISCHARGE_KINETICS",
+    "RF_SOURCE_TIME_DOMAIN"
+  ],
+  "eta_0_representative": "event ROI E0 p95",
+  "Pi_RF_rule": "same cell/time anchor",
+  "frequency_proxy": "1/PW; DIAGNOSTIC_PROXY; not a spectral peak",
+  "event_gate": "EVENT_WINDOW_COMPLETE before pulse metrics",
+  "unresolved_values_are_not_imputed": true
+}

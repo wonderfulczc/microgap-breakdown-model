@@ -1,0 +1,16 @@
+case_id,design_level,scan_family,voltage_V,gas_gap_m,rise_time_s,geometry_id,gas,pressure_Pa,temperature_K
+l0_baseline_repeat_1,LEVEL_0,BASELINE_REPEATABILITY,500.0,7e-05,5e-12,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0
+l0_baseline_repeat_2,LEVEL_0,BASELINE_REPEATABILITY,500.0,7e-05,5e-12,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0
+l0_baseline_repeat_3,LEVEL_0,BASELINE_REPEATABILITY,500.0,7e-05,5e-12,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0
+l1_voltage_400V,LEVEL_1,VOLTAGE,400.0,7e-05,5e-12,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0
+l1_voltage_450V,LEVEL_1,VOLTAGE,450.0,7e-05,5e-12,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0
+l1_voltage_550V,LEVEL_1,VOLTAGE,550.0,7e-05,5e-12,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0
+l1_voltage_600V,LEVEL_1,VOLTAGE,600.0,7e-05,5e-12,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0
+l1_gap_60um,LEVEL_1,GAP,500.0,5.9999999999999995e-05,5e-12,canonical-2d-needle-plane-gap-60um,air,101325.0,300.0
+l1_gap_80um,LEVEL_1,GAP,500.0,7.999999999999999e-05,5e-12,canonical-2d-needle-plane-gap-80um,air,101325.0,300.0
+l1_rise_2p5ps,LEVEL_1,RISE_TIME,500.0,7e-05,2.5e-12,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0
+l1_rise_10p0ps,LEVEL_1,RISE_TIME,500.0,7e-05,1e-11,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0
+l2_voltage_450V_rise_2p5ps,LEVEL_2,VOLTAGE_X_RISE,450.0,7e-05,2.5e-12,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0
+l2_voltage_450V_rise_10p0ps,LEVEL_2,VOLTAGE_X_RISE,450.0,7e-05,1e-11,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0
+l2_voltage_550V_rise_2p5ps,LEVEL_2,VOLTAGE_X_RISE,550.0,7e-05,2.5e-12,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0
+l2_voltage_550V_rise_10p0ps,LEVEL_2,VOLTAGE_X_RISE,550.0,7e-05,1e-11,canonical-2d-needle-plane-gap-70um,air,101325.0,300.0

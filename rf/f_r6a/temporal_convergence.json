@@ -1,0 +1,487 @@
+{
+  "cases": [
+    {
+      "case_id": "l0_baseline_repeat_1",
+      "reference_case_status": "PASS",
+      "finer_case_status": "PASS",
+      "metrics": {
+        "event_peak_s": {
+          "status": "PASS",
+          "relative_change": 0.0011170717171824784,
+          "tolerance": 0.05
+        },
+        "PW_FWHM_s": {
+          "status": "PASS",
+          "relative_change": 0.00040791817405601847,
+          "tolerance": 0.05
+        },
+        "PW_FW1E_s": {
+          "status": "PASS",
+          "relative_change": 0.0004145654504585794,
+          "tolerance": 0.05
+        },
+        "delta_M_A_m": {
+          "status": "PASS",
+          "relative_change": 0.010215365469365429,
+          "tolerance": 0.05
+        },
+        "eta_peak": {
+          "status": "PASS",
+          "relative_change": 5.4315613491755705e-08,
+          "tolerance": 0.05
+        },
+        "tau_i_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 1.0531578229078569e-07,
+          "tolerance": 0.05
+        },
+        "tau_M_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 0.010304142310618446,
+          "tolerance": 0.05
+        }
+      },
+      "topology": {
+        "status": "PASS",
+        "reference": "ELECTRODE_ATTACHMENT",
+        "finer": "ELECTRODE_ATTACHMENT"
+      },
+      "status": "PASS"
+    },
+    {
+      "case_id": "l1_voltage_400V",
+      "reference_case_status": "PASS",
+      "finer_case_status": "PASS",
+      "metrics": {
+        "event_peak_s": {
+          "status": "PASS",
+          "relative_change": 0.0010127187479862785,
+          "tolerance": 0.05
+        },
+        "PW_FWHM_s": {
+          "status": "PASS",
+          "relative_change": 0.00015127716158961396,
+          "tolerance": 0.05
+        },
+        "PW_FW1E_s": {
+          "status": "PASS",
+          "relative_change": 0.0006113471132870757,
+          "tolerance": 0.05
+        },
+        "delta_M_A_m": {
+          "status": "PASS",
+          "relative_change": 0.010305288567805177,
+          "tolerance": 0.05
+        },
+        "eta_peak": {
+          "status": "PASS",
+          "relative_change": 3.705828475654708e-08,
+          "tolerance": 0.05
+        },
+        "tau_i_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 1.0134975852746679e-07,
+          "tolerance": 0.05
+        },
+        "tau_M_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 0.009506671601520673,
+          "tolerance": 0.05
+        }
+      },
+      "topology": {
+        "status": "PASS",
+        "reference": "UNRESOLVED",
+        "finer": "UNRESOLVED"
+      },
+      "status": "PASS"
+    },
+    {
+      "case_id": "l1_voltage_450V",
+      "reference_case_status": "PASS",
+      "finer_case_status": "PASS",
+      "metrics": {
+        "event_peak_s": {
+          "status": "PASS",
+          "relative_change": 0.001349569122523671,
+          "tolerance": 0.05
+        },
+        "PW_FWHM_s": {
+          "status": "PASS",
+          "relative_change": 0.00032131546800646883,
+          "tolerance": 0.05
+        },
+        "PW_FW1E_s": {
+          "status": "PASS",
+          "relative_change": 0.00031485808797796573,
+          "tolerance": 0.05
+        },
+        "delta_M_A_m": {
+          "status": "PASS",
+          "relative_change": 0.010599772800128427,
+          "tolerance": 0.05
+        },
+        "eta_peak": {
+          "status": "PASS",
+          "relative_change": 4.193148666946197e-08,
+          "tolerance": 0.05
+        },
+        "tau_i_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 1.0781780082130629e-07,
+          "tolerance": 0.05
+        },
+        "tau_M_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 0.009830251383660204,
+          "tolerance": 0.05
+        }
+      },
+      "topology": {
+        "status": "PASS",
+        "reference": "UNRESOLVED",
+        "finer": "UNRESOLVED"
+      },
+      "status": "PASS"
+    },
+    {
+      "case_id": "l1_voltage_600V",
+      "reference_case_status": "PASS",
+      "finer_case_status": "PASS",
+      "metrics": {
+        "event_peak_s": {
+          "status": "PASS",
+          "relative_change": 0.0011504196461493649,
+          "tolerance": 0.05
+        },
+        "PW_FWHM_s": {
+          "status": "PASS",
+          "relative_change": 4.746553331421663e-05,
+          "tolerance": 0.05
+        },
+        "PW_FW1E_s": {
+          "status": "PASS",
+          "relative_change": 4.944360263795637e-05,
+          "tolerance": 0.05
+        },
+        "delta_M_A_m": {
+          "status": "PASS",
+          "relative_change": 0.010704472567811903,
+          "tolerance": 0.05
+        },
+        "eta_peak": {
+          "status": "PASS",
+          "relative_change": 6.738759987636186e-08,
+          "tolerance": 0.05
+        },
+        "tau_i_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 1.1665753937564876e-07,
+          "tolerance": 0.05
+        },
+        "tau_M_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 0.012303474158996802,
+          "tolerance": 0.05
+        }
+      },
+      "topology": {
+        "status": "PASS",
+        "reference": "ELECTRODE_ATTACHMENT",
+        "finer": "ELECTRODE_ATTACHMENT"
+      },
+      "status": "PASS"
+    },
+    {
+      "case_id": "l1_gap_60um",
+      "reference_case_status": "NOT_RESOLVED_PULSE",
+      "finer_case_status": "PASS",
+      "metrics": {
+        "event_peak_s": {
+          "status": "PASS",
+          "relative_change": 0.0038215310077625254,
+          "tolerance": 0.05
+        },
+        "PW_FWHM_s": {
+          "status": "NOT_EVALUABLE",
+          "relative_change": null,
+          "tolerance": 0.05
+        },
+        "PW_FW1E_s": {
+          "status": "NOT_EVALUABLE",
+          "relative_change": null,
+          "tolerance": 0.05
+        },
+        "delta_M_A_m": {
+          "status": "PASS",
+          "relative_change": 0.01734975564948994,
+          "tolerance": 0.05
+        },
+        "eta_peak": {
+          "status": "PASS",
+          "relative_change": 3.1300179027522446e-08,
+          "tolerance": 0.05
+        },
+        "tau_i_characteristic_s": {
+          "status": "NOT_EVALUABLE",
+          "relative_change": null,
+          "tolerance": 0.05
+        },
+        "tau_M_characteristic_s": {
+          "status": "NOT_EVALUABLE",
+          "relative_change": null,
+          "tolerance": 0.05
+        }
+      },
+      "topology": {
+        "status": "NOT_RESOLVED",
+        "reference": "ELECTRODE_ATTACHMENT",
+        "finer": "UNRESOLVED"
+      },
+      "status": "NOT_RESOLVED"
+    },
+    {
+      "case_id": "l1_gap_80um",
+      "reference_case_status": "PASS",
+      "finer_case_status": "PASS",
+      "metrics": {
+        "event_peak_s": {
+          "status": "PASS",
+          "relative_change": 0.000554494061565879,
+          "tolerance": 0.05
+        },
+        "PW_FWHM_s": {
+          "status": "PASS",
+          "relative_change": 1.838056322142699e-05,
+          "tolerance": 0.05
+        },
+        "PW_FW1E_s": {
+          "status": "PASS",
+          "relative_change": 1.9910096690480425e-05,
+          "tolerance": 0.05
+        },
+        "delta_M_A_m": {
+          "status": "PASS",
+          "relative_change": 0.007822977939892253,
+          "tolerance": 0.05
+        },
+        "eta_peak": {
+          "status": "PASS",
+          "relative_change": 5.4378577282752264e-08,
+          "tolerance": 0.05
+        },
+        "tau_i_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 9.244636295075e-08,
+          "tolerance": 0.05
+        },
+        "tau_M_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 0.008529283403890156,
+          "tolerance": 0.05
+        }
+      },
+      "topology": {
+        "status": "PASS",
+        "reference": "ELECTRODE_ATTACHMENT",
+        "finer": "ELECTRODE_ATTACHMENT"
+      },
+      "status": "PASS"
+    },
+    {
+      "case_id": "l1_rise_2p5ps",
+      "reference_case_status": "PASS",
+      "finer_case_status": "PASS",
+      "metrics": {
+        "event_peak_s": {
+          "status": "PASS",
+          "relative_change": 0.00047994593366919156,
+          "tolerance": 0.05
+        },
+        "PW_FWHM_s": {
+          "status": "PASS",
+          "relative_change": 0.0004598064245152222,
+          "tolerance": 0.05
+        },
+        "PW_FW1E_s": {
+          "status": "PASS",
+          "relative_change": 0.0004838750093555438,
+          "tolerance": 0.05
+        },
+        "delta_M_A_m": {
+          "status": "PASS",
+          "relative_change": 0.013901829012900576,
+          "tolerance": 0.05
+        },
+        "eta_peak": {
+          "status": "PASS",
+          "relative_change": 7.108321851039586e-08,
+          "tolerance": 0.05
+        },
+        "tau_i_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 1.4917999721450003e-07,
+          "tolerance": 0.05
+        },
+        "tau_M_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 0.013550803971196488,
+          "tolerance": 0.05
+        }
+      },
+      "topology": {
+        "status": "PASS",
+        "reference": "ELECTRODE_ATTACHMENT",
+        "finer": "ELECTRODE_ATTACHMENT"
+      },
+      "status": "PASS"
+    },
+    {
+      "case_id": "l1_rise_10p0ps",
+      "reference_case_status": "PASS",
+      "finer_case_status": "PASS",
+      "metrics": {
+        "event_peak_s": {
+          "status": "PASS",
+          "relative_change": 0.0007884174495013228,
+          "tolerance": 0.05
+        },
+        "PW_FWHM_s": {
+          "status": "PASS",
+          "relative_change": 0.000122950687703716,
+          "tolerance": 0.05
+        },
+        "PW_FW1E_s": {
+          "status": "PASS",
+          "relative_change": 0.00011905947334377559,
+          "tolerance": 0.05
+        },
+        "delta_M_A_m": {
+          "status": "PASS",
+          "relative_change": 0.018389604562784153,
+          "tolerance": 0.05
+        },
+        "eta_peak": {
+          "status": "PASS",
+          "relative_change": 7.59308887721802e-08,
+          "tolerance": 0.05
+        },
+        "tau_i_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 1.580475744617732e-07,
+          "tolerance": 0.05
+        },
+        "tau_M_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 0.017871302779868148,
+          "tolerance": 0.05
+        }
+      },
+      "topology": {
+        "status": "PASS",
+        "reference": "ELECTRODE_ATTACHMENT",
+        "finer": "ELECTRODE_ATTACHMENT"
+      },
+      "status": "PASS"
+    },
+    {
+      "case_id": "l2_voltage_450V_rise_2p5ps",
+      "reference_case_status": "PASS",
+      "finer_case_status": "PASS",
+      "metrics": {
+        "event_peak_s": {
+          "status": "PASS",
+          "relative_change": 0.0004152046458535447,
+          "tolerance": 0.05
+        },
+        "PW_FWHM_s": {
+          "status": "PASS",
+          "relative_change": 0.00015548297541090547,
+          "tolerance": 0.05
+        },
+        "PW_FW1E_s": {
+          "status": "PASS",
+          "relative_change": 0.000202215607070216,
+          "tolerance": 0.05
+        },
+        "delta_M_A_m": {
+          "status": "PASS",
+          "relative_change": 0.007596511606045549,
+          "tolerance": 0.05
+        },
+        "eta_peak": {
+          "status": "PASS",
+          "relative_change": 3.492749609980492e-08,
+          "tolerance": 0.05
+        },
+        "tau_i_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 8.602938438348646e-08,
+          "tolerance": 0.05
+        },
+        "tau_M_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 0.007246405115473737,
+          "tolerance": 0.05
+        }
+      },
+      "topology": {
+        "status": "PASS",
+        "reference": "UNRESOLVED",
+        "finer": "UNRESOLVED"
+      },
+      "status": "PASS"
+    },
+    {
+      "case_id": "l2_voltage_450V_rise_10p0ps",
+      "reference_case_status": "PASS",
+      "finer_case_status": "PASS",
+      "metrics": {
+        "event_peak_s": {
+          "status": "PASS",
+          "relative_change": 0.001466223801368651,
+          "tolerance": 0.05
+        },
+        "PW_FWHM_s": {
+          "status": "PASS",
+          "relative_change": 0.0010884188461367744,
+          "tolerance": 0.05
+        },
+        "PW_FW1E_s": {
+          "status": "PASS",
+          "relative_change": 0.0011457224713002474,
+          "tolerance": 0.05
+        },
+        "delta_M_A_m": {
+          "status": "PASS",
+          "relative_change": 0.014777168415046373,
+          "tolerance": 0.05
+        },
+        "eta_peak": {
+          "status": "PASS",
+          "relative_change": 4.9969881771375576e-08,
+          "tolerance": 0.05
+        },
+        "tau_i_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 1.2178656297310224e-07,
+          "tolerance": 0.05
+        },
+        "tau_M_characteristic_s": {
+          "status": "PASS",
+          "relative_change": 0.013227295654117862,
+          "tolerance": 0.05
+        }
+      },
+      "topology": {
+        "status": "PASS",
+        "reference": "UNRESOLVED",
+        "finer": "UNRESOLVED"
+      },
+      "status": "PASS"
+    }
+  ],
+  "representative_pass_count": 9,
+  "unresolved_endpoints_are_retained": true,
+  "status": "PASS_WITH_UNRESOLVED_ENDPOINTS"
+}

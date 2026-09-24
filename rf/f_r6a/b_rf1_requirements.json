@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "B_RF1_REQUIRED_PARAMETERS": [
+    "geometry_id",
+    "E0_map",
+    "E0_max",
+    "E0_p95",
+    "high_field_volume_or_area",
+    "Cgap",
+    "event_region_field_descriptor"
+  ],
+  "actual_geometry_descriptor_count": 0,
+  "stage_c_geometry_mapping_defined": false,
+  "B_RF1_COMPLETE": false,
+  "F_R6B_ALLOWED": false,
+  "required_sequence": "B-RF1 -> F-R6B -> E-R2 -> I-R1"
+}

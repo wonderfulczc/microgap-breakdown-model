@@ -22,6 +22,7 @@ struct Options {
   std::filesystem::path out{"rf/c_r5/development"};
   int steps{24};
   double voltage_V{500.0};
+  double gas_gap_m{70e-6};
   double dt_cap_s{1e-15};
   double dt_scale{0.05};
   std::string waveform{"constant"};
@@ -47,6 +48,7 @@ Options parse(int argc, char** argv) {
     };
     if (arg == "--steps") options.steps = std::stoi(need("--steps"));
     else if (arg == "--voltage") options.voltage_V = std::stod(need("--voltage"));
+    else if (arg == "--gas-gap") options.gas_gap_m = std::stod(need("--gas-gap"));
     else if (arg == "--dt-cap") options.dt_cap_s = std::stod(need("--dt-cap"));
     else if (arg == "--dt-scale") options.dt_scale = std::stod(need("--dt-scale"));
     else if (arg == "--waveform") options.waveform = need("--waveform");
@@ -61,7 +63,8 @@ Options parse(int argc, char** argv) {
     else if (arg == "--post-tail-samples") options.post_tail_samples = std::stoi(need("--post-tail-samples"));
     else throw std::runtime_error("unknown option " + arg);
   }
-  if (options.steps < 1 || !(options.dt_cap_s > 0.0) || !(options.dt_scale > 0.0) ||
+  if (options.steps < 1 || !(options.voltage_V > 0.0) || !(options.gas_gap_m > 0.0) ||
+      options.gas_gap_m > 80e-6 || !(options.dt_cap_s > 0.0) || !(options.dt_scale > 0.0) ||
       (options.waveform != "constant" && options.waveform != "ramp") ||
       (options.trace_mode != "full" && options.trace_mode != "targeted") ||
       !(options.pre_hold_s > 0.0) || !(options.ramp_time_s > 0.0) || options.trigger_settle_duration_s < 0.0 ||
@@ -157,9 +160,14 @@ int main(int argc, char** argv) {
   MPI_Comm_rank(PETSC_COMM_WORLD, &rank);
   const auto total_start = std::chrono::steady_clock::now();
 
-  AxisymmetricGrid grid(12, 24, 80e-6, 0.0, 90e-6);
-  AxisymmetricNeedlePlaneGeometry geometry("stage-c-r5-development-needle-plane", 0.0, 75e-6,
-                                           5e-6, 2.5e-6, 5e-6);
+  constexpr double ground_thickness_m = 5e-6;
+  constexpr double grid_z_max_m = 90e-6;
+  AxisymmetricGrid grid(12, 24, 80e-6, 0.0, grid_z_max_m);
+  const double tip_z_m = ground_thickness_m + options.gas_gap_m;
+  const std::string geometry_id = "stage-c-r5-development-needle-plane-gap-" +
+                                  std::to_string(static_cast<int>(std::llround(options.gas_gap_m * 1e6))) + "um";
+  AxisymmetricNeedlePlaneGeometry geometry(geometry_id, 0.0, tip_z_m,
+                                           5e-6, 2.5e-6, ground_thickness_m);
   ConstantVoltage voltage(options.voltage_V);
   SampledVoltage ramp_voltage(
       {0.0, options.pre_hold_s, options.pre_hold_s + options.ramp_time_s},
@@ -351,6 +359,14 @@ int main(int argc, char** argv) {
     resource << std::setprecision(17)
              << "{\n  \"schema_version\": \"1.0\",\n  \"mode\": \"LIGHTWEIGHT_STAGE_C_DEVELOPMENT_REFERENCE\",\n"
              << "  \"waveform\": \"" << options.waveform << "\",\n"
+             << "  \"geometry_id\": \"" << geometry_id << "\",\n"
+             << "  \"voltage_V\": " << options.voltage_V << ",\n"
+             << "  \"gas_gap_m\": " << options.gas_gap_m << ",\n"
+             << "  \"tip_z_m\": " << tip_z_m << ",\n"
+             << "  \"grid_z_max_m\": " << grid_z_max_m << ",\n"
+             << "  \"gas_gap_cells\": " << options.gas_gap_m / grid.dz() << ",\n"
+             << "  \"pre_hold_s\": " << options.pre_hold_s << ",\n"
+             << "  \"ramp_time_s\": " << options.ramp_time_s << ",\n"
              << "  \"trigger_settle_duration_s\": " << options.trigger_settle_duration_s << ",\n"
              << "  \"dt_scale\": " << options.dt_scale << ",\n  \"dt_cap_s\": " << options.dt_cap_s << ",\n"
              << "  \"steps_requested\": " << options.steps << ",\n  \"steps_accepted\": " << accepted
