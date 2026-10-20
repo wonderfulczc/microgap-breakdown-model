@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:i1:fp4:cold-to-thermal-handoff:1.0",
+  "title": "ColdToThermalHandoff declarative contract, not an implemented provider",
+  "description": "No runtime initialization or scientific validation is implemented by this schema. Null plus availability/reason represents unknown, never a default zero.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "entry_mode", "target_backend", "identity", "control_volumes", "time", "energy_convention", "port_partition", "thermal_initial", "boundary", "current", "inventories", "history", "provenance", "limitations"],
+  "properties": {
+    "contract_version": {"const": "I1-FP4-HANDOFF-1.0"},
+    "entry_mode": {"enum": ["AUTO_COLD_TO_THERMAL", "GIVEN_THERMAL_INITIAL_STATE"]},
+    "target_backend": {"enum": ["CURRENT_G1_TP_ZERO_VELOCITY", "FUTURE_CONSERVATIVE_INITIALIZER_NOT_IMPLEMENTED"]},
+    "identity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["geometry_id", "geometry_revision", "boundary_id", "mesh_id", "operator_id", "reference_plane_id", "coordinate_system", "source_manifest_uri"],
+      "properties": {
+        "geometry_id": {"$ref": "#/$defs/id"}, "geometry_revision": {"$ref": "#/$defs/id"},
+        "boundary_id": {"$ref": "#/$defs/id"}, "mesh_id": {"$ref": "#/$defs/id"},
+        "operator_id": {"$ref": "#/$defs/id"}, "reference_plane_id": {"$ref": "#/$defs/id"},
+        "coordinate_system": {"const": "2D_AXISYMMETRIC_TO_1D_RADIAL_COLUMN"},
+        "source_manifest_uri": {"$ref": "#/$defs/id"}
+      }
+    },
+    "control_volumes": {
+      "type": "object", "additionalProperties": false,
+      "required": ["cold_control_volume_id", "thermal_control_volume_id", "ell_ch_m", "radial_faces_m", "profile_sampling", "axial_uniformity_evidence_id", "mapping_scope"],
+      "properties": {
+        "cold_control_volume_id": {"type": ["string", "null"]},
+        "thermal_control_volume_id": {"$ref": "#/$defs/id"},
+        "ell_ch_m": {"type": "number", "exclusiveMinimum": 0},
+        "radial_faces_m": {"type": "array", "minItems": 4, "items": {"type": "number", "minimum": 0}},
+        "profile_sampling": {"enum": ["CELL_CENTER", "VOLUME_AVERAGE_WITH_DECLARED_PROJECTION"]},
+        "axial_uniformity_evidence_id": {"$ref": "#/$defs/id"},
+        "mapping_scope": {"enum": ["SAME_PHYSICAL_CONTROL_VOLUME", "EXPLICIT_CONSERVATIVE_DOMAIN_MAP_REQUIRED", "STANDALONE_GIVEN_REFERENCE_NO_COLD_MAP"]}
+      }
+    },
+    "time": {
+      "type": "object", "additionalProperties": false,
+      "required": ["global_t_h_s", "thermal_tau0_s", "cold_time_layer", "new_budget_segment_id"],
+      "properties": {
+        "global_t_h_s": {"type": "number", "minimum": 0}, "thermal_tau0_s": {"const": 0},
+        "cold_time_layer": {"enum": ["ACCEPTED", "NOT_APPLICABLE_STANDALONE"]},
+        "new_budget_segment_id": {"$ref": "#/$defs/id"}
+      }
+    },
+    "energy_convention": {
+      "type": "object", "additionalProperties": false,
+      "required": ["eos_id", "coefficient_sha256", "energy_zero_id", "species_scope_id", "nonoverlap_partition_id", "lte_evidence_id", "cold_energy_zero_mapping_id"],
+      "properties": {
+        "eos_id": {"$ref": "#/$defs/id"},
+        "coefficient_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "energy_zero_id": {"$ref": "#/$defs/id"}, "species_scope_id": {"$ref": "#/$defs/id"},
+        "nonoverlap_partition_id": {"$ref": "#/$defs/id"},
+        "lte_evidence_id": {"$ref": "#/$defs/id", "description": "May name an explicit assumed LTE numerical-reference limitation, not fabricated experimental evidence."},
+        "cold_energy_zero_mapping_id": {"type": ["string", "null"]}
+      }
+    },
+    "port_partition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["capacitance_owner", "capacitance_scope", "capacitance_source_id", "topology_id", "current_mapping_evidence_id", "charge_functional_id", "field_energy_scope_id"],
+      "properties": {
+        "capacitance_owner": {"enum": ["TOTAL_CHARGE", "SPLIT_GEOMETRIC_CAPACITANCE", "NOT_APPLICABLE_STANDALONE_PRESCRIBED_ICOL"]},
+        "capacitance_scope": {"enum": ["LOCAL_DISCRETE_DOMAIN", "GLOBAL_PHYSICAL_PENDING", "NOT_APPLICABLE_STANDALONE"]},
+        "capacitance_source_id": {"type": ["string", "null"]}, "topology_id": {"$ref": "#/$defs/id"},
+        "current_mapping_evidence_id": {"$ref": "#/$defs/id"}, "charge_functional_id": {"type": ["string", "null"]},
+        "field_energy_scope_id": {"$ref": "#/$defs/id"}
+      }
+    },
+    "thermal_initial": {"oneOf": [{"$ref": "#/$defs/primitive_profile"}, {"$ref": "#/$defs/conservative_profile"}]},
+    "boundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["radial_model", "ambient_T_K", "ambient_p_Pa", "axial_electrode_loss_status", "radiation_status"],
+      "properties": {
+        "radial_model": {"enum": ["ambient", "closed"]},
+        "ambient_T_K": {"type": "number", "exclusiveMinimum": 0},
+        "ambient_p_Pa": {"type": "number", "exclusiveMinimum": 0},
+        "axial_electrode_loss_status": {"const": "NOT_IMPLEMENTED_IN_CURRENT_G1"},
+        "radiation_status": {"const": "RADIATION_MODEL_NOT_ENABLED"}
+      }
+    },
+    "current": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role", "source_id", "source_uri", "sign_convention", "time_support_s", "i_port", "I_col"],
+      "properties": {
+        "role": {"const": "COLUMN_CONDUCTION_NOT_TOTAL_PORT"}, "source_id": {"$ref": "#/$defs/id"},
+        "source_uri": {"$ref": "#/$defs/id"}, "sign_convention": {"$ref": "#/$defs/id"},
+        "time_support_s": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
+        "i_port": {"allOf": [{"$ref": "#/$defs/quantity"}, {"properties": {"unit": {"const": "A"}}}]},
+        "I_col": {"allOf": [{"$ref": "#/$defs/quantity"}, {"properties": {"unit": {"const": "A"}}}]}
+      }
+    },
+    "inventories": {
+      "type": "object", "additionalProperties": false,
+      "required": ["cold_material_energy", "thermal_material_energy", "field_energy", "gas_kinetic_energy", "mass", "radial_momentum", "net_charge", "R_map"],
+      "properties": {
+        "cold_material_energy": {"$ref": "#/$defs/energy"}, "thermal_material_energy": {"$ref": "#/$defs/energy"},
+        "field_energy": {"$ref": "#/$defs/energy"}, "gas_kinetic_energy": {"$ref": "#/$defs/energy"},
+        "mass": {"allOf": [{"$ref": "#/$defs/quantity"}, {"properties": {"unit": {"const": "kg"}}}]},
+        "radial_momentum": {"allOf": [{"$ref": "#/$defs/quantity"}, {"properties": {"unit": {"const": "kg*m/s"}}}]},
+        "net_charge": {"allOf": [{"$ref": "#/$defs/quantity"}, {"properties": {"unit": {"const": "C"}}}]},
+        "R_map": {"$ref": "#/$defs/energy"}
+      }
+    },
+    "history": {
+      "type": "object", "additionalProperties": false,
+      "required": ["accepted_state_token", "cold_snapshot_uri", "circuit_state_uri", "previous_ledger_uri", "numerical_corrections_uri", "restart_policy"],
+      "properties": {
+        "accepted_state_token": {"type": ["string", "null"]}, "cold_snapshot_uri": {"type": ["string", "null"]},
+        "circuit_state_uri": {"type": ["string", "null"]}, "previous_ledger_uri": {"type": ["string", "null"]},
+        "numerical_corrections_uri": {"type": ["string", "null"]},
+        "restart_policy": {"enum": ["PRESERVE_GLOBAL_CLOCK_AND_PRIOR_LEDGER", "NEW_STANDALONE_REFERENCE_NOT_COLD_RESTART"]}
+      }
+    },
+    "auto_mapping_evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["material_partition_id", "lte_transition_id", "conservative_profile_map_id", "charge_and_field_retention_id", "circuit_capacitor_match_id"],
+      "properties": {
+        "material_partition_id": {"$ref": "#/$defs/id"}, "lte_transition_id": {"$ref": "#/$defs/id"},
+        "conservative_profile_map_id": {"$ref": "#/$defs/id"}, "charge_and_field_retention_id": {"$ref": "#/$defs/id"},
+        "circuit_capacitor_match_id": {"$ref": "#/$defs/id"}
+      }
+    },
+    "provenance": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/provenance"}},
+    "limitations": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}}
+  },
+  "allOf": [
+    {"if": {"properties": {"target_backend": {"const": "CURRENT_G1_TP_ZERO_VELOCITY"}}}, "then": {"properties": {"thermal_initial": {"allOf": [{"$ref": "#/$defs/primitive_profile"}, {"properties": {"u_r_m_s": {"items": {"const": 0}}, "velocity_policy": {"const": "EXPLICIT_ZERO_GIVEN"}}}]}}}},
+    {"if": {"properties": {"entry_mode": {"const": "AUTO_COLD_TO_THERMAL"}}}, "then": {"required": ["auto_mapping_evidence"], "properties": {"time": {"properties": {"cold_time_layer": {"const": "ACCEPTED"}}}, "control_volumes": {"properties": {"cold_control_volume_id": {"$ref": "#/$defs/id"}, "mapping_scope": {"enum": ["SAME_PHYSICAL_CONTROL_VOLUME", "EXPLICIT_CONSERVATIVE_DOMAIN_MAP_REQUIRED"]}}}, "energy_convention": {"properties": {"cold_energy_zero_mapping_id": {"$ref": "#/$defs/id"}}}, "history": {"properties": {"accepted_state_token": {"$ref": "#/$defs/id"}, "cold_snapshot_uri": {"$ref": "#/$defs/id"}, "previous_ledger_uri": {"$ref": "#/$defs/id"}, "restart_policy": {"const": "PRESERVE_GLOBAL_CLOCK_AND_PRIOR_LEDGER"}}}}}},
+    {"if": {"properties": {"entry_mode": {"const": "GIVEN_THERMAL_INITIAL_STATE"}}}, "then": {"properties": {"control_volumes": {"properties": {"mapping_scope": {"const": "STANDALONE_GIVEN_REFERENCE_NO_COLD_MAP"}}}, "time": {"properties": {"cold_time_layer": {"const": "NOT_APPLICABLE_STANDALONE"}}}, "history": {"properties": {"restart_policy": {"const": "NEW_STANDALONE_REFERENCE_NOT_COLD_RESTART"}}}, "inventories": {"properties": {"R_map": {"properties": {"availability": {"const": "NOT_APPLICABLE"}, "value": {"type": "null"}}}}}}}}
+  ],
+  "$defs": {
+    "id": {"type": "string", "minLength": 1},
+    "availability": {"enum": ["AVAILABLE_NATIVE", "DERIVABLE_WITH_EXISTING_DATA", "MODEL_CLOSURE_REQUIRED", "EXTERNAL_INITIAL_STATE_REQUIRED", "NOT_IMPLEMENTED", "NOT_APPLICABLE"]},
+    "quantity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["unit", "availability", "value", "reason", "source_id", "control_volume_id", "time_layer", "energy_reference_id"],
+      "properties": {
+        "unit": {"$ref": "#/$defs/id"}, "availability": {"$ref": "#/$defs/availability"},
+        "value": {"type": ["number", "null"]}, "reason": {"$ref": "#/$defs/id"}, "source_id": {"$ref": "#/$defs/id"},
+        "control_volume_id": {"$ref": "#/$defs/id"},
+        "time_layer": {"enum": ["COLD_ACCEPTED_BEFORE", "THERMAL_INITIAL_AFTER", "ACCEPTED_INTERVAL", "MAPPING_DIFFERENCE", "NOT_APPLICABLE_STANDALONE"]},
+        "energy_reference_id": {"type": ["string", "null"], "description": "Required key; null only for unavailable or non-energy quantities, never an implicit EOS zero."}
+      },
+      "allOf": [
+        {"if": {"properties": {"availability": {"const": "AVAILABLE_NATIVE"}}}, "then": {"properties": {"value": {"type": "number"}}}},
+        {"if": {"properties": {"availability": {"enum": ["MODEL_CLOSURE_REQUIRED", "EXTERNAL_INITIAL_STATE_REQUIRED", "NOT_IMPLEMENTED", "NOT_APPLICABLE"]}}}, "then": {"properties": {"value": {"type": "null"}}}}
+      ]
+    },
+    "energy": {"allOf": [{"$ref": "#/$defs/quantity"}, {"properties": {"unit": {"const": "J"}}}]},
+    "profile": {"type": "array", "minItems": 3, "items": {"type": "number"}},
+    "primitive_profile": {
+      "type": "object", "additionalProperties": false,
+      "required": ["representation", "T_K", "p_Pa", "u_r_m_s", "velocity_policy", "source_id"],
+      "properties": {
+        "representation": {"const": "T_P_U"},
+        "T_K": {"allOf": [{"$ref": "#/$defs/profile"}, {"items": {"exclusiveMinimum": 0}}]},
+        "p_Pa": {"allOf": [{"$ref": "#/$defs/profile"}, {"items": {"exclusiveMinimum": 0}}]},
+        "u_r_m_s": {"$ref": "#/$defs/profile"}, "velocity_policy": {"enum": ["EXPLICIT_ZERO_GIVEN", "EXPLICIT_NONZERO_REQUIRES_NEW_INTERFACE"]},
+        "source_id": {"$ref": "#/$defs/id"}
+      }
+    },
+    "conservative_profile": {
+      "type": "object", "additionalProperties": false,
+      "required": ["representation", "rho_m_kg_m3", "momentum_kg_m2s", "total_material_J_m3", "source_id"],
+      "properties": {
+        "representation": {"const": "CONSERVATIVE_RHO_MOMENTUM_ENERGY_FUTURE_INTERFACE"},
+        "rho_m_kg_m3": {"allOf": [{"$ref": "#/$defs/profile"}, {"items": {"exclusiveMinimum": 0}}]},
+        "momentum_kg_m2s": {"$ref": "#/$defs/profile"},
+        "total_material_J_m3": {"$ref": "#/$defs/profile"},
+        "source_id": {"$ref": "#/$defs/id"}
+      }
+    },
+    "provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_id", "uri", "source_type", "sha256"],
+      "properties": {
+        "source_id": {"$ref": "#/$defs/id"}, "uri": {"$ref": "#/$defs/id"},
+        "source_type": {"enum": ["NATIVE_ACCEPTED_OUTPUT", "DERIVED_EXISTING_DATA", "EXTERNAL_GIVEN_STATE", "SYNTHETIC_REFERENCE", "THEORY_CONTRACT"]},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  },
+  "$comment": "Semantic checks not implementable here: matching array lengths/grid/units; finite values in strict JSON; EOS range/positive internal energy; conservative inversion; evidence authenticity; LTE adequacy; true capacitor/inductor continuity; unique capacitance ownership; cold charge retention; energy zero match; and R_map. Schema validity alone does not authorize a solver or an automatic transition."
+}

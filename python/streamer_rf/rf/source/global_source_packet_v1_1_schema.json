@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "I1-GLOBAL-SOURCE-1.1 additive contract",
+  "type": "object",
+  "required": ["version", "geometry_id", "mesh_id", "operator_id", "reference_plane_id", "time_interval", "time_layer", "source_hash", "build_hash", "config_hash", "includes_displacement_current", "secondary_emission_in_net_electron_flux", "secondary_emission_added_as_source", "capacitance_owner", "capacitance_copies"],
+  "properties": {
+    "version": {"const": "I1-GLOBAL-SOURCE-1.1"},
+    "includes_displacement_current": {"const": false},
+    "secondary_emission_in_net_electron_flux": {"const": true},
+    "secondary_emission_added_as_source": {"const": false},
+    "capacitance_copies": {"const": 1},
+    "capacitance_owner": {"enum": ["TOTAL_CHARGE", "SPLIT_GEOMETRIC_CAPACITANCE"]},
+    "cell_charge_ledger": {"type": ["object", "null"]},
+    "conductor_extension": {
+      "type": ["object", "null"],
+      "required": ["version", "geometry", "time_layer", "time_interval", "units", "distribution_source_file", "distribution_source_sha256", "patches", "sigma_s_C_m2", "conductor_edge_current_A", "surface_current_A_m", "surface_current_reason"],
+      "properties": {
+        "version": {"const": "I1_SURFACE_CONTACT_EXCHANGE_V1"},
+        "geometry": {"$ref": "global_conductor_geometry_schema.json"},
+        "external_operator": {"$ref": "local_external_boundary_operator_schema.json"}
+      }
+    }
+  },
+  "$comment": "Legacy 1.0 remains supported. Full source needs explicit graph, electrode contacts/exchange, source-bound distributions and semantic continuity checks. Neither this schema nor a source label validates a device or receiver."
+}

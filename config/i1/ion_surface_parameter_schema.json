@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "version",
+    "mode",
+    "requested_domain",
+    "parameters",
+    "device_calibration_evidence"
+  ],
+  "properties": {
+    "version": {
+      "const": "I1-ION-SURFACE-1.0"
+    },
+    "mode": {
+      "enum": [
+        "SYNTHETIC_ENGINEERING",
+        "CONDITIONAL_LITERATURE",
+        "REAL_DEVICE"
+      ]
+    },
+    "parameters": {
+      "type": "object",
+      "required": [
+        "mu_p",
+        "D_p",
+        "gamma_i"
+      ],
+      "additionalProperties": {
+        "$ref": "#/$defs/parameter"
+      }
+    }
+  },
+  "$defs": {
+    "parameter": {
+      "type": "object",
+      "required": [
+        "value",
+        "unit",
+        "classification",
+        "species_id",
+        "gas_composition",
+        "validity_domain",
+        "interpolation",
+        "uncertainty",
+        "out_of_domain",
+        "surface_material",
+        "surface_state",
+        "incident_ion_energy",
+        "emission_mechanism",
+        "source",
+        "source_level"
+      ],
+      "properties": {
+        "classification": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "out_of_domain": {
+          "const": "REJECT"
+        }
+      }
+    }
+  },
+  "semantic_validation": "parameters.py checks units, finite values, source SHA, matched ion/context, domain and physical mode; schema alone is not sufficient"
+}

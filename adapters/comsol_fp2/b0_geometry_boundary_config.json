@@ -1,0 +1,147 @@
+{
+  "source_type": "DERIVED",
+  "parameters": {
+    "gap_m": 7e-05,
+    "tip_radius_m": 0.0002,
+    "half_angle_rad": 0.2617993877991494,
+    "shank_radius_m": 0.001,
+    "tip_to_back_length_m": 0.03
+  },
+  "geometry_id": "B0_R02_A30_g70_Nominal",
+  "target_geometry_id": "B0-profile-from-exports",
+  "target_geometry_revision": "1",
+  "port_reference": "HV=1 V relative to RETURN=0 V",
+  "source_mesh_sha256": "8a5b440018c145d909a44324ee19ceefa20488e394e72f964bff932c19c17253",
+  "boundary_labels_source": "RECONSTRUCTED CSV; edge/node identity independently matched to native MPHTXT",
+  "arc_cone_join_s_m": 0.00014823619097949586,
+  "arc_cone_join_r_m": 0.00019318516525781366,
+  "cone_cylinder_join_s_m": 0.003159310146537623,
+  "cylinder_length_m": 0.026840689853462375,
+  "total_length_semantics": "tip_to_back; not cylinder length",
+  "original_editable_CAD_status": "NOT_AVAILABLE",
+  "boundary_evidence": [
+    {
+      "boundary_id": 13,
+      "part": "arc",
+      "node_count": 263,
+      "max_normal_distance_m": 2.159686964583584e-10,
+      "r_min_m": 0.0,
+      "r_max_m": 0.0001931851652578137,
+      "s_min_m": 0.0,
+      "s_max_m": 0.00014823619097949588
+    },
+    {
+      "boundary_id": 14,
+      "part": "arc",
+      "node_count": 263,
+      "max_normal_distance_m": 2.1596869648546346e-10,
+      "r_min_m": 0.0,
+      "r_max_m": 0.0001931851652578137,
+      "s_min_m": 0.0,
+      "s_max_m": 0.00014823619097949588
+    },
+    {
+      "boundary_id": 8,
+      "part": "cone",
+      "node_count": 3119,
+      "max_normal_distance_m": 3.1417766379673916e-19,
+      "r_min_m": 0.0001931851652578137,
+      "r_max_m": 0.0009999999999999998,
+      "s_min_m": 0.00014823619097949588,
+      "s_max_m": 0.0031593101465376234
+    },
+    {
+      "boundary_id": 9,
+      "part": "cone",
+      "node_count": 3119,
+      "max_normal_distance_m": 3.1417766379673916e-19,
+      "r_min_m": 0.0001931851652578137,
+      "r_max_m": 0.0009999999999999998,
+      "s_min_m": 0.00014823619097949588,
+      "s_max_m": 0.0031593101465376234
+    },
+    {
+      "boundary_id": 10,
+      "part": "cylinder",
+      "node_count": 107,
+      "max_normal_distance_m": 2.168404344971009e-19,
+      "r_min_m": 0.0009999999999999998,
+      "r_max_m": 0.0009999999999999998,
+      "s_min_m": 0.0031593101465376234,
+      "s_max_m": 0.03
+    },
+    {
+      "boundary_id": 11,
+      "part": "cylinder",
+      "node_count": 107,
+      "max_normal_distance_m": 2.168404344971009e-19,
+      "r_min_m": 0.0009999999999999998,
+      "r_max_m": 0.0009999999999999998,
+      "s_min_m": 0.0031593101465376234,
+      "s_max_m": 0.03
+    },
+    {
+      "boundary_id": 3,
+      "part": "back",
+      "node_count": 3,
+      "max_normal_distance_m": 0.0,
+      "r_min_m": 0.0,
+      "r_max_m": 0.0009999999999999998,
+      "s_min_m": 0.03,
+      "s_max_m": 0.03
+    },
+    {
+      "boundary_id": 6,
+      "part": "back",
+      "node_count": 3,
+      "max_normal_distance_m": 0.0,
+      "r_min_m": 0.0,
+      "r_max_m": 0.0009999999999999998,
+      "s_min_m": 0.03,
+      "s_max_m": 0.03
+    }
+  ],
+  "maximum_gas_normal_vector_error": 3.839402115457079e-05,
+  "profile_status": "MATCHES_EXPORTED_BOUNDARY_WITHIN_1_NM",
+  "physical_final_terminal_selection": "NOT_RESOLVED",
+  "outer_boundary": {
+    "rmax_m": 0.01,
+    "zmin_m": -0.040035,
+    "zmax_m": 0.040035,
+    "type": "NEUMANN_ZERO",
+    "epsilon_r": 1,
+    "HV_V": 1,
+    "return_V": 0,
+    "axis": "SYMMETRY"
+  },
+  "field_boundary_potential_checks": {
+    "HV": {
+      "records": 5235,
+      "max_psi_error": 0.0
+    },
+    "RETURN": {
+      "records": 5228,
+      "max_psi_error": 0.0
+    }
+  },
+  "source_normal_field_diagnostics": {
+    "outer_r": {
+      "records": 241,
+      "max_abs_normal_per_m": 0.10411133424906893,
+      "RMS_normal_per_m": 0.02462698928544586,
+      "normal_to_vector_RMS_ratio": 0.0014286559669577194
+    },
+    "outer_z": {
+      "records": 62,
+      "max_abs_normal_per_m": 0.002520271624007364,
+      "RMS_normal_per_m": 0.0013418598911693054,
+      "normal_to_vector_RMS_ratio": 0.016002478742490642
+    },
+    "axis": {
+      "records": 168,
+      "max_abs_normal_per_m": 3.041651038452983,
+      "RMS_normal_per_m": 1.281128031565002,
+      "normal_to_vector_RMS_ratio": 0.00011260759385261063
+    }
+  }
+}

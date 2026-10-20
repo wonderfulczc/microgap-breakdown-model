@@ -13,6 +13,7 @@ constexpr double eps0 = 8.8541878128e-12;
 constexpr double pi = 3.14159265358979323846;
 
 bool is_gas_cell(const AxisymmetricGrid& grid, const StreamerConfig& config, int i, int j) {
+  if (config.geometry_view) return config.geometry_view->classify(i,j)==ElectrodeCellType::Gas;
   return !config.electrode_geometry ||
          config.electrode_geometry->classify(grid, i, j) == ElectrodeCellType::Gas;
 }

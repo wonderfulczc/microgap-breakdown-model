@@ -9,6 +9,7 @@ namespace streamer_rf::streamer {
 namespace {
 
 bool gas_cell(const AxisymmetricGrid& g, const StreamerConfig& cfg, int i, int j) {
+  if (cfg.geometry_view) return cfg.geometry_view->classify(i,j)==ElectrodeCellType::Gas;
   return !cfg.electrode_geometry || cfg.electrode_geometry->classify(g, i, j) == ElectrodeCellType::Gas;
 }
 

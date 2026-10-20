@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "I1 FP1 normalized electrostatic package",
+  "description": "Adapter representation of I1-PARAM-1.0 workbook sheets 01, 03 and static checks from 06. Adapter-only keys record provenance and mesh mapping; sheets 04-05 remain out of scope.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "fp1_manifest_version", "dataset_role", "geometry_id",
+    "geometry_family", "model_dimension", "geometry_model_version",
+    "static_run_id", "boundary_model_id", "port_reference_plane_id",
+    "coordinate_basis", "coordinate_unit", "length_unit_in_geometry",
+    "gas_region_id", "hv_surface_id", "return_surface_id",
+    "outer_boundary_id", "axis_boundary_id", "outer_boundary_type",
+    "return_reference", "normal_convention", "d_net_m", "gap_witness",
+    "unit_voltage_V", "material_map_id",
+    "psi_field_file", "Ew_field_file", "domain_mask_file",
+    "boundary_faces_file", "mesh_metadata_file",
+    "C_geom_F", "Q_HV_at_1V_C", "U_at_1V_J",
+    "static_solution_provenance", "mesh_mapping", "uncertainty",
+    "file_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "I1-PARAM-1.0"},
+    "fp1_manifest_version": {"const": "FP1-1.0"},
+    "dataset_role": {"enum": ["REAL_COMSOL", "SYNTHETIC_DEVELOPMENT_FIXTURE"]},
+    "geometry_id": {"type": "string", "minLength": 1},
+    "geometry_family": {"type": "string", "minLength": 1},
+    "model_dimension": {"enum": ["2D_axi", "3D"]},
+    "geometry_model_version": {"type": "string", "minLength": 1},
+    "geometry_source": {"type": "string"},
+    "geometry_source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "static_run_id": {"type": "string", "minLength": 1},
+    "boundary_model_id": {"type": "string", "minLength": 1},
+    "port_reference_plane_id": {"type": "string", "minLength": 1},
+    "coordinate_basis": {"enum": ["r,z", "x,y,z"]},
+    "coordinate_unit": {"const": "m"},
+    "length_unit_in_geometry": {"enum": ["m", "mm", "um"]},
+    "gas_region_id": {"type": "array", "minItems": 1, "items": {"type": "integer"}},
+    "hv_surface_id": {"type": "array", "minItems": 1, "items": {"type": "integer"}},
+    "return_surface_id": {"type": "array", "minItems": 1, "items": {"type": "integer"}},
+    "outer_boundary_id": {"type": "array", "items": {"type": "integer"}},
+    "axis_boundary_id": {"type": "array", "items": {"type": "integer"}},
+    "outer_boundary_type": {"type": "string", "minLength": 1},
+    "return_reference": {"const": "return=0V"},
+    "normal_convention": {"const": "outward_from_gas"},
+    "d_net_m": {"type": "number", "exclusiveMinimum": 0},
+    "gap_witness": {
+      "type": "object", "required": ["hv_point_m", "return_point_m", "gas_connected", "method"],
+      "properties": {
+        "hv_point_m": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
+        "return_point_m": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
+        "gas_connected": {"const": true},
+        "method": {"type": "string", "minLength": 1}
+      }
+    },
+    "unit_voltage_V": {"const": 1},
+    "material_map_id": {"type": "string", "minLength": 1},
+    "epsilon_r_uniform": {"type": "number", "exclusiveMinimum": 0},
+    "epsilon_field_file": {"type": "string"},
+    "psi_field_file": {"type": "string"},
+    "Ew_field_file": {"type": "string"},
+    "domain_mask_file": {"type": "string"},
+    "boundary_faces_file": {"type": "string"},
+    "mesh_metadata_file": {"type": "string"},
+    "static_mesh_sensitivity_file": {"type": "string"},
+    "domain_truncation_file": {"type": "string"},
+    "target_poisson_links_file": {"type": "string"},
+    "C_geom_F": {"type": "number", "exclusiveMinimum": 0},
+    "Q_HV_at_1V_C": {"type": "number"},
+    "U_at_1V_J": {"type": "number", "minimum": 0},
+    "static_solution_provenance": {
+      "type": "object", "required": ["model_name", "comsol_version", "solution_id", "zero_free_charge"],
+      "properties": {
+        "model_name": {"type": "string"}, "comsol_version": {"type": "string"},
+        "solution_id": {"type": "string"}, "zero_free_charge": {"const": true}
+      }
+    },
+    "mesh_mapping": {"type": "object", "required": ["source_mesh_id", "target_mesh_id", "policy"]},
+    "uncertainty": {"type": "object", "required": ["field_gradient_rtol", "static_energy_rtol", "mapping_status"]},
+    "file_sha256": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+  },
+  "allOf": [
+    {"if": {"properties": {"dataset_role": {"const": "REAL_COMSOL"}}},
+     "then": {"required": ["geometry_source", "geometry_source_sha256", "static_mesh_sensitivity_file", "domain_truncation_file"]}}
+  ]
+}

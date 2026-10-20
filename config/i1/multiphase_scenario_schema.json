@@ -1,0 +1,256 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "I1MultiphaseScenario",
+  "type": "object",
+  "required": [
+    "version",
+    "mode",
+    "qualification",
+    "assembly",
+    "segment_id",
+    "time_anchor_s",
+    "anchor_identity",
+    "prior_cold_history",
+    "requested_source_scope",
+    "wall_budget_s",
+    "accepted_steps"
+  ],
+  "properties": {
+    "version": {
+      "const": "I1_MULTIPHASE_SCENARIO_1.0"
+    },
+    "mode": {
+      "enum": [
+        "COLD_FULL",
+        "GIVEN_THERMAL_SERIES",
+        "AUTO_COLD_TO_THERMAL"
+      ]
+    },
+    "qualification": {
+      "enum": [
+        "SYNTHETIC_ENGINEERING",
+        "REAL_DEVICE"
+      ]
+    },
+    "assembly": {
+      "type": "object",
+      "required": [
+        "file",
+        "sha256"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "segment_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "time_anchor_s": {
+      "type": "number",
+      "minimum": 0
+    },
+    "anchor_identity": {
+      "const": "SYNTHETIC_CLOCK_NOT_HANDOFF_TIME"
+    },
+    "prior_cold_history": {
+      "type": "null"
+    },
+    "requested_source_scope": {
+      "enum": [
+        "B0_LOCAL_CONDUCTOR_SOURCE",
+        "THERMAL_COLUMN_REFERENCE",
+        "FULL_GLOBAL_PHYSICAL_SOURCE"
+      ]
+    },
+    "wall_budget_s": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 900
+    },
+    "accepted_steps": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "native_scenario": {
+      "type": "object",
+      "required": [
+        "file",
+        "sha256"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "native_binary": {
+      "type": "object",
+      "required": [
+        "file",
+        "sha256"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "thermal_initial_package": {
+      "type": "object",
+      "required": [
+        "file",
+        "sha256"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "current_branch": {
+      "const": "COLUMN_CONDUCTION_CURRENT"
+    },
+    "maximum_dt_s": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 5e-11
+    },
+    "capacitance_owner": {
+      "enum": [
+        "TOTAL_CHARGE",
+        "SPLIT_GEOMETRIC_CAPACITANCE"
+      ]
+    },
+    "circuit_assembles_Cp": {
+      "type": "boolean"
+    },
+    "Cp_F": {
+      "type": "number",
+      "minimum": 0
+    },
+    "Cp_identity": {
+      "const": "SYNTHETIC_NOT_B0_OR_FULL_LOCAL"
+    },
+    "circuit": {
+      "type": "object"
+    },
+    "circuit_initial": {
+      "type": "object"
+    },
+    "source": {
+      "type": "object"
+    },
+    "thermal_geometry_relation": {
+      "const": "INDEPENDENT_REFERENCE_NOT_DEVICE_GEOMETRY"
+    }
+  },
+  "$comment": "Runtime explicit semantic validation remains required; no generic meta-schema certification claimed. AUTO and REAL_DEVICE are representable requests, not executable capabilities.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "COLD_FULL"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "native_scenario",
+          "native_binary"
+        ],
+        "properties": {
+          "accepted_steps": {
+            "const": 3
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "GIVEN_THERMAL_SERIES"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "thermal_initial_package",
+          "current_branch",
+          "maximum_dt_s",
+          "capacitance_owner",
+          "circuit_assembles_Cp",
+          "Cp_F",
+          "Cp_identity",
+          "circuit",
+          "circuit_initial",
+          "source",
+          "thermal_geometry_relation"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "capacitance_owner": {
+            "const": "TOTAL_CHARGE"
+          }
+        },
+        "required": [
+          "capacitance_owner"
+        ]
+      },
+      "then": {
+        "properties": {
+          "circuit_assembles_Cp": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "capacitance_owner": {
+            "const": "SPLIT_GEOMETRIC_CAPACITANCE"
+          }
+        },
+        "required": [
+          "capacitance_owner"
+        ]
+      },
+      "then": {
+        "properties": {
+          "circuit_assembles_Cp": {
+            "const": true
+          }
+        }
+      }
+    }
+  ]
+}

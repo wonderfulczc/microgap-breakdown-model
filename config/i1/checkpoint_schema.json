@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "version",
+    "kind",
+    "identity",
+    "config",
+    "accepted",
+    "payload_sha256",
+    "output_prefixes",
+    "rebuild",
+    "provider",
+    "capacitance_mode"
+  ],
+  "properties": {
+    "version": {
+      "const": "I1-ACCEPTED-CHECKPOINT-3.1"
+    },
+    "kind": {
+      "const": "ACCEPTED_CHECKPOINT"
+    },
+    "identity": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "payload_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "capacitance_mode": {
+      "enum": [
+        "TOTAL_CHARGE",
+        "SPLIT_GEOMETRIC_CAPACITANCE"
+      ]
+    }
+  },
+  "payload_fields": [
+    "nine native fields",
+    "time",
+    "provider version",
+    "dt and previous time",
+    "accepted ID/native call count",
+    "HV/Return and head history",
+    "native/conjugate capacitance",
+    "six SP3 warm vectors",
+    "weight fields and operator key",
+    "performance/Poisson diagnostics",
+    "last electron/ion faces",
+    "active-network weight",
+    "cumulative species/charge/energy/corrections",
+    "output offsets"
+  ],
+  "rejected_kinds": [
+    "TRIAL_STATE",
+    "DIAGNOSTIC_SNAPSHOT"
+  ],
+  "storage": "same-build serial binary, endian marker, internal checksum plus envelope SHA256; atomic directory publication and fsynced completion",
+  "not_serialized": [
+    "PETSc pointers/matrices/preconditioner",
+    "observer pointer; requires explicit rebind"
+  ],
+  "runtime_validator": "checkpoints.py + native_persistent_checkpoint.hpp"
+}

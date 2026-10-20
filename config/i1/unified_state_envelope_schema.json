@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScenarioStateEnvelope",
+  "type": "object",
+  "required": [
+    "global_time",
+    "segment_local_time",
+    "time_anchor_s",
+    "segment_id",
+    "physics_mode",
+    "identity",
+    "electrical_circuit_state",
+    "source_state",
+    "port_charge_and_current",
+    "field_energy",
+    "material_energy_if_available",
+    "accumulated_work_and_losses",
+    "stage_capabilities",
+    "checkpoint_provenance",
+    "native_state",
+    "prior_cold_history",
+    "capacitance_owner",
+    "circuit_assembles_Cp",
+    "schema_version",
+    "units"
+  ],
+  "properties": {
+    "global_time": {
+      "type": "number",
+      "minimum": 0
+    },
+    "segment_local_time": {
+      "type": "number",
+      "minimum": 0
+    },
+    "time_anchor_s": {
+      "type": "number",
+      "minimum": 0
+    },
+    "segment_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "physics_mode": {
+      "enum": [
+        "COLD_FULL",
+        "GIVEN_THERMAL_SERIES"
+      ]
+    },
+    "identity": {
+      "type": "object"
+    },
+    "electrical_circuit_state": {
+      "type": "object"
+    },
+    "source_state": {
+      "type": "object"
+    },
+    "port_charge_and_current": {
+      "type": "object"
+    },
+    "field_energy": {
+      "type": "object"
+    },
+    "material_energy_if_available": {
+      "type": "object"
+    },
+    "accumulated_work_and_losses": {
+      "type": "object"
+    },
+    "stage_capabilities": {
+      "type": "object"
+    },
+    "checkpoint_provenance": {
+      "type": "object"
+    },
+    "native_state": {
+      "type": "object"
+    },
+    "prior_cold_history": {
+      "type": "object"
+    },
+    "capacitance_owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "circuit_assembles_Cp": {
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "I1_SCENARIO_STATE_ENVELOPE_1.0"
+    },
+    "units": {
+      "const": {
+        "time": "s",
+        "energy": "J",
+        "charge": "C",
+        "current": "A",
+        "voltage": "V"
+      }
+    }
+  },
+  "$comment": "Runtime explicit semantic validation remains required; no generic meta-schema certification claimed."
+}

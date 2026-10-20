@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "I1_CONDUCTOR_GEOMETRY_V1",
+  "type": "object",
+  "required": ["version", "geometry_source_id", "geometry_source_file", "geometry_source_sha", "source_class", "coordinate_system", "coordinate_transform", "electrode_H_surfaces", "electrode_Return_surfaces", "reference_plane_H", "reference_plane_Return", "reference_plane_id", "lead_segments", "return_segments", "material_id", "surface_orientation", "mesh_or_surface_mapping", "external_boundary", "terminal_connection_graph"],
+  "properties": {
+    "version": {"const": "I1_CONDUCTOR_GEOMETRY_V1"},
+    "geometry_source_sha": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "source_class": {"enum": ["ACTUAL_SOURCE_BOUND_GEOMETRY", "PARAMETRIC_B0_GEOMETRY", "SYNTHETIC_TEST_GEOMETRY", "UNKNOWN_EXPERIMENTAL_GEOMETRY"]},
+    "coordinate_system": {"enum": ["AXISYMMETRIC_R_Z_SI", "CARTESIAN_XYZ_SI"]},
+    "coordinate_transform": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "number"}}},
+    "electrode_H_surfaces": {"type": "array", "minItems": 1},
+    "electrode_Return_surfaces": {"type": "array", "minItems": 1},
+    "surface_orientation": {"const": "GAS_TO_METAL"},
+    "lead_segments": {"type": ["array", "null"]},
+    "return_segments": {"type": ["array", "null"]},
+    "material_id": {"type": ["string", "null"]},
+    "terminal_connection_graph": {"type": ["object", "null"]},
+    "unavailable": {"type": "object"}
+  },
+  "$comment": "Semantic validator checks source hashes, mask contact normals, rotated FV areas, rigid transforms, explicit contacts and connected closed return. A schema label does not qualify physical geometry. Null external data are local-only."
+}

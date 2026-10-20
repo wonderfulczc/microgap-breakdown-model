@@ -24,6 +24,7 @@ std::size_t flat_index(const AxisymmetricGrid& grid, int i, int j) {
 }
 
 bool is_gas(const AxisymmetricGrid& grid, const StreamerConfig& config, int i, int j) {
+  if (config.geometry_view) return config.geometry_view->classify(i,j)==ElectrodeCellType::Gas;
   return !config.electrode_geometry ||
          config.electrode_geometry->classify(grid, i, j) == ElectrodeCellType::Gas;
 }
@@ -109,12 +110,12 @@ double component_distance(const Component& a, const Component& b) {
 
 double electrode_distance(const AxisymmetricGrid& grid, const StreamerConfig& config,
                           const std::vector<std::pair<int, int>>& roi) {
-  if (!config.electrode_geometry || roi.empty()) return std::numeric_limits<double>::quiet_NaN();
+  if ((!config.electrode_geometry&&!config.geometry_view) || roi.empty()) return std::numeric_limits<double>::quiet_NaN();
   double minimum = std::numeric_limits<double>::infinity();
   for (const auto& [ri, rj] : roi) {
     for (int j = 0; j < grid.nz(); ++j) {
       for (int i = 0; i < grid.nr(); ++i) {
-        if (config.electrode_geometry->classify(grid, i, j) == ElectrodeCellType::Gas) continue;
+        if (is_gas(grid,config,i,j)) continue;
         minimum = std::min(minimum, std::hypot(grid.r(ri) - grid.r(i), grid.z(rj) - grid.z(j)));
       }
     }

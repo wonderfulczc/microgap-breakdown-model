@@ -1,0 +1,23 @@
+{
+  "version": "I1-ACCEPTED-SPECIES-FV-1.0",
+  "required": [
+    "geometry_id",
+    "mesh_id",
+    "operator_id",
+    "reference_plane_id",
+    "time_layer",
+    "species_model_id",
+    "units",
+    "source_hash",
+    "files"
+  ],
+  "time_layer": "ACCEPTED_INTERVAL_PRE_FLUX",
+  "source_definition": "TOTAL_CONDUCTION_FV_ELECTRON_PLUS_POSITIVE_ION",
+  "includes_displacement_current": false,
+  "negative_ion_transport": "IMMOBILE_BY_MODEL",
+  "reconstruction": "Jr=0.5*(Jout_rplus-Jout_rminus), Jz=0.5*(Jout_zplus-Jout_zminus), per species; native faces retained",
+  "caveat": "center current is a diagnostic reconstruction, not a second conservative FV divergence; no terminal-current substitution",
+  "terminal_current": "UNAVAILABLE_IN_SPATIAL_PACKET",
+  "displacement_current": "NOT_INJECTED",
+  "secondary_emission": "already in net electron face; no second addition"
+}

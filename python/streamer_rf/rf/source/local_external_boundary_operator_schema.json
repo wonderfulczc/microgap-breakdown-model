@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "I1_EXTERNAL_BOUNDARY_RESPONSE_V1",
+  "type": "object",
+  "required": ["contract", "A", "B", "D", "local_indices"],
+  "properties": {
+    "contract": {
+      "type": "object",
+      "required": ["version", "operator_id", "geometry_id", "reference_plane_id", "common_boundary_id", "local_control_volume", "global_control_volume", "gauge", "terminal_ids", "units", "energy_network", "capacitance_owner", "capacitance_copies", "source_file", "source_sha256", "evidence_class"],
+      "properties": {
+        "version": {"const": "I1_EXTERNAL_BOUNDARY_RESPONSE_V1"},
+        "evidence_class": {"enum": ["SYNTHETIC_TEST_OPERATOR", "SOURCE_BOUND_OPERATOR"]},
+        "capacitance_owner": {"enum": ["TOTAL_CHARGE", "SPLIT_GEOMETRIC_CAPACITANCE"]},
+        "capacitance_copies": {"const": 1},
+        "energy_network": {"const": "SYMMETRIC_CONSTRAINED_ELECTROSTATIC"}
+      }
+    },
+    "A": {"type": "array", "items": {"type": "array", "items": {"type": "number"}}},
+    "B": {"type": "array", "items": {"type": "array", "items": {"type": "number"}}},
+    "D": {"type": "array", "items": {"type": "array", "items": {"type": "number"}}},
+    "local_indices": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "integer", "minimum": 0}}
+  },
+  "$comment": "A is constrained SPD free block in F. B is free-terminal coupling, D terminal block. Source-backed NPZ binds all arrays. Free charge q [C] and V [V] are runtime inputs. Terminal functional and outer-source energy are eliminated synchronously."
+}
